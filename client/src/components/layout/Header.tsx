@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { blogPosts } from "@/lib/posts";
 import { useMemo } from "react";
+import { SkipToContent } from "@/components/SkipToContent";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,18 +55,21 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200" role="banner">
+      <SkipToContent />
       {/* Logo Section - Centered */}
       <div className="container py-6 relative">
         {/* Mobile Menu Button - Top Right Corner (Mobile Only) */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden absolute top-6 right-4"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden absolute top-6 right-4"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
 
         {/* Logo - Centered */}
         <a href="/" className="flex justify-center items-center hover:opacity-80 transition-opacity">
@@ -78,7 +82,7 @@ export function Header() {
 
         {/* Mobile Navigation - Below Logo */}
         {isOpen && (
-          <nav className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3">
+          <nav className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3" role="navigation" aria-label="Mobile navigation">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -88,6 +92,7 @@ export function Header() {
                     ? "text-black"
                     : "text-gray-600 hover:text-black"
                 }`}
+                aria-current={location === item.href ? "page" : undefined}
               >
                 {item.label}
               </a>
@@ -95,6 +100,8 @@ export function Header() {
             <button 
               onClick={handleSearchClick}
               className="block py-2 text-sm font-medium text-gray-600 hover:text-black transition-colors flex items-center gap-2"
+              aria-label="Search articles"
+              aria-expanded={isSearchOpen}
             >
               <Search className="w-4 h-4" />
               <span>Search</span>
@@ -108,7 +115,7 @@ export function Header() {
         <div className="container py-3">
           <div className="flex items-center justify-center">
             {/* Desktop Navigation */}
-            <nav className="flex items-center justify-center gap-8">
+            <nav className="flex items-center justify-center gap-8" role="navigation" aria-label="Main navigation">
               {navItems.map((item) => (
                 <a
                   key={item.href}
@@ -118,6 +125,7 @@ export function Header() {
                       ? "text-black border-b-2 border-black"
                       : "text-gray-600 hover:text-black"
                   }`}
+                  aria-current={location === item.href ? "page" : undefined}
                 >
                   {item.label}
                 </a>
@@ -126,7 +134,8 @@ export function Header() {
               <button 
                 onClick={handleSearchClick}
                 className="text-gray-600 hover:text-black transition-colors p-2"
-                aria-label="Search"
+                aria-label="Search articles"
+                aria-expanded={isSearchOpen}
               >
                 <Search className="w-5 h-5" />
               </button>

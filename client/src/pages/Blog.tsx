@@ -5,6 +5,7 @@ import { PostCard } from "@/components/blog/PostCard";
 import { blogPosts, categories } from "@/lib/posts";
 import { useState, useMemo } from "react";
 import { Search } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,9 +49,14 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Blog & Articles"
+        description="Discover insights on AI, fintech, debt management, and real-time financial solutions."
+        url="/blog"
+      />
       <Header />
 
-      <main>
+      <main id="main-content">
         {/* Page Header */}
         <section className="bg-gray-50 border-b border-gray-200 py-12">
           <div className="container">

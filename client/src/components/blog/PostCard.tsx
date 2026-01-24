@@ -3,6 +3,7 @@ import { getCategoryColor } from "@/lib/blog-utils";
 import { BlogPost } from "@/lib/types";
 import { formatDate } from "@/lib/blog-utils";
 import { Clock, User } from "lucide-react";
+import { Image } from "@/components/ui/image";
 
 interface PostCardProps {
   post: BlogPost;
@@ -15,7 +16,7 @@ export function PostCard({ post }: PostCardProps) {
     <article className="group border border-gray-200 hover:border-black transition-all duration-300 hover:shadow-lg overflow-hidden">
       {/* Image */}
       <div className="relative h-48 overflow-hidden bg-gray-100">
-        <img
+        <Image
           src={post.image}
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -62,8 +63,9 @@ export function PostCard({ post }: PostCardProps) {
           {post.tags.slice(0, 3).map((tag) => (
             <a
               key={tag}
-              href={`/tag/${tag.toLowerCase()}`}
+              href={`/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
               className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2 py-1 rounded transition-colors"
+              aria-label={`View articles tagged ${tag}`}
             >
               #{tag}
             </a>

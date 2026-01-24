@@ -4,6 +4,8 @@ import { PostCard } from "@/components/blog/PostCard";
 import { getFeaturedPosts, getRecentPosts } from "@/lib/blog-utils";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export default function Home() {
   const featuredPosts = getFeaturedPosts();
@@ -11,9 +13,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Home"
+        description="Explore the intersection of artificial intelligence and financial technology. Real-time solutions, debt management strategies, and the latest fintech innovations."
+      />
       <Header />
 
-      <main>
+      <main id="main-content">
         {/* Hero Section */}
         <section className="bg-gray-50 border-b border-gray-200 py-16 lg:py-20">
           <div className="container max-w-4xl mx-auto text-center">
@@ -121,17 +127,11 @@ export default function Home() {
             <p className="text-lg text-blue-50 mb-8 max-w-2xl mx-auto">
               Subscribe to our newsletter and get the latest insights delivered to your inbox weekly.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 h-12 rounded text-gray-900 placeholder:text-gray-500 bg-white focus:outline-none focus:ring-2 focus:ring-white"
-                required
-              />
-              <Button className="bg-white hover:bg-gray-100 text-blue-700 font-bold px-8 h-12 rounded-none">
-                Subscribe
-              </Button>
-            </form>
+            <NewsletterForm
+              placeholder="Enter your email"
+              buttonText="Subscribe"
+              className="max-w-md mx-auto"
+            />
           </div>
         </section>
       </main>

@@ -1,6 +1,7 @@
 import { getRecentPosts } from "@/lib/blog-utils";
 import { categories } from "@/lib/posts";
 import { formatDate } from "@/lib/blog-utils";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export function Sidebar() {
   const recentPosts = getRecentPosts(5);
@@ -58,20 +59,11 @@ export function Sidebar() {
         <p className="text-sm mb-4 text-blue-50">
           Get the latest insights delivered to your inbox.
         </p>
-        <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="email"
-            placeholder="Your email"
-            className="w-full px-3 py-2 h-10 text-gray-900 placeholder:text-gray-500 bg-white rounded text-sm focus:outline-none focus:ring-2 focus:ring-white"
-            required
-          />
-          <button
-            type="submit"
-            className="w-full bg-white text-blue-700 font-semibold h-10 rounded hover:bg-gray-100 transition-colors text-sm"
-          >
-            Subscribe
-          </button>
-        </form>
+        <NewsletterForm
+          placeholder="Your email"
+          buttonText="Subscribe"
+          className="space-y-3"
+        />
       </div>
     </aside>
   );

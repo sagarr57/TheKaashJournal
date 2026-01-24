@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Mail, Linkedin, Twitter } from "lucide-react";
 // import { ChartSection } from "@/components/ChartSection";
@@ -9,9 +10,14 @@ import { Mail, Linkedin, Twitter } from "lucide-react";
 export default function About() {
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="About Us"
+        description="Learn about The Kaash Journal - exploring the intersection of artificial intelligence and financial technology."
+        url="/about"
+      />
       <Header />
 
-      <main>
+      <main id="main-content">
         {/* Page Header */}
         <section className="bg-gray-50 border-b border-gray-200 py-16">
           <div className="container">

@@ -1,0 +1,74 @@
+import { useState, FormEvent } from "react";
+import { subscribeToNewsletter } from "@/lib/newsletter";
+import { toast } from "sonner";
+import { pushToDataLayer } from "./GTM";
+
+interface NewsletterFormProps {
+  placeholder?: string;
+  buttonText?: string;
+  className?: string;
+}
+
+export function NewsletterForm({
+  placeholder = "Enter your email",
+  buttonText = "Subscribe",
+  className = "",
+}: NewsletterFormProps) {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const result = await subscribeToNewsletter(email.trim());
+
+      if (result.success) {
+        toast.success(result.message);
+        setEmail("");
+        
+        // Track newsletter subscription in GTM
+        pushToDataLayer("newsletter_subscribe", {
+          email: email.trim(),
+        });
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={className}>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={placeholder}
+          className="flex-1 px-4 py-3 h-12 rounded text-gray-900 placeholder:text-gray-500 bg-white focus:outline-none focus:ring-2 focus:ring-white"
+          required
+          disabled={isLoading}
+        />
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="bg-white hover:bg-gray-100 text-blue-700 font-bold px-8 h-12 rounded-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        >
+          {isLoading ? "Subscribing..." : buttonText}
+        </button>
+      </div>
+    </form>
+  );
+}
