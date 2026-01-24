@@ -182,7 +182,7 @@ blog_project/
 **Data Sources:**
 - Google Analytics 4
 - Google Tag Manager
-- Mailchimp (subscribers)
+- Brevo (subscribers)
 - Custom API endpoints
 
 ---
@@ -252,7 +252,7 @@ blog_project/
 - DataLayer helper functions
 
 **NewsletterForm** (`components/NewsletterForm.tsx`)
-- Mailchimp integration
+- Brevo integration
 - Form validation
 - Toast notifications
 - GTM event tracking
@@ -422,9 +422,8 @@ cd client && pnpm build
 
 **Environment Variables:**
 - `VITE_GTM_ID` - Google Tag Manager ID
-- `VITE_MAILCHIMP_API_KEY` - Mailchimp API key
-- `VITE_MAILCHIMP_LIST_ID` - Mailchimp list ID
-- `VITE_MAILCHIMP_SERVER_PREFIX` - Mailchimp server prefix
+- `VITE_BREVO_API_KEY` - Brevo API key
+- `VITE_BREVO_LIST_ID` - Brevo list ID
 - `VITE_ADMIN_PASSWORD` - Admin dashboard password
 - `VITE_API_URL` - API base URL (defaults to `/api`)
 

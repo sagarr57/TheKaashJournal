@@ -8,10 +8,11 @@
 - Configured for Vercel/GitHub Pages
 
 ### 2. **Newsletter Integration** ✓
-- Mailchimp API integration
+- Brevo (Sendinblue) API integration
 - Newsletter forms on Home page and Sidebar
 - Toast notifications for success/error
 - GTM event tracking for subscriptions
+- Google Ads conversion tracking (GCLID)
 
 ### 3. **Google Tag Manager (GTM)** ✓
 - GTM component added to App
@@ -34,10 +35,10 @@
 
 ### Immediate Actions Required:
 
-1. **Create Mailchimp Account**
-   - Sign up at https://mailchimp.com
-   - Create an audience/list
-   - Get API key, List ID, and Server Prefix
+1. **Create Brevo Account**
+   - Sign up at https://www.brevo.com (free tier: 300 emails/day, unlimited contacts)
+   - Create a contact list
+   - Get API key and List ID
    - Add to `.env` file
 
 2. **Set Up Google Tag Manager**
@@ -103,9 +104,8 @@ blog_project/
 Required variables (add to `.env`):
 
 - `VITE_GTM_ID` - Google Tag Manager ID
-- `VITE_MAILCHIMP_API_KEY` - Mailchimp API key
-- `VITE_MAILCHIMP_LIST_ID` - Mailchimp audience/list ID
-- `VITE_MAILCHIMP_SERVER_PREFIX` - Mailchimp server prefix (us1, us2, etc.)
+- `VITE_BREVO_API_KEY` - Brevo API key
+- `VITE_BREVO_LIST_ID` - Brevo contact list ID
 
 ## 🚀 Quick Start
 
@@ -170,4 +170,4 @@ If you encounter issues:
 1. Check browser console for errors
 2. Verify environment variables are set correctly
 3. Check GTM Preview mode for tracking issues
-4. Review Mailchimp API logs for newsletter errors
+4. Review Brevo API logs for newsletter errors

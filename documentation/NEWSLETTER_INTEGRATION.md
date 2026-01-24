@@ -1,52 +1,65 @@
 # Newsletter Integration Guide
 
-Complete guide for integrating newsletter subscription functionality with Mailchimp.
+Complete guide for integrating newsletter subscription functionality with **Brevo** (formerly Sendinblue).
 
-## 📧 Mailchimp Setup
+## 🎁 Why Brevo?
 
-### Step 1: Create Mailchimp Account
+**Free Tier Benefits:**
+- ✅ **300 emails per day** (9,000/month)
+- ✅ **Unlimited contacts**
+- ✅ **No credit card required**
+- ✅ **Full API access**
+- ✅ **Email templates**
+- ✅ **Automation workflows**
 
-1. Go to [Mailchimp](https://mailchimp.com)
-2. Sign up for a free account (up to 500 contacts)
-3. Verify your email address
+Perfect for getting started! Upgrade only when you need more than 300 emails/day.
 
-### Step 2: Create an Audience/List
+---
 
-1. In Mailchimp dashboard, go to **Audience** > **All contacts**
-2. Click **Create Audience**
+## 📧 Brevo Setup
+
+### Step 1: Create Brevo Account
+
+1. Go to [Brevo (Sendinblue)](https://www.brevo.com)
+2. Click **"Sign up free"**
+3. Fill in your details:
+   - **Email**: Your email address
+   - **Password**: Create a password
+   - **Company name**: The Kaash Journal
+4. Verify your email address
+5. **No credit card required!**
+
+### Step 2: Create a Contact List
+
+1. In Brevo dashboard, go to **Contacts** > **Lists**
+2. Click **"Create a list"**
 3. Fill in:
-   - **Audience name**: The Kaash Journal Subscribers
-   - **Default from email**: your@email.com
-   - **Default from name**: The Kaash Journal
-4. Click **Save**
+   - **List name**: Newsletter Subscribers
+   - **Description**: Subscribers from The Kaash Journal website
+4. Click **"Create"**
+5. **Copy the List ID** (you'll see it in the URL or list settings)
 
 ### Step 3: Get Your API Key
 
-1. Go to **Account** > **Extras** > **API keys**
-2. Click **Create A Key**
-3. Copy your API key (format: `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us1`)
+1. In Brevo dashboard, go to **Settings** > **API Keys**
+2. Click **"Generate a new API key"**
+3. Give it a name: "Website Newsletter Form"
+4. Click **"Generate"**
+5. **Copy the API key immediately** (you won't see it again!)
+   - Format: `xkeysib-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxx`
 
-### Step 4: Get Your List ID
-
-1. Go to **Audience** > **All contacts**
-2. Click **Settings** > **Audience name and defaults**
-3. Scroll down to find **Audience ID** (format: `xxxxxxxxxx`)
-4. Copy the Audience ID
-
-### Step 5: Get Server Prefix
-
-The server prefix is in your API key URL:
-- If your API key ends with `-us1`, prefix is `us1`
-- If it ends with `-us2`, prefix is `us2`
-- Common prefixes: `us1`, `us2`, `us3`, `us6`, `us7`, `us8`, `us9`, `us10`, `us11`, `us12`, `us13`, `us14`, `us15`, `us16`, `us17`, `us18`, `us19`, `us20`, `us21`
-
-### Step 6: Add to Environment Variables
+### Step 4: Add to Environment Variables
 
 Add to your `.env` file:
 ```bash
-VITE_MAILCHIMP_API_KEY=your_api_key_here
-VITE_MAILCHIMP_LIST_ID=your_list_id_here
-VITE_MAILCHIMP_SERVER_PREFIX=us1
+VITE_BREVO_API_KEY=your_api_key_here
+VITE_BREVO_LIST_ID=your_list_id_here
+```
+
+**Example:**
+```bash
+VITE_BREVO_API_KEY=xkeysib-abc123def456...
+VITE_BREVO_LIST_ID=2
 ```
 
 ---
@@ -55,12 +68,12 @@ VITE_MAILCHIMP_SERVER_PREFIX=us1
 
 ### How It Works
 
-The newsletter integration uses Mailchimp's API v3 to add subscribers:
+The newsletter integration uses Brevo's API v3 to add subscribers:
 
 1. User enters email in newsletter form
 2. Form submits to `subscribeToNewsletter()` function
-3. Function calls Mailchimp API
-4. Subscriber is added to your audience
+3. Function calls Brevo API
+4. Subscriber is added to your list
 5. Success/error message displayed to user
 
 ### Newsletter Forms
@@ -73,10 +86,11 @@ Newsletter forms are integrated in:
 
 The `NewsletterForm` component handles:
 - Email validation
-- API calls to Mailchimp
+- API calls to Brevo
 - Loading states
 - Success/error notifications
 - GTM event tracking
+- Google Ads conversion tracking (GCLID)
 
 **Usage:**
 ```typescript
@@ -95,25 +109,19 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 
 ### Single Opt-In (Current Default)
 
-Subscribers are immediately added to your list:
-```typescript
-status: "subscribed"
-```
+Subscribers are immediately added to your list. Brevo will send a welcome email if configured.
 
 ### Double Opt-In (Recommended)
 
-Requires email confirmation before adding to list:
-```typescript
-status: "pending"
-```
+To enable double opt-in:
 
-To enable double opt-in, edit `client/src/lib/newsletter.ts`:
-```typescript
-body: JSON.stringify({
-  email_address: email,
-  status: "pending", // Changed from "subscribed"
-}),
-```
+1. In Brevo dashboard, go to **Contacts** > **Lists**
+2. Select your list
+3. Go to **Settings** > **Double opt-in**
+4. Enable **"Require double opt-in"**
+5. Customize confirmation email
+
+When enabled, subscribers will receive a confirmation email before being added.
 
 ---
 
@@ -127,6 +135,15 @@ pushToDataLayer("newsletter_subscribe", {
   email: email.trim(),
 });
 ```
+
+### Google Ads Conversion Tracking
+
+Subscriptions also track conversions with GCLID:
+```typescript
+trackConversion("newsletter_signup");
+```
+
+This ensures Google Ads can attribute conversions to ad clicks.
 
 ### Google Analytics
 
@@ -143,13 +160,13 @@ Set up conversion tracking in GA4:
 
 1. Use a test email address
 2. Submit newsletter form
-3. Check Mailchimp dashboard for new subscriber
+3. Check Brevo dashboard for new contact
 4. Verify email received (if double opt-in enabled)
 
 ### Check API Response
 
 Monitor browser console for:
-- Success: Subscriber added
+- Success: Contact added
 - Error: Already subscribed, invalid email, etc.
 
 ---
@@ -158,25 +175,28 @@ Monitor browser console for:
 
 ### Common Errors
 
-**"Member Exists"**
+**"Contact already exists"**
 - Email is already in your list
-- User sees friendly message
+- User sees friendly message: "You're already subscribed!"
 
-**"Invalid Email"**
+**"Invalid email"**
 - Email format is incorrect
 - Form validation prevents submission
 
 **"API Key Invalid"**
-- Check `VITE_MAILCHIMP_API_KEY` is correct
-- Verify API key hasn't expired
+- Check `VITE_BREVO_API_KEY` is correct
+- Verify API key hasn't been revoked
+- Make sure you copied the full key
 
 **"List ID Invalid"**
-- Check `VITE_MAILCHIMP_LIST_ID` is correct
-- Verify list exists in Mailchimp
+- Check `VITE_BREVO_LIST_ID` is correct
+- Verify list exists in Brevo
+- List ID should be a number (e.g., `2`, `5`, `10`)
 
-**"Server Prefix Invalid"**
-- Check `VITE_MAILCHIMP_SERVER_PREFIX` matches API key
-- Common values: us1, us2, us3, etc.
+**"Rate limit exceeded"**
+- Free tier: 300 emails/day limit
+- Wait 24 hours or upgrade plan
+- This shouldn't happen with normal usage
 
 ---
 
@@ -184,22 +204,24 @@ Monitor browser console for:
 
 ### View Subscribers
 
-1. Go to Mailchimp dashboard
-2. **Audience** > **All contacts**
+1. Go to Brevo dashboard
+2. **Contacts** > **All contacts**
 3. View subscriber list, segments, tags
 
 ### Export Subscribers
 
-1. Go to **Audience** > **All contacts**
-2. Click **Export** > **Export as CSV**
-3. Download subscriber list
+1. Go to **Contacts** > **All contacts**
+2. Click **"Export"**
+3. Choose format (CSV, Excel)
+4. Download subscriber list
 
-### Unsubscribe Handling
+### Send Campaigns
 
-Mailchimp automatically handles:
-- Unsubscribe links in emails
-- GDPR compliance
-- List hygiene
+1. Go to **Campaigns** > **Email campaigns**
+2. Click **"Create an email campaign"**
+3. Choose template or create custom
+4. Select your list
+5. Send to all subscribers
 
 ---
 
@@ -213,19 +235,40 @@ Mailchimp automatically handles:
 
 ---
 
-## 🔄 Alternative: Mailchimp Embedded Form
+## 💰 Pricing & Limits
+
+### Free Plan (Current)
+
+- ✅ 300 emails per day
+- ✅ Unlimited contacts
+- ✅ Email campaigns
+- ✅ Automation workflows
+- ✅ API access
+- ✅ Email support
+
+### When to Upgrade
+
+Upgrade to **Lite Plan** ($25/month) when you need:
+- More than 300 emails/day
+- Advanced features
+- Priority support
+
+---
+
+## 🔄 Alternative: Brevo Embedded Form
 
 If you prefer not to use API integration:
 
-1. In Mailchimp, go to **Audience** > **Signup forms** > **Embedded forms**
-2. Copy the form HTML code
-3. Replace newsletter forms with embedded form
-4. No API keys needed
+1. In Brevo, go to **Contacts** > **Forms**
+2. Create a new form
+3. Copy the form embed code
+4. Replace newsletter forms with embedded form
+5. No API keys needed
 
 **Pros:**
 - Simpler setup
 - No API configuration
-- Built-in Mailchimp styling
+- Built-in Brevo styling
 
 **Cons:**
 - Less customization
@@ -236,21 +279,43 @@ If you prefer not to use API integration:
 
 ## 📚 Resources
 
-- [Mailchimp API Documentation](https://mailchimp.com/developer/)
-- [Mailchimp API v3 Reference](https://mailchimp.com/developer/api/marketing/)
-- [Mailchimp Audience API](https://mailchimp.com/developer/api/marketing/audiences/)
+- [Brevo API Documentation](https://developers.brevo.com/)
+- [Brevo API Reference](https://developers.brevo.com/reference)
+- [Brevo Contacts API](https://developers.brevo.com/reference/createcontact)
+- [Brevo Free Plan Details](https://www.brevo.com/pricing/)
 
 ---
 
 ## ✅ Checklist
 
-- [ ] Mailchimp account created
-- [ ] Audience/list created
+- [ ] Brevo account created
+- [ ] Contact list created
 - [ ] API key generated
 - [ ] List ID copied
-- [ ] Server prefix identified
-- [ ] Environment variables set
+- [ ] Environment variables set (`VITE_BREVO_API_KEY`, `VITE_BREVO_LIST_ID`)
 - [ ] Newsletter forms tested
 - [ ] GTM event tracking verified
+- [ ] Google Ads conversion tracking verified
 - [ ] Double opt-in configured (optional)
 - [ ] Error handling tested
+- [ ] Welcome email configured (optional)
+
+---
+
+## 🆚 Comparison: Brevo vs Mailchimp
+
+| Feature | Brevo (Free) | Mailchimp (Free) |
+|---------|--------------|------------------|
+| **Emails/day** | 300 | Unlimited* |
+| **Contacts** | Unlimited | 500 |
+| **API Access** | ✅ Full | ✅ Full |
+| **Email Templates** | ✅ | ✅ |
+| **Automation** | ✅ | ✅ Limited |
+| **Support** | Email | Email |
+
+*Mailchimp free tier has unlimited emails but limited to 500 contacts
+
+**Why Brevo is better for growth:**
+- Unlimited contacts means you can grow your list without hitting limits
+- 300 emails/day is plenty for newsletters (you send to all subscribers at once)
+- Better free tier for serious email marketing

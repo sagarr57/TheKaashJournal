@@ -7,39 +7,40 @@ This guide covers deploying The Kaash Journal blog to free hosting platforms.
 1. **Domain Name** - Purchase a domain from Namecheap, GoDaddy, or similar
 2. **GitHub Account** - For GitHub Pages deployment
 3. **Vercel Account** - For Vercel deployment (optional)
-4. **Mailchimp Account** - For newsletter subscriptions
+4. **Brevo Account** - For newsletter subscriptions (free tier available)
 5. **Google Tag Manager Account** - For analytics and tracking
 
 ## Setup Steps
 
 ### 1. Google Tag Manager (GTM)
 
-1. Go to [Google Tag Manager](https://tagmanager.google.com)
-2. Create a new account and container
-3. Copy your GTM ID (format: `GTM-XXXXXXX`)
-4. Add it to your `.env` file:
-   ```
-   VITE_GTM_ID=GTM-XXXXXXX
-   ```
+✅ **Already Configured**: Your GTM ID is `GTM-P33W36DQ`
 
-### 2. Mailchimp Newsletter
+1. Your GTM container is ready: `GTM-P33W36DQ`
+2. Add it to your `.env` file:
+   ```
+   VITE_GTM_ID=GTM-P33W36DQ
+   ```
+3. The GTM script will automatically load on all pages
 
-1. Sign up at [Mailchimp](https://mailchimp.com) (free tier available)
-2. Create an audience/list
+### 2. Brevo Newsletter
+
+1. Sign up at [Brevo](https://www.brevo.com) (free tier: 300 emails/day, unlimited contacts)
+2. Create a contact list:
+   - Go to Contacts > Lists
+   - Click "Create a list"
+   - Name it (e.g., "Newsletter Subscribers")
 3. Get your API key:
-   - Go to Account > Extras > API keys
-   - Create a new API key
+   - Go to Settings > API Keys
+   - Click "Generate a new API key"
+   - Copy the key immediately (you won't see it again!)
 4. Get your List ID:
-   - Go to Audience > All contacts
-   - Settings > Audience name and defaults
-   - Copy the Audience ID
-5. Get your Server Prefix:
-   - Found in your API key URL (e.g., `us1.api.mailchimp.com` = `us1`)
-6. Add to `.env`:
+   - Found in the list URL or list settings
+   - It's a number (e.g., `2`, `5`, `10`)
+5. Add to `.env`:
    ```
-   VITE_MAILCHIMP_API_KEY=your_api_key_here
-   VITE_MAILCHIMP_LIST_ID=your_list_id_here
-   VITE_MAILCHIMP_SERVER_PREFIX=us1
+   VITE_BREVO_API_KEY=your_api_key_here
+   VITE_BREVO_LIST_ID=your_list_id_here
    ```
 
 ### 3. Environment Variables
@@ -84,9 +85,8 @@ Fill in your actual values.
    - Go to your repo > Settings > Secrets and variables > Actions
    - Add all environment variables:
      - `VITE_GTM_ID`
-     - `VITE_MAILCHIMP_API_KEY`
-     - `VITE_MAILCHIMP_LIST_ID`
-     - `VITE_MAILCHIMP_SERVER_PREFIX`
+     - `VITE_BREVO_API_KEY`
+     - `VITE_BREVO_LIST_ID`
 
 2. **Configure GitHub Pages**:
    - Go to Settings > Pages
@@ -114,7 +114,7 @@ Fill in your actual values.
 ### 2. Test Newsletter
 
 1. Try subscribing with a test email
-2. Check Mailchimp dashboard for new subscribers
+2. Check Brevo dashboard for new subscribers
 3. Verify email confirmation (if double opt-in enabled)
 
 ### 3. Access Admin Dashboard
@@ -127,7 +127,7 @@ Visit: `https://yourdomain.com/admin`
 
 ### Newsletter Not Working
 
-- Check Mailchimp API key is correct
+- Check Brevo API key is correct
 - Verify List ID matches your audience
 - Check server prefix (us1, us2, etc.)
 - Check browser console for errors
@@ -155,5 +155,5 @@ Visit: `https://yourdomain.com/admin`
 
 - [Vercel Documentation](https://vercel.com/docs)
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
-- [Mailchimp API Docs](https://mailchimp.com/developer/)
+- [Brevo API Docs](https://developers.brevo.com/)
 - [Google Tag Manager Guide](https://support.google.com/tagmanager)

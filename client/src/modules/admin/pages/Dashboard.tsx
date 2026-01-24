@@ -25,56 +25,6 @@ import type {
 } from "../types";
 import { toast } from "sonner";
 
-// Mock data fallback
-const mockAnalyticsData = {
-  overview: {
-    totalVisitors: 12543,
-    totalSubscribers: 892,
-    totalClicks: 3456,
-    totalRevenue: 12450.75,
-    visitorsChange: 12.5,
-    subscribersChange: 8.3,
-    clicksChange: -2.1,
-    revenueChange: 15.8,
-  },
-  visitors: [
-    { date: "Jan", visitors: 1200 },
-    { date: "Feb", visitors: 1900 },
-    { date: "Mar", visitors: 2100 },
-    { date: "Apr", visitors: 1800 },
-    { date: "May", visitors: 2400 },
-    { date: "Jun", visitors: 3143 },
-  ],
-  clicks: [
-    { date: "Jan", clicks: 450 },
-    { date: "Feb", clicks: 520 },
-    { date: "Mar", clicks: 680 },
-    { date: "Apr", clicks: 590 },
-    { date: "May", clicks: 720 },
-    { date: "Jun", clicks: 496 },
-  ],
-  revenue: [
-    { date: "Jan", revenue: 1200 },
-    { date: "Feb", revenue: 1800 },
-    { date: "Mar", revenue: 2100 },
-    { date: "Apr", revenue: 1950 },
-    { date: "May", revenue: 2400 },
-    { date: "Jun", revenue: 3000.75 },
-  ],
-  topPosts: [
-    { title: "AI Tools for Debt Management", views: 3420, clicks: 234, revenue: 450.50 },
-    { title: "Real-Time Finance Solutions", views: 2890, clicks: 189, revenue: 380.25 },
-    { title: "Fintech Trends 2025", views: 2567, clicks: 156, revenue: 320.00 },
-    { title: "How to Use AI for Personal Finance", views: 2345, clicks: 145, revenue: 290.50 },
-  ],
-  trafficSources: [
-    { name: "Organic Search", value: 45, color: "#0066FF" },
-    { name: "Direct", value: 25, color: "#10B981" },
-    { name: "Social Media", value: 20, color: "#F59E0B" },
-    { name: "Referral", value: 10, color: "#EF4444" },
-  ],
-};
-
 function AdminDashboard() {
   const [overview, setOverview] = useState<AnalyticsData | null>(null);
   const [visitors, setVisitors] = useState<ChartDataPoint[]>([]);
@@ -106,23 +56,23 @@ function AdminDashboard() {
       setTrafficSources(trafficData);
     } catch (error) {
       console.error("Error loading analytics data:", error);
-      toast.error("Failed to load analytics data");
-      // Use mock data as fallback
+      toast.error("Failed to load analytics data. Please check your GA4 configuration.");
+      // Set empty data instead of mock data
       setOverview({
-        visitors: mockAnalyticsData.overview.totalVisitors,
-        subscribers: mockAnalyticsData.overview.totalSubscribers,
-        clicks: mockAnalyticsData.overview.totalClicks,
-        revenue: mockAnalyticsData.overview.totalRevenue,
-        visitorsChange: mockAnalyticsData.overview.visitorsChange,
-        subscribersChange: mockAnalyticsData.overview.subscribersChange,
-        clicksChange: mockAnalyticsData.overview.clicksChange,
-        revenueChange: mockAnalyticsData.overview.revenueChange,
+        visitors: 0,
+        subscribers: 0,
+        clicks: 0,
+        revenue: 0,
+        visitorsChange: 0,
+        subscribersChange: 0,
+        clicksChange: 0,
+        revenueChange: 0,
       });
-      setVisitors(mockAnalyticsData.visitors.map(v => ({ date: v.date, value: v.visitors })));
-      setClicks(mockAnalyticsData.clicks.map(c => ({ date: c.date, value: c.clicks })));
-      setRevenue(mockAnalyticsData.revenue.map(r => ({ date: r.date, value: r.revenue })));
-      setTopPosts(mockAnalyticsData.topPosts);
-      setTrafficSources(mockAnalyticsData.trafficSources);
+      setVisitors([]);
+      setClicks([]);
+      setRevenue([]);
+      setTopPosts([]);
+      setTrafficSources([]);
     } finally {
       setIsLoading(false);
     }
@@ -144,14 +94,14 @@ function AdminDashboard() {
   }, []);
 
   const displayOverview = overview || {
-    visitors: mockAnalyticsData.overview.totalVisitors,
-    subscribers: mockAnalyticsData.overview.totalSubscribers,
-    clicks: mockAnalyticsData.overview.totalClicks,
-    revenue: mockAnalyticsData.overview.totalRevenue,
-    visitorsChange: mockAnalyticsData.overview.visitorsChange,
-    subscribersChange: mockAnalyticsData.overview.subscribersChange,
-    clicksChange: mockAnalyticsData.overview.clicksChange,
-    revenueChange: mockAnalyticsData.overview.revenueChange,
+    visitors: 0,
+    subscribers: 0,
+    clicks: 0,
+    revenue: 0,
+    visitorsChange: 0,
+    subscribersChange: 0,
+    clicksChange: 0,
+    revenueChange: 0,
   };
 
   const StatCard = ({ 
@@ -280,15 +230,21 @@ function AdminDashboard() {
                 <CardTitle>Monthly Visitors</CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={visitors.length > 0 ? visitors : mockAnalyticsData.visitors.map(v => ({ date: v.date, value: v.visitors }))}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="value" fill="#0066FF" />
-                  </BarChart>
-                </ResponsiveContainer>
+                {visitors.length > 0 ? (
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart data={visitors}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="date" />
+                      <YAxis />
+                      <Tooltip />
+                      <Bar dataKey="value" fill="#0066FF" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-[300px] flex items-center justify-center text-gray-500">
+                    <p>No visitor data available</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -299,15 +255,21 @@ function AdminDashboard() {
                 <CardTitle>Monthly Clicks</CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={clicks.length > 0 ? clicks : mockAnalyticsData.clicks.map(c => ({ date: c.date, value: c.clicks }))}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="value" stroke="#0066FF" strokeWidth={2} />
-                  </LineChart>
-                </ResponsiveContainer>
+                {clicks.length > 0 ? (
+                  <ResponsiveContainer width="100%" height={300}>
+                    <LineChart data={clicks}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="date" />
+                      <YAxis />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="value" stroke="#0066FF" strokeWidth={2} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-[300px] flex items-center justify-center text-gray-500">
+                    <p>No click data available</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -318,15 +280,21 @@ function AdminDashboard() {
                 <CardTitle>Monthly Revenue</CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={revenue.length > 0 ? revenue : mockAnalyticsData.revenue.map(r => ({ date: r.date, value: r.revenue }))}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip formatter={(value: number) => `$${value.toLocaleString()}`} />
-                    <Line type="monotone" dataKey="value" stroke="#10B981" strokeWidth={2} />
-                  </LineChart>
-                </ResponsiveContainer>
+                {revenue.length > 0 ? (
+                  <ResponsiveContainer width="100%" height={300}>
+                    <LineChart data={revenue}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="date" />
+                      <YAxis />
+                      <Tooltip formatter={(value: number) => `$${value.toLocaleString()}`} />
+                      <Line type="monotone" dataKey="value" stroke="#10B981" strokeWidth={2} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-[300px] flex items-center justify-center text-gray-500">
+                    <p>No revenue data available</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -337,25 +305,31 @@ function AdminDashboard() {
                 <CardTitle>Traffic Sources</CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <PieChart>
-                    <Pie
-                      data={trafficSources.length > 0 ? trafficSources : mockAnalyticsData.trafficSources}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                      outerRadius={100}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {(trafficSources.length > 0 ? trafficSources : mockAnalyticsData.trafficSources).map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
+                {trafficSources.length > 0 ? (
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={trafficSources}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        outerRadius={100}
+                        fill="#8884d8"
+                        dataKey="value"
+                      >
+                        {trafficSources.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-[300px] flex items-center justify-center text-gray-500">
+                    <p>No traffic source data available</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -378,16 +352,24 @@ function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(topPosts.length > 0 ? topPosts : mockAnalyticsData.topPosts).map((post, index) => (
-                    <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4">{post.title}</td>
-                      <td className="py-3 px-4 text-right">{post.views.toLocaleString()}</td>
-                      <td className="py-3 px-4 text-right">{post.clicks.toLocaleString()}</td>
-                      <td className="py-3 px-4 text-right font-semibold">
-                        ${post.revenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {topPosts.length > 0 ? (
+                    topPosts.map((post, index) => (
+                      <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
+                        <td className="py-3 px-4">{post.title}</td>
+                        <td className="py-3 px-4 text-right">{post.views.toLocaleString()}</td>
+                        <td className="py-3 px-4 text-right">{post.clicks.toLocaleString()}</td>
+                        <td className="py-3 px-4 text-right font-semibold">
+                          ${post.revenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={4} className="py-8 text-center text-gray-500">
+                        No post data available
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>

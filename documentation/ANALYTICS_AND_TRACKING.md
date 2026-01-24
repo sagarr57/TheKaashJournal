@@ -29,12 +29,16 @@ Complete guide for setting up Google Tag Manager (GTM), Google Analytics, and Go
 
 After creating the container, you'll see your GTM ID in the format: `GTM-XXXXXXX`
 
+**Your GTM ID**: `GTM-P33W36DQ` (already configured)
+
 ### Step 3: Add GTM ID to Environment
 
 Add to your `.env` file:
 ```bash
-VITE_GTM_ID=GTM-XXXXXXX
+VITE_GTM_ID=GTM-P33W36DQ
 ```
+
+**Note**: Your GTM ID is already set in `.env.example`. Just copy it to `.env` when ready.
 
 ### Step 4: Verify Installation
 
@@ -143,7 +147,43 @@ For real-time data in admin dashboard:
 4. Set trigger (e.g., newsletter subscription, purchase, etc.)
 5. Save and publish
 
-### Step 4: Track Revenue (Optional)
+### Step 4: GCLID Tracking (Automatic)
+
+**GCLID (Google Click Identifier) tracking is automatically implemented!**
+
+The application automatically:
+- ✅ Captures `gclid` parameter from URL when users click Google Ads
+- ✅ Stores GCLID in localStorage for 30 days (Google's attribution window)
+- ✅ Tracks conversions with GCLID for proper Google Ads attribution
+- ✅ Sends conversion events to GTM dataLayer with GCLID
+
+**How it works:**
+
+1. When a user clicks a Google Ad, the URL contains `?gclid=...`
+2. The app automatically captures and stores this GCLID
+3. When a conversion happens (newsletter signup, click, etc.), the GCLID is included
+4. Google Ads can then attribute the conversion to the correct ad click
+
+**Implementation details:**
+
+- GCLID tracking is initialized in `App.tsx` on app load
+- Conversion tracking happens automatically in `NewsletterForm.tsx`
+- You can manually track conversions using:
+
+```typescript
+import { trackConversion } from "@/lib/google-ads";
+
+// Track newsletter signup
+trackConversion("newsletter_signup");
+
+// Track click with value
+trackConversion("click", 10.50, "USD");
+
+// Track custom conversion
+trackConversion("custom", 0, "USD");
+```
+
+### Step 5: Track Revenue (Optional)
 
 For e-commerce/revenue tracking:
 
@@ -154,25 +194,53 @@ For e-commerce/revenue tracking:
 
 ```typescript
 import { pushToDataLayer } from "@/components/GTM";
+import { trackConversion } from "@/lib/google-ads";
 
+// Method 1: Using GTM directly
 pushToDataLayer("purchase", {
   value: 29.99,
   currency: "USD",
   transaction_id: "12345"
 });
+
+// Method 2: Using conversion tracker (includes GCLID automatically)
+trackConversion("custom", 29.99, "USD");
 ```
 
 ---
 
 ## 📊 Admin Dashboard Analytics
 
-The admin dashboard displays analytics from multiple sources:
+The admin dashboard displays **real-time analytics** from Google Analytics 4. All data is fetched dynamically - no hardcoded values!
 
 ### Data Sources
 
-1. **Google Analytics 4** - Visitors, page views, traffic sources
-2. **Google Tag Manager** - Click tracking, custom events
-3. **Mailchimp** - Newsletter subscribers
+1. **Google Analytics 4** - Visitors, page views, traffic sources, revenue
+2. **Google Tag Manager** - Click tracking, custom events, conversions
+3. **Brevo** - Newsletter subscribers (via API)
+4. **Google Ads** - Conversion tracking with GCLID attribution
+
+### Dynamic Data Features
+
+✅ **Real-time Overview Stats**
+- Total Visitors (with % change from previous period)
+- Newsletter Subscribers (with % change)
+- Total Clicks (with % change)
+- Total Revenue (with % change)
+
+✅ **Interactive Charts**
+- Monthly Visitors (Bar Chart)
+- Monthly Clicks (Line Chart)
+- Monthly Revenue (Line Chart)
+- Traffic Sources (Pie Chart)
+
+✅ **Top Performing Posts Table**
+- Post Title
+- Views
+- Clicks
+- Revenue
+
+**Note**: If GA4 is not configured, the dashboard will show empty states instead of mock data. This ensures you always know when real data is available.
 4. **Google Ads** - Conversions, revenue (if configured)
 
 ### API Endpoints

@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { toast } from "sonner";
 import { pushToDataLayer } from "./GTM";
+import { trackConversion } from "@/lib/google-ads";
 
 interface NewsletterFormProps {
   placeholder?: string;
@@ -38,6 +39,9 @@ export function NewsletterForm({
         pushToDataLayer("newsletter_subscribe", {
           email: email.trim(),
         });
+        
+        // Track conversion with GCLID for Google Ads
+        trackConversion("newsletter_signup");
       } else {
         toast.error(result.message);
       }
@@ -51,20 +55,20 @@ export function NewsletterForm({
 
   return (
     <form onSubmit={handleSubmit} className={className}>
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col gap-3">
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={placeholder}
-          className="flex-1 px-4 py-3 h-12 rounded text-gray-900 placeholder:text-gray-500 bg-white focus:outline-none focus:ring-2 focus:ring-white"
+          className="w-full px-3 py-2 h-10 text-gray-900 placeholder:text-gray-500 bg-white rounded text-sm focus:outline-none focus:ring-2 focus:ring-white"
           required
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-white hover:bg-gray-100 text-blue-700 font-bold px-8 h-12 rounded-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-white text-blue-700 font-semibold py-2 h-10 rounded hover:bg-gray-100 transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? "Subscribing..." : buttonText}
         </button>

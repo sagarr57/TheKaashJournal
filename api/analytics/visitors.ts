@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
 export default async function handler(
   req: VercelRequest,
@@ -15,20 +16,58 @@ export default async function handler(
   const days = parseInt(req.query.days as string) || 30;
 
   try {
-    // TODO: Implement GA4 API call
-    // For now, return mock data
-    const mockData = Array.from({ length: days }, (_, i) => {
-      const date = new Date();
-      date.setDate(date.getDate() - (days - i - 1));
-      return {
-        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-        value: Math.floor(Math.random() * 2000) + 500,
-      };
+    const GA_PROPERTY_ID = process.env.GA_PROPERTY_ID;
+    const GA_CREDENTIALS = process.env.GA_CREDENTIALS;
+
+    if (!GA_PROPERTY_ID || !GA_CREDENTIALS) {
+      return res.json([]);
+    }
+
+    let credentials;
+    try {
+      credentials = JSON.parse(GA_CREDENTIALS);
+    } catch {
+      return res.status(500).json({ error: 'Invalid GA credentials format' });
+    }
+
+    const analyticsDataClient = new BetaAnalyticsDataClient({
+      credentials,
     });
 
-    res.json(mockData);
+    const propertyId = `properties/${GA_PROPERTY_ID}`;
+    const today = new Date();
+    const startDate = new Date();
+    startDate.setDate(today.getDate() - days);
+
+    const [response] = await analyticsDataClient.runReport({
+      property: propertyId,
+      dateRanges: [
+        {
+          startDate: startDate.toISOString().split('T')[0],
+          endDate: today.toISOString().split('T')[0],
+        },
+      ],
+      dimensions: [{ name: 'date' }],
+      metrics: [{ name: 'activeUsers' }],
+      orderBys: [{ dimension: { dimensionName: 'date' } }],
+    });
+
+    const data = response.rows?.map((row) => {
+      const dateStr = row.dimensionValues?.[0]?.value || '';
+      const date = new Date(
+        parseInt(dateStr.substring(0, 4)),
+        parseInt(dateStr.substring(4, 6)) - 1,
+        parseInt(dateStr.substring(6, 8))
+      );
+      return {
+        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        value: parseInt(row.metricValues?.[0]?.value || '0'),
+      };
+    }) || [];
+
+    res.json(data);
   } catch (error) {
     console.error('Visitors API error:', error);
-    res.status(500).json({ error: 'Failed to fetch visitors data' });
+    res.json([]);
   }
 }

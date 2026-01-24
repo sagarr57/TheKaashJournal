@@ -1,9 +1,9 @@
-// Newsletter integration with Mailchimp
-// You'll need to set up a Mailchimp account and get your API key and list ID
+// Newsletter integration with Brevo (formerly Sendinblue)
+// Free tier: 300 emails/day, unlimited contacts
+// Sign up at: https://www.brevo.com
 
-const MAILCHIMP_API_KEY = import.meta.env.VITE_MAILCHIMP_API_KEY;
-const MAILCHIMP_LIST_ID = import.meta.env.VITE_MAILCHIMP_LIST_ID;
-const MAILCHIMP_SERVER_PREFIX = import.meta.env.VITE_MAILCHIMP_SERVER_PREFIX; // e.g., "us1", "us2", etc.
+const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
+const BREVO_LIST_ID = import.meta.env.VITE_BREVO_LIST_ID;
 
 interface NewsletterResponse {
   success: boolean;
@@ -11,8 +11,8 @@ interface NewsletterResponse {
 }
 
 export async function subscribeToNewsletter(email: string): Promise<NewsletterResponse> {
-  if (!MAILCHIMP_API_KEY || !MAILCHIMP_LIST_ID || !MAILCHIMP_SERVER_PREFIX) {
-    console.error("Mailchimp configuration is missing");
+  if (!BREVO_API_KEY || !BREVO_LIST_ID) {
+    console.error("Brevo configuration is missing");
     return {
       success: false,
       message: "Newsletter service is not configured. Please contact support.",
@@ -20,34 +20,43 @@ export async function subscribeToNewsletter(email: string): Promise<NewsletterRe
   }
 
   try {
-    // Mailchimp API endpoint
-    const url = `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_LIST_ID}/members`;
+    // Brevo API endpoint for adding contacts
+    const url = "https://api.brevo.com/v3/contacts";
 
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${MAILCHIMP_API_KEY}`,
+        "api-key": BREVO_API_KEY,
       },
       body: JSON.stringify({
-        email_address: email,
-        status: "subscribed", // or "pending" for double opt-in
+        email: email.trim(),
+        listIds: [parseInt(BREVO_LIST_ID)],
+        updateEnabled: true, // Update if contact already exists
       }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      // Handle Mailchimp errors
-      if (data.title === "Member Exists") {
+      // Handle Brevo errors
+      if (response.status === 400 && data.message?.includes("already exists")) {
         return {
-          success: false,
-          message: "This email is already subscribed to our newsletter.",
+          success: true, // Treat as success since they're already subscribed
+          message: "You're already subscribed to our newsletter!",
         };
       }
+      
+      if (response.status === 400 && data.message?.includes("Invalid email")) {
+        return {
+          success: false,
+          message: "Please enter a valid email address.",
+        };
+      }
+
       return {
         success: false,
-        message: data.detail || "Failed to subscribe. Please try again later.",
+        message: data.message || "Failed to subscribe. Please try again later.",
       };
     }
 
@@ -63,6 +72,3 @@ export async function subscribeToNewsletter(email: string): Promise<NewsletterRe
     };
   }
 }
-
-// Alternative: Use Mailchimp's embedded form (simpler, no API needed)
-// You can also use their hosted form URL directly

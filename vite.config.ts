@@ -22,6 +22,46 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "client/dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // React core
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'react-vendor';
+          }
+          // Router
+          if (id.includes('node_modules/wouter')) {
+            return 'router';
+          }
+          // Radix UI components
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'ui-vendor';
+          }
+          // Charts (large library)
+          if (id.includes('node_modules/recharts')) {
+            return 'charts';
+          }
+          // Markdown and syntax highlighting (very large)
+          if (id.includes('node_modules/react-markdown') || 
+              id.includes('node_modules/remark') || 
+              id.includes('node_modules/react-syntax-highlighter') ||
+              id.includes('node_modules/unified') ||
+              id.includes('node_modules/micromark') ||
+              id.includes('node_modules/mdast')) {
+            return 'markdown';
+          }
+          // Icons
+          if (id.includes('node_modules/lucide-react')) {
+            return 'icons';
+          }
+          // Admin module
+          if (id.includes('modules/admin')) {
+            return 'admin';
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
   },
   server: {
     port: 3000,
