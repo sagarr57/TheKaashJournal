@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Menu, Search, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from "wouter";
 import {
   Dialog,
@@ -19,10 +19,127 @@ export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [location, setLocation] = useLocation();
+  
+  // Mobile header auto-hide state
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
+
+  // Check if current page is a blog-related page
+  const isBlogPage = useMemo(() => {
+    return (
+      location === '/blog' ||
+      location.startsWith('/blog/') ||
+      location.startsWith('/category/') ||
+      location.startsWith('/tag/')
+    );
+  }, [location]);
+
+  // Header auto-hide on scroll (mobile: all pages, desktop: only blog pages)
+  useEffect(() => {
+    let ticking = false;
+    let lastScrollDirection: 'up' | 'down' | null = null;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const scrollDifference = currentScrollY - lastScrollY;
+          const isMobile = window.innerWidth < 768;
+          
+          // Mobile: Apply auto-hide on all pages
+          // Desktop: Only apply auto-hide on blog pages
+          const shouldApplyAutoHide = isMobile || (isBlogPage && !isMobile);
+          
+          if (!shouldApplyAutoHide) {
+            setIsHeaderVisible(true);
+            setLastScrollY(currentScrollY);
+            ticking = false;
+            return;
+          }
+
+          // IMPORTANT: Keep header visible when mobile menu is open
+          if (isOpen) {
+            setIsHeaderVisible(true);
+            if (scrollTimeoutRef.current) {
+              clearTimeout(scrollTimeoutRef.current);
+              scrollTimeoutRef.current = null;
+            }
+            setLastScrollY(currentScrollY);
+            ticking = false;
+            return;
+          }
+
+          // Clear existing timeout
+          if (scrollTimeoutRef.current) {
+            clearTimeout(scrollTimeoutRef.current);
+            scrollTimeoutRef.current = null;
+          }
+
+          // Determine scroll direction
+          if (Math.abs(scrollDifference) > 5) {
+            if (scrollDifference > 0) {
+              lastScrollDirection = 'down';
+            } else {
+              lastScrollDirection = 'up';
+            }
+          }
+
+          // Hide/show based on scroll direction
+          if (lastScrollDirection === 'down' && currentScrollY > 100) {
+            // Scrolling down - hide header immediately
+            setIsHeaderVisible(false);
+            isScrollingRef.current = true;
+            
+            // Show header when scrolling stops (only if we were scrolling down)
+            scrollTimeoutRef.current = setTimeout(() => {
+              setIsHeaderVisible(true);
+              isScrollingRef.current = false;
+            }, 200);
+          } else if (lastScrollDirection === 'up') {
+            // Scrolling up - show header immediately and cancel any pending hide
+            setIsHeaderVisible(true);
+            isScrollingRef.current = false;
+            if (scrollTimeoutRef.current) {
+              clearTimeout(scrollTimeoutRef.current);
+              scrollTimeoutRef.current = null;
+            }
+          }
+
+          setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [lastScrollY, isOpen, isBlogPage]);
+
+  // Ensure header is visible when mobile menu opens
+  useEffect(() => {
+    if (isOpen) {
+      setIsHeaderVisible(true);
+      // Clear any pending timeout when menu opens
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+        scrollTimeoutRef.current = null;
+      }
+    }
+  }, [isOpen]);
 
   // Search functionality
   const searchResults = useMemo(() => {
@@ -55,7 +172,15 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200" role="banner">
+    <header 
+      className={`sticky top-0 z-50 bg-white border-b border-gray-200 transition-transform duration-300 ease-in-out ${
+        // Desktop: Only apply auto-hide on blog pages, mobile: apply on all pages
+        isBlogPage 
+          ? (isHeaderVisible ? 'translate-y-0' : '-translate-y-full')
+          : 'translate-y-0'
+      }`}
+      role="banner"
+    >
       <SkipToContent />
       {/* Logo Section - Centered */}
       <div className="container py-6 relative">
