@@ -37,7 +37,14 @@ Perfect for getting started! Upgrade only when you need more than 300 emails/day
    - **List name**: Newsletter Subscribers
    - **Description**: Subscribers from The Kaash Journal website
 4. Click **"Create"**
-5. **Copy the List ID** (you'll see it in the URL or list settings)
+5. **Find the List ID**:
+   - **Method 1 (Easiest)**: Look at the URL in your browser
+     - After creating/clicking the list, the URL will be: `https://app.brevo.com/lists/2/contacts`
+     - The number after `/lists/` is your List ID (e.g., `2`, `5`, `10`)
+   - **Method 2**: Click the three dots (⋮) next to your list > Settings
+     - The List ID is shown in the settings page or URL
+   
+   **Example**: If your URL shows `/lists/5/contacts`, your List ID is `5`
 
 ### Step 3: Get Your API Key
 
