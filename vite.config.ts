@@ -4,11 +4,8 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
-import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
-
-// Temporarily test without these plugins to see if they cause issues
-// vitePluginManusRuntime is inlining React code into HTML, causing 368KB HTML file and circular deps
-// Disabling it fixes the issue
+// vitePluginManusRuntime removed - it was inlining React code into HTML (368KB file!)
+// This caused circular dependency errors and blank page
 const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
 export default defineConfig({
