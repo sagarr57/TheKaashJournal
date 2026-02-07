@@ -13,11 +13,5 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "crons": [
-    {
-      "path": "/api/analytics/sync-to-supabase",
-      "schedule": "0 2 * * *"
-    }
   ]
 }
