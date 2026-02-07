@@ -16,6 +16,8 @@ import {
   fetchRevenueData,
   fetchTopPosts,
   fetchTrafficSources,
+  fetchSubscribers,
+  type Subscriber,
 } from "../lib/analytics";
 import type {
   AnalyticsData,
@@ -32,6 +34,7 @@ function AdminDashboard() {
   const [revenue, setRevenue] = useState<ChartDataPoint[]>([]);
   const [topPosts, setTopPosts] = useState<TopPost[]>([]);
   const [trafficSources, setTrafficSources] = useState<TrafficSource[]>([]);
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -39,25 +42,102 @@ function AdminDashboard() {
     try {
       setIsLoading(true);
       
-      const [overviewData, visitorsData, clicksData, revenueData, topPostsData, trafficData] = await Promise.all([
+      // Use Promise.allSettled to handle partial failures gracefully
+      const results = await Promise.allSettled([
         fetchAnalyticsOverview(),
         fetchVisitorsData(30),
         fetchClicksData(30),
         fetchRevenueData(30),
         fetchTopPosts(10),
         fetchTrafficSources(),
+        fetchSubscribers(),
       ]);
 
-      setOverview(overviewData);
-      setVisitors(visitorsData);
-      setClicks(clicksData);
-      setRevenue(revenueData);
-      setTopPosts(topPostsData);
-      setTrafficSources(trafficData);
-    } catch (error) {
-      console.error("Error loading analytics data:", error);
-      toast.error("Failed to load analytics data. Please check your GA4 configuration.");
-      // Set empty data instead of mock data
+      // Process results and show errors for failed requests
+      const [overviewResult, visitorsResult, clicksResult, revenueResult, topPostsResult, trafficResult, subscribersResult] = results;
+
+      // Handle overview
+      if (overviewResult.status === 'fulfilled') {
+        setOverview(overviewResult.value);
+      } else {
+        toast.error("Failed to load analytics overview", {
+          description: overviewResult.reason?.message || "Unable to fetch analytics data",
+        });
+        setOverview({
+          visitors: 0,
+          subscribers: 0,
+          clicks: 0,
+          revenue: 0,
+          visitorsChange: 0,
+          subscribersChange: 0,
+          clicksChange: 0,
+          revenueChange: 0,
+        });
+      }
+
+      // Handle visitors data
+      if (visitorsResult.status === 'fulfilled') {
+        setVisitors(visitorsResult.value);
+      } else {
+        toast.error("Failed to load visitors data", {
+          description: visitorsResult.reason?.message || "Unable to fetch visitors chart data",
+        });
+        setVisitors([]);
+      }
+
+      // Handle clicks data
+      if (clicksResult.status === 'fulfilled') {
+        setClicks(clicksResult.value);
+      } else {
+        toast.error("Failed to load clicks data", {
+          description: clicksResult.reason?.message || "Unable to fetch clicks chart data",
+        });
+        setClicks([]);
+      }
+
+      // Handle revenue data
+      if (revenueResult.status === 'fulfilled') {
+        setRevenue(revenueResult.value);
+      } else {
+        toast.error("Failed to load revenue data", {
+          description: revenueResult.reason?.message || "Unable to fetch revenue chart data",
+        });
+        setRevenue([]);
+      }
+
+      // Handle top posts
+      if (topPostsResult.status === 'fulfilled') {
+        setTopPosts(topPostsResult.value);
+      } else {
+        toast.error("Failed to load top posts", {
+          description: topPostsResult.reason?.message || "Unable to fetch top posts data",
+        });
+        setTopPosts([]);
+      }
+
+      // Handle traffic sources (optional, don't show error)
+      if (trafficResult.status === 'fulfilled') {
+        setTrafficSources(trafficResult.value);
+      } else {
+        setTrafficSources([]);
+      }
+
+      // Handle subscribers
+      if (subscribersResult.status === 'fulfilled') {
+        setSubscribers(subscribersResult.value);
+      } else {
+        toast.error("Failed to load subscribers", {
+          description: subscribersResult.reason?.message || "Unable to fetch subscriber list",
+        });
+        setSubscribers([]);
+      }
+    } catch (error: any) {
+      // Fallback for unexpected errors
+      const errorMessage = error?.message || "Failed to load dashboard data";
+      toast.error("Unexpected error", {
+        description: errorMessage,
+      });
+      // Set empty data to prevent UI errors
       setOverview({
         visitors: 0,
         subscribers: 0,
@@ -73,6 +153,7 @@ function AdminDashboard() {
       setRevenue([]);
       setTopPosts([]);
       setTrafficSources([]);
+      setSubscribers([]);
     } finally {
       setIsLoading(false);
     }
@@ -186,8 +267,19 @@ function AdminDashboard() {
           </div>
         </div>
 
-        {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {/* Main Navigation Tabs */}
+        <Tabs defaultValue="analytics" className="space-y-6 mb-8">
+          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-4">
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="subscribers">Subscribers</TabsTrigger>
+            <TabsTrigger value="tracking">Tracking Data</TabsTrigger>
+            <TabsTrigger value="settings" className="hidden lg:block">Settings</TabsTrigger>
+          </TabsList>
+
+          {/* Analytics Tab */}
+          <TabsContent value="analytics" className="space-y-6">
+            {/* Overview Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             title="Total Visitors"
             value={displayOverview.visitors}
@@ -215,14 +307,14 @@ function AdminDashboard() {
           />
         </div>
 
-        {/* Charts */}
-        <Tabs defaultValue="visitors" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="visitors">Visitors</TabsTrigger>
-            <TabsTrigger value="clicks">Clicks</TabsTrigger>
-            <TabsTrigger value="revenue">Revenue</TabsTrigger>
-            <TabsTrigger value="sources">Traffic Sources</TabsTrigger>
-          </TabsList>
+            {/* Charts */}
+            <Tabs defaultValue="visitors" className="space-y-6">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="visitors">Visitors</TabsTrigger>
+                <TabsTrigger value="clicks">Clicks</TabsTrigger>
+                <TabsTrigger value="revenue">Revenue</TabsTrigger>
+                <TabsTrigger value="sources">Traffic Sources</TabsTrigger>
+              </TabsList>
 
           <TabsContent value="visitors">
             <Card>
@@ -332,11 +424,11 @@ function AdminDashboard() {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
-        </Tabs>
+              </TabsContent>
+            </Tabs>
 
-        {/* Top Performing Posts */}
-        <Card className="mt-8">
+            {/* Top Performing Posts */}
+            <Card>
           <CardHeader>
             <CardTitle>Top Performing Posts</CardTitle>
           </CardHeader>
@@ -375,6 +467,97 @@ function AdminDashboard() {
             </div>
           </CardContent>
         </Card>
+          </TabsContent>
+
+          {/* Subscribers Tab */}
+          <TabsContent value="subscribers" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Newsletter Subscribers</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {subscribers.length === 0 ? (
+                  <div className="text-center py-12 text-gray-500">
+                    <Mail className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                    <p>No subscribers yet</p>
+                    <p className="text-sm mt-2">Subscribers will appear here once they sign up</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <p className="text-sm text-gray-600">
+                        Total: <span className="font-semibold">{subscribers.length}</span> subscribers
+                      </p>
+                    </div>
+                    <div className="border rounded-lg overflow-hidden">
+                      <table className="w-full">
+                        <thead className="bg-gray-50 border-b">
+                          <tr>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Source</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subscribed</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y">
+                          {subscribers.map((subscriber) => (
+                            <tr key={subscriber.id} className="hover:bg-gray-50">
+                              <td className="px-4 py-3 text-sm font-medium text-gray-900">{subscriber.email}</td>
+                              <td className="px-4 py-3 text-sm text-gray-600">
+                                {subscriber.source || 'unknown'}
+                              </td>
+                              <td className="px-4 py-3 text-sm text-gray-600">
+                                {new Date(subscriber.subscribed_at).toLocaleDateString()}
+                              </td>
+                              <td className="px-4 py-3 text-sm">
+                                {subscriber.unsubscribed_at ? (
+                                  <span className="px-2 py-1 text-xs rounded bg-red-100 text-red-800">Unsubscribed</span>
+                                ) : (
+                                  <span className="px-2 py-1 text-xs rounded bg-green-100 text-green-800">Active</span>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Tracking Data Tab */}
+          <TabsContent value="tracking" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Tracking Data</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-12 text-gray-500">
+                  <Eye className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                  <p>Tracking data viewer coming soon</p>
+                  <p className="text-sm mt-2">View page views, events, conversions, and redirections from Supabase</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Settings Tab */}
+          <TabsContent value="settings" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Settings</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-12 text-gray-500">
+                  <p>Settings coming soon</p>
+                  <p className="text-sm mt-2">Configure analytics, integrations, and preferences</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </main>
 
       <Footer />

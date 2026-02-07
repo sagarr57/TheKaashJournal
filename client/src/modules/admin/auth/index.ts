@@ -50,10 +50,3 @@ export function logout(): void {
   clearAuth();
   window.location.href = "/admin/login";
 }
-
-/**
- * Get admin password from environment
- */
-export function getAdminPassword(): string {
-  return import.meta.env.VITE_ADMIN_PASSWORD || "admin123";
-}

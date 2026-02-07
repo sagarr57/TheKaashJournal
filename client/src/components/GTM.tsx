@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { trackEvent, trackConversion } from '@/lib/tracking';
 
 interface GTMProps {
   gtmId: string;
@@ -41,11 +42,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 // Helper function to push events to GTM dataLayer
+// Also sends events to our backend for storage in Supabase
 export function pushToDataLayer(event: string, data?: Record<string, any>) {
   if (typeof window !== "undefined" && (window as any).dataLayer) {
     (window as any).dataLayer.push({
       event,
       ...data,
     });
+  }
+
+  // Also send to our backend for storage
+  // Determine if this is a conversion or regular event
+  if (event.includes('conversion') || event.includes('purchase') || event.includes('signup')) {
+    trackConversion(
+      data?.conversion_type || event,
+      data?.conversion_name || event,
+      {
+        value: data?.value,
+        currency: data?.currency,
+        metadata: data,
+      }
+    );
+  } else {
+    trackEvent(
+      'gtm_event',
+      event,
+      {
+        elementId: data?.element_id,
+        elementText: data?.element_text,
+        elementType: data?.element_type,
+        value: data?.value,
+        currency: data?.currency,
+        metadata: data,
+      }
+    );
   }
 }

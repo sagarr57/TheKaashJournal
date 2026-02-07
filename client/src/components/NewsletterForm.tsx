@@ -2,18 +2,20 @@ import { useState, FormEvent } from "react";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { toast } from "sonner";
 import { pushToDataLayer } from "./GTM";
-import { trackConversion } from "@/lib/google-ads";
+import { trackConversion } from "@/lib/tracking";
 
 interface NewsletterFormProps {
   placeholder?: string;
   buttonText?: string;
   className?: string;
+  source?: string; // e.g., 'homepage', 'sidebar', 'blog_post'
 }
 
 export function NewsletterForm({
   placeholder = "Enter your email",
   buttonText = "Subscribe",
   className = "",
+  source = "unknown",
 }: NewsletterFormProps) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +31,7 @@ export function NewsletterForm({
     setIsLoading(true);
 
     try {
-      const result = await subscribeToNewsletter(email.trim());
+      const result = await subscribeToNewsletter(email.trim(), source);
 
       if (result.success) {
         toast.success(result.message);
@@ -40,13 +42,17 @@ export function NewsletterForm({
           email: email.trim(),
         });
         
-        // Track conversion with GCLID for Google Ads
-        trackConversion("newsletter_signup");
+        // Track conversion in our backend (Supabase)
+        trackConversion("newsletter", "newsletter_signup", {
+          metadata: {
+            email: email.trim(),
+            source: "newsletter_form",
+          },
+        });
       } else {
         toast.error(result.message);
       }
     } catch (error) {
-      console.error("Newsletter subscription error:", error);
       toast.error("An error occurred. Please try again later.");
     } finally {
       setIsLoading(false);

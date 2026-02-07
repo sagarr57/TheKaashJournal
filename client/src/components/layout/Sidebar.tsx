@@ -63,6 +63,7 @@ export function Sidebar() {
           placeholder="Your email"
           buttonText="Subscribe"
           className="space-y-3"
+          source="sidebar"
         />
       </div>
     </aside>

@@ -5,10 +5,18 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
-import { setAuth, getAdminPassword } from "./index";
+import { setAuth } from "./index";
+
+// Use Vercel serverless function
+// In production: uses /api (Vercel rewrites to serverless functions)
+// In development: you can either:
+//   1. Run `vercel dev` to run functions locally
+//   2. Or set VITE_API_URL to your deployed Vercel URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export function LoginForm() {
   const [, setLocation] = useLocation();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -18,18 +26,52 @@ export function LoginForm() {
     setError("");
     setIsLoading(true);
 
-    const adminPassword = getAdminPassword();
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username.trim(),
+          password: password,
+        }),
+      });
 
-    if (password === adminPassword) {
-      setAuth();
-      toast.success("Login successful!");
-      setLocation("/admin");
-    } else {
-      setError("Invalid password. Please try again.");
-      toast.error("Invalid password");
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        // If response is not JSON, it's likely a 500 or connection error
+        if (response.status === 500 || response.status === 0) {
+          setError('Backend server not running. Please run `vercel dev` or `npm run dev:api`');
+          toast.error('Backend server not running. Run `vercel dev` or `npm run dev:api`');
+          return;
+        }
+        throw e;
+      }
+
+      if (!response.ok) {
+        setError(data.error || 'Invalid username or password');
+        toast.error(data.error || 'Login failed');
+        return;
+      }
+
+      if (data.success) {
+        setAuth();
+        toast.success("Login successful!");
+        setLocation("/admin");
+      } else {
+        setError('Login failed');
+        toast.error('Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -45,20 +87,31 @@ export function LoginForm() {
             Admin <span className="text-blue-600">Login</span>
           </CardTitle>
           <p className="text-sm text-gray-600 mt-2">
-            Enter your password to access the admin dashboard
+            Enter your credentials to access the admin dashboard
           </p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="h-12"
+                required
+                autoFocus
+                disabled={isLoading}
+              />
+            </div>
+            <div>
+              <Input
                 type="password"
-                placeholder="Enter admin password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="h-12"
                 required
-                autoFocus
                 disabled={isLoading}
               />
               {error && (
@@ -76,9 +129,6 @@ export function LoginForm() {
               {isLoading ? "Logging in..." : "Login"}
             </Button>
           </form>
-          <p className="text-xs text-gray-500 mt-4 text-center">
-            Set VITE_ADMIN_PASSWORD in your .env file for production
-          </p>
         </CardContent>
       </Card>
     </div>

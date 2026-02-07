@@ -212,7 +212,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className={`block py-2 text-sm font-medium transition-colors ${
+                className={`block py-3 text-base font-medium transition-colors ${
                   location === item.href
                     ? "text-black"
                     : "text-gray-600 hover:text-black"
@@ -224,11 +224,11 @@ export function Header() {
             ))}
             <button 
               onClick={handleSearchClick}
-              className="block py-2 text-sm font-medium text-gray-600 hover:text-black transition-colors flex items-center gap-2"
+              className="block py-3 text-base font-medium text-gray-600 hover:text-black transition-colors flex items-center gap-2"
               aria-label="Search articles"
               aria-expanded={isSearchOpen}
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-5 h-5" />
               <span>Search</span>
             </button>
           </nav>
@@ -240,12 +240,12 @@ export function Header() {
         <div className="container py-3">
           <div className="flex items-center justify-center">
             {/* Desktop Navigation */}
-            <nav className="flex items-center justify-center gap-8" role="navigation" aria-label="Main navigation">
+            <nav className="flex items-center justify-center gap-10" role="navigation" aria-label="Main navigation">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`text-sm font-medium transition-colors px-2 py-1 ${
+                  className={`text-base font-medium transition-colors px-3 py-2 ${
                     location === item.href
                       ? "text-black border-b-2 border-black"
                       : "text-gray-600 hover:text-black"
@@ -262,7 +262,7 @@ export function Header() {
                 aria-label="Search articles"
                 aria-expanded={isSearchOpen}
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-6 h-6" />
               </button>
             </nav>
           </div>

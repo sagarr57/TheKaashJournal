@@ -80,9 +80,6 @@ export function Auth() {
               {isLoading ? "Logging in..." : "Login"}
             </Button>
           </form>
-          <p className="text-xs text-gray-500 mt-4 text-center">
-            Set VITE_ADMIN_PASSWORD in your .env file for production
-          </p>
         </CardContent>
       </Card>
     </div>

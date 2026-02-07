@@ -60,11 +60,10 @@ To implement dynamic blog posting, the following components are needed:
 - 50,000 monthly active users
 
 **Setup Requirements:**
-1. Create Supabase account at [supabase.com](https://supabase.com)
-2. Create new project
-3. Set up database table
-4. Configure storage bucket
-5. Set up authentication (if needed)
+1. ✅ Supabase account already created and configured (see `SUPABASE_SETUP.md`)
+2. Create new database table (`blog_posts`) - see schema below
+3. Configure storage bucket for images
+4. Set up Row Level Security (RLS) policies
 
 **Database Schema:**
 ```sql

@@ -131,6 +131,7 @@ export default function Home() {
               placeholder="Enter your email"
               buttonText="Subscribe"
               className="max-w-md mx-auto"
+              source="homepage"
             />
           </div>
         </section>

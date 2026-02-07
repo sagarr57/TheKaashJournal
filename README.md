@@ -29,4 +29,36 @@ Subscribe to our newsletter to receive the latest insights delivered directly to
 
 ---
 
+## Development
+
+### Quick Start
+
+```bash
+npm run dev
+```
+
+This runs the frontend. Most features work client-side with Supabase (newsletter, analytics, dashboard).
+
+### Admin Login (Local Development)
+
+Admin login requires server-side code (bcrypt). You have two options:
+
+**Option 1: Vercel Dev (Recommended)**
+```bash
+vercel dev
+```
+This runs Vercel serverless functions locally, including the login endpoint.
+
+**Option 2: Local Express Server**
+```bash
+npm run dev:api
+```
+Run this in a separate terminal alongside `npm run dev`.
+
+### Production
+
+When deployed to Vercel, all API routes work automatically via serverless functions. No backend server needed.
+
+---
+
 **The Kaash Journal** - Exploring the future of AI-powered finance.

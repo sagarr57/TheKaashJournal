@@ -36,11 +36,6 @@ export default defineConfig({
             return 'react-dom';
           }
           
-          // Router
-          if (id.includes('node_modules/wouter')) {
-            return 'router';
-          }
-          
           // Radix UI components
           if (id.includes('node_modules/@radix-ui')) {
             return 'ui-vendor';
@@ -85,6 +80,32 @@ export default defineConfig({
             return 'forms';
           }
           
+          // Large libraries that should be split
+          if (id.includes('node_modules/wouter')) {
+            return 'router';
+          }
+          if (id.includes('node_modules/axios')) {
+            return 'axios';
+          }
+          if (id.includes('node_modules/framer-motion')) {
+            return 'framer-motion';
+          }
+          if (id.includes('node_modules/sonner')) {
+            return 'sonner';
+          }
+          if (id.includes('node_modules/react-helmet-async')) {
+            return 'helmet';
+          }
+          if (id.includes('node_modules/@supabase')) {
+            return 'supabase';
+          }
+          if (id.includes('node_modules/embla-carousel')) {
+            return 'carousel';
+          }
+          if (id.includes('node_modules/next-themes')) {
+            return 'themes';
+          }
+          
           // Other vendor libraries
           if (id.includes('node_modules/')) {
             return 'vendor';
@@ -110,6 +131,15 @@ export default defineConfig({
     fs: {
       strict: true,
       deny: ["**/.*"],
+    },
+    // Proxy API requests to local Express server (for admin login)
+    // In production, Vercel handles /api routes via serverless functions
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 });

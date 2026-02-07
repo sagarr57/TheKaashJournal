@@ -1,12 +1,13 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { GTM } from "./components/GTM";
 import { Skeleton } from "@/components/ui/skeleton";
-import { initGclidTracking } from "./lib/google-ads";
+import { usePageTracking } from "./hooks/usePageTracking";
+import { useLinkTracking } from "./hooks/useLinkTracking";
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import("./pages/Home"));
@@ -32,6 +33,11 @@ function PageLoader() {
 }
 
 function Router() {
+  // Track page views automatically
+  usePageTracking();
+  // Track link clicks automatically
+  useLinkTracking();
+  
   return (
     <Suspense fallback={<PageLoader />}>
       <Switch>
@@ -53,16 +59,6 @@ function Router() {
 
 function App() {
   const gtmId = import.meta.env.VITE_GTM_ID || "";
-
-  // Initialize GCLID tracking on app load
-  useEffect(() => {
-    // Wait for GTM to initialize before tracking GCLID
-    const timer = setTimeout(() => {
-      initGclidTracking();
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <ErrorBoundary>
