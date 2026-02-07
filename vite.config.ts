@@ -25,9 +25,18 @@ export default defineConfig({
       include: [/node_modules/],
       transformMixedEsModules: true,
     },
-    // Removed manualChunks to let Vite handle chunking automatically
-    // This avoids circular dependency and initialization order issues
+    // Let Vite handle chunking automatically to avoid circular dependencies
     chunkSizeWarningLimit: 900, // React 19 is inherently large (~900KB), this is expected
+    rollupOptions: {
+      output: {
+        // Prevent circular dependencies by ensuring proper module order
+        format: 'es',
+        // Use deterministic chunk names for better caching
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+      },
+    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
