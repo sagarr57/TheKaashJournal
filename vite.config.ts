@@ -22,6 +22,10 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "client/dist"),
     emptyOutDir: true,
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true,
+    },
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -40,67 +44,22 @@ export default defineConfig({
             return 'charts';
           }
           
-          // Markdown and syntax highlighting (very large) - only loaded in Post page
-          if (id.includes('node_modules/react-markdown') || 
-              id.includes('node_modules/remark') || 
-              id.includes('node_modules/react-syntax-highlighter') ||
-              id.includes('node_modules/unified') ||
-              id.includes('node_modules/micromark') ||
-              id.includes('node_modules/mdast') ||
-              id.includes('node_modules/decode-named-character-reference') ||
-              id.includes('node_modules/character-entities') ||
-              id.includes('node_modules/zwitch') ||
-              id.includes('node_modules/bail') ||
-              id.includes('node_modules/extend') ||
-              id.includes('node_modules/vfile') ||
-              id.includes('node_modules/property-information')) {
-            return 'markdown';
-          }
-          
           // Icons
           if (id.includes('node_modules/lucide-react')) {
             return 'icons';
           }
           
-          // Admin module and Google Analytics - already lazy loaded
-          if (id.includes('modules/admin') || id.includes('node_modules/@google-analytics')) {
+          // Charts (large library) - only loaded in admin dashboard
+          if (id.includes('node_modules/recharts')) {
+            return 'charts';
+          }
+          
+          // Admin module - already lazy loaded
+          if (id.includes('modules/admin')) {
             return 'admin';
           }
           
-          // Form libraries (used in admin and newsletter)
-          if (id.includes('node_modules/react-hook-form') || 
-              id.includes('node_modules/@hookform') ||
-              id.includes('node_modules/zod')) {
-            return 'forms';
-          }
-          
-          // Large libraries that should be split
-          if (id.includes('node_modules/wouter')) {
-            return 'router';
-          }
-          if (id.includes('node_modules/axios')) {
-            return 'axios';
-          }
-          if (id.includes('node_modules/framer-motion')) {
-            return 'framer-motion';
-          }
-          if (id.includes('node_modules/sonner')) {
-            return 'sonner';
-          }
-          if (id.includes('node_modules/react-helmet-async')) {
-            return 'helmet';
-          }
-          if (id.includes('node_modules/@supabase')) {
-            return 'supabase';
-          }
-          if (id.includes('node_modules/embla-carousel')) {
-            return 'carousel';
-          }
-          if (id.includes('node_modules/next-themes')) {
-            return 'themes';
-          }
-          
-          // Other vendor libraries
+          // Other vendor libraries (including markdown - let Vite handle it)
           if (id.includes('node_modules/')) {
             return 'vendor';
           }
