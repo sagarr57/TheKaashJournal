@@ -357,15 +357,3 @@ modules/admin/
 - [Tailwind CSS](https://tailwindcss.com)
 
 ---
-
-## ✅ Quick Start Checklist
-
-- [ ] Install dependencies (`pnpm install`)
-- [ ] Create `.env` file with all variables
-- [ ] Run Supabase SQL to create tables
-- [ ] Create admin user
-- [ ] Test locally (`pnpm dev`)
-- [ ] Deploy to Vercel
-- [ ] Add environment variables in Vercel
-- [ ] Test deployed site
-- [ ] Connect custom domain (optional)
