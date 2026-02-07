@@ -28,45 +28,22 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
+        // Use function form to have more control
         manualChunks(id) {
-          // Keep React and ReactDOM together to avoid loading order issues
-          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
-            return 'react-vendor';
-          }
-          
-          // Radix UI components
-          if (id.includes('node_modules/@radix-ui')) {
-            return 'ui-vendor';
-          }
-          
-          // Charts (large library) - only loaded in admin dashboard
+          // Only split very large libraries that are safe to split
           if (id.includes('node_modules/recharts')) {
             return 'charts';
           }
-          
-          // Icons
-          if (id.includes('node_modules/lucide-react')) {
-            return 'icons';
-          }
-          
-          // Charts (large library) - only loaded in admin dashboard
-          if (id.includes('node_modules/recharts')) {
-            return 'charts';
-          }
-          
-          // Admin module - already lazy loaded
-          if (id.includes('modules/admin')) {
-            return 'admin';
-          }
-          
-          // Other vendor libraries (including markdown - let Vite handle it)
-          if (id.includes('node_modules/')) {
-            return 'vendor';
-          }
+          // Let everything else be handled automatically
+          // This avoids circular dependency issues
         },
       },
     },
     chunkSizeWarningLimit: 900, // React 19 is inherently large (~900KB), this is expected
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+    exclude: [],
   },
   server: {
     port: 3000,
