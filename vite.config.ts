@@ -25,15 +25,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Split React into separate chunks to reduce individual chunk size
-          if (id.includes('node_modules/react/jsx-runtime') || id.includes('node_modules/react/jsx-dev-runtime')) {
-            return 'react-jsx';
-          }
-          if (id.includes('node_modules/react/') && !id.includes('react-dom')) {
-            return 'react-core';
-          }
-          if (id.includes('node_modules/react-dom/')) {
-            return 'react-dom';
+          // Keep React and ReactDOM together to avoid loading order issues
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'react-vendor';
           }
           
           // Radix UI components

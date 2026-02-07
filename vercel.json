@@ -1,9 +1,20 @@
 {
-  "buildCommand": "cd client && pnpm build",
+  "buildCommand": "pnpm install && cd client && pnpm build",
   "outputDirectory": "client/dist",
   "devCommand": "cd client && pnpm dev",
   "installCommand": "pnpm install",
   "framework": "vite",
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
