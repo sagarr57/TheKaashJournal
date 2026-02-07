@@ -6,6 +6,7 @@ import path from "path";
 import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
+// Temporarily test without these plugins to see if they cause issues
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
 
 export default defineConfig({
@@ -28,14 +29,64 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        // Use function form to have more control
         manualChunks(id) {
-          // Only split very large libraries that are safe to split
+          // React and ReactDOM must stay together
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'react-vendor';
+          }
+          
+          // Radix UI - large but stable
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'ui-vendor';
+          }
+          
+          // Charts - only loaded in admin
           if (id.includes('node_modules/recharts')) {
             return 'charts';
           }
-          // Let everything else be handled automatically
-          // This avoids circular dependency issues
+          
+          // Markdown - only loaded in Post page, keep all together
+          if (id.includes('node_modules/react-markdown') || 
+              id.includes('node_modules/react-syntax-highlighter') ||
+              id.includes('node_modules/remark') ||
+              id.includes('node_modules/rehype') ||
+              id.includes('node_modules/unified') ||
+              id.includes('node_modules/micromark') ||
+              id.includes('node_modules/mdast')) {
+            return 'markdown';
+          }
+          
+          // Icons
+          if (id.includes('node_modules/lucide-react')) {
+            return 'icons';
+          }
+          
+          // Admin module
+          if (id.includes('modules/admin')) {
+            return 'admin';
+          }
+          
+          // Supabase
+          if (id.includes('node_modules/@supabase')) {
+            return 'supabase';
+          }
+          
+          // Form libraries
+          if (id.includes('node_modules/react-hook-form') || 
+              id.includes('node_modules/@hookform') ||
+              id.includes('node_modules/zod')) {
+            return 'forms';
+          }
+          
+          // Router
+          if (id.includes('node_modules/wouter')) {
+            return 'router';
+          }
+          
+          // Everything else goes to vendor (but smaller now)
+          if (id.includes('node_modules/')) {
+            return 'vendor';
+          }
         },
       },
     },
