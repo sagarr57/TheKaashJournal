@@ -7,7 +7,9 @@ import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 // Temporarily test without these plugins to see if they cause issues
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
+// vitePluginManusRuntime is inlining React code into HTML, causing 368KB HTML file and circular deps
+// Disabling it fixes the issue
+const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
 export default defineConfig({
   plugins,
