@@ -2,7 +2,7 @@
 // This module contains all admin-related functionality including authentication and dashboard
 
 // Auth exports
-export { isAuthenticated, setAuth, clearAuth, logout, getAdminPassword } from "./auth";
+export { isAuthenticated, setAuth, clearAuth, logout } from "./auth";
 export { LoginForm } from "./auth/LoginForm";
 
 // Component exports

@@ -34,13 +34,11 @@ export async function storeDailyAnalytics(data: {
       );
 
     if (error) {
-      console.error('Error storing analytics data:', error);
       throw error;
     }
 
     return { success: true };
   } catch (error) {
-    console.error('Failed to store analytics data:', error);
     return { success: false, error };
   }
 }
@@ -58,13 +56,11 @@ export async function getAnalyticsData(startDate: string, endDate: string) {
       .order('date', { ascending: true });
 
     if (error) {
-      console.error('Error fetching analytics data:', error);
       throw error;
     }
 
     return { data: data || [], error: null };
   } catch (error) {
-    console.error('Failed to fetch analytics data:', error);
     return { data: [], error };
   }
 }
@@ -135,7 +131,6 @@ export async function getAnalyticsOverview() {
       revenueChange: calculateChange(current.revenue, previous.revenue),
     };
   } catch (error) {
-    console.error('Failed to get analytics overview:', error);
     return {
       visitors: 0,
       subscribers: 0,
@@ -172,12 +167,14 @@ export async function getChartData(
       throw error;
     }
 
-    return (data || []).map((row) => ({
-      date: row.date,
-      value: row[metric] || 0,
-    }));
+    return (data || []).map((row) => {
+      const metricValue = (row as Record<string, unknown>)[metric];
+      return {
+        date: row.date,
+        value: typeof metricValue === "number" ? metricValue : 0,
+      };
+    });
   } catch (error) {
-    console.error(`Failed to get ${metric} chart data:`, error);
     return [];
   }
 }

@@ -22,9 +22,8 @@ export function Header() {
   
   // Mobile header auto-hide state
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     setIsOpen(false);
@@ -49,7 +48,7 @@ export function Header() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          const scrollDifference = currentScrollY - lastScrollY;
+          const scrollDifference = currentScrollY - lastScrollYRef.current;
           const isMobile = window.innerWidth < 768;
           
           // Mobile: Apply auto-hide on all pages
@@ -58,7 +57,7 @@ export function Header() {
           
           if (!shouldApplyAutoHide) {
             setIsHeaderVisible(true);
-            setLastScrollY(currentScrollY);
+            lastScrollYRef.current = currentScrollY;
             ticking = false;
             return;
           }
@@ -70,7 +69,7 @@ export function Header() {
               clearTimeout(scrollTimeoutRef.current);
               scrollTimeoutRef.current = null;
             }
-            setLastScrollY(currentScrollY);
+            lastScrollYRef.current = currentScrollY;
             ticking = false;
             return;
           }
@@ -94,24 +93,21 @@ export function Header() {
           if (lastScrollDirection === 'down' && currentScrollY > 100) {
             // Scrolling down - hide header immediately
             setIsHeaderVisible(false);
-            isScrollingRef.current = true;
             
             // Show header when scrolling stops (only if we were scrolling down)
             scrollTimeoutRef.current = setTimeout(() => {
               setIsHeaderVisible(true);
-              isScrollingRef.current = false;
             }, 200);
           } else if (lastScrollDirection === 'up') {
             // Scrolling up - show header immediately and cancel any pending hide
             setIsHeaderVisible(true);
-            isScrollingRef.current = false;
             if (scrollTimeoutRef.current) {
               clearTimeout(scrollTimeoutRef.current);
               scrollTimeoutRef.current = null;
             }
           }
 
-          setLastScrollY(currentScrollY);
+          lastScrollYRef.current = currentScrollY;
           ticking = false;
         });
 
@@ -127,7 +123,7 @@ export function Header() {
         clearTimeout(scrollTimeoutRef.current);
       }
     };
-  }, [lastScrollY, isOpen, isBlogPage]);
+  }, [isOpen, isBlogPage]);
 
   // Ensure header is visible when mobile menu opens
   useEffect(() => {
@@ -174,21 +170,18 @@ export function Header() {
   return (
     <header 
       className={`sticky top-0 z-50 bg-white border-b border-gray-200 transition-transform duration-300 ease-in-out ${
-        // Desktop: Only apply auto-hide on blog pages, mobile: apply on all pages
-        isBlogPage 
-          ? (isHeaderVisible ? 'translate-y-0' : '-translate-y-full')
-          : 'translate-y-0'
+        isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
       role="banner"
     >
       <SkipToContent />
       {/* Logo Section - Centered */}
-      <div className="container py-6 relative">
+      <div className="container py-3 sm:py-4 md:py-5 relative">
         {/* Mobile Menu Button - Top Right Corner (Mobile Only) */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden absolute top-6 right-4"
+              className="md:hidden absolute top-3 right-4 sm:top-4"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
@@ -201,18 +194,18 @@ export function Header() {
           <img 
             src="/images/kaash_logo1.png" 
             alt="The Kaash Journal" 
-            className="h-32 md:h-40 lg:h-48 xl:h-52 w-auto object-contain max-w-full"
+            className="h-14 sm:h-16 md:h-24 lg:h-28 w-auto object-contain max-w-full"
           />
         </a>
 
         {/* Mobile Navigation - Below Logo */}
         {isOpen && (
-          <nav className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3" role="navigation" aria-label="Mobile navigation">
+          <nav className="md:hidden mt-3 pt-3 border-t border-gray-200 space-y-2" role="navigation" aria-label="Mobile navigation">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className={`block py-3 text-base font-medium transition-colors ${
+                className={`block py-2.5 text-base font-medium transition-colors ${
                   location === item.href
                     ? "text-black"
                     : "text-gray-600 hover:text-black"
@@ -224,7 +217,7 @@ export function Header() {
             ))}
             <button 
               onClick={handleSearchClick}
-              className="block py-3 text-base font-medium text-gray-600 hover:text-black transition-colors flex items-center gap-2"
+              className="block py-2.5 text-base font-medium text-gray-600 hover:text-black transition-colors flex items-center gap-2"
               aria-label="Search articles"
               aria-expanded={isSearchOpen}
             >
@@ -237,7 +230,7 @@ export function Header() {
 
       {/* Navigation Section - Below Logo (Desktop Only) */}
       <div className="border-t border-gray-200 bg-white hidden md:block">
-        <div className="container py-3">
+        <div className="container py-2.5">
           <div className="flex items-center justify-center">
             {/* Desktop Navigation */}
             <nav className="flex items-center justify-center gap-10" role="navigation" aria-label="Main navigation">

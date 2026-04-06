@@ -4,16 +4,16 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 mt-20">
-      <div className="container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+    <footer className="bg-gray-50 border-t border-gray-200 mt-14 md:mt-20">
+      <div className="container py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-12">
           {/* Brand */}
           <div>
             <div className="flex items-center justify-center md:justify-start mb-4">
               <img 
                 src="/images/Kaash_logo.png" 
                 alt="The Kaash Journal" 
-                className="h-24 md:h-28 lg:h-32 w-auto object-contain"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain"
               />
             </div>
             <p className="text-gray-600 text-sm">
@@ -101,9 +101,9 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600">
-          <p>&copy; {currentYear} The Kaash Journal. All rights reserved.</p>
-          <div className="flex gap-6">
+        <div className="pt-6 md:pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-sm text-gray-600">
+          <p className="text-center md:text-left">&copy; {currentYear} The Kaash Journal. All rights reserved.</p>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <a href="#" className="hover:text-gray-900 transition-colors">
               Privacy Policy
             </a>

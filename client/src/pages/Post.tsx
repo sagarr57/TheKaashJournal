@@ -52,7 +52,7 @@ export default function Post() {
 
       <main id="main-content">
         {/* Hero Image */}
-        <div className="w-full h-96 overflow-hidden bg-gray-200">
+        <div className="w-full h-52 sm:h-64 md:h-80 lg:h-96 overflow-hidden bg-gray-200">
           <Image
             src={post.image}
             alt={post.title}
@@ -61,23 +61,23 @@ export default function Post() {
         </div>
 
         {/* Article Container */}
-        <div className="container py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+        <div className="container py-10 md:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Main Content */}
             <article className="lg:col-span-3">
               {/* Title */}
-              <h1 className="font-oswald text-4xl lg:text-5xl font-bold uppercase mb-8 leading-tight">
+              <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-6 md:mb-8 leading-tight">
                 {post.title}
               </h1>
 
               {/* Meta Information */}
-              <div className="mb-12 pb-12 border-b border-gray-200">
+              <div className="mb-8 md:mb-12 pb-8 md:pb-12 border-b border-gray-200">
                 <PostMeta post={post} />
               </div>
 
               {/* Content */}
-              <div className="prose prose-lg max-w-none mb-16">
-                <div className="space-y-6 text-gray-700 leading-relaxed markdown-content">
+              <div className="prose prose-base md:prose-lg max-w-none mb-12 md:mb-16">
+                <div className="space-y-5 md:space-y-6 text-gray-700 leading-relaxed markdown-content">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{

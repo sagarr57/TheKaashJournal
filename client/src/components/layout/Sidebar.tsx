@@ -9,7 +9,7 @@ export function Sidebar() {
   return (
     <aside className="space-y-8">
       {/* Recent Posts */}
-      <div className="border border-gray-200 p-6">
+      <div className="border border-gray-200 p-5 md:p-6">
         <h3 className="font-oswald text-xl font-bold uppercase mb-4">
           Recent <span className="text-blue-600">Posts</span>
         </h3>
@@ -29,7 +29,7 @@ export function Sidebar() {
       </div>
 
       {/* Categories */}
-      <div className="border border-gray-200 p-6">
+      <div className="border border-gray-200 p-5 md:p-6">
         <h3 className="font-oswald text-xl font-bold uppercase mb-4">
           <span className="text-blue-600">Categories</span>
         </h3>
@@ -52,7 +52,7 @@ export function Sidebar() {
       </div>
 
       {/* Newsletter Signup */}
-      <div className="bg-blue-700 text-white p-6 border-2 border-blue-800">
+      <div className="bg-blue-700 text-white p-5 md:p-6 border-2 border-blue-800">
         <h3 className="font-oswald text-lg font-bold uppercase mb-2">
           Stay Updated
         </h3>

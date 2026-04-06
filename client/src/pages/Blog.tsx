@@ -58,19 +58,19 @@ export default function Blog() {
 
       <main id="main-content">
         {/* Page Header */}
-        <section className="bg-gray-50 border-b border-gray-200 py-12">
+        <section className="bg-gray-50 border-b border-gray-200 py-10 md:py-12">
           <div className="container">
-            <h1 className="font-oswald text-4xl lg:text-5xl font-bold uppercase mb-4">
+            <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-3 md:mb-4">
               Blog & <span className="text-blue-600">Articles</span>
             </h1>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-base md:text-lg">
               Discover insights on AI, fintech, debt management, and real-time financial solutions.
             </p>
           </div>
         </section>
 
         {/* Content */}
-        <div className="container py-12">
+        <div className="container py-10 md:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-3">
@@ -86,7 +86,7 @@ export default function Blog() {
                       setSearchQuery(e.target.value);
                       setCurrentPage(1);
                     }}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-600"
+                    className="w-full pl-12 pr-4 py-3 text-sm md:text-base border border-gray-300 rounded focus:outline-none focus:border-blue-600"
                   />
                 </div>
               </div>
@@ -96,7 +96,7 @@ export default function Blog() {
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => handleCategoryChange(null)}
-                    className={`px-4 py-2 rounded font-semibold text-sm transition-colors ${
+                    className={`px-3 md:px-4 py-2 rounded font-semibold text-xs sm:text-sm transition-colors ${
                       selectedCategory === null
                         ? "bg-black text-white"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -108,7 +108,7 @@ export default function Blog() {
                     <button
                       key={category.id}
                       onClick={() => handleCategoryChange(category.name)}
-                      className={`px-4 py-2 rounded font-semibold text-sm transition-colors ${
+                      className={`px-3 md:px-4 py-2 rounded font-semibold text-xs sm:text-sm transition-colors ${
                         selectedCategory === category.name
                           ? "text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -136,11 +136,11 @@ export default function Blog() {
 
                   {/* Pagination */}
                   {totalPages > 1 && (
-                    <div className="flex justify-center gap-2 py-8">
+                    <div className="flex flex-wrap justify-center gap-2 py-8">
                       <button
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                         disabled={currentPage === 1}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                        className="px-3 md:px-4 py-2 text-sm border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                       >
                         Previous
                       </button>
@@ -148,7 +148,7 @@ export default function Blog() {
                         <button
                           key={page}
                           onClick={() => setCurrentPage(page)}
-                          className={`px-4 py-2 rounded font-semibold ${
+                          className={`px-3 md:px-4 py-2 text-sm rounded font-semibold ${
                             currentPage === page
                               ? "bg-black text-white"
                               : "border border-gray-300 hover:bg-gray-50"
@@ -160,7 +160,7 @@ export default function Blog() {
                       <button
                         onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                         disabled={currentPage === totalPages}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                        className="px-3 md:px-4 py-2 text-sm border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                       >
                         Next
                       </button>

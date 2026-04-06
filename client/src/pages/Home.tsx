@@ -21,7 +21,7 @@ export default function Home() {
 
       <main id="main-content">
         {/* Hero Section */}
-        <section className="bg-gray-50 border-b border-gray-200 py-16 lg:py-20">
+        <section className="bg-gray-50 border-b border-gray-200 py-12 md:py-16 lg:py-20">
           <div className="container max-w-4xl mx-auto text-center">
             {/* Logo - Commented out since we have logo in header */}
             {/*
@@ -31,13 +31,13 @@ export default function Home() {
               className="h-32 md:h-40 lg:h-48 xl:h-56 w-auto object-contain mx-auto mb-0"
             />
             */}
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed px-4">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-7 md:mb-8 leading-relaxed px-1 sm:px-4">
               Explore the intersection of artificial intelligence and financial technology. Real-time solutions, debt management strategies, and the latest fintech innovations.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Button
                 asChild
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-6 text-lg rounded-none"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 md:px-8 py-3 md:py-6 text-base md:text-lg rounded-none w-full sm:w-auto"
               >
                 <a href="/blog">
                   Explore Articles <ArrowRight className="ml-2 w-5 h-5" />
@@ -46,7 +46,7 @@ export default function Home() {
               <Button
                 asChild
                 variant="outline"
-                className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-bold px-8 py-6 text-lg rounded-none"
+                className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-bold px-6 md:px-8 py-3 md:py-6 text-base md:text-lg rounded-none w-full sm:w-auto"
               >
                 <a href="#featured">Featured Posts</a>
               </Button>
@@ -55,11 +55,11 @@ export default function Home() {
         </section>
 
         {/* Featured Posts */}
-        <section id="featured" className="py-20 bg-gray-50 border-b border-gray-200">
+        <section id="featured" className="py-14 md:py-20 bg-gray-50 border-b border-gray-200">
           <div className="container">
-            <div className="flex items-end justify-between mb-12">
+            <div className="flex items-end justify-between mb-8 md:mb-12">
               <div>
-                <h2 className="font-oswald text-4xl lg:text-5xl font-bold uppercase mb-2">
+                <h2 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-2">
                   Featured <span className="text-blue-600">Posts</span>
                 </h2>
                 <p className="text-gray-600">Our most important and timely articles</p>
@@ -87,11 +87,11 @@ export default function Home() {
         </section>
 
         {/* Recent Posts */}
-        <section className="py-20">
+        <section className="py-14 md:py-20">
           <div className="container">
-            <div className="flex items-end justify-between mb-12">
+            <div className="flex items-end justify-between mb-8 md:mb-12">
               <div>
-                <h2 className="font-oswald text-4xl lg:text-5xl font-bold uppercase mb-2">
+                <h2 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-2">
                   Latest <span className="text-blue-600">Articles</span>
                 </h2>
                 <p className="text-gray-600">Stay updated with our newest content</p>
@@ -119,12 +119,12 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-blue-700 text-white py-16">
+        <section className="bg-blue-700 text-white py-12 md:py-16">
           <div className="container text-center">
-            <h2 className="font-oswald text-3xl lg:text-4xl font-bold uppercase mb-4">
+            <h2 className="font-oswald text-2xl sm:text-3xl lg:text-4xl font-bold uppercase mb-4">
               Never Miss an Update
             </h2>
-            <p className="text-lg text-blue-50 mb-8 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-blue-50 mb-7 md:mb-8 max-w-2xl mx-auto">
               Subscribe to our newsletter and get the latest insights delivered to your inbox weekly.
             </p>
             <NewsletterForm

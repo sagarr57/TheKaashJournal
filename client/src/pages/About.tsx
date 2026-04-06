@@ -19,34 +19,34 @@ export default function About() {
 
       <main id="main-content">
         {/* Page Header */}
-        <section className="bg-gray-50 border-b border-gray-200 py-16">
+        <section className="bg-gray-50 border-b border-gray-200 py-12 md:py-16">
           <div className="container">
-            <h1 className="font-oswald text-5xl font-bold uppercase mb-4">
+            <h1 className="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold uppercase mb-3 md:mb-4">
               About <span className="text-blue-600">Us</span>
             </h1>
-            <p className="text-gray-600 text-lg max-w-2xl">
+            <p className="text-gray-600 text-base md:text-lg max-w-2xl">
               Exploring the intersection of artificial intelligence and financial technology.
             </p>
           </div>
         </section>
 
         {/* Content */}
-        <div className="container py-20">
+        <div className="container py-12 md:py-20">
           <div className="max-w-3xl mx-auto">
             {/* Mission */}
-            <section className="mb-16">
-              <h2 className="font-oswald text-3xl font-bold uppercase mb-6">Our Mission</h2>
-              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+            <section className="mb-12 md:mb-16">
+              <h2 className="font-oswald text-2xl md:text-3xl font-bold uppercase mb-5 md:mb-6">Our Mission</h2>
+              <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
                 At The Kaash Journal, we believe that the convergence of artificial intelligence and financial technology is reshaping how people manage money, invest, and plan for the future.
               </p>
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="text-gray-700 text-base md:text-lg leading-relaxed">
                 Our mission is to provide clear, data-driven insights into this rapidly evolving landscape. We cover real-time financial solutions, AI-powered debt management tools, emerging fintech trends, and practical guides to help you leverage these technologies effectively.
               </p>
             </section>
 
             {/* What We Cover */}
-            <section className="mb-16 py-12 border-y border-gray-200">
-              <h2 className="font-oswald text-3xl font-bold uppercase mb-8">What We Cover</h2>
+            <section className="mb-12 md:mb-16 py-10 md:py-12 border-y border-gray-200">
+              <h2 className="font-oswald text-2xl md:text-3xl font-bold uppercase mb-6 md:mb-8">What We Cover</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="font-oswald text-xl font-bold uppercase mb-3 text-blue-600">
@@ -100,8 +100,8 @@ export default function About() {
             </section>
 
             {/* Why Trust Us */}
-            <section className="mb-16">
-              <h2 className="font-oswald text-3xl font-bold uppercase mb-6">Why Trust Us</h2>
+            <section className="mb-12 md:mb-16">
+              <h2 className="font-oswald text-2xl md:text-3xl font-bold uppercase mb-6">Why Trust Us</h2>
               <ul className="space-y-4">
                 <li className="flex gap-4">
                   <span className="text-blue-600 font-bold text-xl flex-shrink-0">✓</span>
@@ -166,21 +166,21 @@ export default function About() {
             */}
 
             {/* Contact */}
-            <section className="bg-gray-50 border border-gray-200 p-12 rounded max-w-3xl mx-auto">
-              <h2 className="font-oswald text-3xl font-bold uppercase mb-6">Get In Touch</h2>
+            <section className="bg-gray-50 border border-gray-200 p-6 md:p-12 rounded max-w-3xl mx-auto">
+              <h2 className="font-oswald text-2xl md:text-3xl font-bold uppercase mb-5 md:mb-6">Get In Touch</h2>
               <p className="text-gray-700 mb-8">
                 Have questions, suggestions, or want to collaborate? We'd love to hear from you.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-none flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 md:gap-4">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-none flex items-center justify-center gap-2 w-full sm:w-auto">
                   <Mail className="w-5 h-5" />
                   Email Us
                 </Button>
-                <Button variant="outline" className="border-2 border-gray-300 font-bold px-6 py-3 rounded-none flex items-center gap-2">
+                <Button variant="outline" className="border-2 border-gray-300 font-bold px-6 py-3 rounded-none flex items-center justify-center gap-2 w-full sm:w-auto">
                   <Twitter className="w-5 h-5" />
                   Follow on Twitter
                 </Button>
-                <Button variant="outline" className="border-2 border-gray-300 font-bold px-6 py-3 rounded-none flex items-center gap-2">
+                <Button variant="outline" className="border-2 border-gray-300 font-bold px-6 py-3 rounded-none flex items-center justify-center gap-2 w-full sm:w-auto">
                   <Linkedin className="w-5 h-5" />
                   Connect on LinkedIn
                 </Button>

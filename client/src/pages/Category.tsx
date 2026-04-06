@@ -57,19 +57,19 @@ export default function Category() {
 
       <main id="main-content">
         {/* Page Header */}
-        <section className="bg-gray-50 border-b border-gray-200 py-12">
+        <section className="bg-gray-50 border-b border-gray-200 py-10 md:py-12">
           <div className="container">
-            <h1 className="font-oswald text-4xl lg:text-5xl font-bold uppercase mb-4">
+            <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-3 md:mb-4">
               {category.name}
             </h1>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-base md:text-lg">
               {category.description}
             </p>
           </div>
         </section>
 
         {/* Content */}
-        <div className="container py-12">
+        <div className="container py-10 md:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-3">
@@ -83,11 +83,11 @@ export default function Category() {
 
                   {/* Pagination */}
                   {totalPages > 1 && (
-                    <div className="flex justify-center gap-2 py-8">
+                    <div className="flex flex-wrap justify-center gap-2 py-8">
                       <button
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                         disabled={currentPage === 1}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                        className="px-3 md:px-4 py-2 text-sm border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                       >
                         Previous
                       </button>
@@ -95,7 +95,7 @@ export default function Category() {
                         <button
                           key={page}
                           onClick={() => setCurrentPage(page)}
-                          className={`px-4 py-2 rounded font-semibold ${
+                          className={`px-3 md:px-4 py-2 text-sm rounded font-semibold ${
                             currentPage === page
                               ? "bg-black text-white"
                               : "border border-gray-300 hover:bg-gray-50"
@@ -107,7 +107,7 @@ export default function Category() {
                       <button
                         onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                         disabled={currentPage === totalPages}
-                        className="px-4 py-2 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                        className="px-3 md:px-4 py-2 text-sm border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                       >
                         Next
                       </button>
