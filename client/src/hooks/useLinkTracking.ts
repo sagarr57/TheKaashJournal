@@ -1,9 +1,12 @@
 // Hook to automatically track link clicks and redirections
 import { useEffect } from 'react';
 import { trackRedirection, trackEvent } from '@/lib/tracking';
+import { hasAnalyticsConsent } from '@/lib/cookie-consent';
 
 export function useLinkTracking() {
   useEffect(() => {
+    if (!hasAnalyticsConsent()) return;
+
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const link = target.closest('a');

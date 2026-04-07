@@ -2,11 +2,14 @@
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { trackPageView, startTimeTracking, stopTimeTracking } from '@/lib/tracking';
+import { hasAnalyticsConsent } from '@/lib/cookie-consent';
 
 export function usePageTracking() {
   const [location] = useLocation();
 
   useEffect(() => {
+    if (!hasAnalyticsConsent()) return;
+
     // Track page view when route changes
     const pagePath = location;
     const pageTitle = document.title;
@@ -22,6 +25,8 @@ export function usePageTracking() {
 
   // Track time on page when component unmounts or user navigates away
   useEffect(() => {
+    if (!hasAnalyticsConsent()) return;
+
     const handleBeforeUnload = () => {
       stopTimeTracking();
     };

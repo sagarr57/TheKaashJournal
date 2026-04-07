@@ -1,6 +1,7 @@
 // Client-side tracking functions
 // Sends page views, events, conversions, and redirections to your backend
 
+import { hasAnalyticsConsent } from './cookie-consent';
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 // Generate or get session ID
@@ -40,7 +41,7 @@ function getBrowser(): string {
  */
 export async function trackPageView(pagePath: string, pageTitle?: string) {
   // Skip tracking in development (API routes only work in production)
-  if (import.meta.env.DEV) {
+  if (import.meta.env.DEV || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -84,7 +85,7 @@ let timeTrackingInterval: NodeJS.Timeout | null = null;
 
 export function startTimeTracking(pagePath: string) {
   // Skip tracking in development (API routes only work in production)
-  if (import.meta.env.DEV) {
+  if (import.meta.env.DEV || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -143,7 +144,7 @@ export async function trackEvent(
   }
 ) {
   // Skip tracking in development (API routes only work in production)
-  if (import.meta.env.DEV) {
+  if (import.meta.env.DEV || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -191,7 +192,7 @@ export async function trackConversion(
   }
 ) {
   // Skip tracking in development (API routes only work in production)
-  if (import.meta.env.DEV) {
+  if (import.meta.env.DEV || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -238,7 +239,7 @@ export async function trackRedirection(
   }
 ) {
   // Skip tracking in development (API routes only work in production)
-  if (import.meta.env.DEV) {
+  if (import.meta.env.DEV || !hasAnalyticsConsent()) {
     return;
   }
 
