@@ -9,6 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { author, categories } from "@/lib/categories";
 import {
   fetchAnalyticsOverview,
   fetchVisitorsData,
@@ -27,6 +29,24 @@ import type {
 } from "../types";
 import { toast } from "sonner";
 
+const DEFAULT_POST_IMAGE = "/images/hero-abstract.jpg";
+const DEFAULT_READING_TIME = 5;
+const getInitialPostForm = () => ({
+  title: "",
+  slug: "",
+  excerpt: "",
+  content: "",
+  author: author.name,
+  date: new Date().toISOString().split("T")[0],
+  category: categories[0]?.name || "",
+  tags: "",
+  readingTime: DEFAULT_READING_TIME,
+  featured: false,
+  image: DEFAULT_POST_IMAGE,
+  metaDescription: "",
+  keywords: "",
+});
+
 function AdminDashboard() {
   const [overview, setOverview] = useState<AnalyticsData | null>(null);
   const [visitors, setVisitors] = useState<ChartDataPoint[]>([]);
@@ -37,6 +57,87 @@ function AdminDashboard() {
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isPublishingPost, setIsPublishingPost] = useState(false);
+  const [postForm, setPostForm] = useState(getInitialPostForm());
+
+  const slugify = (value: string) =>
+    value
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+
+  const handlePostFieldChange = (field: string, value: string | boolean | number) => {
+    setPostForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handlePostTitleBlur = () => {
+    if (!postForm.slug.trim() && postForm.title.trim()) {
+      handlePostFieldChange("slug", slugify(postForm.title));
+    }
+  };
+
+  const handlePublishPost = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const slug = postForm.slug.trim() || slugify(postForm.title);
+
+    if (!postForm.title.trim() || !slug || !postForm.excerpt.trim() || !postForm.content.trim() || !postForm.category.trim()) {
+      toast.error("Missing required fields", {
+        description: "Title, slug, excerpt, content, and category are required.",
+      });
+      return;
+    }
+
+    setIsPublishingPost(true);
+    try {
+      const tags = postForm.tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+      const keywords = postForm.keywords
+        .split(",")
+        .map((k) => k.trim())
+        .filter(Boolean);
+
+      const { error } = await supabase.from("blog_posts").upsert(
+        {
+          id: slug,
+          title: postForm.title.trim(),
+          slug,
+          excerpt: postForm.excerpt.trim(),
+          content: postForm.content,
+          author: postForm.author.trim() || author.name,
+          date: postForm.date,
+          category: postForm.category.trim(),
+          tags,
+          reading_time: Number(postForm.readingTime) || DEFAULT_READING_TIME,
+          featured: postForm.featured,
+          image: postForm.image.trim() || DEFAULT_POST_IMAGE,
+          meta_description: postForm.metaDescription.trim() || postForm.excerpt.trim(),
+          keywords,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "id" }
+      );
+
+      if (error) {
+        throw new Error(error.message || "Failed to publish post");
+      }
+
+      toast.success("Post published", {
+        description: "The blog post has been saved to Supabase.",
+      });
+
+      setPostForm(getInitialPostForm());
+    } catch (error: any) {
+      toast.error("Failed to publish post", {
+        description: error?.message || "Please check inputs and try again.",
+      });
+    } finally {
+      setIsPublishingPost(false);
+    }
+  };
 
   const loadData = async () => {
     try {
@@ -238,20 +339,20 @@ function AdminDashboard() {
       <SEO title="Admin Dashboard" description="Analytics and revenue dashboard" />
       <Header />
       
-      <main id="main-content" className="container py-12">
-        <div className="mb-8 flex items-center justify-between">
+      <main id="main-content" className="container py-8 md:py-12">
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="font-oswald text-4xl lg:text-5xl font-bold uppercase mb-2">
+            <h1 className="font-oswald text-3xl md:text-4xl lg:text-5xl font-bold uppercase mb-2">
               Admin <span className="text-blue-600">Dashboard</span>
             </h1>
-            <p className="text-gray-600">Analytics, revenue tracking, and performance metrics</p>
+            <p className="text-gray-600 text-sm md:text-base">Analytics, revenue tracking, and performance metrics</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button
               onClick={handleRefresh}
               disabled={isRefreshing}
               variant="outline"
-              className="border-2 border-gray-300 rounded-none"
+              className="border-2 border-gray-300 rounded-none w-full sm:w-auto"
             >
               <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
               Refresh
@@ -259,7 +360,7 @@ function AdminDashboard() {
             <Button
               onClick={logout}
               variant="outline"
-              className="border-2 border-gray-300 rounded-none"
+              className="border-2 border-gray-300 rounded-none w-full sm:w-auto"
             >
               <LogOut className="w-4 h-4 mr-2" />
               Logout
@@ -269,12 +370,15 @@ function AdminDashboard() {
 
         {/* Main Navigation Tabs */}
         <Tabs defaultValue="analytics" className="space-y-6 mb-8">
-          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-4">
+          <div className="overflow-x-auto">
+            <TabsList className="inline-flex min-w-max w-full lg:grid lg:grid-cols-5">
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="subscribers">Subscribers</TabsTrigger>
             <TabsTrigger value="tracking">Tracking Data</TabsTrigger>
+            <TabsTrigger value="posts">Posts</TabsTrigger>
             <TabsTrigger value="settings" className="hidden lg:block">Settings</TabsTrigger>
-          </TabsList>
+            </TabsList>
+          </div>
 
           {/* Analytics Tab */}
           <TabsContent value="analytics" className="space-y-6">
@@ -309,12 +413,14 @@ function AdminDashboard() {
 
             {/* Charts */}
             <Tabs defaultValue="visitors" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-4">
+              <div className="overflow-x-auto">
+                <TabsList className="inline-flex min-w-max w-full lg:grid lg:grid-cols-4">
                 <TabsTrigger value="visitors">Visitors</TabsTrigger>
                 <TabsTrigger value="clicks">Clicks</TabsTrigger>
                 <TabsTrigger value="revenue">Revenue</TabsTrigger>
                 <TabsTrigger value="sources">Traffic Sources</TabsTrigger>
-              </TabsList>
+                </TabsList>
+              </div>
 
           <TabsContent value="visitors">
             <Card>
@@ -434,7 +540,7 @@ function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-[640px]">
                 <thead>
                   <tr className="border-b border-gray-200">
                     <th className="text-left py-3 px-4 font-semibold text-black">Post Title</th>
@@ -490,7 +596,7 @@ function AdminDashboard() {
                       </p>
                     </div>
                     <div className="border rounded-lg overflow-hidden">
-                      <table className="w-full">
+                      <table className="w-full min-w-[680px]">
                         <thead className="bg-gray-50 border-b">
                           <tr>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
@@ -539,6 +645,128 @@ function AdminDashboard() {
                   <p>Tracking data viewer coming soon</p>
                   <p className="text-sm mt-2">View page views, events, conversions, and redirections from Supabase</p>
                 </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Posts Tab */}
+          <TabsContent value="posts" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Publish Blog Post</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handlePublishPost} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      value={postForm.title}
+                      onChange={(e) => handlePostFieldChange("title", e.target.value)}
+                      onBlur={handlePostTitleBlur}
+                      placeholder="Title *"
+                      className="w-full border border-gray-300 px-3 py-2 rounded"
+                      required
+                    />
+                    <input
+                      value={postForm.slug}
+                      onChange={(e) => handlePostFieldChange("slug", slugify(e.target.value))}
+                      placeholder="slug-example *"
+                      className="w-full border border-gray-300 px-3 py-2 rounded"
+                      required
+                    />
+                    <input
+                      value={postForm.author}
+                      onChange={(e) => handlePostFieldChange("author", e.target.value)}
+                      placeholder="Author"
+                      className="w-full border border-gray-300 px-3 py-2 rounded"
+                    />
+                    <input
+                      type="date"
+                      value={postForm.date}
+                      onChange={(e) => handlePostFieldChange("date", e.target.value)}
+                      className="w-full border border-gray-300 px-3 py-2 rounded"
+                    />
+                    <select
+                      value={postForm.category}
+                      onChange={(e) => handlePostFieldChange("category", e.target.value)}
+                      className="w-full border border-gray-300 px-3 py-2 rounded bg-white"
+                      required
+                    >
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.name}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="number"
+                      min={1}
+                      value={postForm.readingTime}
+                      onChange={(e) => handlePostFieldChange("readingTime", Number(e.target.value))}
+                      placeholder="Reading time (min)"
+                      className="w-full border border-gray-300 px-3 py-2 rounded"
+                    />
+                  </div>
+
+                  <input
+                    value={postForm.image}
+                    onChange={(e) => handlePostFieldChange("image", e.target.value)}
+                    placeholder="Image URL/path (e.g. /images/hero-abstract.jpg)"
+                    className="w-full border border-gray-300 px-3 py-2 rounded"
+                  />
+
+                  <textarea
+                    value={postForm.excerpt}
+                    onChange={(e) => handlePostFieldChange("excerpt", e.target.value)}
+                    placeholder="Excerpt *"
+                    className="w-full border border-gray-300 px-3 py-2 rounded min-h-[90px]"
+                    required
+                  />
+
+                  <textarea
+                    value={postForm.content}
+                    onChange={(e) => handlePostFieldChange("content", e.target.value)}
+                    placeholder="Markdown content *"
+                    className="w-full border border-gray-300 px-3 py-2 rounded min-h-[260px] font-mono text-sm"
+                    required
+                  />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      value={postForm.tags}
+                      onChange={(e) => handlePostFieldChange("tags", e.target.value)}
+                      placeholder="Tags (comma separated)"
+                      className="w-full border border-gray-300 px-3 py-2 rounded"
+                    />
+                    <input
+                      value={postForm.keywords}
+                      onChange={(e) => handlePostFieldChange("keywords", e.target.value)}
+                      placeholder="SEO keywords (comma separated)"
+                      className="w-full border border-gray-300 px-3 py-2 rounded"
+                    />
+                  </div>
+
+                  <input
+                    value={postForm.metaDescription}
+                    onChange={(e) => handlePostFieldChange("metaDescription", e.target.value)}
+                    placeholder="Meta description (optional)"
+                    className="w-full border border-gray-300 px-3 py-2 rounded"
+                  />
+
+                  <label className="flex items-center gap-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={postForm.featured}
+                      onChange={(e) => handlePostFieldChange("featured", e.target.checked)}
+                    />
+                    Feature this post
+                  </label>
+
+                  <div className="flex justify-end">
+                    <Button type="submit" disabled={isPublishingPost} className="rounded-none">
+                      {isPublishingPost ? "Publishing..." : "Publish Post"}
+                    </Button>
+                  </div>
+                </form>
               </CardContent>
             </Card>
           </TabsContent>

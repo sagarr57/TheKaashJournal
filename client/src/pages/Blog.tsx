@@ -2,30 +2,47 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
-import { blogPosts, categories } from "@/lib/posts";
-import { useState, useMemo } from "react";
+import { categories } from "@/lib/categories";
+import { postIndex } from "@/lib/postsIndex";
+import { useState, useMemo, useEffect } from "react";
 import { Search } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { fetchPublishedPostIndex } from "@/lib/blog-data";
 
 export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [posts, setPosts] = useState(postIndex);
   const postsPerPage = 9;
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadPosts() {
+      const data = await fetchPublishedPostIndex();
+      if (!cancelled && data.length > 0) {
+        setPosts(data);
+      }
+    }
+    loadPosts();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Filter posts
   const filteredPosts = useMemo(() => {
-    let posts = [...blogPosts];
+    let filtered = [...posts];
 
     // Filter by category
     if (selectedCategory) {
-      posts = posts.filter((post) => post.category === selectedCategory);
+      filtered = filtered.filter((post) => post.category === selectedCategory);
     }
 
     // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      posts = posts.filter(
+      filtered = filtered.filter(
         (post) =>
           post.title.toLowerCase().includes(query) ||
           post.excerpt.toLowerCase().includes(query) ||
@@ -34,8 +51,8 @@ export default function Blog() {
     }
 
     // Sort by date (newest first)
-    return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, [searchQuery, selectedCategory]);
+    return filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }, [searchQuery, selectedCategory, posts]);
 
   // Pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);

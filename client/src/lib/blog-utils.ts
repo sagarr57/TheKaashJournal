@@ -1,5 +1,6 @@
-import { blogPosts, categories } from "./posts";
-import { BlogPost } from "./types";
+import { categories } from "./categories";
+import { postIndex } from "./postsIndex";
+import type { BlogPost } from "./types";
 
 export function calculateReadingTime(content: string): number {
   const wordsPerMinute = 200;
@@ -8,44 +9,45 @@ export function calculateReadingTime(content: string): number {
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((post) => post.slug === slug);
+  // Content is loaded separately on the single-post route.
+  return postIndex.find((post) => post.slug === slug) as unknown as BlogPost | undefined;
 }
 
 export function getPostsByCategory(categorySlug: string): BlogPost[] {
   const category = categories.find((cat) => cat.slug === categorySlug);
   if (!category) return [];
-  return blogPosts.filter((post) => post.category === category.name);
+  return postIndex.filter((post) => post.category === category.name) as unknown as BlogPost[];
 }
 
 export function getFeaturedPosts(): BlogPost[] {
-  return blogPosts.filter((post) => post.featured).slice(0, 3);
+  return postIndex.filter((post) => post.featured).slice(0, 3) as unknown as BlogPost[];
 }
 
 export function getRecentPosts(limit: number = 5): BlogPost[] {
-  return [...blogPosts]
+  return [...postIndex]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, limit);
+    .slice(0, limit) as unknown as BlogPost[];
 }
 
 export function getRelatedPosts(post: BlogPost, limit: number = 3): BlogPost[] {
-  return blogPosts
+  return postIndex
     .filter(
       (p) =>
         p.id !== post.id &&
         (p.category === post.category || p.tags.some((tag) => post.tags.includes(tag)))
     )
-    .slice(0, limit);
+    .slice(0, limit) as unknown as BlogPost[];
 }
 
 export function searchPosts(query: string): BlogPost[] {
   const lowerQuery = query.toLowerCase();
-  return blogPosts.filter(
+  // Intentionally exclude `content` search to keep list routes lightweight.
+  return postIndex.filter(
     (post) =>
       post.title.toLowerCase().includes(lowerQuery) ||
       post.excerpt.toLowerCase().includes(lowerQuery) ||
-      post.content.toLowerCase().includes(lowerQuery) ||
       post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
-  );
+  ) as unknown as BlogPost[];
 }
 
 export function formatDate(dateString: string): string {
@@ -68,14 +70,14 @@ export function getCategoryByName(categoryName: string) {
 
 export function getAllTags(): string[] {
   const tags = new Set<string>();
-  blogPosts.forEach((post) => {
+  postIndex.forEach((post) => {
     post.tags.forEach((tag) => tags.add(tag));
   });
   return Array.from(tags).sort();
 }
 
 export function getPostsByTag(tag: string): BlogPost[] {
-  return blogPosts.filter((post) => post.tags.includes(tag));
+  return postIndex.filter((post) => post.tags.includes(tag)) as unknown as BlogPost[];
 }
 
 export function paginate<T>(items: T[], page: number, pageSize: number = 10) {

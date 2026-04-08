@@ -1,5 +1,5 @@
 import { getRecentPosts } from "@/lib/blog-utils";
-import { categories } from "@/lib/posts";
+import { categories } from "@/lib/categories";
 import { formatDate } from "@/lib/blog-utils";
 import { NewsletterForm } from "@/components/NewsletterForm";
 

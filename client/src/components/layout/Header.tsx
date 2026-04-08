@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { blogPosts } from "@/lib/posts";
+import { postIndex } from "@/lib/postsIndex";
 import { useMemo } from "react";
 import { SkipToContent } from "@/components/SkipToContent";
 
@@ -142,7 +142,7 @@ export function Header() {
     if (!searchQuery.trim()) return [];
     
     const query = searchQuery.toLowerCase();
-    return blogPosts.filter(
+    return postIndex.filter(
       (post) =>
         post.title.toLowerCase().includes(query) ||
         post.excerpt.toLowerCase().includes(query) ||

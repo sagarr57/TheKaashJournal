@@ -2,7 +2,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
-import { blogPosts, categories } from "@/lib/posts";
+import { postIndex } from "@/lib/postsIndex";
+import { categories } from "@/lib/categories";
 import { useState, useMemo } from "react";
 import { useParams } from "wouter";
 import { SEO } from "@/components/SEO";
@@ -20,7 +21,7 @@ export default function Category() {
   const filteredPosts = useMemo(() => {
     if (!category) return [];
     
-    return blogPosts
+    return postIndex
       .filter((post) => post.category === category.name)
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }, [category]);

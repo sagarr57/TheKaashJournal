@@ -7,19 +7,83 @@ import { getPostBySlug } from "@/lib/blog-utils";
 import { useParams } from "wouter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Image } from "@/components/ui/image";
 import { SEO } from "@/components/SEO";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { SocialShare } from "@/components/SocialShare";
+import { useEffect, useState } from "react";
+import { fetchPostBySlugWithContent } from "@/lib/blog-data";
+
+function MarkdownCode({
+  inline,
+  className,
+  children,
+  ...rest
+}: {
+  inline?: boolean;
+  className?: string;
+  children?: any;
+}) {
+  const match = /language-(\w+)/.exec(className || "");
+  const isInline = !!inline || !match;
+
+  if (isInline) {
+    return (
+      <code
+        className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800"
+        {...rest}
+      >
+        {children}
+      </code>
+    );
+  }
+
+  // Keep code blocks lightweight: avoid bundling syntax highlighting libraries.
+  return (
+    <pre className="bg-gray-900 text-gray-100 rounded p-4 my-4 overflow-x-auto text-sm">
+      <code>{String(children).replace(/\n$/, "")}</code>
+    </pre>
+  );
+}
 
 export default function Post() {
   const params = useParams();
   const slug = params.slug as string;
-  const post = getPostBySlug(slug);
+  const [postMeta, setPostMeta] = useState(getPostBySlug(slug));
+  const [content, setContent] = useState<string | null>(null);
+  const [contentError, setContentError] = useState<string | null>(null);
 
-  if (!post) {
+  useEffect(() => {
+    let cancelled = false;
+    setContent(null);
+    setContentError(null);
+    setPostMeta(getPostBySlug(slug));
+
+    async function load() {
+      try {
+        const supabasePost = await fetchPostBySlugWithContent(slug);
+        if (!cancelled && supabasePost) {
+          setPostMeta(supabasePost);
+          setContent(supabasePost.content || "");
+          return;
+        }
+
+        const mod = await import("@/lib/postsContent");
+        const loaded = mod.postContentBySlug?.[slug];
+        if (!loaded) throw new Error("Content not found");
+        if (!cancelled) setContent(loaded);
+      } catch (e: any) {
+        if (!cancelled) setContentError(e?.message || "Failed to load content");
+      }
+    }
+
+    if (postMeta) load();
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  if (!postMeta) {
     return (
       <div className="min-h-screen bg-white">
         <Header />
@@ -38,14 +102,14 @@ export default function Post() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title={post.title}
-        description={post.excerpt}
-        image={post.image}
-        url={`/blog/${post.slug}`}
+        title={postMeta.title}
+        description={postMeta.excerpt}
+        image={postMeta.image}
+        url={`/blog/${postMeta.slug}`}
         type="article"
-        author={post.author}
-        publishedTime={new Date(post.date).toISOString()}
-        tags={post.tags}
+        author={postMeta.author}
+        publishedTime={new Date(postMeta.date).toISOString()}
+        tags={postMeta.tags}
       />
       <ReadingProgress />
       <Header />
@@ -54,8 +118,8 @@ export default function Post() {
         {/* Hero Image */}
         <div className="w-full h-52 sm:h-64 md:h-80 lg:h-96 overflow-hidden bg-gray-200">
           <Image
-            src={post.image}
-            alt={post.title}
+            src={postMeta.image}
+            alt={postMeta.title}
             className="w-full h-full object-cover"
           />
         </div>
@@ -67,17 +131,25 @@ export default function Post() {
             <article className="lg:col-span-3">
               {/* Title */}
               <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-6 md:mb-8 leading-tight">
-                {post.title}
+                {postMeta.title}
               </h1>
 
               {/* Meta Information */}
               <div className="mb-8 md:mb-12 pb-8 md:pb-12 border-b border-gray-200">
-                <PostMeta post={post} />
+                <PostMeta post={postMeta as any} />
               </div>
 
               {/* Content */}
               <div className="prose prose-base md:prose-lg max-w-none mb-12 md:mb-16">
                 <div className="space-y-5 md:space-y-6 text-gray-700 leading-relaxed markdown-content">
+                  {contentError && (
+                    <div className="border border-red-200 bg-red-50 text-red-800 p-4 rounded">
+                      Failed to load article content. Please refresh and try again.
+                    </div>
+                  )}
+                  {!content && !contentError && (
+                    <div className="text-gray-500">Loading article...</div>
+                  )}
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
@@ -117,24 +189,7 @@ export default function Post() {
                       blockquote: ({ node, ...props }) => (
                         <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4 text-gray-600" {...props} />
                       ),
-                      code: ({ node, inline, className, children, ...props }: any) => {
-                        const match = /language-(\w+)/.exec(className || "");
-                        return !inline && match ? (
-                          <SyntaxHighlighter
-                            style={vscDarkPlus}
-                            language={match[1]}
-                            PreTag="div"
-                            className="rounded my-4"
-                            {...props}
-                          >
-                            {String(children).replace(/\n$/, "")}
-                          </SyntaxHighlighter>
-                        ) : (
-                          <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800" {...props}>
-                            {children}
-                          </code>
-                        );
-                      },
+                      code: (props: any) => <MarkdownCode {...props} />,
                       table: ({ node, ...props }) => (
                         <div className="overflow-x-auto my-4">
                           <table className="w-full border-collapse border border-gray-300" {...props} />
@@ -150,24 +205,28 @@ export default function Post() {
                         <td className="border border-gray-300 p-3" {...props} />
                       ),
                       img: ({ node, ...props }: any) => (
-                        <Image className="max-w-full h-auto rounded my-4" {...props} alt={props.alt || post.title} />
+                        <Image
+                          className="max-w-full h-auto rounded my-4"
+                          {...props}
+                          alt={props.alt || postMeta.title}
+                        />
                       ),
                     }}
                   >
-                    {post.content}
+                    {content || ""}
                   </ReactMarkdown>
                 </div>
               </div>
 
               {/* Social Share */}
               <SocialShare
-                title={post.title}
-                url={`/blog/${post.slug}`}
-                description={post.excerpt}
+                title={postMeta.title}
+                url={`/blog/${postMeta.slug}`}
+                description={postMeta.excerpt}
               />
 
               {/* Related Posts */}
-              <RelatedPosts currentPost={post} />
+              <RelatedPosts currentPost={postMeta as any} />
             </article>
 
             {/* Sidebar */}
