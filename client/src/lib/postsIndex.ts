@@ -156,6 +156,101 @@ export const postIndex: PostIndexItem[] = [
       keywords: ["debt payoff success", "AI debt management", "debt free story", "financial success"],
     },
   },
+  {
+    id: "9",
+    title: "When Debt Takes Over Your Headspace (and How to Steady the Wheel)",
+    slug: "debt-stress-mindset-practical-steps",
+    excerpt:
+      "Money worries can crowd out everything else. Here is a calmer way to understand what is happening emotionally — and a practical path back toward clarity.",
+    author: "Team Kaash",
+    date: "2026-04-14",
+    category: "Debt Management",
+    tags: ["Debt stress", "Mental health", "Budgeting", "UK finance"],
+    readingTime: 11,
+    featured: false,
+    image: "/images/hero-abstract.jpg",
+    seo: {
+      metaDescription:
+        "Understand how debt stress affects thinking and motivation, and learn practical, non-judgemental steps to regain control of your finances in the UK.",
+      keywords: ["debt stress", "money anxiety", "debt help UK", "financial wellbeing"],
+    },
+  },
+  {
+    id: "10",
+    title: "Loan Repayments Feel Relentless. Here Is How to Take the Pressure Down",
+    slug: "loan-repayment-stress-seven-approaches",
+    excerpt:
+      "Fixed monthly payments can feel like a treadmill. These approaches focus on communication, structure, and small buffers — not willpower alone.",
+    author: "Team Kaash",
+    date: "2026-04-12",
+    category: "Debt Management",
+    tags: ["Loans", "Repayments", "Refinancing", "UK"],
+    readingTime: 12,
+    featured: false,
+    image: "/images/data-visualization-bg.jpg",
+    seo: {
+      metaDescription:
+        "Practical ways to manage loan repayment stress: clarity on numbers, lender conversations, automation, and when to seek free debt advice.",
+      keywords: ["loan stress", "repayment help", "debt advice UK", "personal loans"],
+    },
+  },
+  {
+    id: "11",
+    title: "A Debt Collector Has Called. Pause, Verify, Then Decide Your Next Move",
+    slug: "debt-collector-call-uk-verify-rights",
+    excerpt:
+      "Unexpected calls about money you may or may not owe are unsettling. This guide walks through verification, records, and where to get trustworthy help.",
+    author: "Team Kaash",
+    date: "2026-04-10",
+    category: "Debt Management",
+    tags: ["Debt collection", "Consumer rights", "UK", "Scams"],
+    readingTime: 10,
+    featured: false,
+    image: "/images/hero-abstract.jpg",
+    seo: {
+      metaDescription:
+        "What to do if a debt collector calls: verify the debt, know UK protections, avoid pressure tactics, and use official channels before you pay.",
+      keywords: ["debt collector UK", "verify debt", "FCA debt collection", "consumer rights"],
+    },
+  },
+  {
+    id: "12",
+    title: "IVAs in Plain English: Who They Suit, What They Cost You, and What to Ask First",
+    slug: "iva-uk-explained-trade-offs",
+    excerpt:
+      "Individual Voluntary Arrangements are widely advertised. This piece explains the mechanics, typical trade-offs, and how to get advice that is not selling you a product.",
+    author: "Team Kaash",
+    date: "2026-04-08",
+    category: "Debt Management",
+    tags: ["IVA", "Insolvency", "UK debt", "Advice"],
+    readingTime: 13,
+    featured: false,
+    image: "/images/data-visualization-bg.jpg",
+    seo: {
+      metaDescription:
+        "An impartial overview of UK IVAs: duration, voting rules, credit file impact, fees, and why free debt charities should be part of your research.",
+      keywords: ["IVA UK", "Individual Voluntary Arrangement", "debt solutions", "insolvency practitioner"],
+    },
+  },
+  {
+    id: "13",
+    title: "Several Loans at Once? A Straightforward Way to Tidy the Mess",
+    slug: "multiple-loans-strategy-consolidation-pitfalls",
+    excerpt:
+      "More than one repayment each month is mentally expensive. Here is how to rank debts, when consolidation helps, and the habits that undo good plans.",
+    author: "Team Kaash",
+    date: "2026-04-06",
+    category: "Debt Management",
+    tags: ["Multiple debts", "Snowball", "Avalanche", "Consolidation"],
+    readingTime: 12,
+    featured: false,
+    image: "/images/hero-abstract.jpg",
+    seo: {
+      metaDescription:
+        "Manage multiple loans with a clear inventory, a repayment strategy that matches your personality, and pitfalls that keep people cycling back into debt.",
+      keywords: ["multiple loans", "debt snowball", "debt avalanche", "consolidation loan UK"],
+    },
+  },
 ];
 
 export function getPostIndexBySlug(slug: string): PostIndexItem | undefined {

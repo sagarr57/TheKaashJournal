@@ -1,7 +1,8 @@
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { blogPosts } from "../client/src/lib/posts";
+import { postIndex } from "../client/src/lib/postsIndex";
+import { postContentBySlug } from "../client/src/lib/postsContent";
 import { author } from "../client/src/lib/categories";
 
 function escapeSqlString(value: string): string {
@@ -25,15 +26,19 @@ function toSqlTextArray(values: string[] | undefined): string {
 
 const EDITORIAL_BYLINE = author.name;
 
-const rows = blogPosts
+const rows = postIndex
   .map((post) => {
+    const content = postContentBySlug[post.slug] ?? "";
+    if (!content) {
+      console.warn(`[seed] Missing markdown for slug "${post.slug}" (id ${post.id}) — SQL content will be empty.`);
+    }
     const updatedValue = post.updated ? `'${escapeSqlString(post.updated)}'` : "NULL";
     return `(
   '${escapeSqlString(post.id)}',
   '${escapeSqlString(post.title)}',
   '${escapeSqlString(post.slug)}',
   '${escapeSqlString(post.excerpt)}',
-  '${escapeSqlString(post.content || "")}',
+  '${escapeSqlString(content)}',
   '${escapeSqlString(EDITORIAL_BYLINE)}',
   '${escapeSqlString(post.date)}',
   ${updatedValue},
