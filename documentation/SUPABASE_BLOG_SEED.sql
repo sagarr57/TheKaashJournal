@@ -690,6 +690,147 @@ You do not need a perfect month to begin. You need a truthful list, a single cho
   '/images/hero-abstract.jpg',
   'Manage multiple loans with a clear inventory, a repayment strategy that matches your personality, and pitfalls that keep people cycling back into debt.',
   ARRAY['multiple loans', 'debt snowball', 'debt avalanche', 'consolidation loan UK']::text[]
+),
+(
+  '14',
+  'Debt Advice Scams: 9 Red Flags Before You Share a Pound',
+  'debt-advice-scams-red-flags-uk',
+  'Not every company promising debt relief is acting in your best interest. Learn the warning signs and how to verify providers before you commit.',
+  '# Debt Advice Scams: 9 Red Flags Before You Share a Pound
+
+> **Editorial note:** This article is general information for UK readers. It is not legal advice or regulated debt counselling. If you need personalised support, use free, FCA-authorised organisations such as StepChange, Citizens Advice, or National Debtline.
+
+When money is tight, urgency is high. That urgency is exactly what scam operators exploit. They use reassuring language, push quick commitments, and present expensive products as if they are your only route out.
+
+Not every paid service is a scam, but every debt offer should be treated like a contract decision: verify first, commit second.
+
+## Nine red flags worth taking seriously
+
+### 1. Pressure to "act today"
+If a company says your options disappear unless you pay immediately, pause. Legitimate advisers allow time to review terms.
+
+### 2. Upfront fees before meaningful advice
+Be cautious if money is requested before a clear affordability assessment and explanation of alternatives.
+
+### 3. Vague claims like "we can wipe most of your debt"
+Debt solutions have eligibility rules, costs, and trade-offs. Broad promises without detail are a warning sign.
+
+### 4. No clear regulatory details
+In the UK, firms providing regulated debt help should be transparent about authorisation status and complaints process.
+
+### 5. They discourage free alternatives
+If they dismiss free debt charities without explaining why, that is a concern. Good advisers compare options fairly.
+
+### 6. Unclear total cost
+You should be told exactly how fees are charged and what happens if your circumstances change.
+
+### 7. They avoid putting terms in writing
+Never rely on a phone promise. Ask for documents and read them before agreeing.
+
+### 8. They ask for full banking access too early
+Sharing sensitive account access before due diligence increases risk.
+
+### 9. They focus on "approval" more than affordability
+A sustainable solution is about your income and essentials, not sales scripts.
+
+## A safer decision flow
+
+1. **Verify firm details** through official channels.
+2. **Take a second opinion** from a free debt advice charity.
+3. **List all options side by side**: informal plans, consolidation, formal insolvency routes.
+4. **Read all fees and failure terms** before any signature.
+5. **Sleep on it** where possible. Urgency is often emotional, not legal.
+
+## If you already paid a questionable provider
+
+Gather records: invoices, emails, call notes, and bank transactions. Then contact your bank promptly and ask an independent adviser what complaint route is appropriate in your case.
+
+## Bottom line
+
+Good debt help should make your options clearer, not foggier. If a service increases pressure, hides costs, or blocks comparison, step back. Reliable support does not need fear-based selling.',
+  'Team Kaash',
+  '2026-04-04',
+  NULL,
+  'Debt Management',
+  ARRAY['Debt advice', 'Scams', 'UK', 'Consumer protection']::text[],
+  11,
+  FALSE,
+  '/images/data-visualization-bg.jpg',
+  'How to spot debt advice scams in the UK: red flags, verification steps, and safe alternatives through free FCA-authorised support.',
+  ARRAY['debt scam warning signs', 'FCA authorised debt advice', 'debt help UK', 'financial scams']::text[]
+),
+(
+  '15',
+  'How to Build a Debt Payoff Plan in 60 Minutes (Without Fancy Tools)',
+  'build-debt-payoff-plan-in-60-minutes',
+  'You do not need complex apps to start. This one-hour planning method helps you map balances, priorities, and realistic monthly actions.',
+  '# How to Build a Debt Payoff Plan in 60 Minutes (Without Fancy Tools)
+
+> **Editorial note:** Educational content only. Not tailored debt advice. For complex situations, seek free, FCA-authorised debt support.
+
+You do not need a perfect spreadsheet or a premium app to start fixing debt. What you need is one focused hour, honest numbers, and a simple routine you can repeat every month.
+
+## Minute 0-10: Gather every debt in one place
+
+Create a single table with:
+- lender name
+- balance
+- interest rate (APR)
+- minimum payment
+- due date
+
+If a field is missing, write "to confirm" and keep going.
+
+## Minute 10-20: Protect essential spending first
+
+Write your non-negotiables: housing, utilities, food, transport, medicines, childcare. A repayment plan that ignores essentials will fail under pressure.
+
+## Minute 20-30: Calculate available repayment cash
+
+Use a realistic monthly figure, not your best-case number. If you can only commit 120 this month, plan around 120. Reliability beats ambition.
+
+## Minute 30-40: Choose one targeting method
+
+- **Avalanche:** target the highest APR first for best interest efficiency.
+- **Snowball:** target the smallest balance first for quick momentum.
+
+Choose based on your behaviour, not internet arguments.
+
+## Minute 40-50: Set automation and reminders
+
+Automate minimum payments where possible. Add calendar reminders 3-5 days before key dates so surprises do not become missed payments.
+
+## Minute 50-60: Write your monthly review checklist
+
+Keep it short:
+1. Did all minimums clear?
+2. Did I make extra payment to the target debt?
+3. Did any balance or rate change?
+4. What gets adjusted next month?
+
+This turns debt reduction into a repeatable process, not an emotional emergency.
+
+## A small template you can reuse
+
+- **Total debt:** £____
+- **Monthly debt budget:** £____
+- **Current target debt:** ________
+- **Next review date:** ________
+- **Backup action if budget drops:** call lender / reduce extra payment / seek free adviser support
+
+## Final thought
+
+Most people delay because they think they need a flawless plan. They do not. A clear, imperfect plan used consistently is usually enough to change the trajectory.',
+  'Team Kaash',
+  '2026-04-02',
+  NULL,
+  'Debt Management',
+  ARRAY['Debt plan', 'Budgeting', 'Repayment strategy', 'Financial wellbeing']::text[],
+  10,
+  FALSE,
+  '/images/hero-abstract.jpg',
+  'Create a practical debt payoff plan in one hour with a simple template, realistic budget rules, and a follow-through routine.',
+  ARRAY['debt payoff plan', 'budget for debt', 'repayment strategy', 'debt management steps']::text[]
 )
 on conflict (id) do update set
   title = excluded.title,

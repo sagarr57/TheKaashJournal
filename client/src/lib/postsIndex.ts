@@ -251,6 +251,44 @@ export const postIndex: PostIndexItem[] = [
       keywords: ["multiple loans", "debt snowball", "debt avalanche", "consolidation loan UK"],
     },
   },
+  {
+    id: "14",
+    title: "Debt Advice Scams: 9 Red Flags Before You Share a Pound",
+    slug: "debt-advice-scams-red-flags-uk",
+    excerpt:
+      "Not every company promising debt relief is acting in your best interest. Learn the warning signs and how to verify providers before you commit.",
+    author: "Team Kaash",
+    date: "2026-04-04",
+    category: "Debt Management",
+    tags: ["Debt advice", "Scams", "UK", "Consumer protection"],
+    readingTime: 11,
+    featured: false,
+    image: "/images/data-visualization-bg.jpg",
+    seo: {
+      metaDescription:
+        "How to spot debt advice scams in the UK: red flags, verification steps, and safe alternatives through free FCA-authorised support.",
+      keywords: ["debt scam warning signs", "FCA authorised debt advice", "debt help UK", "financial scams"],
+    },
+  },
+  {
+    id: "15",
+    title: "How to Build a Debt Payoff Plan in 60 Minutes (Without Fancy Tools)",
+    slug: "build-debt-payoff-plan-in-60-minutes",
+    excerpt:
+      "You do not need complex apps to start. This one-hour planning method helps you map balances, priorities, and realistic monthly actions.",
+    author: "Team Kaash",
+    date: "2026-04-02",
+    category: "Debt Management",
+    tags: ["Debt plan", "Budgeting", "Repayment strategy", "Financial wellbeing"],
+    readingTime: 10,
+    featured: false,
+    image: "/images/hero-abstract.jpg",
+    seo: {
+      metaDescription:
+        "Create a practical debt payoff plan in one hour with a simple template, realistic budget rules, and a follow-through routine.",
+      keywords: ["debt payoff plan", "budget for debt", "repayment strategy", "debt management steps"],
+    },
+  },
 ];
 
 export function getPostIndexBySlug(slug: string): PostIndexItem | undefined {

@@ -1,7 +1,9 @@
+import { getContactEmail } from "@/lib/site-contact";
 import { Mail, Twitter, Linkedin, Github } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const contactEmail = getContactEmail();
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200 mt-14 md:mt-20">
@@ -38,6 +40,11 @@ export function Footer() {
               <li>
                 <a href="/about" className="hover:text-gray-900 transition-colors">
                   About
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="hover:text-gray-900 transition-colors">
+                  Contact
                 </a>
               </li>
             </ul>
@@ -84,16 +91,20 @@ export function Footer() {
           <div>
             <h3 className="font-oswald font-bold uppercase text-sm mb-4 text-gray-900">Connect</h3>
             <div className="flex gap-4 mb-6">
-              <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a
+                href={contactEmail ? `mailto:${encodeURIComponent(contactEmail)}` : "/contact"}
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+                aria-label={contactEmail ? `Email ${contactEmail}` : "Contact"}
+              >
                 <Mail className="w-5 h-5" />
               </a>
             </div>

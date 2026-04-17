@@ -20,6 +20,7 @@ const Home = lazy(() => import("./pages/Home"));
 const Blog = lazy(() => import("./pages/Blog"));
 const Post = lazy(() => import("./pages/Post"));
 const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
 const Category = lazy(() => import("./pages/Category"));
 const Tag = lazy(() => import("./pages/Tag"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -56,6 +57,7 @@ function Router() {
         <Route path={"/category/:slug"} component={Category} />
         <Route path={"/tag/:tag"} component={Tag} />
         <Route path={"/about"} component={About} />
+        <Route path={"/contact"} component={Contact} />
         <Route path={"/privacy-policy"} component={PrivacyPolicy} />
         <Route path={"/terms-and-conditions"} component={TermsAndConditions} />
         <Route path={"/cookie-policy"} component={CookiePolicy} />

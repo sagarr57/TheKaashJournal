@@ -16,6 +16,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.thekaashjournal.com/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.thekaashjournal.com/privacy-policy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
@@ -135,6 +140,18 @@
   <url>
     <loc>https://www.thekaashjournal.com/blog/multiple-loans-strategy-consolidation-pitfalls</loc>
     <lastmod>2026-04-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.thekaashjournal.com/blog/debt-advice-scams-red-flags-uk</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.thekaashjournal.com/blog/build-debt-payoff-plan-in-60-minutes</loc>
+    <lastmod>2026-04-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
