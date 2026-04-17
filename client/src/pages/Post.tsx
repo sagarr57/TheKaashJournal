@@ -46,6 +46,14 @@ function MarkdownCode({
   );
 }
 
+/** Off-site links open in a new tab so readers keep the article; internal /… and mailto stay default. */
+function markdownLinkOpensNewTab(href: string | undefined): boolean {
+  if (!href || href.startsWith("#")) return false;
+  if (href.startsWith("/")) return false;
+  if (/^(mailto|tel|sms):/i.test(href)) return false;
+  return /^https?:\/\//i.test(href) || href.startsWith("//");
+}
+
 export default function Post() {
   const params = useParams();
   const slug = params.slug as string;
@@ -183,12 +191,19 @@ export default function Post() {
                       em: ({ node, ...props }) => (
                         <em className="italic text-gray-800" {...props} />
                       ),
-                      a: ({ node, ...props }) => (
-                        <a
-                          className="text-blue-700 hover:text-blue-800 underline underline-offset-[3px] decoration-blue-700/40 hover:decoration-blue-800"
-                          {...props}
-                        />
-                      ),
+                      a: ({ node, ...props }) => {
+                        const href = typeof props.href === "string" ? props.href : undefined;
+                        const newTab = markdownLinkOpensNewTab(href);
+                        return (
+                          <a
+                            className="text-blue-700 hover:text-blue-800 underline underline-offset-[3px] decoration-blue-700/40 hover:decoration-blue-800"
+                            {...props}
+                            {...(newTab
+                              ? { target: "_blank", rel: "noopener noreferrer" }
+                              : {})}
+                          />
+                        );
+                      },
                       blockquote: ({ node, ...props }) => (
                         <blockquote
                           className="border-l-[3px] border-blue-600 bg-slate-50 py-4 px-5 my-6 rounded-r-md text-gray-700 not-italic text-[0.98em] leading-relaxed"
