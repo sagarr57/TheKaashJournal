@@ -35,10 +35,7 @@ Goodbudget translates envelope budgeting into an app: you split income across en
 
 If you are comparing **regulated** apps that bundle ISAs or investing with everyday money, **[Moneybox](https://www.moneyboxapp.com/)** is one name people shop alongside high-street banks. Read their fees and key investor information on their domain, and verify any firm on the **[FCA register](https://register.fca.org.uk/s/)** before you transfer money.
 
-## Further reading
-
-- [Get free debt advice — GOV.UK](https://www.gov.uk/debt-advice)
-- [Financial Services Register](https://register.fca.org.uk/s/)`,
+**UK:** [Get free debt advice on GOV.UK](https://www.gov.uk/debt-advice) lists authorised charities and services; use the same site to cross-check who is regulated.`,
 
   "real-time-financial-data-investment": `# How Real-Time Financial Data is Changing Investment Decisions
 
@@ -88,13 +85,13 @@ The investors who tend to sleep better are not always the ones with the fastest 
 
 ## If you invest from the UK
 
-Worth bookmarking on a rainy Sunday: the FCA **[Investments](https://www.fca.org.uk/investments)** hub on scams, risk, and how to **[check a firm on the register](https://register.fca.org.uk/s/)**. If you like context more than hype, the **[Bank of England education pages](https://www.bankofengland.co.uk/education)** explain how the wider system fits together in plain language.`,
+Worth bookmarking on a rainy Sunday: the **[FCA’s investments hub](https://www.fca.org.uk/investments)** (scams, risk, and how to check a firm). For wider context without market noise, the Bank of England’s education section is a steady read—search for “Bank of England education”.`,
 
   "chatgpt-personal-finance-guide": `# ChatGPT for Personal Finance: A Complete Beginner's Guide
 
 > *Never paste card numbers, full account details, or one-time codes into any chat. For pensions, investments, or serious debt, talk to a qualified human. OpenAI’s [usage policies](https://openai.com/policies/usage-policies) spell out what belongs in [ChatGPT](https://chatgpt.com/) and what does not.*
 
-Money questions are embarrassing to ask out loud. That is why so many people open a chat window first—it feels private, patient, and oddly non-judgmental. [ChatGPT](https://chatgpt.com/) and similar tools can **brainstorm, translate jargon, and sketch a budget you still have to sanity-check** against real bank rows. Used that way, they save time and shame; used blindly, they create new mistakes. Here is a beginner-friendly way to stay on the right side of that line.
+Money questions are embarrassing to ask out loud. That is why so many people open a chat window first—it feels private, patient, and oddly non-judgmental. **[ChatGPT](https://chatgpt.com/)** and similar tools can **brainstorm, translate jargon, and sketch a budget you still have to sanity-check** against real bank rows. Used that way, they save time and shame; used blindly, they create new mistakes. Here is a beginner-friendly way to stay on the right side of that line.
 
 ## 1. Budgeting: turn messy numbers into a conversation
 
@@ -108,13 +105,13 @@ Ask follow-ups: "What if my rent goes up 5% next year?" or "Rewrite that as a we
 
 ## 2. Investing vocabulary—not personalised recommendations
 
-Use [ChatGPT](https://chatgpt.com/) to unpack terms such as **OCF**, **accumulation vs income** funds, or why **volatility** matters—then verify anything consequential against the fund factsheet or the **[FCA investments hub](https://www.fca.org.uk/investments)**. A good prompt pattern: "Explain [concept] in plain English, then list three questions I should ask a regulated adviser before acting."
+Use the same chat tool to unpack terms such as **OCF**, **accumulation vs income** funds, or why **volatility** matters—then verify anything consequential against the fund factsheet or the **[FCA investments hub](https://www.fca.org.uk/investments)**. A good prompt pattern: "Explain [concept] in plain English, then list three questions I should ask a regulated adviser before acting."
 
 Do **not** ask it to pick stocks or time the market as if it had a crystal ball; ask for **frameworks** (risk tolerance, time horizon, diversification) you still own.
 
 ## 3. Debt: compare strategies, then talk to humans for the real decision
 
-ChatGPT can outline **snowball vs avalanche**, how minimum payments drag on high APR, or how to phrase an email to a lender—but formal debt solutions (IVAs, DMPs, breathing space) need **[free advice from GOV.UK’s list](https://www.gov.uk/debt-advice)** or charities such as **[StepChange](https://www.stepchange.org/)**.
+The model can outline **snowball vs avalanche**, how minimum payments drag on high APR, or how to phrase an email to a lender—but formal debt solutions (IVAs, DMPs, breathing space) need a **human** from the free services listed on **[GOV.UK debt advice](https://www.gov.uk/debt-advice)** (for example StepChange or Citizens Advice).
 
 **Example prompt:** "Here are my balances and APRs: [list]. Which order minimises interest if I can put an extra £150/month only toward one account at a time? Show the trade-off vs snowball order."
 
@@ -126,7 +123,7 @@ ChatGPT can outline **snowball vs avalanche**, how minimum payments drag on high
 
 ## Bottom line
 
-[ChatGPT](https://chatgpt.com/) is a strong **study partner** for vocabulary, rehearsal, and “what does this letter even mean?” moments. The moment you are about to move money, sign paperwork, or choose between formal debt options, bring a human with a licence and a complaints process—and keep **[FCA consumer hub](https://www.fca.org.uk/consumers)** and **[MoneyHelper](https://www.moneyhelper.org.uk/)** open in another tab so marketing never gets the last word.`,
+ChatGPT is a strong **study partner** for vocabulary, rehearsal, and “what does this letter even mean?” moments. The moment you are about to move money, sign paperwork, or choose between formal debt options, bring a human with a licence and a complaints process—and keep the **[FCA consumer hub](https://www.fca.org.uk/consumers)** open in another tab so marketing never gets the last word.`,
 
   "ai-fintech-startups-2026": `# The Rise of AI-Powered Fintech Startups: What You Need to Know
 
@@ -140,7 +137,7 @@ Many lenders use models to triage applications, detect anomalies, or price risk 
 
 ## Wealth and investing: personalisation without a human IFA
 
-Robo-style journeys (questionnaires, model portfolios, automatic rebalancing) have been mainstream for years; newer layers add **natural-language interfaces** or “coach” messaging. Helpful when they explain fees and risk clearly—risky when they blur the line between **information** and **regulated advice**. If you invest in the UK, bookmark the **[FCA investments hub](https://www.fca.org.uk/investments)** and verify any firm on the **[FCA register](https://register.fca.org.uk/s/)**.
+Robo-style journeys (questionnaires, model portfolios, automatic rebalancing) have been mainstream for years; newer layers add **natural-language interfaces** or “coach” messaging. Helpful when they explain fees and risk clearly—risky when they blur the line between **information** and **regulated advice**. If you invest in the UK, use the **[FCA website](https://www.fca.org.uk/consumers)** to read about investments and to check whether a firm is authorised.
 
 ## Fraud detection: where machine learning quietly earns its keep
 
@@ -154,7 +151,7 @@ Front-line chat can now draft answers from knowledge bases, summarise long threa
 
 Speed is exciting until it is your overdraft on the line. Prefer providers who show fees in daylight, answer complaints in public channels, and tell you plainly who regulates them. If something only makes sense in a voice note at 2am, it probably does not belong in your main bank account.
 
-If you want to see how regulators think about new models—not just marketing—browse the FCA’s **[Innovation](https://www.fca.org.uk/firms/innovation)** pages alongside its everyday **[consumer guidance](https://www.fca.org.uk/consumers)**.`,
+If you want to see how regulators think about new models—not just marketing—start from the **[FCA consumer section](https://www.fca.org.uk/consumers)** and use their search for “Innovation” when you want the firm-facing programmes.`,
 
   "automate-budget-ai-tutorial": `# Automating Your Budget with AI: Step-by-Step Tutorial
 
@@ -164,13 +161,13 @@ Most people do not fail at budgeting because they are “bad with money.” They
 
 ## Step 1: Choose a budgeting app you will actually open
 
-**Mint is gone for US users**—Intuit wound it down in early 2024 ([CNBC](https://www.cnbc.com/select/mint-budgeting-app-is-going-away-here-are-some-alternatives/), [NYT](https://www.nytimes.com/2023/11/03/business/mint-app-closing-intuit.html)) and steered many people toward **Credit Karma**, which is not a one-for-one replacement. Most shoppers today shortlist tools like **[YNAB](https://www.ynab.com/)**, **[Goodbudget](https://goodbudget.com/)**, or **[Undebt.it](https://undebt.it/)** (free payoff calculators) depending on whether they want strict envelopes, simple tracking, or debt-order maths.
+**Mint is gone for US users**—Intuit wound it down in early 2024 (widely reported at the time) and steered many people toward **Credit Karma**, which is not a one-for-one replacement. Most shoppers today shortlist **[YNAB](https://www.ynab.com/)**, **[Goodbudget](https://goodbudget.com/)**, or **[Undebt.it](https://undebt.it/)** depending on whether they want strict envelopes, simple tracking, or debt-order maths.
 
 Look for apps that support your banks, export data, and explain how they classify transactions. Use free trials, then pick one and stay with it for a quarter.
 
 ## Step 2: Connect accounts through proper consent screens
 
-Most budgeting apps use **open banking** (read-only feeds) or card linking. In the UK, regulated providers should send you through your bank’s own login and consent flow—if something asks for your full card number and PIN inside a random web form, stop. Use strong passwords, turn on **two-factor authentication**, and revoke access in your bank’s “connected apps” list if you uninstall a tool. The **[Open Banking Implementation Entity](https://www.openbanking.org.uk/)** explains how consent works at a high level.
+Most budgeting apps use **open banking** (read-only feeds) or card linking. In the UK, regulated providers should send you through your bank’s own login and consent flow—if something asks for your full card number and PIN inside a random web form, stop. Use strong passwords, turn on **two-factor authentication**, and revoke access in your bank’s “connected apps” list if you uninstall a tool. Open Banking UK’s public pages explain how consent works if you want the detail.
 
 ## Step 3: Start with five categories, not fifty
 
@@ -211,7 +208,7 @@ Helpful: clearer fee disclosure, natural-language search across fund docs, remin
 
 ## Where to start digging in (UK examples)
 
-Many readers line up **[Moneybox](https://www.moneyboxapp.com/)**, **[Vanguard Investor UK](https://www.vanguardinvestor.co.uk/)**, and **[interactive investor](https://www.ii.co.uk/)** in separate tabs: compare minimums, dealing fees, ISA charges, and fund line-ups—then confirm each firm on the **[FCA register](https://register.fca.org.uk/s/)** before you fund anything.
+Many readers line up Moneybox, Vanguard Investor UK, and interactive investor in separate tabs (use each brand’s official site), compare minimums, dealing fees, ISA charges, and fund line-ups—then confirm each firm on the **[FCA register](https://register.fca.org.uk/s/)** before you fund anything.
 
 ## When a robo might not be enough
 
@@ -225,68 +222,36 @@ Markets will fall again; your platform’s job is not to make that fun—it is t
 
 > *This is a **landscape** piece: real categories and products you can open today, with official links. It is **not** a list of unverified “drops” from social media—always confirm features and pricing on each vendor’s site before you rely on anything for tax, debt, or investments.*
 
-January hits different when money already feels tight: your feed fills with “new finance AI” threads, slick demos, and urgency that is rarely about *your* rent date. Under that noise, the genuinely useful shift is often boring—**copilots tucked inside Word, Excel, or Gmail**, bank apps that finally categorise the way your brain does, and the same regulator warnings because scams did not take a holiday. This piece sorts the signal from the hype and links straight to official sites so you can click with your eyes open.
+January hits different when money already feels tight: your feed fills with “new finance AI” threads, slick demos, and urgency that is rarely about *your* rent date. Under that noise, the genuinely useful shift is often boring—**copilots tucked inside Word, Excel, or Gmail**, bank apps that finally categorise the way your brain does, and the same regulator warnings because scams did not take a holiday. This piece sorts signal from hype—**a few trusted links**, not a link farm.
 
 ## 1. General-purpose assistants (your research layer)
 
-Large language models are not bank tellers, but they are decent at **explaining terms**, drafting a budget outline from numbers *you* choose to share, and stress-testing a plan in plain English—if you treat every answer as a draft to verify.
-
-- **[ChatGPT](https://chatgpt.com/)** (OpenAI) — widely used for explanations and structured prompts; read **[OpenAI’s usage policies](https://openai.com/policies/usage-policies)** before you paste anything sensitive.
-- **[Claude](https://claude.ai/)** (Anthropic) — alternative assistant with its own safety and data rules; check **[Anthropic’s consumer terms](https://www.anthropic.com/legal/consumer-terms)** on their site.
-- **[Gemini](https://gemini.google.com/)** (Google) — integrated with Google accounts in supported regions; review Google’s account and AI disclosures for your country.
-
-Use these tools for **education and rehearsal**, not for “execute this trade” or “tell me if I should enter an IVA” without a human adviser.
+Large language models are not bank tellers, but they are decent at **explaining terms**, drafting a budget outline from numbers *you* choose to share, and stress-testing a plan in plain English—if you treat every answer as a draft to verify. Most readers already know the names: ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google). **[ChatGPT](https://chatgpt.com/)** is a sensible bookmark; read each provider’s own terms before you paste anything sensitive. Use these tools for **education and rehearsal**, not for executing trades or choosing formal debt routes without a human adviser.
 
 ## 2. Copilots inside Microsoft and Google workspaces
 
-A lot of “new AI finance” at work is really **spreadsheet and email assistance**: summarising long threads, suggesting formulas, or turning a table into a chart. That matters for personal finance when your truth still lives in CSV exports from the bank.
-
-- **[Microsoft Copilot](https://www.microsoft.com/microsoft-copilot)** — positioned across Windows, Microsoft 365 apps, and Edge; Excel-heavy users should read what Copilot can and cannot see in *your* tenant or home subscription.
-- **Google Workspace and Gemini** — Google bundles Gemini into Workspace and consumer accounts where available; see **[Gemini help](https://support.google.com/gemini)** for country availability and which apps can access Drive before you upload statements.
-
-If you already pay for an office suite, turning these features on is often cheaper than buying a separate “AI finance OS” you have never heard of.
+A lot of “new AI finance” at work is really **spreadsheet and email assistance**: summarising threads, suggesting formulas, turning a table into a chart. If you already pay for an office suite, **[Microsoft Copilot](https://www.microsoft.com/microsoft-copilot)** and Google’s Gemini features are often the cheapest upgrade path—read what each can see in your files before you upload bank exports.
 
 ## 3. Dedicated budgeting and debt apps (rules plus automation)
 
-These products are not magic, but they combine **bank feeds, rules, categories, and reminders**—which is where most people actually get traction.
-
-- **[YNAB](https://www.ynab.com/)** — strict “give every dollar a job” style budgeting; strong for people who will engage weekly.
-- **[Goodbudget](https://goodbudget.com/)** — digital envelope budgeting with a gentler learning curve than some competitors.
-- **[Undebt.it](https://undebt.it/)** — free calculators for snowball, avalanche, and custom payoff orders when you already have balances and APRs.
-- **[Copilot](https://www.copilot.money/)** — polished tracking for many Apple-first households; confirm bank support in your country on their site.
-
-If you are in the UK and comparing **investing** apps as well as budgeting, **[Moneybox](https://www.moneyboxapp.com/)** is one regulated name people shop alongside high-street banks—always confirm the firm on the **[FCA register](https://register.fca.org.uk/s/)**.
+These products combine **bank feeds, rules, categories, and reminders**—where most people actually get traction. **[YNAB](https://www.ynab.com/)** and **[Goodbudget](https://goodbudget.com/)** suit envelope-style habits; **[Undebt.it](https://undebt.it/)** is a free planner for snowball and avalanche maths. Apple-first households often look at **Copilot Money** (search the official site). UK readers comparing investing apps as well may browse **Moneybox** on its own domain—then confirm the firm on the FCA register before transferring money.
 
 ## 4. UK banks and “always-on” spending analytics
 
-Major UK digital banks have shipped **spending breakdowns, merchant memory, and savings nudges** for years; the January story is less “brand-new bank” and more “incremental improvements to the app you already have.” Worth comparing if your legacy bank still feels blind:
-
-- **[Monzo](https://monzo.com/)** — spending categories, pots, and savings features (read their current product pages and fees).
-- **[Starling Bank](https://www.starlingbank.com/)** — business and personal accounts with real-time notifications and insights.
-- **[Revolut](https://www.revolut.com/)** — broad feature set across currencies and plans; read fee tiers carefully before upgrading.
-
-None of these replace advice on insolvency or priority debts—use **[GOV.UK’s free debt advice list](https://www.gov.uk/debt-advice)** when bills are unmanageable.
+Monzo, Starling, and Revolut are the usual names people compare when a legacy app still feels blind—open each bank’s **official** app store listing or .com / .co.uk site for current fees. None of these replace advice on insolvency or priority debts; **[GOV.UK’s free debt advice list](https://www.gov.uk/debt-advice)** is the right place when bills are unmanageable.
 
 ## 5. Open banking and “plumbing” you rarely see
 
-Many apps above connect through **open banking** providers. You might never visit their homepages, but they matter for reliability and consent screens:
+Many apps connect through open banking infrastructure you never brand—if an unknown app asks for broad permissions with vague wording, pause and find out **which regulated firm** sits behind it.
 
-- **[TrueLayer](https://truelayer.com/)** — UK-headquartered open banking / payments infrastructure used behind many consumer apps (developer- and partner-facing documentation explains how linking works).
+## 6. Regulators and plain-English help
 
-If an unknown app asks for broad permissions with vague branding, pause and verify who the regulated entity is.
-
-## 6. Regulators are louder about scams than about “cool demos”
-
-Before you chase a trending tool, read how UK regulators frame **risk and fraud**:
-
-- **[FCA — Protect yourself from scams](https://www.fca.org.uk/consumers/protect-yourself-from-scams)** — practical warning signs and what to do if you are targeted.
-- **[FCA — Investments](https://www.fca.org.uk/investments)** — context before you move serious money into unfamiliar apps.
-- **[MoneyHelper](https://www.moneyhelper.org.uk/)** — government-backed guidance on money, pensions, and debt in the UK.
+Before you chase a trending tool, skim how UK authorities talk about **risk and fraud** on the **[FCA’s consumer pages](https://www.fca.org.uk/consumers)**—that hub links onward to scams, investments, and firm checks without you chasing ten separate bookmarks.
 
 ## Checklist: six questions before you adopt anything “new”
 
 1. **What problem does it solve in one sentence?** If the vendor cannot say, skip.
-2. **Who is regulated, and for what?** Search the firm on the **[FCA register](https://register.fca.org.uk/s/)** when investments or debt advice are involved.
+2. **Who is regulated, and for what?** When money is serious, verify the firm on the FCA register (linked from the FCA consumer hub above).
 3. **Where does your data live, and for how long?** Read privacy, retention, and “train on my data” toggles.
 4. **Is the “AI” rules-based or generative?** Both can be useful; you should know which you are trusting.
 5. **What happens if the answer is wrong?** For tax, benefits, or court deadlines, you still own the outcome.
@@ -294,7 +259,7 @@ Before you chase a trending tool, read how UK regulators frame **risk and fraud*
 
 ## Bottom line
 
-You deserve tools that respect your attention, not ones that farm it. Pair **[ChatGPT](https://chatgpt.com/)**, **[Claude](https://claude.ai/)**, or **[Gemini](https://gemini.google.com/)** with one budgeting rhythm you can keep, and keep **[FCA](https://www.fca.org.uk/consumers)** and **[MoneyHelper](https://www.moneyhelper.org.uk/)** in the loop when stakes get high. The “latest” finance AI is not the loudest launch—it is whatever you will reopen next Sunday when motivation is average and the weather is grey.`,
+You deserve tools that respect your attention, not ones that farm it. Pair one assistant and one budgeting habit you can keep, and let the **FCA consumer hub** be your anchor when stakes get high. The “latest” finance AI is whatever you will reopen next Sunday when motivation is average—not whichever demo had the loudest soundtrack.`,
 
   "case-study-ai-debt-payoff-50000": `# Paying down a large balance: a composite teaching example (not a verified news story)
 
@@ -316,11 +281,11 @@ Next, pick **one** tool you will actually open weekly: **[YNAB](https://www.ynab
 
 ## Phase 4: automation that protects you from yourself
 
-Automate **minimums** so you never pay a late fee by accident. Put the “extra” payment on the target account on payday if your bank allows—before discretionary spending sees the money. Alerts from **[Monzo](https://monzo.com/)**, **[Starling](https://www.starlingbank.com/)**, or your legacy bank’s app are legitimate “AI” in the sense that rules fire when you drift.
+Automate **minimums** so you never pay a late fee by accident. Put the “extra” payment on the target account on payday if your bank allows—before discretionary spending sees the money. Spending alerts from Monzo, Starling, or your legacy bank’s app are legitimate “AI” in the sense that rules fire when you drift.
 
 ## Phase 5: when the maths says you cannot close the gap
 
-If income minus essentials cannot meet contractual payments, spreadsheets will not fix structural shortfall—that is when **[StepChange](https://www.stepchange.org/)**, **National Debtline**, or **Citizens Advice** (all listed on **[GOV.UK](https://www.gov.uk/debt-advice)**) earn their keep. They map breathing space, formal plans, and insolvency routes without a commission on your fear.
+If income minus essentials cannot meet contractual payments, spreadsheets will not fix structural shortfall—that is when **StepChange**, **National Debtline**, or **Citizens Advice** (all listed on **[GOV.UK](https://www.gov.uk/debt-advice)**) earn their keep. They map breathing space, formal plans, and insolvency routes without a commission on your fear.
 
 ## What this example is not claiming
 
@@ -379,9 +344,7 @@ You did not arrive here in a single day, and you will not unwind it in a single 
 
 ## If money is affecting your health or safety
 
-- **[Get free debt advice on GOV.UK](https://www.gov.uk/debt-advice)** lists National Debtline, Citizens Advice, StepChange, PayPlan, and more.
-- **[Samaritans](https://www.samaritans.org/)** — **116 123** (UK & ROI), free and confidential.
-- **[NHS 111](https://www.nhs.uk/nhs-services/urgent-and-emergency-care-services/nhs-111/)** when you need urgent care advice or mental health signposting.`,
+**Debt and money:** [Get free debt advice on GOV.UK](https://www.gov.uk/debt-advice) lists National Debtline, Citizens Advice, StepChange, PayPlan, and more. **Crisis:** **[Samaritans](https://www.samaritans.org/)** on **116 123** (UK & ROI). **Urgent health signposting:** **[NHS 111](https://www.nhs.uk/nhs-services/urgent-and-emergency-care-services/nhs-111/)**.`,
 
   "loan-repayment-stress-seven-approaches": `# Loan Repayments Feel Relentless. Here Is How to Take the Pressure Down
 
@@ -431,7 +394,7 @@ Do not improvise alone. Bring paperwork to a free advice appointment, ask what p
 
 Relentless repayments respond better to structure and communication than to shame. You deserve a plan you can explain in a sentence and follow on a tough week — not one that only works on your best day.
 
-For free, regulated debt help, start from **[GOV.UK’s debt advice hub](https://www.gov.uk/debt-advice)**. **[MoneyHelper](https://www.moneyhelper.org.uk/en/money-troubles/dealing-with-debt)** also publishes plain-English guides on talking to creditors and prioritising payments.`,
+For free, regulated debt help, start from **[GOV.UK’s debt advice hub](https://www.gov.uk/debt-advice)**—it links onward to MoneyHelper and other vetted guidance when you need it.`,
 
   "debt-collector-call-uk-verify-rights": `# A Debt Collector Has Called. Pause, Verify, Then Decide Your Next Move
 
@@ -479,11 +442,10 @@ A call is a signal to move from rumour to paperwork: who is asking, for what, un
 
 ## Further reading (UK)
 
-- **Check whether a firm is authorised:** [Financial Services Register](https://register.fca.org.uk/s/) (Financial Conduct Authority).
-- **FCA expectations for how firms treat people in arrears** are set out in the handbook (for example the **CONC** sourcebook — start from the FCA site and search “CONC arrears” if you want the technical rules).
-- **Joint regulator messaging** on debt collection standards (including treating customers fairly) was summarised in an FCA news story: [FCA joins other regulators to warn firms on debt collection](https://www.fca.org.uk/news/news-stories/fca-joins-other-regulators-warn-firms-debt-collection).
-- **Citizens Advice — debt and money:** [https://www.citizensadvice.org.uk/debt-and-money/](https://www.citizensadvice.org.uk/debt-and-money/)
-- **US — CFPB debt collection portal:** [https://www.consumerfinance.gov/consumer-tools/debt-collection/](https://www.consumerfinance.gov/consumer-tools/debt-collection/)`,
+- **[Financial Services Register](https://register.fca.org.uk/s/)** — check whether a firm is authorised before you pay or share data.
+- **[Citizens Advice — debt and money](https://www.citizensadvice.org.uk/debt-and-money/)** — practical guides alongside what collectors can and cannot do.
+
+**US readers:** the Consumer Financial Protection Bureau’s debt collection pages are the clearest official starting point (search “CFPB debt collection”).`,
 
   "iva-uk-explained-trade-offs": `# IVAs in Plain English: Who They Suit, What They Cost You, and What to Ask First
 
@@ -544,7 +506,7 @@ UK charities such as **StepChange**, **National Debtline**, and **Citizens Advic
 
 An IVA can be the right structured exit for some people. It can also be an expensive detour if your problem was actually short-term cashflow or if a simpler plan would have worked. Slow down, compare alternatives, and let paperwork — not slogans — lead the decision.
 
-Start with the **[GOV.UK overview of IVAs](https://www.gov.uk/options-for-dealing-with-your-debts/individual-voluntary-arrangements)** for responsibilities, fees at a high level, and public record implications, then search **“IVA protocol”** on [GOV.UK](https://www.gov.uk/) for current protocol PDFs and key-facts sheets. **[National Debtline](https://nationaldebtline.org/)** and **[Citizens Advice on debt solutions](https://www.citizensadvice.org.uk/debt-and-money/debt-solutions/)** are better next clicks than a sales landing page.`,
+Start with the **[GOV.UK overview of IVAs](https://www.gov.uk/options-for-dealing-with-your-debts/individual-voluntary-arrangements)** for responsibilities, fees at a high level, and public record implications, then search **“IVA protocol”** on gov.uk for current protocol PDFs. **National Debtline** and **Citizens Advice** (both signposted from that GOV.UK debt advice hub) are better next steps than a sales landing page.`,
 
   "multiple-loans-strategy-consolidation-pitfalls": `# Several Loans at Once? A Straightforward Way to Tidy the Mess
 
@@ -598,7 +560,7 @@ Debt is not only a maths problem; it is an attention problem. Reducing the numbe
 
 You do not need a perfect month to begin. You need a truthful list, a single chosen focus account, and a help contact saved for when the plan wobbles. Small clarity beats heroic denial — every time.
 
-**UK:** [Get free debt advice on GOV.UK](https://www.gov.uk/debt-advice) lists National Debtline, Citizens Advice, StepChange, PayPlan, and related services. The **[FCA consumer hub](https://www.fca.org.uk/consumers)** explains how regulated firms should treat you if you fall behind.`,
+**UK:** [Get free debt advice on GOV.UK](https://www.gov.uk/debt-advice) lists National Debtline, Citizens Advice, StepChange, PayPlan, and related services—and explains how to spot regulated help.`,
 
   "debt-advice-scams-red-flags-uk": `# Debt Advice Scams: 9 Red Flags Before You Share a Pound
 
@@ -653,7 +615,7 @@ Gather records: invoices, emails, call notes, and bank transactions. Then contac
 
 Good debt help should make your options clearer, not foggier. If a service increases pressure, hides costs, or blocks comparison, step back. Reliable support does not need fear-based selling.
 
-Before you pay anyone for “debt help,” check the **[Financial Services Register](https://register.fca.org.uk/s/)** and read the **[FCA’s guide to protecting yourself from scams](https://www.fca.org.uk/consumers/protect-yourself-from-scams)**. If you think you have been defrauded, **[Action Fraud](https://www.actionfraud.police.uk/)** is the UK national reporting centre.`,
+Before you pay anyone for “debt help,” check the **[Financial Services Register](https://register.fca.org.uk/s/)** and read the **[FCA’s scam guidance](https://www.fca.org.uk/consumers/protect-yourself-from-scams)**. If you think you have been defrauded, use **[Action Fraud](https://www.actionfraud.police.uk/)**.`,
 
   "build-debt-payoff-plan-in-60-minutes": `# How to Build a Debt Payoff Plan in 60 Minutes (Without Fancy Tools)
 

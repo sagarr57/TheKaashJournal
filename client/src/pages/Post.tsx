@@ -46,12 +46,12 @@ function MarkdownCode({
   );
 }
 
-/** Off-site links open in a new tab so readers keep the article; internal /… and mailto stay default. */
+/** Open article links in a new tab so readers keep this page (internal /… paths too). Same tab only for fragments and tel/mailto/sms. */
 function markdownLinkOpensNewTab(href: string | undefined): boolean {
-  if (!href || href.startsWith("#")) return false;
-  if (href.startsWith("/")) return false;
+  if (!href || href === "#") return false;
+  if (href.startsWith("#")) return false;
   if (/^(mailto|tel|sms):/i.test(href)) return false;
-  return /^https?:\/\//i.test(href) || href.startsWith("//");
+  return true;
 }
 
 export default function Post() {
