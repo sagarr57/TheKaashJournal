@@ -8,11 +8,12 @@
     "dev:api": "node server.js",
     "dev:all": "concurrently \"npm run dev:api\" \"npm run dev\"",
     "dev:vercel": "vercel dev",
-    "build": "vite build",
+    "build": "pnpm generate:sitemap && vite build",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
-    "seed:blogs:sql": "pnpm tsx scripts/generate-blog-seed-sql.ts"
+    "seed:blogs:sql": "pnpm tsx scripts/generate-blog-seed-sql.ts",
+    "generate:sitemap": "pnpm tsx scripts/generate-sitemap.ts"
   },
   "dependencies": {
     "@google-analytics/data": "^5.2.1",
