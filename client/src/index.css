@@ -223,12 +223,12 @@
   }
 
   .prose h2 {
-    @apply text-3xl font-bold uppercase mt-8 mb-4;
+    @apply text-2xl sm:text-3xl font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900;
     font-family: 'Oswald', sans-serif;
   }
 
   .prose h3 {
-    @apply text-2xl font-bold uppercase mt-6 mb-3;
+    @apply text-xl sm:text-2xl font-bold normal-case tracking-tight mt-8 mb-3 text-gray-900;
     font-family: 'Oswald', sans-serif;
   }
 

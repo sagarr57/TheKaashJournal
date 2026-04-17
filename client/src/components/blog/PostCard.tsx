@@ -38,7 +38,7 @@ export function PostCard({ post }: PostCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="font-oswald text-lg md:text-xl font-bold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="font-oswald text-lg md:text-xl font-bold normal-case tracking-tight mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
           <a href={`/blog/${post.slug}`}>{post.title}</a>
         </h3>
 

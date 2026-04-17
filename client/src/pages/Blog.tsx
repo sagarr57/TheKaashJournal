@@ -67,8 +67,8 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Blog & Articles"
-        description="Discover insights on AI, fintech, debt management, and real-time financial solutions."
+        title="The Kaash Journal — articles on money, AI, and debt"
+        description="Long-form articles on AI, fintech, debt, and personal finance—with sources linked in the text."
         url="/blog"
       />
       <Header />
@@ -77,11 +77,11 @@ export default function Blog() {
         {/* Page Header */}
         <section className="bg-gray-50 border-b border-gray-200 py-10 md:py-12">
           <div className="container">
-            <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-3 md:mb-4">
-              Blog & <span className="text-blue-600">Articles</span>
+            <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold normal-case tracking-tight mb-3 md:mb-4 text-gray-900">
+              The <span className="text-blue-600">Kaash Journal</span>
             </h1>
-            <p className="text-gray-600 text-base md:text-lg">
-              Discover insights on AI, fintech, debt management, and real-time financial solutions.
+            <p className="text-gray-600 text-base md:text-lg max-w-2xl leading-relaxed">
+              Long-form guides on AI, fintech, debt, and money psychology—sources linked in the copy so you can verify claims yourself.
             </p>
           </div>
         </section>

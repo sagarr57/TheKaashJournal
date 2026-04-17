@@ -1,3 +1,7 @@
+// Blog posts: Supabase `blog_posts` is the primary source when the table returns rows.
+// `postIndex` + `postContentBySlug` are the static fallback (offline, tests, first paint).
+// Repo edits to `postsContent.ts` apply live only after you upsert SQL (see `documentation/SUPABASE_BLOG_SEED.sql`)
+// or publish via admin — otherwise production keeps the previous DB content.
 import { postIndex } from "@/lib/postsIndex";
 import { postContentBySlug } from "@/lib/postsContent";
 import { supabase } from "@/lib/supabase";

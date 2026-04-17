@@ -6,10 +6,10 @@ export type PostIndexItem = Omit<BlogPost, "content"> & { content?: never };
 export const postIndex: PostIndexItem[] = [
   {
     id: "1",
-    title: "Top 5 AI Tools for Debt Management in 2026",
+    title: "Five apps that help you tackle debt and budgeting (2026)",
     slug: "top-5-ai-tools-debt-management-2026",
     excerpt:
-      "Discover the most powerful AI-driven tools that can help you automate debt tracking, optimize payoff strategies, and take control of your finances.",
+      "A straight comparison of YNAB, Rocket Money, Undebt.it, Copilot, and Goodbudget—what each is for, with links so you can check pricing and coverage yourself.",
     author: "Team Kaash",
     date: "2026-01-15",
     category: "Debt Management",
@@ -19,8 +19,8 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/hero-abstract.jpg",
     seo: {
       metaDescription:
-        "Explore the top 5 AI tools transforming debt management in 2026. Automate tracking, optimize payoff strategies, and achieve financial freedom faster.",
-      keywords: ["AI debt management", "debt payoff tools", "AI finance", "debt consolidation"],
+        "Hands-on look at YNAB, Rocket Money, Undebt.it, Copilot, and Goodbudget for budgeting and debt—with links to each product and UK debt help resources.",
+      keywords: ["YNAB", "Undebt.it", "Rocket Money", "debt payoff tools", "budgeting apps UK"],
     },
   },
   {
@@ -139,21 +139,21 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "8",
-    title: "Case Study: How AI Helped a Family Pay Off $50,000 in Debt",
+    title: "Paying down a large balance: a composite teaching example (not a verified news story)",
     slug: "case-study-ai-debt-payoff-50000",
     excerpt:
-      "A real-world success story of how AI-powered debt management tools helped a family eliminate $50,000 in debt in just 18 months.",
+      "A composite teaching example — not a verified family story — showing how budgeting apps and automation can support a disciplined payoff plan.",
     author: "Team Kaash",
     date: "2026-01-18",
     category: "Case Studies",
-    tags: ["Case Study", "Debt", "AI", "Success Story"],
+    tags: ["Debt", "AI", "Budgeting", "Teaching example"],
     readingTime: 10,
     featured: true,
     image: "/images/data-visualization-bg.jpg",
     seo: {
       metaDescription:
-        "Real success story: How AI helped a family pay off $50,000 in debt in 18 months. Learn the strategies and tools that made it possible.",
-      keywords: ["debt payoff success", "AI debt management", "debt free story", "financial success"],
+        "Composite teaching example: how software can support visibility and consistency when paying down debt — not a verified news report. Includes UK help signposting.",
+      keywords: ["debt payoff plan", "AI budgeting tools", "debt management UK", "financial habits"],
     },
   },
   {

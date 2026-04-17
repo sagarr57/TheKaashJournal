@@ -11,66 +11,57 @@ export function PostMeta({ post }: PostMetaProps) {
   const categoryColor = getCategoryColor(post.category);
 
   return (
-    <div className="space-y-6">
-      {/* Category */}
+    <div className="space-y-5">
       <div>
         <Badge
           variant="outline"
-          className="border-2 rounded-full text-sm font-bold px-4 py-1"
+          className="border rounded-full text-xs font-semibold px-3 py-0.5 tracking-wide"
           style={{ borderColor: categoryColor, color: categoryColor }}
         >
           {post.category}
         </Badge>
       </div>
 
-      {/* Meta Information */}
-      <div className="space-y-4 py-6 border-y border-gray-200">
-        <div className="flex items-center gap-3 text-gray-600">
-          <User className="w-5 h-5 flex-shrink-0" />
-          <div>
-            <p className="text-xs uppercase font-bold text-gray-500">Author</p>
-            <p className="font-semibold">{post.author}</p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 text-gray-600">
-          <Calendar className="w-5 h-5 flex-shrink-0" />
-          <div>
-            <p className="text-xs uppercase font-bold text-gray-500">Published</p>
-            <p className="font-semibold">{formatDate(post.date)}</p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 text-gray-600">
-          <Clock className="w-5 h-5 flex-shrink-0" />
-          <div>
-            <p className="text-xs uppercase font-bold text-gray-500">Reading Time</p>
-            <p className="font-semibold">{post.readingTime} minutes</p>
-          </div>
-        </div>
-
+      <p className="text-sm text-gray-600 flex flex-wrap items-center gap-x-1 gap-y-1">
+        <span className="inline-flex items-center gap-1.5">
+          <User className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden />
+          <span className="text-gray-900 font-medium">{post.author}</span>
+        </span>
+        <span className="text-gray-300" aria-hidden>
+          ·
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden />
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+        </span>
+        <span className="text-gray-300" aria-hidden>
+          ·
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <Clock className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden />
+          <span>{post.readingTime} min read</span>
+        </span>
         {post.updated && (
-          <div className="flex items-center gap-3 text-gray-600">
-            <Calendar className="w-5 h-5 flex-shrink-0" />
-            <div>
-              <p className="text-xs uppercase font-bold text-gray-500">Last Updated</p>
-              <p className="font-semibold">{formatDate(post.updated)}</p>
-            </div>
-          </div>
+          <>
+            <span className="text-gray-300 hidden sm:inline" aria-hidden>
+              ·
+            </span>
+            <span className="w-full sm:w-auto text-xs text-gray-500 sm:inline">
+              Updated {formatDate(post.updated)}
+            </span>
+          </>
         )}
-      </div>
+      </p>
 
-      {/* Tags */}
       <div>
-        <p className="text-xs uppercase font-bold text-gray-500 mb-3">Tags</p>
         <div className="flex flex-wrap gap-2">
           {post.tags.map((tag) => (
             <a
               key={tag}
               href={`/tag/${tag.toLowerCase()}`}
-              className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm transition-colors"
+              className="inline-block text-xs text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200/80 px-2.5 py-1 rounded-md transition-colors"
             >
-              #{tag}
+              {tag}
             </a>
           ))}
         </div>

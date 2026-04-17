@@ -127,21 +127,21 @@ export default function Post() {
         {/* Article Container */}
         <div className="container py-10 md:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
-            {/* Main Content */}
-            <article className="lg:col-span-3">
+            {/* Main Content — narrow measure reads like a real article */}
+            <article className="lg:col-span-3 max-w-3xl">
               {/* Title */}
-              <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-6 md:mb-8 leading-tight">
+              <h1 className="font-oswald text-3xl sm:text-4xl lg:text-[2.5rem] font-bold normal-case tracking-tight mb-6 md:mb-8 leading-tight text-gray-900">
                 {postMeta.title}
               </h1>
 
               {/* Meta Information */}
-              <div className="mb-8 md:mb-12 pb-8 md:pb-12 border-b border-gray-200">
+              <div className="mb-8 md:mb-10 pb-8 md:pb-10 border-b border-gray-200">
                 <PostMeta post={postMeta as any} />
               </div>
 
               {/* Content */}
               <div className="prose prose-base md:prose-lg max-w-none mb-12 md:mb-16">
-                <div className="space-y-5 md:space-y-6 text-gray-700 leading-relaxed markdown-content">
+                <div className="text-[1.0625rem] md:text-lg text-gray-800 leading-[1.75] markdown-content article-body">
                   {contentError && (
                     <div className="border border-red-200 bg-red-50 text-red-800 p-4 rounded">
                       Failed to load article content. Please refresh and try again.
@@ -154,40 +154,46 @@ export default function Post() {
                     remarkPlugins={[remarkGfm]}
                     components={{
                       h1: ({ node, ...props }) => (
-                        <h1 className="font-oswald text-4xl font-bold uppercase mt-8 mb-4 text-black" {...props} />
+                        <h1 className="font-oswald text-3xl font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900" {...props} />
                       ),
                       h2: ({ node, ...props }) => (
-                        <h2 className="font-oswald text-3xl font-bold uppercase mt-8 mb-4 text-black" {...props} />
+                        <h2 className="font-oswald text-2xl sm:text-[1.65rem] font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900" {...props} />
                       ),
                       h3: ({ node, ...props }) => (
-                        <h3 className="font-oswald text-2xl font-bold uppercase mt-6 mb-3 text-black" {...props} />
+                        <h3 className="font-oswald text-xl sm:text-2xl font-bold normal-case tracking-tight mt-8 mb-3 text-gray-900" {...props} />
                       ),
                       h4: ({ node, ...props }) => (
-                        <h4 className="font-oswald text-xl font-bold uppercase mt-4 mb-2 text-black" {...props} />
+                        <h4 className="font-oswald text-lg font-bold normal-case tracking-tight mt-6 mb-2 text-gray-900" {...props} />
                       ),
                       p: ({ node, ...props }) => (
-                        <p className="mb-4 leading-relaxed" {...props} />
+                        <p className="mb-5 leading-[1.75]" {...props} />
                       ),
                       ul: ({ node, ...props }) => (
-                        <ul className="list-disc list-inside mb-4 space-y-2 ml-4" {...props} />
+                        <ul className="list-disc pl-6 mb-5 space-y-2 marker:text-gray-400" {...props} />
                       ),
                       ol: ({ node, ...props }) => (
-                        <ol className="list-decimal list-inside mb-4 space-y-2 ml-4" {...props} />
+                        <ol className="list-decimal pl-6 mb-5 space-y-2 marker:text-gray-400" {...props} />
                       ),
                       li: ({ node, ...props }) => (
-                        <li className="mb-1" {...props} />
+                        <li className="pl-1 leading-[1.7]" {...props} />
                       ),
                       strong: ({ node, ...props }) => (
-                        <strong className="font-bold text-black" {...props} />
+                        <strong className="font-semibold text-gray-900" {...props} />
                       ),
                       em: ({ node, ...props }) => (
-                        <em className="italic" {...props} />
+                        <em className="italic text-gray-800" {...props} />
                       ),
                       a: ({ node, ...props }) => (
-                        <a className="text-blue-600 hover:text-blue-700 underline" {...props} />
+                        <a
+                          className="text-blue-700 hover:text-blue-800 underline underline-offset-[3px] decoration-blue-700/40 hover:decoration-blue-800"
+                          {...props}
+                        />
                       ),
                       blockquote: ({ node, ...props }) => (
-                        <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4 text-gray-600" {...props} />
+                        <blockquote
+                          className="border-l-[3px] border-blue-600 bg-slate-50 py-4 px-5 my-6 rounded-r-md text-gray-700 not-italic text-[0.98em] leading-relaxed"
+                          {...props}
+                        />
                       ),
                       code: (props: any) => <MarkdownCode {...props} />,
                       table: ({ node, ...props }) => (
