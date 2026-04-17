@@ -145,66 +145,81 @@ Worth bookmarking: the FCA **[Investments](https://www.fca.org.uk/investments)**
   '3',
   'ChatGPT for Personal Finance: A Complete Beginner''s Guide',
   'chatgpt-personal-finance-guide',
-  'Learn how to use ChatGPT and other AI language models to improve your personal finance management, budgeting, and financial planning.',
+  'Concrete prompts for budgeting (UK and US examples), using ChatGPT for investing vocabulary—not stock tips—and when to switch to FCA-regulated human advice.',
   '# ChatGPT for Personal Finance: A Complete Beginner''s Guide
 
 > *Never paste card numbers, full account details, or one-time codes into any chat. For pensions, investments, or serious debt, talk to a qualified human. OpenAI’s [usage policies](https://openai.com/policies/usage-policies) spell out what belongs in [ChatGPT](https://chatgpt.com/) and what does not.*
 
 ChatGPT and similar assistants can help you **brainstorm, explain terminology, and draft a first-pass budget outline** — but treat outputs as starting points you verify yourself.
 
-## Getting Started
+## 1. Budgeting: turn messy numbers into a conversation
 
-### 1. Budget Analysis
+Paste **rounded** figures only—never full account numbers or one-time codes. Ask for a category breakdown you can sanity-check against your bank app.
 
-Ask ChatGPT to analyze your spending patterns and suggest optimization strategies. You can provide your monthly expenses and income, and it will help identify areas for improvement.
+**Example (UK):** "After tax I take home £2,400/month. Rent £850, council tax £140, utilities £120, groceries £320, travel £90, phone £35, subscriptions £45, minimums on two cards £180 total. What are three realistic ways to find £100/month extra for debt without cutting food below safe levels?"
 
-**Example prompt:** "I make $5,000/month and spend $1,200 on rent, $400 on groceries, $300 on utilities, $200 on transportation, and $500 on entertainment. How can I optimize my budget to save more?"
+**Example (US):** "I make $5,000/month and spend $1,200 on rent, $400 on groceries, $300 on utilities, $200 on transportation, and $500 on entertainment. Where are the least painful cuts if I need $200 more for savings?"
 
-### 2. Investment Research
+Ask follow-ups: "What if my rent goes up 5% next year?" or "Rewrite that as a weekly cash plan." Treat the reply as a **draft** you adjust with real receipts.
 
-Get explanations of complex financial concepts in simple terms.
+## 2. Investing vocabulary—not personalised recommendations
 
-### 3. Debt Payoff Strategies
+Use [ChatGPT](https://chatgpt.com/) to unpack terms such as **OCF**, **accumulation vs income** funds, or why **volatility** matters—then verify anything consequential against the fund factsheet or the **[FCA investments hub](https://www.fca.org.uk/investments)**. A good prompt pattern: "Explain [concept] in plain English, then list three questions I should ask a regulated adviser before acting."
 
-ChatGPT can help you evaluate different debt payoff methods like the debt snowball vs. debt avalanche methods.
+Do **not** ask it to pick stocks or time the market as if it had a crystal ball; ask for **frameworks** (risk tolerance, time horizon, diversification) you still own.
 
-## Best Practices
+## 3. Debt: compare strategies, then talk to humans for the real decision
 
-- Be specific with numbers and goals
-- Ask follow-up questions
-- Cross-reference important decisions with official sources
+ChatGPT can outline **snowball vs avalanche**, how minimum payments drag on high APR, or how to phrase an email to a lender—but formal debt solutions (IVAs, DMPs, breathing space) need **[free advice from GOV.UK’s list](https://www.gov.uk/debt-advice)** or charities such as **[StepChange](https://www.stepchange.org/)**.
+
+**Example prompt:** "Here are my balances and APRs: [list]. Which order minimises interest if I can put an extra £150/month only toward one account at a time? Show the trade-off vs snowball order."
+
+## Habits that keep you safe
+
+- **Round or approximate** inputs; redact employer names or account identifiers if you are worried about oversharing.
+- **Ask for assumptions** the model made, then correct them in a second message.
+- **Export** anything useful to your own notes so you are not re-pasting the same data later.
 
 ## Bottom line
 
-[ChatGPT](https://chatgpt.com/) is useful for drafts and explanations; it is not a substitute for advice where the law says you need a professional. UK readers can keep the [FCA consumer hub](https://www.fca.org.uk/consumers) open in another tab when you research products.',
+[ChatGPT](https://chatgpt.com/) is a strong **study partner** for money vocabulary and rough plans; it is not a substitute for regulated advice where the law requires a human. UK readers should keep **[FCA consumer hub](https://www.fca.org.uk/consumers)** and **[MoneyHelper](https://www.moneyhelper.org.uk/)** open when you move from chat to real products.',
   'Team Kaash',
   '2026-01-10',
   NULL,
   'How-To Guides',
   ARRAY['ChatGPT', 'AI', 'Personal Finance', 'Budgeting']::text[],
-  7,
+  9,
   TRUE,
   '/images/icon-ai.png',
-  'Master ChatGPT for personal finance. Learn practical strategies for budgeting, debt payoff, and financial planning with AI assistance.',
+  'Use ChatGPT safely for budgets, debt strategy sketches, and learning investing terms—with UK prompts, GOV.UK debt signposting, and FCA/MoneyHelper links.',
   ARRAY['ChatGPT finance', 'AI budgeting', 'personal finance AI', 'ChatGPT money']::text[]
 ),
 (
   '4',
   'The Rise of AI-Powered Fintech Startups: What You Need to Know',
   'ai-fintech-startups-2026',
-  'Explore the explosive growth of AI-powered fintech companies and what their success means for the future of finance.',
+  'How AI shows up in lending, wealth apps, fraud detection, and support—and what to verify before you trust a startup with your money.',
   '# The Rise of AI-Powered Fintech Startups: What You Need to Know
 
 > *Industry snapshot, not a tip sheet—always read a product’s fees, terms, and regulator before you sign up.*
 
 The fintech industry continues to adopt machine learning for faster decisions, cheaper distribution, and better fraud screening. In practice, the question is usually: *does this product reduce fees, increase transparency, or create new risks you actually understand?*
 
-## Key Areas of Innovation
+## Lending: faster decisions, same old credit questions
 
-- Lending
-- Wealth management
-- Fraud detection
-- Customer service
+Many lenders use models to triage applications, detect anomalies, or price risk at speed. That can shorten waits for decisions—but **eligibility, APR, and total repayable** still depend on your profile and the firm’s underwriting rules. Treat any “AI approved you in seconds” headline as marketing until you have the contract terms in writing. UK readers comparing credit should still cross-check costs and rights on **[MoneyHelper](https://www.moneyhelper.org.uk/)** alongside lender sites.
+
+## Wealth and investing: personalisation without a human IFA
+
+Robo-style journeys (questionnaires, model portfolios, automatic rebalancing) have been mainstream for years; newer layers add **natural-language interfaces** or “coach” messaging. Helpful when they explain fees and risk clearly—risky when they blur the line between **information** and **regulated advice**. If you invest in the UK, bookmark the **[FCA investments hub](https://www.fca.org.uk/investments)** and verify any firm on the **[FCA register](https://register.fca.org.uk/s/)**.
+
+## Fraud detection: where machine learning quietly earns its keep
+
+Banks and card networks have long used rules engines; modern stacks add **behavioural signals**—unusual device, velocity of logins, merchant category spikes—to block transactions before you notice. You rarely “see” this AI; you see fewer fraudulent charges and occasional false declines. That is the realistic consumer-facing story more often than a glossy new app icon.
+
+## Customer service: chatbots that escalate properly
+
+Front-line chat can now draft answers from knowledge bases, summarise long threads, and route you to a human with context preserved—when implemented well. When implemented poorly, you get loops and rage-tweets. For money products, the quality bar should be higher: clear escalation paths, accessible complaints data, and transparent pricing.
 
 ## Conclusion
 
@@ -216,17 +231,17 @@ Curious how regulation keeps pace? The FCA explains its **[Innovation](https://w
   NULL,
   'Fintech Trends',
   ARRAY['Fintech', 'AI', 'Startups', 'Investment']::text[],
-  9,
+  10,
   FALSE,
   '/images/icon-finance.png',
-  'Discover the explosive growth of AI-powered fintech startups and what it means for the future of finance and investment opportunities.',
+  'AI in fintech: underwriting speed, robo journeys, invisible fraud controls, and chat support—with FCA register and MoneyHelper signposts for UK readers.',
   ARRAY['AI fintech', 'fintech startups', 'fintech innovation', 'AI finance companies']::text[]
 ),
 (
   '5',
   'Automating Your Budget with AI: Step-by-Step Tutorial',
   'automate-budget-ai-tutorial',
-  'A practical guide to setting up automated budgeting with AI tools. Save time and make smarter financial decisions.',
+  'Five steps: pick an app after Mint, connect safely via UK open banking, slim categories, weekly reviews, and month-end exports—plus YNAB, Goodbudget, Undebt.it.',
   '# Automating Your Budget with AI: Step-by-Step Tutorial
 
 > *Before you link a bank, read each app’s privacy policy, open-banking permissions, and cancellation terms for your country.*
@@ -239,113 +254,217 @@ Automated budgeting is one of the quickest ways to improve your financial health
 
 Look for apps that support your banks, export data, and explain how they classify transactions. Use free trials, then pick one and stay with it for a quarter.
 
-## Step 2: Connect Your Bank Accounts
+## Step 2: Connect accounts through proper consent screens
 
-Most tools require secure access for real-time transaction tracking. Use strong passwords, enable two-factor authentication, and revoke access if you stop using a service.
+Most budgeting apps use **open banking** (read-only feeds) or card linking. In the UK, regulated providers should send you through your bank’s own login and consent flow—if something asks for your full card number and PIN inside a random web form, stop. Use strong passwords, turn on **two-factor authentication**, and revoke access in your bank’s “connected apps” list if you uninstall a tool. The **[Open Banking Implementation Entity](https://www.openbanking.org.uk/)** explains how consent works at a high level.
 
-## Step 3: Set categories you will actually maintain
+## Step 3: Start with five categories, not fifty
 
-Start with a small set of categories (housing, transport, food, subscriptions) and refine monthly. Over-detailed categories usually collapse after a few weeks.
+Housing, utilities, food, transport, subscriptions—add “debt payments” if you are in payoff mode. Refine on the **first of each month** when you already have one month of data; over-detailed trees usually collapse by week three.
+
+## Step 4: One weekly ten-minute review
+
+Same weekday, same mug of tea: categorise anything uncategorised, check upcoming bills, move spare cash to savings or an extra debt payment in your plan. Automation handles the feed; **you** still own the decision.
+
+## Step 5: Month-end snapshot
+
+Export a CSV or screenshot your “spent vs planned” summary. That archive proves progress when motivation dips, and it helps if you later speak to a mortgage adviser or debt charity who wants a paper trail.
 
 ## Conclusion
 
-Start small, be consistent, and let automation reduce the mental tax of remembering every due date.',
+Pick one app, connect honestly, review weekly, archive monthly. That rhythm is what turns “AI budgeting” from a buzzword into a habit you can defend in a sentence.',
   'Team Kaash',
   '2026-01-05',
   NULL,
   'How-To Guides',
   ARRAY['Budgeting', 'Automation', 'AI', 'Personal Finance']::text[],
-  6,
+  8,
   FALSE,
   '/images/icon-marketing.png',
-  'Learn how to automate your budget with AI tools. Step-by-step guide to save time and make smarter financial decisions.',
+  'Automated budgeting tutorial: Mint’s closure, YNAB/Goodbudget/Undebt.it, UK open banking consent, weekly review habit, and CSV snapshots.',
   ARRAY['automated budgeting', 'AI budget', 'budget automation', 'smart budgeting']::text[]
 ),
 (
   '6',
   'Comparing AI Robo-Advisors: Which One is Best for You?',
   'ai-robo-advisors-comparison',
-  'Compare the top AI-powered robo-advisors and find the perfect fit for your investment goals and budget.',
+  'What robo-advisors actually do, how to compare fees and ISAs, when chat features help, and UK platforms to research—Moneybox, Vanguard, interactive investor—plus the FCA register.',
   '# Comparing AI Robo-Advisors: Which One is Best for You?
 
 > *This is a comparison framework, not a league table. Always read fees, fund line-up, tax wrappers, and FCA permissions on the provider’s own site.*
 
-AI robo-advisors have democratized investment management. The best choice depends on your situation, but most beginners do well with low-fee, easy-to-use platforms.
+“Robo-advisor” usually means: you answer a risk questionnaire, the platform assigns a **model portfolio** (often low-cost index funds), and software handles **rebalancing** and **dividend reinvestment** on a schedule. Some apps add chat-style interfaces or “nudges”—useful when transparent, noisy when they push trading you do not need.
 
 ## What to compare first
 
-- **Total cost:** management fee plus fund OCF, not headline “free” marketing.
-- **Portfolio design:** passive vs active tilt, and whether you understand the asset mix.
-- **Cash handling:** default cash allocations can drag long-term returns if you do not invest promptly.
+- **Total cost:** platform fee **plus** each fund’s **OCF** (ongoing charge). A low headline fee with expensive underlying funds is still expensive.
+- **Portfolio design:** mostly passive global equity/bond split vs tilt to themes or active sleeves—know which you are buying.
+- **Cash handling:** high default cash weights can drag long-term returns if cash is not intentionally part of your plan.
+- **Tax wrappers:** in the UK, can you hold a **Stocks & Shares ISA**, **Lifetime ISA**, **Junior ISA**, or only a general account? Fees inside an ISA still matter.
 
-## Where to start digging in
+## The risk questionnaire is the product
 
-UK readers often open **[Moneybox](https://www.moneyboxapp.com/)** or **[Vanguard Investor UK](https://www.vanguardinvestor.co.uk/)** in two browser tabs and compare costs, minimums, and ISA handling side by side—then confirm the firm on the **[FCA register](https://register.fca.org.uk/s/)** before funding an account.',
+If the app steers everyone to the same aggressive mix after three generic questions, treat that as a red flag. Good journeys explain **why** a portfolio matches your stated time horizon and loss tolerance—and show you the **worst historical drawdowns** as education, not small print.
+
+## When “AI” helps vs when it is wallpaper
+
+Helpful: clearer fee disclosure, natural-language search across fund docs, reminders to use your ISA allowance before tax-year end. Unhelpful: gamified badges that reward frequent trading. Match the feature list to **your** weakness (forgetfulness vs over-trading).
+
+## Where to start digging in (UK examples)
+
+Many readers line up **[Moneybox](https://www.moneyboxapp.com/)**, **[Vanguard Investor UK](https://www.vanguardinvestor.co.uk/)**, and **[interactive investor](https://www.ii.co.uk/)** in separate tabs: compare minimums, dealing fees, ISA charges, and fund line-ups—then confirm each firm on the **[FCA register](https://register.fca.org.uk/s/)** before you fund anything.
+
+## When a robo might not be enough
+
+Complex self-employment tax planning, pension annual allowance issues, or deciding between pension vs ISA vs mortgage overpayment often need a **human financial planner** or accountant. Robos excel at **execution** of a simple long-term plan, not bespoke tax law.
+
+## Bottom line
+
+Pick the robo whose **defaults, fees, and honesty about risk** match how you behave when markets fall—not the one with the slickest demo video. Slow comparison beats fast signup.',
   'Team Kaash',
   '2026-01-02',
   NULL,
   'How-To Guides',
   ARRAY['Robo-Advisors', 'Investment', 'AI', 'Comparison']::text[],
-  8,
+  10,
   FALSE,
   '/images/hero-abstract.jpg',
-  'Compare the best AI robo-advisors. Find the perfect platform for your investment goals with our detailed comparison and recommendations.',
+  'Robo-advisor comparison framework: costs, portfolios, cash drag, ISAs, risk questionnaires, UK platform links, and when you need a human adviser—not hype.',
   ARRAY['robo-advisor comparison', 'best robo-advisors', 'AI investment', 'automated investing']::text[]
 ),
 (
   '7',
   'Latest AI Finance Tools: What''s New in January 2026',
   'latest-ai-finance-tools-january-2026',
-  'Stay ahead of the curve with the newest AI-powered finance tools launching this month. Discover innovations that can transform your financial management.',
+  'A January 2026 snapshot: ChatGPT, Claude, Gemini, Copilot, real budgeting apps, UK bank analytics, open banking—and how to tell signal from social hype.',
   '# Latest AI Finance Tools: What''s New in January 2026
 
-> *We skip unverified “launches” here—if a tool is only trending on socials, confirm what it actually ships on the company website.*
+> *This is a **landscape** piece: real categories and products you can open today, with official links. It is **not** a list of unverified “drops” from social media—always confirm features and pricing on each vendor’s site before you rely on anything for tax, debt, or investments.*
 
-The AI finance tool landscape is evolving rapidly. Instead of a hype list, use a simple checklist when you evaluate a new release.
+January is when marketing volume spikes: “new AI finance stack” threads, demo videos, and wait-lists. Under the noise, the useful shift is usually quieter—**copilots inside software you already pay for**, clearer bank-side categorisation, and regulators repeating the same warnings about scams and unregulated crypto apps. Below is what is worth your attention in early 2026, with links so you can verify details yourself.
 
-## What to look for in “new” launches
+## 1. General-purpose assistants (your research layer)
 
-- Clear explanation of what model is doing (rules vs generative text).
-- Data retention and deletion policies.
-- Whether outputs are informational only, especially for tax and debt.
+Large language models are not bank tellers, but they are decent at **explaining terms**, drafting a budget outline from numbers *you* choose to share, and stress-testing a plan in plain English—if you treat every answer as a draft to verify.
 
-## Conclusion
+- **[ChatGPT](https://chatgpt.com/)** (OpenAI) — widely used for explanations and structured prompts; read **[OpenAI’s usage policies](https://openai.com/policies/usage-policies)** before you paste anything sensitive.
+- **[Claude](https://claude.ai/)** (Anthropic) — alternative assistant with its own safety and data rules; check **[Anthropic’s consumer terms](https://www.anthropic.com/legal/consumer-terms)** on their site.
+- **[Gemini](https://gemini.google.com/)** (Google) — integrated with Google accounts in supported regions; review Google’s account and AI disclosures for your country.
 
-Stay informed, try tools during free trials, and find what works best for your financial situation. If you want a familiar assistant to stress-test ideas, **[ChatGPT](https://chatgpt.com/)** is the obvious starting point; if you are allocating real money in the UK, pair that with the **[FCA’s investing hub](https://www.fca.org.uk/investments)** so you know how protection and risk are framed in regulation, not marketing.',
+Use these tools for **education and rehearsal**, not for “execute this trade” or “tell me if I should enter an IVA” without a human adviser.
+
+## 2. Copilots inside Microsoft and Google workspaces
+
+A lot of “new AI finance” at work is really **spreadsheet and email assistance**: summarising long threads, suggesting formulas, or turning a table into a chart. That matters for personal finance when your truth still lives in CSV exports from the bank.
+
+- **[Microsoft Copilot](https://www.microsoft.com/microsoft-copilot)** — positioned across Windows, Microsoft 365 apps, and Edge; Excel-heavy users should read what Copilot can and cannot see in *your* tenant or home subscription.
+- **Google Workspace and Gemini** — Google bundles Gemini into Workspace and consumer accounts where available; see **[Gemini help](https://support.google.com/gemini)** for country availability and which apps can access Drive before you upload statements.
+
+If you already pay for an office suite, turning these features on is often cheaper than buying a separate “AI finance OS” you have never heard of.
+
+## 3. Dedicated budgeting and debt apps (rules plus automation)
+
+These products are not magic, but they combine **bank feeds, rules, categories, and reminders**—which is where most people actually get traction.
+
+- **[YNAB](https://www.ynab.com/)** — strict “give every dollar a job” style budgeting; strong for people who will engage weekly.
+- **[Goodbudget](https://goodbudget.com/)** — digital envelope budgeting with a gentler learning curve than some competitors.
+- **[Undebt.it](https://undebt.it/)** — free calculators for snowball, avalanche, and custom payoff orders when you already have balances and APRs.
+- **[Copilot](https://www.copilot.money/)** — polished tracking for many Apple-first households; confirm bank support in your country on their site.
+
+If you are in the UK and comparing **investing** apps as well as budgeting, **[Moneybox](https://www.moneyboxapp.com/)** is one regulated name people shop alongside high-street banks—always confirm the firm on the **[FCA register](https://register.fca.org.uk/s/)**.
+
+## 4. UK banks and “always-on” spending analytics
+
+Major UK digital banks have shipped **spending breakdowns, merchant memory, and savings nudges** for years; the January story is less “brand-new bank” and more “incremental improvements to the app you already have.” Worth comparing if your legacy bank still feels blind:
+
+- **[Monzo](https://monzo.com/)** — spending categories, pots, and savings features (read their current product pages and fees).
+- **[Starling Bank](https://www.starlingbank.com/)** — business and personal accounts with real-time notifications and insights.
+- **[Revolut](https://www.revolut.com/)** — broad feature set across currencies and plans; read fee tiers carefully before upgrading.
+
+None of these replace advice on insolvency or priority debts—use **[GOV.UK’s free debt advice list](https://www.gov.uk/debt-advice)** when bills are unmanageable.
+
+## 5. Open banking and “plumbing” you rarely see
+
+Many apps above connect through **open banking** providers. You might never visit their homepages, but they matter for reliability and consent screens:
+
+- **[TrueLayer](https://truelayer.com/)** — UK-headquartered open banking / payments infrastructure used behind many consumer apps (developer- and partner-facing documentation explains how linking works).
+
+If an unknown app asks for broad permissions with vague branding, pause and verify who the regulated entity is.
+
+## 6. Regulators are louder about scams than about “cool demos”
+
+Before you chase a trending tool, read how UK regulators frame **risk and fraud**:
+
+- **[FCA — Protect yourself from scams](https://www.fca.org.uk/consumers/protect-yourself-from-scams)** — practical warning signs and what to do if you are targeted.
+- **[FCA — Investments](https://www.fca.org.uk/investments)** — context before you move serious money into unfamiliar apps.
+- **[MoneyHelper](https://www.moneyhelper.org.uk/)** — government-backed guidance on money, pensions, and debt in the UK.
+
+## Checklist: six questions before you adopt anything “new”
+
+1. **What problem does it solve in one sentence?** If the vendor cannot say, skip.
+2. **Who is regulated, and for what?** Search the firm on the **[FCA register](https://register.fca.org.uk/s/)** when investments or debt advice are involved.
+3. **Where does your data live, and for how long?** Read privacy, retention, and “train on my data” toggles.
+4. **Is the “AI” rules-based or generative?** Both can be useful; you should know which you are trusting.
+5. **What happens if the answer is wrong?** For tax, benefits, or court deadlines, you still own the outcome.
+6. **Can you export or leave?** CSV export and account deletion matter more than launch hype.
+
+## Bottom line
+
+January rewards patience: use **[ChatGPT](https://chatgpt.com/)**, **[Claude](https://claude.ai/)**, or **[Gemini](https://gemini.google.com/)** to learn faster, pair them with a budgeting app that fits your behaviour, and let **[FCA](https://www.fca.org.uk/consumers)** and **[MoneyHelper](https://www.moneyhelper.org.uk/)** anchor anything that touches investments or formal debt solutions. The “latest” tool is whichever one you will actually open every Sunday—not whichever one had the loudest launch video this week.',
   'Team Kaash',
   '2026-01-20',
   NULL,
   'AI Tools & Updates',
   ARRAY['AI Tools', 'Finance', 'Updates', 'Technology']::text[],
-  7,
+  11,
   TRUE,
   '/images/icon-ai.png',
-  'Discover the latest AI finance tools launching in January 2026. Stay ahead with cutting-edge innovations in financial technology.',
+  'Early-2026 AI finance landscape: assistants, Microsoft/Google copilots, YNAB, Goodbudget, Undebt.it, UK neobanks, TrueLayer, FCA scam guidance—with official links.',
   ARRAY['AI finance tools', 'financial technology', 'AI updates', 'fintech 2026']::text[]
 ),
 (
   '8',
   'Paying down a large balance: a composite teaching example (not a verified news story)',
   'case-study-ai-debt-payoff-50000',
-  'A composite teaching example — not a verified family story — showing how budgeting apps and automation can support a disciplined payoff plan.',
+  'A fictional-but-realistic path: full debt list, one weekly budgeting habit, avalanche vs snowball, automated minimums, and when to call free UK advisers—not a verified household story.',
   '# Paying down a large balance: a composite teaching example (not a verified news story)
 
 > *The URL still says “case study” for history, but this is a **composite teaching example**, not journalism about a named household. Your timeline depends on income, rates, fees, and discipline. Stuck? Use [GOV.UK’s free debt advice list](https://www.gov.uk/debt-advice).*
 
-Many families use budgeting apps, automated categorisation, and payment reminders to stay consistent while paying down balances. The pattern below is common: visibility first, automation second, then steady extra payments toward the most expensive line.
+Imagine a household with several high-interest lines plus a car loan: not unusual, not shameful, and painfully easy to avoid looking at. The pattern below is **made up for teaching**, but the sequence is one debt advisers see often: **stop the leak**, **see the whole board**, **pick one attack line**, **automate the boring parts**, then **adjust monthly** when life changes.
 
-## Key Takeaway
+## Phase 1: stop pretending the minimum payment is a plan
 
-You don''t have to figure it out alone — tools can add structure — but the sustainable part is usually a simple plan you repeat every month, adjusted when life changes. **[StepChange](https://www.stepchange.org/)** and the services listed on **[GOV.UK](https://www.gov.uk/debt-advice)** can help when the numbers stop making sense on your own.',
+Minimums on revolving debt can stretch for years. The first win is not heroic—it is **honesty**: list every lender, balance, APR, minimum, and due date in one place. A spreadsheet, a note, or **[Undebt.it](https://undebt.it/)** all work. Until the list exists, anxiety fills the gaps with worst-case guesses.
+
+## Phase 2: one “source of truth” for cashflow
+
+Next, pick **one** tool you will actually open weekly: **[YNAB](https://www.ynab.com/)**, **[Goodbudget](https://goodbudget.com/)**, or even a simple bank feed plus calendar reminders. The goal is not a perfect category tree on day one; it is knowing, after rent and groceries, what is *realistically* left to throw at the target debt.
+
+## Phase 3: choose avalanche or snowball—and ignore the flame wars
+
+**Avalanche** (highest APR first) usually saves the most interest. **Snowball** (smallest balance first) can win on morale and cashflow if you need early wins. Composite households often blend: avalanche on toxic cards, snowball on tiny nuisances. The mistake is switching strategy every time a blog disagrees.
+
+## Phase 4: automation that protects you from yourself
+
+Automate **minimums** so you never pay a late fee by accident. Put the “extra” payment on the target account on payday if your bank allows—before discretionary spending sees the money. Alerts from **[Monzo](https://monzo.com/)**, **[Starling](https://www.starlingbank.com/)**, or your legacy bank’s app are legitimate “AI” in the sense that rules fire when you drift.
+
+## Phase 5: when the maths says you cannot close the gap
+
+If income minus essentials cannot meet contractual payments, spreadsheets will not fix structural shortfall—that is when **[StepChange](https://www.stepchange.org/)**, **National Debtline**, or **Citizens Advice** (all listed on **[GOV.UK](https://www.gov.uk/debt-advice)**) earn their keep. They map breathing space, formal plans, and insolvency routes without a commission on your fear.
+
+## What this example is not claiming
+
+No app erases debt. No assistant replaces a licensed insolvency practitioner. The “composite” label matters: **do not compare your month two to someone else’s highlight reel.** Compare your month two to your month one—and keep the help numbers saved for the month the plan wobbles.',
   'Team Kaash',
   '2026-01-18',
   NULL,
   'Case Studies',
   ARRAY['Debt', 'AI', 'Budgeting', 'Teaching example']::text[],
-  10,
+  12,
   TRUE,
   '/images/data-visualization-bg.jpg',
-  'Composite teaching example: how software can support visibility and consistency when paying down debt — not a verified news report. Includes UK help signposting.',
+  'Composite teaching example: phases from honest inventory through budgeting apps, avalanche vs snowball, automation, and when to use free UK debt advice—not a news story.',
   ARRAY['debt payoff plan', 'AI budgeting tools', 'debt management UK', 'financial habits']::text[]
 ),
 (
