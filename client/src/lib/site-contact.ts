@@ -1,4 +1,4 @@
-const DEFAULT_CONTACT_EMAIL = "hello.kaash@gmail.com";
+const DEFAULT_CONTACT_EMAIL = "kaashjournal@gmail.com";
 
 /** Public inbox on /contact and footer. Override with `VITE_CONTACT_EMAIL` in `.env` or Vercel if needed. */
 export function getContactEmail(): string {
