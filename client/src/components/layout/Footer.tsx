@@ -55,8 +55,8 @@ export function Footer() {
             <h3 className="font-oswald font-bold uppercase text-sm mb-4 text-gray-900">Categories</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
-                <a href="/category/ai-tools-updates" className="hover:text-gray-900 transition-colors">
-                  AI Tools & Updates
+                <a href="/category/ai-and-health" className="hover:text-gray-900 transition-colors">
+                  AI and Health
                 </a>
               </li>
               <li>
@@ -72,11 +72,6 @@ export function Footer() {
               <li>
                 <a href="/category/fintech-trends" className="hover:text-gray-900 transition-colors">
                   Fintech Trends
-                </a>
-              </li>
-              <li>
-                <a href="/category/how-to-guides" className="hover:text-gray-900 transition-colors">
-                  How-To Guides
                 </a>
               </li>
               <li>

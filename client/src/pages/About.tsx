@@ -50,10 +50,10 @@ export default function About() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="font-oswald text-xl font-bold uppercase mb-3 text-blue-600">
-                    AI Tools & Updates
+                    AI and Health
                   </h3>
                   <p className="text-gray-700">
-                    Latest AI tools and platforms transforming the financial industry.
+                    AI developments across wearables, prevention, and practical health intelligence.
                   </p>
                 </div>
                 <div>
@@ -78,14 +78,6 @@ export default function About() {
                   </h3>
                   <p className="text-gray-700">
                     Industry news, analysis, and emerging opportunities.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-oswald text-xl font-bold uppercase mb-3 text-blue-600">
-                    How-To Guides
-                  </h3>
-                  <p className="text-gray-700">
-                    Practical tutorials on using AI for personal finance.
                   </p>
                 </div>
                 <div>
