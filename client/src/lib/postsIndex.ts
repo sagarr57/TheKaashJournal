@@ -289,6 +289,44 @@ export const postIndex: PostIndexItem[] = [
       keywords: ["debt payoff plan", "budget for debt", "repayment strategy", "debt management steps"],
     },
   },
+  {
+    id: "16",
+    title: "Best Emergency Loan Alternatives in 2026: Ranked by Cost and Speed",
+    slug: "best-emergency-loan-alternatives-2026",
+    excerpt:
+      "A practical ranking of emergency cash options by speed, total cost, and repayment risk—plus red flags to avoid before signing any high-cost loan.",
+    author: "Team Kaash",
+    date: "2026-04-21",
+    category: "Debt Management",
+    tags: ["Emergency cash", "Debt", "Borrowing", "Personal finance"],
+    readingTime: 11,
+    featured: false,
+    image: "/images/hero-abstract.jpg",
+    seo: {
+      metaDescription:
+        "Compare emergency loan alternatives in 2026 by cost and speed: savings, earned wage access, credit union loans, payment plans, BNPL, and personal loans.",
+      keywords: ["emergency loan alternatives", "payday loan alternatives", "quick cash options", "debt management"],
+    },
+  },
+  {
+    id: "17",
+    title: "Wall Street in Your Pocket: Can an AI Co-Pilot Beat the Market?",
+    slug: "wall-street-in-your-pocket-ai-copilot-beat-market",
+    excerpt:
+      "AI can speed up research and portfolio checks, but it cannot erase market risk. A practical 2026 guide to using AI investing tools without overpromising returns.",
+    author: "Team Kaash",
+    date: "2026-04-20",
+    category: "Real-Time Finance",
+    tags: ["AI investing", "Risk management", "Portfolio", "Markets"],
+    readingTime: 9,
+    featured: false,
+    image: "/images/data-visualization-bg.jpg",
+    seo: {
+      metaDescription:
+        "Can AI co-pilots beat the market in 2026? Understand where AI helps, where it fails, and how to use a core-plus-satellite approach with risk controls.",
+      keywords: ["AI copilot investing", "beat the market", "algorithmic investing", "portfolio risk"],
+    },
+  },
 ];
 
 export function getPostIndexBySlug(slug: string): PostIndexItem | undefined {
