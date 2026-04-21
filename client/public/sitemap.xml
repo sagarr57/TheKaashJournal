@@ -36,7 +36,7 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.thekaashjournal.com/category/ai-tools-updates</loc>
+    <loc>https://www.thekaashjournal.com/category/ai-and-health</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -52,11 +52,6 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/category/fintech-trends</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.thekaashjournal.com/category/how-to-guides</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -164,6 +159,18 @@
   <url>
     <loc>https://www.thekaashjournal.com/blog/wall-street-in-your-pocket-ai-copilot-beat-market</loc>
     <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.thekaashjournal.com/blog/ai-wearables-predicting-illness-2026</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.thekaashjournal.com/blog/ai-microbiome-precision-nutrition-2026</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

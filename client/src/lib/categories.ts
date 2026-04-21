@@ -3,9 +3,9 @@ import type { Author, Category } from "@/lib/types";
 export const categories: Category[] = [
   {
     id: "1",
-    name: "AI Tools & Updates",
-    slug: "ai-tools-updates",
-    description: "Latest AI tools and updates for finance",
+    name: "AI and Health",
+    slug: "ai-and-health",
+    description: "AI developments in health, wellness, and wearables",
     color: "#0066FF",
   },
   {
@@ -31,13 +31,6 @@ export const categories: Category[] = [
   },
   {
     id: "5",
-    name: "How-To Guides",
-    slug: "how-to-guides",
-    description: "Tutorials on using AI for finance",
-    color: "#5856D6",
-  },
-  {
-    id: "6",
     name: "Case Studies",
     slug: "case-studies",
     description: "Real-world applications and success stories",
