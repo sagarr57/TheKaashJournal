@@ -9,6 +9,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { usePageTracking } from "./hooks/usePageTracking";
 import { useLinkTracking } from "./hooks/useLinkTracking";
 import { CookieConsentBanner } from "./components/CookieConsentBanner";
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals";
+
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+  }
+}
 import {
   COOKIE_CONSENT_EVENT,
   CookieConsentStatus,
@@ -71,6 +78,17 @@ function Router() {
   );
 }
 
+function sendToGTM({ name, value, id }: { name: string; value: number; id: string }) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "web-vitals",
+    event_category: "Web Vitals",
+    event_label: id,
+    event_action: name,
+    value: Math.round(name === "CLS" ? value * 1000 : value),
+  });
+}
+
 function App() {
   const gtmId = import.meta.env.VITE_GTM_ID || "";
   const [consentStatus, setConsentStatus] = useState<CookieConsentStatus | null>(null);
@@ -88,6 +106,16 @@ function App() {
       window.removeEventListener(COOKIE_CONSENT_EVENT, handleConsentUpdate);
     };
   }, []);
+
+  // Report Core Web Vitals to GTM dataLayer once consent is given
+  useEffect(() => {
+    if (consentStatus !== "accepted") return;
+    onCLS(sendToGTM);
+    onFCP(sendToGTM);
+    onINP(sendToGTM);
+    onLCP(sendToGTM);
+    onTTFB(sendToGTM);
+  }, [consentStatus]);
 
   return (
     <ErrorBoundary>

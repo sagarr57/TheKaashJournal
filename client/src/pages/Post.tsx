@@ -14,6 +14,11 @@ import { SocialShare } from "@/components/SocialShare";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
 
+const SITE_URL =
+  typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
+    ? import.meta.env.VITE_SITE_URL
+    : "https://www.thekaashjournal.com";
+
 function MarkdownCode({
   inline,
   className,
@@ -38,7 +43,6 @@ function MarkdownCode({
     );
   }
 
-  // Keep code blocks lightweight: avoid bundling syntax highlighting libraries.
   return (
     <pre className="bg-gray-900 text-gray-100 rounded p-4 my-4 overflow-x-auto text-sm">
       <code>{String(children).replace(/\n$/, "")}</code>
@@ -46,12 +50,72 @@ function MarkdownCode({
   );
 }
 
-/** Open article links in a new tab so readers keep this page (internal /… paths too). Same tab only for fragments and tel/mailto/sms. */
 function markdownLinkOpensNewTab(href: string | undefined): boolean {
   if (!href || href === "#") return false;
   if (href.startsWith("#")) return false;
   if (/^(mailto|tel|sms):/i.test(href)) return false;
   return true;
+}
+
+interface TocItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
+function extractToc(markdown: string): TocItem[] {
+  const lines = markdown.split("\n");
+  const items: TocItem[] = [];
+  for (const line of lines) {
+    const match = /^(#{2,4})\s+(.+)/.exec(line);
+    if (match) {
+      const text = match[2].replace(/[*_`[\]]/g, "").trim();
+      const id = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+      items.push({ id, text, level: match[1].length });
+    }
+  }
+  return items;
+}
+
+function TableOfContents({ items }: { items: TocItem[] }) {
+  if (items.length < 3) return null;
+  return (
+    <nav
+      aria-label="Table of contents"
+      className="my-8 rounded-lg border border-blue-100 bg-blue-50 px-5 py-4"
+    >
+      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-700">
+        In this article
+      </p>
+      <ol className="space-y-1.5 text-sm">
+        {items.map((item) => (
+          <li
+            key={item.id}
+            style={{ paddingLeft: `${(item.level - 2) * 12}px` }}
+          >
+            <a
+              href={`#${item.id}`}
+              className="text-blue-700 hover:text-blue-900 hover:underline"
+            >
+              {item.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
+function slugifyHeading(text: string): string {
+  return text
+    .replace(/[*_`[\]]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
 }
 
 export default function Post() {
@@ -107,6 +171,88 @@ export default function Post() {
     );
   }
 
+  const tocItems = content ? extractToc(content) : [];
+  const postUrl = `${SITE_URL}/blog/${postMeta.slug}`;
+  const postImage = postMeta.image?.startsWith("http")
+    ? postMeta.image
+    : `${SITE_URL}${postMeta.image}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: postMeta.title,
+    description: postMeta.excerpt,
+    image: postImage,
+    url: postUrl,
+    datePublished: new Date(postMeta.date).toISOString(),
+    dateModified: postMeta.updated
+      ? new Date(postMeta.updated).toISOString()
+      : new Date(postMeta.date).toISOString(),
+    author: {
+      "@type": "Person",
+      name: postMeta.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "The Kaash Journal",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/images/Kaash_logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+    inLanguage: "en-GB",
+    ...(postMeta.category ? { articleSection: postMeta.category } : {}),
+    ...(postMeta.tags?.length ? { keywords: postMeta.tags.join(", ") } : {}),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${SITE_URL}/blog`,
+      },
+      ...(postMeta.category
+        ? [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: postMeta.category,
+              item: `${SITE_URL}/category/${postMeta.category
+                .toLowerCase()
+                .replace(/\s+/g, "-")}`,
+            },
+            {
+              "@type": "ListItem",
+              position: 4,
+              name: postMeta.title,
+              item: postUrl,
+            },
+          ]
+        : [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: postMeta.title,
+              item: postUrl,
+            },
+          ]),
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <SEO
@@ -117,8 +263,25 @@ export default function Post() {
         type="article"
         author={postMeta.author}
         publishedTime={new Date(postMeta.date).toISOString()}
+        modifiedTime={
+          postMeta.updated
+            ? new Date(postMeta.updated).toISOString()
+            : undefined
+        }
         tags={postMeta.tags}
+        category={postMeta.category}
       />
+
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       <ReadingProgress />
       <Header />
 
@@ -135,8 +298,28 @@ export default function Post() {
         {/* Article Container */}
         <div className="container py-10 md:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
-            {/* Main Content — narrow measure reads like a real article */}
             <article className="lg:col-span-3 max-w-3xl">
+
+              {/* Breadcrumb nav (visible) */}
+              <nav aria-label="Breadcrumb" className="mb-6 text-sm text-gray-500 flex flex-wrap gap-1 items-center">
+                <a href="/" className="hover:text-blue-700 hover:underline">Home</a>
+                <span aria-hidden="true">/</span>
+                <a href="/blog" className="hover:text-blue-700 hover:underline">Blog</a>
+                {postMeta.category && (
+                  <>
+                    <span aria-hidden="true">/</span>
+                    <a
+                      href={`/category/${postMeta.category.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="hover:text-blue-700 hover:underline"
+                    >
+                      {postMeta.category}
+                    </a>
+                  </>
+                )}
+                <span aria-hidden="true">/</span>
+                <span className="text-gray-700 truncate max-w-[200px]">{postMeta.title}</span>
+              </nav>
+
               {/* Title */}
               <h1 className="font-oswald text-3xl sm:text-4xl lg:text-[2.5rem] font-bold normal-case tracking-tight mb-6 md:mb-8 leading-tight text-gray-900">
                 {postMeta.title}
@@ -146,6 +329,9 @@ export default function Post() {
               <div className="mb-8 md:mb-10 pb-8 md:pb-10 border-b border-gray-200">
                 <PostMeta post={postMeta as any} />
               </div>
+
+              {/* Table of Contents */}
+              {content && <TableOfContents items={tocItems} />}
 
               {/* Content */}
               <div className="prose prose-base md:prose-lg max-w-none mb-12 md:mb-16">
@@ -164,15 +350,45 @@ export default function Post() {
                       h1: ({ node, ...props }) => (
                         <h1 className="font-oswald text-3xl font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900" {...props} />
                       ),
-                      h2: ({ node, ...props }) => (
-                        <h2 className="font-oswald text-2xl sm:text-[1.65rem] font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900" {...props} />
-                      ),
-                      h3: ({ node, ...props }) => (
-                        <h3 className="font-oswald text-xl sm:text-2xl font-bold normal-case tracking-tight mt-8 mb-3 text-gray-900" {...props} />
-                      ),
-                      h4: ({ node, ...props }) => (
-                        <h4 className="font-oswald text-lg font-bold normal-case tracking-tight mt-6 mb-2 text-gray-900" {...props} />
-                      ),
+                      h2: ({ node, children, ...props }) => {
+                        const text = String(children ?? "");
+                        const id = slugifyHeading(text);
+                        return (
+                          <h2
+                            id={id}
+                            className="font-oswald text-2xl sm:text-[1.65rem] font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900"
+                            {...props}
+                          >
+                            {children}
+                          </h2>
+                        );
+                      },
+                      h3: ({ node, children, ...props }) => {
+                        const text = String(children ?? "");
+                        const id = slugifyHeading(text);
+                        return (
+                          <h3
+                            id={id}
+                            className="font-oswald text-xl sm:text-2xl font-bold normal-case tracking-tight mt-8 mb-3 text-gray-900"
+                            {...props}
+                          >
+                            {children}
+                          </h3>
+                        );
+                      },
+                      h4: ({ node, children, ...props }) => {
+                        const text = String(children ?? "");
+                        const id = slugifyHeading(text);
+                        return (
+                          <h4
+                            id={id}
+                            className="font-oswald text-lg font-bold normal-case tracking-tight mt-6 mb-2 text-gray-900"
+                            {...props}
+                          >
+                            {children}
+                          </h4>
+                        );
+                      },
                       p: ({ node, ...props }) => (
                         <p className="mb-5 leading-[1.75]" {...props} />
                       ),

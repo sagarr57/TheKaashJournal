@@ -365,6 +365,113 @@ export const postIndex: PostIndexItem[] = [
       keywords: ["precision nutrition", "AI microbiome", "CGM insights", "personalized diet AI"],
     },
   },
+  {
+    id: "20",
+    title: "The Dawn of the Health Agent: Why 2026 Is the Year of Proactive Wellness Planning",
+    slug: "ai-health-agent-proactive-wellness-2026",
+    excerpt:
+      "AI health agents now merge wearable data, bloodwork, and your calendar to act as 24/7 wellness concierges — shifting from passive tracking to proactive intervention before burnout arrives.",
+    author: "Team Kaash",
+    date: "2026-04-25",
+    category: "AI and Health",
+    tags: ["AI Health", "Wearables", "Longevity", "Digital Health", "Wellness"],
+    readingTime: 10,
+    featured: true,
+    image: "/images/icon-ai.png",
+    seo: {
+      metaDescription:
+        "How agentic AI health coaches in 2026 merge biometric data, bloodwork, and your calendar to deliver proactive wellness planning — before you feel the burnout coming.",
+      keywords: [
+        "AI health agent",
+        "proactive wellness planning",
+        "agentic AI health coach",
+        "personalised longevity",
+        "AI wearables 2026",
+        "digital health coach UK",
+      ],
+    },
+  },
+  {
+    id: "21",
+    title: "The End of Anti-Aging: How AI and Biotech Are Ushering in the Era of Skin Longevity",
+    slug: "ai-skin-longevity-biotech-2026",
+    excerpt:
+      "The beauty industry has retired 'anti-aging' in favour of skin longevity. AI diagnostics and biotech ingredients like senolytics and NAD+ boosters are redefining skincare as cellular health science.",
+    author: "Team Kaash",
+    date: "2026-04-26",
+    category: "AI and Health",
+    tags: ["Skin Longevity", "AI Diagnostics", "Biotech", "Skincare", "Regenerative Beauty"],
+    readingTime: 9,
+    featured: false,
+    image: "/images/icon-ai.png",
+    seo: {
+      metaDescription:
+        "How AI skin diagnostics and biotech ingredients like senolytics and NAD+ boosters are replacing anti-aging with skin longevity — a data-driven approach to cellular health.",
+      keywords: [
+        "skin longevity",
+        "AI skin diagnostics",
+        "senolytics skincare",
+        "NAD+ skincare",
+        "regenerative beauty 2026",
+        "anti-aging replaced",
+        "biological age skin",
+      ],
+    },
+  },
+  {
+    id: "22",
+    title: "The Rise of AI Nutritionists: How Artificial Intelligence Is Changing Diet and Meal Planning",
+    slug: "ai-nutritionist-meal-planning-2026",
+    excerpt:
+      "Manual calorie counting is over. AI nutritionists in 2026 integrate wearables, CGM data, and grocery apps to create fully automated, bio-individual meal plans that evolve with your physiology.",
+    author: "Team Kaash",
+    date: "2026-04-27",
+    category: "AI and Health",
+    tags: ["AI Nutrition", "Meal Planning", "Precision Nutrition", "Digital Health", "CGM"],
+    readingTime: 10,
+    featured: false,
+    image: "/images/icon-finance.png",
+    seo: {
+      metaDescription:
+        "How AI nutritionists in 2026 use wearable data, CGM readings, and microbiome insights to replace manual calorie counting with automated, personalised meal planning.",
+      keywords: [
+        "AI nutritionist",
+        "AI meal planning 2026",
+        "precision nutrition AI",
+        "personalised diet app",
+        "CGM meal planning",
+        "automated nutrition",
+        "bio-individual diet",
+      ],
+    },
+  },
+  {
+    id: "23",
+    title: "The 3 AM Therapist: Is AI the Cure for Our Mental Health Crisis or a Digital Band-Aid?",
+    slug: "ai-mental-health-digital-therapist-2026",
+    excerpt:
+      "Millions are turning to AI chatbots for 24/7 emotional support. But can an algorithm truly empathise? A balanced look at AI therapy's real benefits, ethical risks, and the hybrid model reshaping mental healthcare in 2026.",
+    author: "Team Kaash",
+    date: "2026-04-28",
+    category: "AI and Health",
+    tags: ["Mental Health", "AI Therapy", "Digital Wellbeing", "CBT", "AI Health"],
+    readingTime: 11,
+    featured: true,
+    image: "/images/icon-ai.png",
+    seo: {
+      metaDescription:
+        "AI therapy chatbots offer 24/7 mental health support — but can they replace human therapists? An honest look at the benefits, ethical risks, and the 2026 hybrid model.",
+      keywords: [
+        "AI therapy",
+        "AI mental health chatbot",
+        "digital therapist 2026",
+        "AI counselling",
+        "mental health app UK",
+        "Woebot Wysa AI",
+        "AI CBT therapy",
+      ],
+    },
+  },
 ];
 
 export function getPostIndexBySlug(slug: string): PostIndexItem | undefined {

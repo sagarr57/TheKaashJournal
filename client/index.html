@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 
   <head>
     <meta charset="UTF-8" />
@@ -10,16 +10,50 @@
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5606354728180472"
       crossorigin="anonymous"></script>
-    <title>The Kaash Journal - Blog & Articles</title>    
+    <title>The Kaash Journal - AI & Fintech Insights for UK Audiences</title>
+    <meta name="description" content="The Kaash Journal — expert guides on AI, fintech, debt management and personal finance for UK readers. FCA-aware, jargon-free." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Organisation schema: tells Google who runs this site -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "The Kaash Journal",
+      "url": "https://www.thekaashjournal.com",
+      "logo": "https://www.thekaashjournal.com/images/Kaash_logo.png",
+      "description": "Expert guides on AI, fintech, and debt management for UK audiences.",
+      "areaServed": "GB",
+      "inLanguage": "en-GB",
+      "sameAs": []
+    }
+    </script>
+
+    <!-- WebSite schema: enables Google sitelinks search box -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "The Kaash Journal",
+      "url": "https://www.thekaashjournal.com",
+      "inLanguage": "en-GB",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.thekaashjournal.com/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Analytics can be added here when needed -->
   </body>
 
 </html>
