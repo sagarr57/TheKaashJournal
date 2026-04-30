@@ -6,9 +6,9 @@ export function Footer() {
   const contactEmail = getContactEmail();
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 mt-14 md:mt-20">
-      <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-12">
+    <footer className="bg-gray-50 border-t border-gray-200 mt-8 md:mt-10">
+      <div className="container py-10 md:py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10 mb-8 md:mb-10">
           {/* Brand */}
           <div>
             <div className="flex items-center justify-center md:justify-start mb-4">

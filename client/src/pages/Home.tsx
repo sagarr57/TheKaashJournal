@@ -19,9 +19,9 @@ export default function Home() {
       />
       <Header />
 
-      <main id="main-content">
+      <main id="main-content" className="pt-2 sm:pt-3">
         {/* Hero Section */}
-        <section className="bg-gray-50 border-b border-gray-200 py-12 md:py-16 lg:py-20">
+        <section className="bg-white border-b border-gray-200 py-7 md:py-9 lg:py-10">
           <div className="container max-w-4xl mx-auto text-center">
             {/* Logo - Commented out since we have logo in header */}
             {/*
@@ -31,10 +31,10 @@ export default function Home() {
               className="h-32 md:h-40 lg:h-48 xl:h-56 w-auto object-contain mx-auto mb-0"
             />
             */}
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-7 md:mb-8 leading-relaxed px-1 sm:px-4">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-5 md:mb-6 leading-relaxed px-1 sm:px-4">
               Explore the intersection of artificial intelligence and financial technology. Real-time solutions, debt management strategies, and the latest fintech innovations.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
               <Button
                 asChild
                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 md:px-8 py-3 md:py-6 text-base md:text-lg rounded-none w-full sm:w-auto"
@@ -55,9 +55,9 @@ export default function Home() {
         </section>
 
         {/* Featured Posts */}
-        <section id="featured" className="py-14 md:py-20 bg-gray-50 border-b border-gray-200">
+        <section id="featured" className="py-9 md:py-12 bg-gray-50 border-b border-gray-200">
           <div className="container">
-            <div className="flex items-end justify-between mb-8 md:mb-12">
+            <div className="flex items-end justify-between mb-6 md:mb-8">
               <div>
                 <h2 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-2">
                   Featured <span className="text-blue-600">Posts</span>
@@ -73,13 +73,13 @@ export default function Home() {
             </div>
 
             {featuredPosts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {featuredPosts.map((post) => (
                   <PostCard key={post.id} post={post} />
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
+              <div className="text-center py-8">
                 <p className="text-gray-500">No featured posts available.</p>
               </div>
             )}
@@ -87,9 +87,9 @@ export default function Home() {
         </section>
 
         {/* Recent Posts */}
-        <section className="py-14 md:py-20">
+        <section className="py-9 md:py-12">
           <div className="container">
-            <div className="flex items-end justify-between mb-8 md:mb-12">
+            <div className="flex items-end justify-between mb-6 md:mb-8">
               <div>
                 <h2 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-2">
                   Latest <span className="text-blue-600">Articles</span>
@@ -105,13 +105,13 @@ export default function Home() {
             </div>
 
             {recentPosts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {recentPosts.map((post) => (
                   <PostCard key={post.id} post={post} />
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
+              <div className="text-center py-8">
                 <p className="text-gray-500">No articles available yet.</p>
               </div>
             )}
@@ -119,12 +119,12 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-blue-700 text-white py-12 md:py-16">
+        <section className="bg-blue-700 text-white py-6 md:py-8">
           <div className="container text-center">
-            <h2 className="font-oswald text-2xl sm:text-3xl lg:text-4xl font-bold uppercase mb-4">
+            <h2 className="font-oswald text-2xl sm:text-3xl lg:text-4xl font-bold uppercase mb-3">
               Never Miss an Update
             </h2>
-            <p className="text-base md:text-lg text-blue-50 mb-7 md:mb-8 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-blue-50 mb-5 md:mb-6 max-w-2xl mx-auto">
               Subscribe to our newsletter and get the latest insights delivered to your inbox weekly.
             </p>
             <NewsletterForm

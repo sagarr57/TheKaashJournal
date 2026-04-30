@@ -88,98 +88,95 @@ export function Header() {
   ];
 
   return (
-    <header 
-      className={`sticky top-0 z-50 bg-white border-b border-gray-200 transition-transform duration-300 ease-in-out ${
-        isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+    <header
+      className={`sticky top-3 sm:top-4 z-50 px-3 sm:px-4 lg:px-6 transition-transform duration-300 ease-in-out ${
+        isHeaderVisible ? "translate-y-0" : "-translate-y-full"
       }`}
       role="banner"
     >
       <SkipToContent />
-      {/* Logo Section - Centered */}
-      <div className="container py-3 sm:py-4 md:py-5 relative">
-        {/* Mobile Menu Button - Top Right Corner (Mobile Only) */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden absolute top-3 right-4 sm:top-4"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
+      <div className="mx-auto max-w-6xl rounded-2xl border border-slate-200 bg-white">
+        <div className="relative flex h-14 sm:h-16 items-center justify-center px-3 sm:px-5">
+          <a href="/" className="flex items-center hover:opacity-85 transition-opacity">
+            <img
+              src="/images/Kaash_logo.png"
+              alt="The Kaash Journal"
+              className="h-16 w-auto object-contain"
+            />
+          </a>
 
-        {/* Logo - Centered */}
-        <a href="/" className="flex justify-center items-center hover:opacity-80 transition-opacity">
-          <img 
-            src="/images/kaash_logo1.png" 
-            alt="The Kaash Journal" 
-            className="h-14 sm:h-16 md:h-24 lg:h-28 w-auto object-contain max-w-full"
-          />
-        </a>
-
-        {/* Mobile Navigation - Below Logo */}
-        {isOpen && (
-          <nav className="md:hidden mt-3 pt-3 border-t border-gray-200 space-y-2" role="navigation" aria-label="Mobile navigation">
+          <nav
+            className="hidden md:flex items-center justify-center gap-1 absolute right-3 sm:right-5"
+            role="navigation"
+            aria-label="Main navigation"
+          >
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className={`block py-2.5 text-base font-medium transition-colors ${
+                className={`text-sm font-medium transition-colors px-3 py-2 rounded-lg ${
                   location === item.href
-                    ? "text-black"
-                    : "text-gray-600 hover:text-black"
+                    ? "text-slate-950 bg-slate-100"
+                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/80"
                 }`}
                 aria-current={location === item.href ? "page" : undefined}
               >
                 {item.label}
               </a>
             ))}
-            <button 
+            <button
               onClick={handleSearchClick}
-              className="block py-2.5 text-base font-medium text-gray-600 hover:text-black transition-colors flex items-center gap-2"
+              className="text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-colors p-2 rounded-lg"
               aria-label="Search articles"
               aria-expanded={isSearchOpen}
             >
               <Search className="w-5 h-5" />
+            </button>
+          </nav>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden absolute right-3"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </Button>
+        </div>
+
+        {isOpen && (
+          <nav
+            className="md:hidden border-t border-slate-200/80 px-3 pb-3 pt-2 space-y-1"
+            role="navigation"
+            aria-label="Mobile navigation"
+          >
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                  location === item.href
+                    ? "text-slate-950 bg-slate-100"
+                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/80"
+                }`}
+                aria-current={location === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            ))}
+            <button
+              onClick={handleSearchClick}
+              className="w-full rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-colors flex items-center gap-2"
+              aria-label="Search articles"
+              aria-expanded={isSearchOpen}
+            >
+              <Search className="w-4 h-4" />
               <span>Search</span>
             </button>
           </nav>
         )}
-      </div>
-
-      {/* Navigation Section - Below Logo (Desktop Only) */}
-      <div className="border-t border-gray-200 bg-white hidden md:block">
-        <div className="container py-2.5">
-          <div className="flex items-center justify-center">
-            {/* Desktop Navigation */}
-            <nav className="flex items-center justify-center gap-10" role="navigation" aria-label="Main navigation">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`text-base font-medium transition-colors px-3 py-2 ${
-                    location === item.href
-                      ? "text-black border-b-2 border-black"
-                      : "text-gray-600 hover:text-black"
-                  }`}
-                  aria-current={location === item.href ? "page" : undefined}
-                >
-                  {item.label}
-                </a>
-              ))}
-              {/* Search Option */}
-              <button 
-                onClick={handleSearchClick}
-                className="text-gray-600 hover:text-black transition-colors p-2"
-                aria-label="Search articles"
-                aria-expanded={isSearchOpen}
-              >
-                <Search className="w-6 h-6" />
-              </button>
-            </nav>
-          </div>
-        </div>
       </div>
 
       {/* Search Dialog */}
