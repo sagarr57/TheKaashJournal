@@ -85,7 +85,7 @@ function TableOfContents({ items }: { items: TocItem[] }) {
   return (
     <nav
       aria-label="Table of contents"
-      className="my-8 rounded-lg border border-blue-100 bg-blue-50 px-5 py-4"
+      className="my-5 md:my-6 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3"
     >
       <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-700">
         In this article
@@ -159,9 +159,9 @@ export default function Post() {
     return (
       <div className="min-h-screen bg-white">
         <Header />
-        <main className="container py-20 text-center">
-          <h1 className="font-oswald text-4xl font-bold mb-4">Article Not Found</h1>
-          <p className="text-gray-600 mb-8">The article you're looking for doesn't exist.</p>
+        <main id="main-content" className="container pt-24 sm:pt-28 pb-20 text-center">
+          <h1 className="font-oswald text-2xl sm:text-3xl font-bold mb-3">Article Not Found</h1>
+          <p className="text-gray-600 mb-6 text-sm sm:text-base">The article you're looking for doesn't exist.</p>
           <a href="/blog" className="text-blue-600 font-semibold hover:text-blue-700">
             ← Back to Blog
           </a>
@@ -285,9 +285,9 @@ export default function Post() {
       <ReadingProgress />
       <Header />
 
-      <main id="main-content">
+      <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
         {/* Hero Image */}
-        <div className="w-full h-52 sm:h-64 md:h-80 lg:h-96 overflow-hidden bg-gray-200">
+        <div className="w-full h-44 sm:h-52 md:h-64 lg:h-72 overflow-hidden bg-gray-200">
           <Image
             src={postMeta.image}
             alt={postMeta.title}
@@ -296,12 +296,12 @@ export default function Post() {
         </div>
 
         {/* Article Container */}
-        <div className="container py-10 md:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="container py-6 md:py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
             <article className="lg:col-span-3 max-w-3xl">
 
               {/* Breadcrumb nav (visible) */}
-              <nav aria-label="Breadcrumb" className="mb-6 text-sm text-gray-500 flex flex-wrap gap-1 items-center">
+              <nav aria-label="Breadcrumb" className="mb-4 text-sm text-gray-500 flex flex-wrap gap-1 items-center">
                 <a href="/" className="hover:text-blue-700 hover:underline">Home</a>
                 <span aria-hidden="true">/</span>
                 <a href="/blog" className="hover:text-blue-700 hover:underline">Blog</a>
@@ -321,12 +321,12 @@ export default function Post() {
               </nav>
 
               {/* Title */}
-              <h1 className="font-oswald text-3xl sm:text-4xl lg:text-[2.5rem] font-bold normal-case tracking-tight mb-6 md:mb-8 leading-tight text-gray-900">
+              <h1 className="font-oswald text-2xl sm:text-3xl lg:text-[2rem] font-bold normal-case tracking-tight mb-4 md:mb-5 leading-tight text-gray-900">
                 {postMeta.title}
               </h1>
 
               {/* Meta Information */}
-              <div className="mb-8 md:mb-10 pb-8 md:pb-10 border-b border-gray-200">
+              <div className="mb-5 md:mb-6 pb-5 md:pb-6 border-b border-gray-200">
                 <PostMeta post={postMeta as any} />
               </div>
 
@@ -334,8 +334,8 @@ export default function Post() {
               {content && <TableOfContents items={tocItems} />}
 
               {/* Content */}
-              <div className="prose prose-base md:prose-lg max-w-none mb-12 md:mb-16">
-                <div className="text-[1.0625rem] md:text-lg text-gray-800 leading-[1.75] markdown-content article-body">
+              <div className="prose prose-sm md:prose-base max-w-none mb-8 md:mb-10">
+                <div className="text-[1rem] md:text-[1.0625rem] text-gray-800 leading-[1.7] markdown-content article-body">
                   {contentError && (
                     <div className="border border-red-200 bg-red-50 text-red-800 p-4 rounded">
                       Failed to load article content. Please refresh and try again.
@@ -348,7 +348,7 @@ export default function Post() {
                     remarkPlugins={[remarkGfm]}
                     components={{
                       h1: ({ node, ...props }) => (
-                        <h1 className="font-oswald text-3xl font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900" {...props} />
+                        <h1 className="font-oswald text-2xl font-bold normal-case tracking-tight mt-8 mb-3 text-gray-900" {...props} />
                       ),
                       h2: ({ node, children, ...props }) => {
                         const text = String(children ?? "");
@@ -356,7 +356,7 @@ export default function Post() {
                         return (
                           <h2
                             id={id}
-                            className="font-oswald text-2xl sm:text-[1.65rem] font-bold normal-case tracking-tight mt-10 mb-4 text-gray-900"
+                            className="font-oswald text-xl sm:text-2xl font-bold normal-case tracking-tight mt-8 mb-3 text-gray-900"
                             {...props}
                           >
                             {children}
@@ -369,7 +369,7 @@ export default function Post() {
                         return (
                           <h3
                             id={id}
-                            className="font-oswald text-xl sm:text-2xl font-bold normal-case tracking-tight mt-8 mb-3 text-gray-900"
+                            className="font-oswald text-lg sm:text-xl font-bold normal-case tracking-tight mt-6 mb-2 text-gray-900"
                             {...props}
                           >
                             {children}
@@ -382,7 +382,7 @@ export default function Post() {
                         return (
                           <h4
                             id={id}
-                            className="font-oswald text-lg font-bold normal-case tracking-tight mt-6 mb-2 text-gray-900"
+                            className="font-oswald text-base md:text-lg font-bold normal-case tracking-tight mt-5 mb-1.5 text-gray-900"
                             {...props}
                           >
                             {children}
@@ -390,13 +390,13 @@ export default function Post() {
                         );
                       },
                       p: ({ node, ...props }) => (
-                        <p className="mb-5 leading-[1.75]" {...props} />
+                        <p className="mb-4 leading-[1.7]" {...props} />
                       ),
                       ul: ({ node, ...props }) => (
-                        <ul className="list-disc pl-6 mb-5 space-y-2 marker:text-gray-400" {...props} />
+                        <ul className="list-disc pl-6 mb-4 space-y-1.5 marker:text-gray-400" {...props} />
                       ),
                       ol: ({ node, ...props }) => (
-                        <ol className="list-decimal pl-6 mb-5 space-y-2 marker:text-gray-400" {...props} />
+                        <ol className="list-decimal pl-6 mb-4 space-y-1.5 marker:text-gray-400" {...props} />
                       ),
                       li: ({ node, ...props }) => (
                         <li className="pl-1 leading-[1.7]" {...props} />
@@ -422,7 +422,7 @@ export default function Post() {
                       },
                       blockquote: ({ node, ...props }) => (
                         <blockquote
-                          className="border-l-[3px] border-blue-600 bg-slate-50 py-4 px-5 my-6 rounded-r-md text-gray-700 not-italic text-[0.98em] leading-relaxed"
+                          className="border-l-[3px] border-blue-600 bg-slate-50 py-3 px-4 my-4 rounded-r-md text-gray-700 not-italic text-[0.98em] leading-relaxed"
                           {...props}
                         />
                       ),

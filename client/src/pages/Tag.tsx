@@ -40,9 +40,9 @@ export default function Tag() {
     return (
       <div className="min-h-screen bg-white">
         <Header />
-        <main className="container py-20 text-center">
-          <h1 className="font-oswald text-4xl font-bold mb-4">Tag Not Found</h1>
-          <p className="text-gray-600 mb-8">
+        <main id="main-content" className="container pt-24 sm:pt-28 pb-20 text-center">
+          <h1 className="font-oswald text-2xl sm:text-3xl font-bold mb-3">Tag Not Found</h1>
+          <p className="text-gray-600 mb-6 text-sm sm:text-base">
             The tag you're looking for doesn't exist.
           </p>
           <a href="/blog" className="text-blue-600 font-semibold hover:text-blue-700">
@@ -62,27 +62,27 @@ export default function Tag() {
         url={`/tag/${tagSlug}`}
       />
       <Header />
-      <main id="main-content">
+      <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
         {/* Page Header */}
-        <section className="bg-gray-50 border-b border-gray-200 py-10 md:py-12">
+        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
           <div className="container">
-            <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-3 md:mb-4">
+            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5 md:mb-2">
               #{tagName} <span className="text-blue-600">Articles</span>
             </h1>
-            <p className="text-gray-600 text-base md:text-lg">
+            <p className="text-gray-600 text-sm md:text-base">
               All articles tagged with "{tagName}"
             </p>
           </div>
         </section>
 
         {/* Content */}
-        <div className="container py-10 md:py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="container py-6 md:py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Main Content */}
             <div className="lg:col-span-3">
               {paginatedPosts.length > 0 ? (
                 <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 md:mb-9">
                     {paginatedPosts.map((post) => (
                       <PostCard key={post.id} post={post} />
                     ))}
@@ -90,7 +90,7 @@ export default function Tag() {
 
                   {/* Pagination */}
                   {totalPages > 1 && (
-                    <div className="flex flex-wrap justify-center gap-2 py-8">
+                    <div className="flex flex-wrap justify-center gap-2 py-5">
                       <button
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                         disabled={currentPage === 1}
@@ -126,7 +126,7 @@ export default function Tag() {
                   )}
                 </>
               ) : (
-                <div className="text-center py-12">
+                <div className="text-center py-8">
                   <p className="text-gray-500 text-lg">
                     No articles found with the tag "{tagName}".
                   </p>

@@ -1,4 +1,5 @@
 import { Twitter, Linkedin, Facebook, Link2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 interface SocialShareProps {
@@ -22,15 +23,16 @@ export function SocialShare({ title, url, description }: SocialShareProps) {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(fullUrl);
-      // You could add a toast notification here
+      toast.success("Copied!");
     } catch (err) {
       console.error("Failed to copy:", err);
+      toast.error("Couldn't copy. Copy the link from your browser's address bar.");
     }
   };
 
   return (
-    <div className="border-t border-gray-200 pt-8 mt-8">
-      <h3 className="font-oswald text-xl font-bold uppercase mb-4 text-black">
+    <div className="border-t border-gray-200 pt-5 mt-6">
+      <h3 className="font-oswald text-lg font-bold uppercase mb-3 text-black">
         Share This Article
       </h3>
       <div className="flex flex-wrap gap-3">

@@ -6,47 +6,53 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const featuredPosts = getFeaturedPosts();
   const recentPosts = getRecentPosts(6);
 
+  const heroCtaClass =
+    "box-border h-10 sm:h-11 w-full sm:w-44 md:w-48 justify-center rounded-none text-sm md:text-base font-semibold px-4 md:px-5 border-2";
+
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Home"
-        description="Explore the intersection of artificial intelligence and financial technology. Real-time solutions, debt management strategies, and the latest fintech innovations."
+        title="AI, Health & Fintech — Practical Guides for Everyone"
+        description="In-depth guides on AI, health tech, fintech, and personal finance. Source-linked, jargon-free articles for curious readers everywhere."
+        url="/"
       />
       <Header />
 
-      <main id="main-content" className="pt-2 sm:pt-3">
+      <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
         {/* Hero Section */}
-        <section className="bg-white border-b border-gray-200 py-7 md:py-9 lg:py-10">
+        <section className="bg-white border-b border-gray-200 py-5 md:py-6 lg:py-7">
           <div className="container max-w-4xl mx-auto text-center">
-            {/* Logo - Commented out since we have logo in header */}
-            {/*
-            <img 
-              src="/images/Kaash_logo.png" 
-              alt="The Kaash Journal" 
-              className="h-32 md:h-40 lg:h-48 xl:h-56 w-auto object-contain mx-auto mb-0"
-            />
-            */}
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-5 md:mb-6 leading-relaxed px-1 sm:px-4">
-              Explore the intersection of artificial intelligence and financial technology. Real-time solutions, debt management strategies, and the latest fintech innovations.
+            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-2 md:mb-3 text-gray-900">
+              AI, Health &amp; Fintech — <span className="text-blue-600">Practical Guides for Everyone</span>
+            </h1>
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-4 md:mb-5 leading-relaxed px-1 sm:px-4">
+              Explore AI tools, health tech, debt management, and fintech trends — clear, source-linked articles you can actually use.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center items-stretch sm:items-center">
               <Button
                 asChild
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 md:px-8 py-3 md:py-6 text-base md:text-lg rounded-none w-full sm:w-auto"
+                className={cn(
+                  heroCtaClass,
+                  "border-transparent bg-blue-600 hover:bg-blue-700 text-white shadow-none"
+                )}
               >
                 <a href="/blog">
-                  Explore Articles <ArrowRight className="ml-2 w-5 h-5" />
+                  Explore Articles <ArrowRight className="ml-1.5 w-4 h-4 shrink-0" />
                 </a>
               </Button>
               <Button
                 asChild
                 variant="outline"
-                className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-bold px-6 md:px-8 py-3 md:py-6 text-base md:text-lg rounded-none w-full sm:w-auto"
+                className={cn(
+                  heroCtaClass,
+                  "border-gray-800 bg-transparent text-gray-800 hover:bg-gray-800 hover:text-white shadow-none"
+                )}
               >
                 <a href="#featured">Featured Posts</a>
               </Button>
@@ -55,11 +61,11 @@ export default function Home() {
         </section>
 
         {/* Featured Posts */}
-        <section id="featured" className="py-9 md:py-12 bg-gray-50 border-b border-gray-200">
+        <section id="featured" className="py-6 md:py-7 bg-gray-50 border-b border-gray-200">
           <div className="container">
-            <div className="flex items-end justify-between mb-6 md:mb-8">
+            <div className="flex items-end justify-between mb-4 md:mb-5">
               <div>
-                <h2 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-2">
+                <h2 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5">
                   Featured <span className="text-blue-600">Posts</span>
                 </h2>
                 <p className="text-gray-600">Our most important and timely articles</p>
@@ -79,7 +85,7 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8">
+              <div className="text-center py-6">
                 <p className="text-gray-500">No featured posts available.</p>
               </div>
             )}
@@ -87,11 +93,11 @@ export default function Home() {
         </section>
 
         {/* Recent Posts */}
-        <section className="py-9 md:py-12">
+        <section className="py-6 md:py-7">
           <div className="container">
-            <div className="flex items-end justify-between mb-6 md:mb-8">
+            <div className="flex items-end justify-between mb-4 md:mb-5">
               <div>
-                <h2 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-2">
+                <h2 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5">
                   Latest <span className="text-blue-600">Articles</span>
                 </h2>
                 <p className="text-gray-600">Stay updated with our newest content</p>
@@ -111,7 +117,7 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8">
+              <div className="text-center py-6">
                 <p className="text-gray-500">No articles available yet.</p>
               </div>
             )}
@@ -119,12 +125,12 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-blue-700 text-white py-6 md:py-8">
+        <section className="bg-blue-700 text-white py-5 md:py-7">
           <div className="container text-center">
-            <h2 className="font-oswald text-2xl sm:text-3xl lg:text-4xl font-bold uppercase mb-3">
+            <h2 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-2">
               Never Miss an Update
             </h2>
-            <p className="text-base md:text-lg text-blue-50 mb-5 md:mb-6 max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-blue-50 mb-4 md:mb-5 max-w-2xl mx-auto">
               Subscribe to our newsletter and get the latest insights delivered to your inbox weekly.
             </p>
             <NewsletterForm

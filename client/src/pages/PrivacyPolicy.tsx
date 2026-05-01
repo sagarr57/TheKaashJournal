@@ -7,72 +7,155 @@ export default function PrivacyPolicy() {
     <div className="min-h-screen bg-white">
       <SEO
         title="Privacy Policy"
-        description="Read the privacy policy for The Kaash Journal, including data collection, cookies, analytics, and newsletter usage."
+        description="Read the privacy policy for The Kaash Journal, including data collection, Google AdSense advertising, cookies, analytics, and your rights under UK GDPR."
         url="/privacy-policy"
       />
       <Header />
 
-      <main id="main-content">
-        <section className="bg-gray-50 border-b border-gray-200 py-10 md:py-12">
+      <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
+        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
           <div className="container">
-            <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-3 md:mb-4">
+            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5 md:mb-2">
               Privacy <span className="text-blue-600">Policy</span>
             </h1>
-            <p className="text-gray-600 text-base md:text-lg">
-              Last updated: February 2026
+            <p className="text-gray-600 text-sm md:text-base">
+              Last updated: 1 May 2026
             </p>
           </div>
         </section>
 
-        <section className="container py-10 md:py-12">
-          <div className="max-w-3xl prose prose-base md:prose-lg">
-            <h2>Information We Collect</h2>
+        <section className="container py-6 md:py-8">
+          <div className="max-w-3xl space-y-5 text-gray-700 text-base leading-relaxed">
+
             <p>
-              We may collect personal information you provide directly, such as your email
-              address when subscribing to newsletters. We also collect limited technical and
-              usage data such as device type, browser, pages viewed, and referral source.
+              This Privacy Policy explains how The Kaash Journal ("we", "us", "our") collects, uses, and protects
+              information when you visit <strong>www.thekaashjournal.com</strong>. By using this site, you agree to
+              the practices described below. This policy is governed by UK GDPR and the UK Data Protection Act 2018.
             </p>
 
-            <h2>How We Use Information</h2>
-            <p>We use collected information to:</p>
-            <ul>
-              <li>Deliver content and improve site performance</li>
-              <li>Send newsletters and updates when you opt in</li>
-              <li>Analyze engagement and optimize user experience</li>
-              <li>Maintain security and prevent abuse</li>
-            </ul>
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">1. Information We Collect</h2>
+              <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Email address</strong> — when you subscribe to our newsletter via Brevo.</li>
+                <li><strong>Usage data</strong> — pages visited, time on site, referral source, browser type, and device type, collected via Google Analytics.</li>
+                <li><strong>Cookie data</strong> — set by us and by third-party services listed below.</li>
+              </ul>
+              <p className="mt-3">We do not collect names, payment details, or sensitive personal data unless you voluntarily provide them via our contact form.</p>
+            </div>
 
-            <h2>Cookies and Tracking</h2>
-            <p>
-              We use cookies and similar technologies for analytics, performance, and advertising
-              measurement. You can control cookies through browser settings. See our Cookie Policy
-              for more details.
-            </p>
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">2. How We Use Information</h2>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>To deliver and improve site content and performance</li>
+                <li>To send newsletters and editorial updates when you have opted in</li>
+                <li>To analyse site engagement and optimise user experience</li>
+                <li>To display relevant advertisements via Google AdSense (see Section 4)</li>
+                <li>To maintain security and prevent abuse</li>
+              </ul>
+            </div>
 
-            <h2>Third-Party Services</h2>
-            <p>
-              We may use third-party services for analytics, email delivery, and advertising.
-              These providers process data according to their own privacy policies and applicable
-              law.
-            </p>
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">3. Cookies and Tracking</h2>
+              <p className="mb-3">
+                We use cookies and similar tracking technologies. You can control cookies through your browser settings or via
+                the cookie consent banner shown on your first visit. See our{" "}
+                <a href="/cookie-policy" className="text-blue-600 hover:underline">Cookie Policy</a> for full details.
+              </p>
+              <p>
+                Types of cookies used on this site include: strictly necessary cookies (site function), analytics cookies
+                (Google Analytics), and advertising cookies (Google AdSense).
+              </p>
+            </div>
 
-            <h2>Data Retention</h2>
-            <p>
-              We keep personal data only as long as necessary for the purpose it was collected,
-              unless a longer period is required by law.
-            </p>
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">4. Google AdSense Advertising</h2>
+              <p className="mb-3">
+                This site uses <strong>Google AdSense</strong>, a third-party advertising service operated by Google LLC.
+                Google AdSense uses cookies to serve advertisements based on your prior visits to this and other websites.
+              </p>
+              <ul className="list-disc pl-6 space-y-2 mb-3">
+                <li>Google may use the DoubleClick cookie to serve ads across the web based on your browsing history.</li>
+                <li>Google's use of advertising cookies enables it and its partners to serve ads based on your visits to this site and other sites on the internet.</li>
+                <li>We do not control the cookies set by Google AdSense. Google's data practices are governed by the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Privacy Policy</a>.</li>
+              </ul>
+              <p className="mb-3">
+                <strong>Opt out of personalised advertising:</strong> You can opt out of personalised ads from Google by visiting{" "}
+                <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  Google Ads Settings
+                </a>{" "}
+                or{" "}
+                <a href="https://www.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  aboutads.info
+                </a>.
+              </p>
+              <p>
+                Under UK GDPR, personalised advertising cookies are only activated after you have given consent via our cookie banner.
+              </p>
+            </div>
 
-            <h2>Your Rights</h2>
-            <p>
-              Depending on your location, you may have rights to access, correct, delete, or
-              restrict use of your personal data. Contact us to make a request.
-            </p>
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">5. Other Third-Party Services</h2>
+              <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Google Analytics</strong> — used to measure site traffic and user behaviour. Data is anonymised before transmission where possible. <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Opt out of Google Analytics</a>.</li>
+                <li><strong>Google Tag Manager</strong> — used to manage analytics and marketing tags without code changes.</li>
+                <li><strong>Brevo (formerly Sendinblue)</strong> — used to manage newsletter subscriptions and send email updates. Your email address is stored on Brevo's servers. See the <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Brevo Privacy Policy</a>.</li>
+                <li><strong>Supabase</strong> — used as our backend database for content and analytics. Data is stored in the EU. See the <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Supabase Privacy Policy</a>.</li>
+              </ul>
+            </div>
 
-            <h2>Contact</h2>
-            <p>
-              For privacy-related requests, contact us through the information provided on our
-              About page.
-            </p>
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">6. Data Retention</h2>
+              <p>
+                We retain personal data only as long as necessary for the purpose it was collected, or as required by law.
+                Newsletter subscribers can unsubscribe at any time using the link in any email. Upon unsubscribing, your
+                email address is removed from active mailing lists within 30 days.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">7. Your Rights (UK GDPR)</h2>
+              <p className="mb-3">Under UK GDPR, you have the right to:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Access</strong> — request a copy of the personal data we hold about you</li>
+                <li><strong>Rectification</strong> — request correction of inaccurate data</li>
+                <li><strong>Erasure</strong> — request deletion of your personal data ("right to be forgotten")</li>
+                <li><strong>Restriction</strong> — request we limit how we use your data</li>
+                <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
+                <li><strong>Withdrawal of consent</strong> — withdraw consent for cookies or marketing at any time</li>
+              </ul>
+              <p className="mt-3">
+                To exercise any of these rights, contact us via our <a href="/contact" className="text-blue-600 hover:underline">contact page</a>.
+                You also have the right to lodge a complaint with the{" "}
+                <a href="https://ico.org.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  Information Commissioner's Office (ICO)
+                </a>.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">8. Children's Privacy</h2>
+              <p>
+                This site is not directed at children under the age of 13. We do not knowingly collect personal data from
+                children. If you believe a child has provided us with personal data, contact us and we will delete it promptly.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">9. Changes to This Policy</h2>
+              <p>
+                We may update this Privacy Policy from time to time. Changes will be reflected by an updated date at the
+                top of this page. Continued use of the site after any change constitutes acceptance of the revised policy.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">10. Contact</h2>
+              <p>
+                For privacy-related requests or questions about this policy, contact us via our{" "}
+                <a href="/contact" className="text-blue-600 hover:underline">contact page</a>.
+              </p>
+            </div>
+
           </div>
         </section>
       </main>

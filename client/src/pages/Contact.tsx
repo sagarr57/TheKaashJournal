@@ -16,23 +16,23 @@ export default function Contact() {
       />
       <Header />
 
-      <main id="main-content">
-        <section className="bg-gray-50 border-b border-gray-200 py-12 md:py-16">
+      <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
+        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
           <div className="container">
-            <h1 className="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold uppercase mb-3 md:mb-4">
+            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5 md:mb-2">
               Contact <span className="text-blue-600">Us</span>
             </h1>
-            <p className="text-gray-600 text-base md:text-lg max-w-2xl">
+            <p className="text-gray-600 text-sm md:text-base max-w-2xl">
               Questions, corrections, collaboration ideas, or media requests. We review every message.
             </p>
           </div>
         </section>
 
-        <div className="container py-12 md:py-20">
+        <div className="container py-6 md:py-8">
           <div className="max-w-3xl mx-auto">
-            <section className="border border-gray-200 rounded p-6 md:p-8 mb-8">
-              <h2 className="font-oswald text-2xl font-bold uppercase mb-4">How to Reach Us</h2>
-              <p className="text-gray-700 mb-5">
+            <section className="border border-gray-200 rounded p-5 md:p-6 mb-6">
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-3">How to Reach Us</h2>
+              <p className="text-gray-700 mb-4">
                 Email is the fastest channel for editorial support, factual corrections, and partnership discussions.
               </p>
               <a

@@ -14,26 +14,26 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <main className="container py-20">
+      <main id="main-content" className="container pt-24 sm:pt-28 pb-16">
         <div className="max-w-2xl mx-auto text-center">
-          <h1 className="font-oswald text-6xl lg:text-8xl font-bold uppercase mb-4 text-black">
+          <h1 className="font-oswald text-5xl sm:text-6xl font-bold uppercase mb-3 text-black">
             404
           </h1>
 
-          <h2 className="font-oswald text-3xl lg:text-4xl font-bold uppercase mb-6 text-black">
+          <h2 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-4 text-black">
             Page Not Found
           </h2>
 
-          <p className="text-gray-600 text-lg mb-12 leading-relaxed max-w-md mx-auto">
+          <p className="text-gray-600 text-base mb-8 leading-relaxed max-w-md mx-auto">
             Sorry, the page you are looking for doesn't exist.
             <br />
             It may have been moved or deleted.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-6 text-lg rounded-none"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 text-sm rounded-none"
             >
               <Home className="w-5 h-5 mr-2" />
               Go Home
@@ -41,7 +41,7 @@ export default function NotFound() {
             <Button
               onClick={() => setLocation("/blog")}
               variant="outline"
-              className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-bold px-8 py-6 text-lg rounded-none"
+              className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold px-6 py-3 text-sm rounded-none"
             >
               View Blog
             </Button>

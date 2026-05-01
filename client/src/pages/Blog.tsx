@@ -73,26 +73,26 @@ export default function Blog() {
       />
       <Header />
 
-      <main id="main-content">
+      <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
         {/* Page Header */}
-        <section className="bg-gray-50 border-b border-gray-200 py-10 md:py-12">
+        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
           <div className="container">
-            <h1 className="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold normal-case tracking-tight mb-3 md:mb-4 text-gray-900">
+            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold normal-case tracking-tight mb-1.5 md:mb-2 text-gray-900">
               The <span className="text-blue-600">Kaash Journal</span>
             </h1>
-            <p className="text-gray-600 text-base md:text-lg max-w-2xl leading-relaxed">
+            <p className="text-gray-600 text-sm md:text-base max-w-2xl leading-relaxed">
               Long-form guides on AI, fintech, debt, and money psychology—sources linked in the copy so you can verify claims yourself.
             </p>
           </div>
         </section>
 
         {/* Content */}
-        <div className="container py-10 md:py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="container py-6 md:py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Main Content */}
             <div className="lg:col-span-3">
               {/* Search Bar */}
-              <div className="mb-8">
+              <div className="mb-5 md:mb-6">
                 <div className="relative">
                   <Search className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                   <input
@@ -109,7 +109,7 @@ export default function Blog() {
               </div>
 
               {/* Category Filter */}
-              <div className="mb-8">
+              <div className="mb-5 md:mb-6">
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => handleCategoryChange(null)}
@@ -145,7 +145,7 @@ export default function Blog() {
               {/* Posts Grid */}
               {paginatedPosts.length > 0 ? (
                 <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 md:mb-9">
                     {paginatedPosts.map((post) => (
                       <PostCard key={post.id} post={post} />
                     ))}
@@ -153,7 +153,7 @@ export default function Blog() {
 
                   {/* Pagination */}
                   {totalPages > 1 && (
-                    <div className="flex flex-wrap justify-center gap-2 py-8">
+                    <div className="flex flex-wrap justify-center gap-2 py-5">
                       <button
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                         disabled={currentPage === 1}
@@ -185,8 +185,8 @@ export default function Blog() {
                   )}
                 </>
               ) : (
-                <div className="text-center py-12">
-                  <p className="text-gray-500 text-lg">No articles found. Try adjusting your filters.</p>
+                <div className="text-center py-8">
+                  <p className="text-gray-500 text-base">No articles found. Try adjusting your filters.</p>
                 </div>
               )}
             </div>

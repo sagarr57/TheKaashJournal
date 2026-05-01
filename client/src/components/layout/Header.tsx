@@ -96,7 +96,7 @@ export function Header() {
     >
       <SkipToContent />
       <div className="mx-auto max-w-6xl rounded-2xl border border-slate-200 bg-white">
-        <div className="relative flex h-14 sm:h-16 items-center justify-center px-3 sm:px-5">
+        <div className="relative flex min-h-16 items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2">
           <a href="/" className="flex items-center hover:opacity-85 transition-opacity">
             <img
               src="/images/Kaash_logo.png"

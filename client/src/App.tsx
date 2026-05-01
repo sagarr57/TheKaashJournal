@@ -33,6 +33,7 @@ const Tag = lazy(() => import("./pages/Tag"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
+const EditorialPolicy = lazy(() => import("./pages/EditorialPolicy"));
 const Admin = lazy(() => import("./pages/Admin"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -68,6 +69,7 @@ function Router() {
         <Route path={"/privacy-policy"} component={PrivacyPolicy} />
         <Route path={"/terms-and-conditions"} component={TermsAndConditions} />
         <Route path={"/cookie-policy"} component={CookiePolicy} />
+        <Route path={"/editorial-policy"} component={EditorialPolicy} />
         <Route path={"/admin/login"} component={AdminLogin} />
         <Route path={"/admin"} component={Admin} />
         <Route path={"/404"} component={NotFound} />

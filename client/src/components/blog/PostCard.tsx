@@ -25,9 +25,9 @@ export function PostCard({ post }: PostCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-5 md:p-6">
+      <div className="p-4 md:p-5">
         {/* Category Badge */}
-        <div className="mb-3">
+        <div className="mb-2">
           <Badge
             variant="outline"
             className="border rounded-full text-xs font-semibold"
@@ -38,15 +38,15 @@ export function PostCard({ post }: PostCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="font-oswald text-lg md:text-xl font-bold normal-case tracking-tight mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="font-oswald text-base md:text-lg font-bold normal-case tracking-tight mb-1.5 line-clamp-2 group-hover:text-blue-600 transition-colors">
           <a href={`/blog/${post.slug}`}>{post.title}</a>
         </h3>
 
         {/* Excerpt */}
-        <p className="text-gray-600 text-sm line-clamp-2 mb-4">{post.excerpt}</p>
+        <p className="text-gray-600 text-sm line-clamp-2 mb-3">{post.excerpt}</p>
 
         {/* Meta */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500 mb-3 pb-3 border-b border-gray-200">
           <div className="flex items-center gap-1">
             <User className="w-3 h-3" />
             <span>{post.author}</span>

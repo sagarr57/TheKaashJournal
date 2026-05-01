@@ -1,5 +1,5 @@
 import { getContactEmail } from "@/lib/site-contact";
-import { Mail, Twitter, Linkedin, Github } from "lucide-react";
+import { Mail } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,19 +8,27 @@ export function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200 mt-8 md:mt-10">
       <div className="container py-10 md:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10 mb-8 md:mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-8 md:mb-10">
           {/* Brand */}
           <div>
             <div className="flex items-center justify-center md:justify-start mb-4">
-              <img 
-                src="/images/Kaash_logo.png" 
-                alt="The Kaash Journal" 
+              <img
+                src="/images/Kaash_logo.png"
+                alt="The Kaash Journal"
                 className="h-12 sm:h-14 md:h-16 w-auto object-contain"
               />
             </div>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 text-sm mb-4">
               Exploring the intersection of AI and finance. Real-time solutions, debt management, and fintech trends.
             </p>
+            <a
+              href={contactEmail ? `mailto:${encodeURIComponent(contactEmail)}` : "/contact"}
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors text-sm"
+              aria-label={contactEmail ? `Email ${contactEmail}` : "Contact"}
+            >
+              <Mail className="w-4 h-4" />
+              {contactEmail || "Contact us"}
+            </a>
           </div>
 
           {/* Quick Links */}
@@ -81,29 +89,6 @@ export function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Social & Newsletter */}
-          <div>
-            <h3 className="font-oswald font-bold uppercase text-sm mb-4 text-gray-900">Connect</h3>
-            <div className="flex gap-4 mb-6">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href={contactEmail ? `mailto:${encodeURIComponent(contactEmail)}` : "/contact"}
-                className="text-gray-600 hover:text-gray-900 transition-colors"
-                aria-label={contactEmail ? `Email ${contactEmail}` : "Contact"}
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Bottom Bar */}
@@ -118,6 +103,9 @@ export function Footer() {
             </a>
             <a href="/cookie-policy" className="hover:text-gray-900 transition-colors">
               Cookie Policy
+            </a>
+            <a href="/editorial-policy" className="hover:text-gray-900 transition-colors">
+              Editorial Policy
             </a>
           </div>
         </div>
