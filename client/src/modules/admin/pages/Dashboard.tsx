@@ -67,6 +67,37 @@ type BlogPostRow = {
   updated_at: string;
 };
 
+function PagerBar({ total, page, perPage, onPageChange }: { total: number; page: number; perPage: number; onPageChange: (p: number) => void }) {
+  const totalPages = Math.ceil(total / perPage);
+  if (totalPages <= 1) return null;
+  return (
+    <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+      <p className="text-xs text-gray-500">
+        Showing {(page - 1) * perPage + 1}–{Math.min(page * perPage, total)} of {total}
+      </p>
+      <div className="flex items-center gap-1">
+        <button
+          onClick={() => onPageChange(Math.max(1, page - 1))}
+          disabled={page === 1}
+          className="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+        >← Prev</button>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <button
+            key={p}
+            onClick={() => onPageChange(p)}
+            className={`px-2.5 py-1 text-xs border rounded ${p === page ? "bg-blue-600 text-white border-blue-600" : "border-gray-200 hover:bg-gray-50"}`}
+          >{p}</button>
+        ))}
+        <button
+          onClick={() => onPageChange(Math.min(totalPages, page + 1))}
+          disabled={page === totalPages}
+          className="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+        >Next →</button>
+      </div>
+    </div>
+  );
+}
+
 function AdminDashboard() {
   const [overview, setOverview] = useState<AnalyticsData | null>(null);
   const [visitors, setVisitors] = useState<ChartDataPoint[]>([]);
@@ -86,13 +117,23 @@ function AdminDashboard() {
   const [deleteModal, setDeleteModal] = useState<{ id: string; title: string } | null>(null);
   const [postsView, setPostsView] = useState<"list" | "form">("list");
   const [postsPage, setPostsPage] = useState(1);
+  const [subPage, setSubPage] = useState(1);
+  const [topPostsPage, setTopPostsPage] = useState(1);
+  const [pvPage, setPvPage] = useState(1);
+  const [clicksPage, setClicksPage] = useState(1);
+  const [eventsPage, setEventsPage] = useState(1);
+  const TRACK_PER_PAGE = 20;
+  const SUB_PER_PAGE = 15;
+  const TOP_POSTS_PER_PAGE = 10;
 
   type PageViewRow = { id: string; page_path: string; page_title: string; referrer: string; device_type: string; browser: string; view_time_seconds: number; created_at: string };
   type EventRow = { id: string; event_type: string; event_name: string; page_path: string; element_text: string; created_at: string };
+  type RedirectionRow = { id: string; source_url: string; destination_url: string; link_text: string; link_type: string; is_external: boolean; created_at: string };
   const [trackingPageViews, setTrackingPageViews] = useState<PageViewRow[]>([]);
   const [trackingEvents, setTrackingEvents] = useState<EventRow[]>([]);
+  const [trackingRedirections, setTrackingRedirections] = useState<RedirectionRow[]>([]);
   const [isFetchingTracking, setIsFetchingTracking] = useState(false);
-  const [trackingTab, setTrackingTab] = useState<"pageviews" | "events">("pageviews");
+  const [trackingTab, setTrackingTab] = useState<"pageviews" | "events" | "clicks">("pageviews");
   const POSTS_PER_PAGE = 10;
   const [contentEditorTab, setContentEditorTab] = useState<"write" | "preview">("write");
 
@@ -101,6 +142,11 @@ function AdminDashboard() {
     () => allPosts.slice((postsPage - 1) * POSTS_PER_PAGE, postsPage * POSTS_PER_PAGE),
     [allPosts, postsPage]
   );
+  const pagedSubscribers = useMemo(() => subscribers.slice((subPage - 1) * SUB_PER_PAGE, subPage * SUB_PER_PAGE), [subscribers, subPage]);
+  const pagedTopPosts = useMemo(() => topPosts.slice((topPostsPage - 1) * TOP_POSTS_PER_PAGE, topPostsPage * TOP_POSTS_PER_PAGE), [topPosts, topPostsPage]);
+  const pagedPv = useMemo(() => trackingPageViews.slice((pvPage - 1) * TRACK_PER_PAGE, pvPage * TRACK_PER_PAGE), [trackingPageViews, pvPage]);
+  const pagedClicks = useMemo(() => trackingRedirections.slice((clicksPage - 1) * TRACK_PER_PAGE, clicksPage * TRACK_PER_PAGE), [trackingRedirections, clicksPage]);
+  const pagedEvents = useMemo(() => trackingEvents.slice((eventsPage - 1) * TRACK_PER_PAGE, eventsPage * TRACK_PER_PAGE), [trackingEvents, eventsPage]);
 
   const tocItems = useMemo(() => {
     return postForm.content
@@ -190,17 +236,25 @@ function AdminDashboard() {
   const fetchTrackingData = async () => {
     setIsFetchingTracking(true);
     try {
-      const [pvRes, evRes] = await Promise.all([
-        supabase.from("page_views").select("id,page_path,page_title,referrer,device_type,browser,view_time_seconds,created_at").order("created_at", { ascending: false }).limit(100),
-        supabase.from("events").select("id,event_type,event_name,page_path,element_text,created_at").order("created_at", { ascending: false }).limit(100),
+      const [pvRes, evRes, rdRes] = await Promise.all([
+        supabase.from("page_views").select("id,page_path,page_title,referrer,device_type,browser,view_time_seconds,created_at").order("created_at", { ascending: false }).limit(200),
+        supabase.from("events").select("id,event_type,event_name,page_path,element_text,created_at").order("created_at", { ascending: false }).limit(200),
+        supabase.from("redirections").select("id,source_url,destination_url,link_text,link_type,is_external,created_at").order("created_at", { ascending: false }).limit(200),
       ]);
       setTrackingPageViews((pvRes.data as PageViewRow[]) || []);
       setTrackingEvents((evRes.data as EventRow[]) || []);
+      setTrackingRedirections((rdRes.data as RedirectionRow[]) || []);
+      setPvPage(1); setClicksPage(1); setEventsPage(1);
     } catch (err: any) {
       toast.error("Failed to load tracking data", { description: err?.message });
     } finally {
       setIsFetchingTracking(false);
     }
+  };
+
+  const handleTrackingTabChange = (t: "pageviews" | "clicks" | "events") => {
+    setTrackingTab(t);
+    setPvPage(1); setClicksPage(1); setEventsPage(1);
   };
 
   const handleCancelEdit = () => {
@@ -335,6 +389,7 @@ function AdminDashboard() {
       // Handle top posts
       if (topPostsResult.status === 'fulfilled') {
         setTopPosts(topPostsResult.value);
+        setTopPostsPage(1);
       } else {
         toast.error("Failed to load top posts", {
           description: topPostsResult.reason?.message || "Unable to fetch top posts data",
@@ -352,6 +407,7 @@ function AdminDashboard() {
       // Handle subscribers
       if (subscribersResult.status === 'fulfilled') {
         setSubscribers(subscribersResult.value);
+        setSubPage(1);
       } else {
         toast.error("Failed to load subscribers", {
           description: subscribersResult.reason?.message || "Unable to fetch subscriber list",
@@ -669,7 +725,7 @@ function AdminDashboard() {
               <table className="w-full min-w-[640px]">
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-semibold text-black">Post Title</th>
+                    <th className="text-left py-3 px-4 font-semibold text-black">Post</th>
                     <th className="text-right py-3 px-4 font-semibold text-black">Views</th>
                     <th className="text-right py-3 px-4 font-semibold text-black">Clicks</th>
                     <th className="text-right py-3 px-4 font-semibold text-black">Revenue</th>
@@ -677,9 +733,12 @@ function AdminDashboard() {
                 </thead>
                 <tbody>
                   {topPosts.length > 0 ? (
-                    topPosts.map((post, index) => (
+                    pagedTopPosts.map((post, index) => (
                       <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                        <td className="py-3 px-4">{post.title}</td>
+                        <td className="py-3 px-4 max-w-[320px]">
+                          <span className="block font-medium text-gray-900 leading-snug">{post.title}</span>
+                          <span className="block text-xs text-gray-400 mt-0.5">/blog/{post.slug}</span>
+                        </td>
                         <td className="py-3 px-4 text-right">{post.views.toLocaleString()}</td>
                         <td className="py-3 px-4 text-right">{post.clicks.toLocaleString()}</td>
                         <td className="py-3 px-4 text-right font-semibold">
@@ -690,12 +749,13 @@ function AdminDashboard() {
                   ) : (
                     <tr>
                       <td colSpan={4} className="py-8 text-center text-gray-500">
-                        No post data available
+                        No post data available yet — views will appear here once visitors land on blog posts.
                       </td>
                     </tr>
                   )}
                 </tbody>
               </table>
+              <PagerBar total={topPosts.length} page={topPostsPage} perPage={TOP_POSTS_PER_PAGE} onPageChange={setTopPostsPage} />
             </div>
           </CardContent>
         </Card>
@@ -732,7 +792,7 @@ function AdminDashboard() {
                           </tr>
                         </thead>
                         <tbody className="divide-y">
-                          {subscribers.map((subscriber) => (
+                          {pagedSubscribers.map((subscriber) => (
                             <tr key={subscriber.id} className="hover:bg-gray-50">
                               <td className="px-4 py-3 text-sm font-medium text-gray-900">{subscriber.email}</td>
                               <td className="px-4 py-3 text-sm text-gray-600">
@@ -752,6 +812,7 @@ function AdminDashboard() {
                           ))}
                         </tbody>
                       </table>
+                      <PagerBar total={subscribers.length} page={subPage} perPage={SUB_PER_PAGE} onPageChange={setSubPage} />
                     </div>
                   </div>
                 )}
@@ -771,15 +832,15 @@ function AdminDashboard() {
               <CardContent>
                 {/* Sub-tabs */}
                 <div className="flex gap-1 border-b border-gray-200 mb-4">
-                  {(["pageviews", "events"] as const).map((t) => (
+                  {(["pageviews", "clicks", "events"] as const).map((t) => (
                     <button
                       key={t}
-                      onClick={() => setTrackingTab(t)}
+                      onClick={() => handleTrackingTabChange(t)}
                       className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
                         trackingTab === t ? "border-blue-600 text-blue-600" : "border-transparent text-gray-500 hover:text-gray-700"
                       }`}
                     >
-                      {t === "pageviews" ? `Page Views (${trackingPageViews.length})` : `Events (${trackingEvents.length})`}
+                      {t === "pageviews" ? `Page Views (${trackingPageViews.length})` : t === "clicks" ? `Outbound Clicks (${trackingRedirections.length})` : `Events (${trackingEvents.length})`}
                     </button>
                   ))}
                 </div>
@@ -789,6 +850,50 @@ function AdminDashboard() {
                     <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin text-blue-600" />
                     <p>Loading tracking data…</p>
                   </div>
+                ) : trackingTab === "clicks" ? (
+                  trackingRedirections.length === 0 ? (
+                    <div className="py-12 text-center text-gray-400">
+                      <MousePointerClick className="w-10 h-10 mx-auto mb-3 text-gray-300" />
+                      <p className="font-medium">No outbound clicks recorded yet</p>
+                      <p className="text-sm mt-1">Every external link click on your site will appear here.</p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[640px] text-sm">
+                        <thead>
+                          <tr className="border-b border-gray-200 text-left text-xs text-gray-500 uppercase">
+                            <th className="py-2 px-3">Destination</th>
+                            <th className="py-2 px-3">Link Text</th>
+                            <th className="py-2 px-3">Type</th>
+                            <th className="py-2 px-3">Source Page</th>
+                            <th className="py-2 px-3 text-right">When</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {pagedClicks.map((row) => (
+                            <tr key={row.id} className="border-b border-gray-100 hover:bg-gray-50">
+                              <td className="py-2 px-3 max-w-[200px]">
+                                <a href={row.destination_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-xs truncate block">
+                                  {(() => { try { return new URL(row.destination_url).hostname; } catch { return row.destination_url; } })()}
+                                </a>
+                              </td>
+                              <td className="py-2 px-3 text-gray-600 text-xs max-w-[160px] truncate">{row.link_text || "—"}</td>
+                              <td className="py-2 px-3">
+                                <span className="px-2 py-0.5 text-xs rounded bg-gray-100 text-gray-600">{row.link_type || "outbound"}</span>
+                              </td>
+                              <td className="py-2 px-3 text-gray-400 text-xs max-w-[160px] truncate">
+                                {(() => { try { return new URL(row.source_url).pathname; } catch { return row.source_url; } })()}
+                              </td>
+                              <td className="py-2 px-3 text-right text-gray-400 text-xs whitespace-nowrap">
+                                {new Date(row.created_at).toLocaleString("en-GB", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <PagerBar total={trackingRedirections.length} page={clicksPage} perPage={TRACK_PER_PAGE} onPageChange={setClicksPage} />
+                    </div>
+                  )
                 ) : trackingTab === "pageviews" ? (
                   trackingPageViews.length === 0 ? (
                     <div className="py-12 text-center text-gray-400">
@@ -810,7 +915,7 @@ function AdminDashboard() {
                           </tr>
                         </thead>
                         <tbody>
-                          {trackingPageViews.map((row) => (
+                          {pagedPv.map((row) => (
                             <tr key={row.id} className="border-b border-gray-100 hover:bg-gray-50">
                               <td className="py-2 px-3 max-w-[220px]">
                                 <span className="block font-medium text-gray-800 truncate">{row.page_title || "—"}</span>
@@ -829,6 +934,7 @@ function AdminDashboard() {
                           ))}
                         </tbody>
                       </table>
+                      <PagerBar total={trackingPageViews.length} page={pvPage} perPage={TRACK_PER_PAGE} onPageChange={setPvPage} />
                     </div>
                   )
                 ) : (
@@ -851,7 +957,7 @@ function AdminDashboard() {
                           </tr>
                         </thead>
                         <tbody>
-                          {trackingEvents.map((row) => (
+                          {pagedEvents.map((row) => (
                             <tr key={row.id} className="border-b border-gray-100 hover:bg-gray-50">
                               <td className="py-2 px-3 font-medium text-gray-800">{row.event_name}</td>
                               <td className="py-2 px-3">
@@ -866,6 +972,7 @@ function AdminDashboard() {
                           ))}
                         </tbody>
                       </table>
+                      <PagerBar total={trackingEvents.length} page={eventsPage} perPage={TRACK_PER_PAGE} onPageChange={setEventsPage} />
                     </div>
                   )
                 )}

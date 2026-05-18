@@ -79,18 +79,24 @@ export async function fetchVisitorsData(days: number = 30): Promise<ChartDataPoi
 
 export async function fetchClicksData(days: number = 30): Promise<ChartDataPoint[]> {
   try {
-    const { data } = await supabase
-      .from("redirections")
-      .select("created_at")
-      .eq("is_external", true)
-      .gte("created_at", daysAgo(days))
-      .order("created_at", { ascending: true });
+    // Combine external redirections + all click events for a full clicks picture
+    const [rdRes, evRes] = await Promise.all([
+      supabase.from("redirections").select("created_at").eq("is_external", true).gte("created_at", daysAgo(days)),
+      supabase.from("events").select("created_at").eq("event_type", "click").gte("created_at", daysAgo(days)),
+    ]);
+
+    // Collect all timestamps, sort by date, then group
+    const all = [
+      ...(rdRes.data || []).map((r) => r.created_at as string),
+      ...(evRes.data || []).map((r) => r.created_at as string),
+    ].sort();
 
     const map: Record<string, number> = {};
-    (data || []).forEach((row) => {
-      const key = toDateKey(row.created_at);
+    all.forEach((iso) => {
+      const key = toDateKey(iso);
       map[key] = (map[key] ?? 0) + 1;
     });
+
     return Object.entries(map).map(([date, value]) => ({ date, value }));
   } catch (err: any) {
     throw new Error(`Clicks Data: ${err?.message}`);
@@ -104,22 +110,64 @@ export async function fetchRevenueData(_days: number = 30): Promise<ChartDataPoi
 
 export async function fetchTopPosts(limit: number = 10): Promise<TopPost[]> {
   try {
-    const { data } = await supabase
-      .from("page_views")
-      .select("page_path, page_title")
-      .gte("created_at", daysAgo(30))
-      .like("page_path", "%/blog/%");
+    const [pvRes, evRes, rdRes] = await Promise.all([
+      // Page views per blog path
+      supabase.from("page_views").select("page_path").gte("created_at", daysAgo(30)).like("page_path", "%/blog/%"),
+      // Click events on blog pages
+      supabase.from("events").select("page_path").eq("event_type", "click").gte("created_at", daysAgo(30)).like("page_path", "%/blog/%"),
+      // Outbound redirections originating from blog pages
+      supabase.from("redirections").select("source_url").eq("is_external", true).gte("created_at", daysAgo(30)),
+    ]);
 
-    const map: Record<string, TopPost> = {};
-    (data || []).forEach((row) => {
-      const path = row.page_path;
-      if (!map[path]) {
-        map[path] = { title: row.page_title || path.split("/").pop() || path, views: 0, clicks: 0, revenue: 0 };
-      }
-      map[path].views += 1;
+    // Count views per path
+    const viewCounts: Record<string, number> = {};
+    (pvRes.data || []).forEach((r) => {
+      viewCounts[r.page_path] = (viewCounts[r.page_path] ?? 0) + 1;
     });
 
-    return Object.values(map)
+    if (Object.keys(viewCounts).length === 0) return [];
+
+    // Count clicks per path (events)
+    const clickCounts: Record<string, number> = {};
+    (evRes.data || []).forEach((r) => {
+      if (!r.page_path) return;
+      clickCounts[r.page_path] = (clickCounts[r.page_path] ?? 0) + 1;
+    });
+
+    // Count clicks from redirections — extract path from source_url
+    (rdRes.data || []).forEach((r) => {
+      try {
+        const path = new URL(r.source_url).pathname;
+        if (path.includes("/blog/")) {
+          clickCounts[path] = (clickCounts[path] ?? 0) + 1;
+        }
+      } catch { /* ignore malformed URLs */ }
+    });
+
+    // Extract slugs and cross-reference blog_posts for real titles
+    const slugs = Object.keys(viewCounts).map((p) =>
+      p.replace(/^\/blog\//, "").replace(/\/$/, "")
+    );
+
+    const { data: posts } = await supabase
+      .from("blog_posts")
+      .select("slug, title")
+      .in("slug", slugs);
+
+    const slugToTitle: Record<string, string> = {};
+    (posts || []).forEach((p) => { slugToTitle[p.slug] = p.title; });
+
+    return Object.entries(viewCounts)
+      .map(([path, views]) => {
+        const slug = path.replace(/^\/blog\//, "").replace(/\/$/, "");
+        return {
+          title: slugToTitle[slug] || slug,
+          slug,
+          views,
+          clicks: clickCounts[path] ?? 0,
+          revenue: 0,
+        };
+      })
       .sort((a, b) => b.views - a.views)
       .slice(0, limit);
   } catch (err: any) {

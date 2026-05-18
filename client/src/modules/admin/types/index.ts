@@ -18,6 +18,7 @@ export interface ChartDataPoint {
 
 export interface TopPost {
   title: string;
+  slug: string;
   views: number;
   clicks: number;
   revenue: number;
