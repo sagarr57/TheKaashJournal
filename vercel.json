@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/publish-scheduled",
+      "schedule": "* * * * *"
+    }
+  ],
   "buildCommand": "pnpm install && pnpm build",
   "outputDirectory": "client/dist",
   "devCommand": "pnpm dev",

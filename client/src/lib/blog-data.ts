@@ -32,13 +32,28 @@ function mapRowToPostIndex(row: any): BlogPostIndexItem {
   };
 }
 
+async function autoPublishScheduled() {
+  try {
+    await supabase
+      .from("blog_posts")
+      .update({ status: "published", publish_at: null })
+      .eq("status", "scheduled")
+      .lte("publish_at", new Date().toISOString());
+  } catch {
+    // silent — best-effort
+  }
+}
+
 export async function fetchPublishedPostIndex(): Promise<BlogPostIndexItem[]> {
   try {
+    await autoPublishScheduled();
+
     const { data, error } = await supabase
       .from("blog_posts")
       .select(
         "id,title,slug,excerpt,author,date,updated,category,tags,reading_time,featured,image,meta_description,keywords"
       )
+      .eq("status", "published")
       .order("date", { ascending: false });
 
     if (error || !data || data.length === 0) {
@@ -55,12 +70,15 @@ export async function fetchPostBySlugWithContent(
   slug: string
 ): Promise<BlogPost | null> {
   try {
+    await autoPublishScheduled();
+
     const { data, error } = await supabase
       .from("blog_posts")
       .select(
         "id,title,slug,excerpt,content,author,date,updated,category,tags,reading_time,featured,image,meta_description,keywords"
       )
       .eq("slug", slug)
+      .eq("status", "published")
       .single();
 
     if (error || !data) {

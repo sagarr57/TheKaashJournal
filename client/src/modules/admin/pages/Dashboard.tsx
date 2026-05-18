@@ -47,7 +47,8 @@ const getInitialPostForm = () => ({
   image: DEFAULT_POST_IMAGE,
   metaDescription: "",
   keywords: "",
-  status: "published" as "published" | "draft",
+  status: "published" as "published" | "draft" | "scheduled",
+  publishAt: "",
 });
 
 type BlogPostRow = {
@@ -65,7 +66,8 @@ type BlogPostRow = {
   image: string;
   meta_description: string;
   keywords: string[];
-  status: "published" | "draft";
+  status: "published" | "draft" | "scheduled";
+  publish_at: string | null;
   updated_at: string;
 };
 
@@ -119,6 +121,7 @@ function AdminDashboard() {
   const [deleteModal, setDeleteModal] = useState<{ id: string; title: string } | null>(null);
   const [postsView, setPostsView] = useState<"list" | "form">("list");
   const [postsPage, setPostsPage] = useState(1);
+  const [postsFilter, setPostsFilter] = useState<"all" | "published" | "draft" | "scheduled">("all");
   const [subPage, setSubPage] = useState(1);
   const [topPostsPage, setTopPostsPage] = useState(1);
   const [pvPage, setPvPage] = useState(1);
@@ -139,10 +142,13 @@ function AdminDashboard() {
   const POSTS_PER_PAGE = 10;
   const [contentEditorTab, setContentEditorTab] = useState<"write" | "preview">("write");
 
-  const totalPostPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+  const filteredPosts = useMemo(
+    () => postsFilter === "all" ? allPosts : allPosts.filter((p) => p.status === postsFilter),
+    [allPosts, postsFilter]
+  );
   const pagedPosts = useMemo(
-    () => allPosts.slice((postsPage - 1) * POSTS_PER_PAGE, postsPage * POSTS_PER_PAGE),
-    [allPosts, postsPage]
+    () => filteredPosts.slice((postsPage - 1) * POSTS_PER_PAGE, postsPage * POSTS_PER_PAGE),
+    [filteredPosts, postsPage]
   );
   const pagedSubscribers = useMemo(() => subscribers.slice((subPage - 1) * SUB_PER_PAGE, subPage * SUB_PER_PAGE), [subscribers, subPage]);
   const pagedTopPosts = useMemo(() => topPosts.slice((topPostsPage - 1) * TOP_POSTS_PER_PAGE, topPostsPage * TOP_POSTS_PER_PAGE), [topPosts, topPostsPage]);
@@ -181,13 +187,21 @@ function AdminDashboard() {
   const fetchAllPosts = async () => {
     setIsFetchingPosts(true);
     try {
+      // Auto-publish any scheduled posts whose time has passed (no pg_cron needed)
+      await supabase
+        .from("blog_posts")
+        .update({ status: "published", publish_at: null })
+        .eq("status", "scheduled")
+        .lte("publish_at", new Date().toISOString());
+
       const { data, error } = await supabase
         .from("blog_posts")
-        .select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,status,updated_at")
+        .select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,status,publish_at,updated_at")
         .order("date", { ascending: false });
       if (error) throw new Error(error.message);
       setAllPosts((data as BlogPostRow[]) || []);
       setPostsPage(1);
+      setPostsFilter("all");
     } catch (err: any) {
       toast.error("Failed to load posts", { description: err?.message });
     } finally {
@@ -212,6 +226,7 @@ function AdminDashboard() {
       metaDescription: post.meta_description || "",
       keywords: (post.keywords || []).join(", "),
       status: post.status || "published",
+      publishAt: post.publish_at ? post.publish_at.slice(0, 16) : "",
     });
     setPostsView("form");
   };
@@ -266,7 +281,7 @@ function AdminDashboard() {
     setPostsView("list");
   };
 
-  const handleSavePost = async (status: "published" | "draft") => {
+  const handleSavePost = async (status: "published" | "draft" | "scheduled") => {
     const slug = postForm.slug.trim() || slugify(postForm.title);
 
     if (!postForm.title.trim()) {
@@ -274,9 +289,19 @@ function AdminDashboard() {
       return;
     }
 
-    if (status === "published" && (!slug || !postForm.excerpt.trim() || !postForm.content.trim() || !postForm.category.trim())) {
+    if (status === "scheduled" && !postForm.publishAt) {
+      toast.error("Pick a publish date/time to schedule this post.");
+      return;
+    }
+
+    if (status === "scheduled" && new Date(postForm.publishAt) <= new Date()) {
+      toast.error("Scheduled time must be in the future.");
+      return;
+    }
+
+    if ((status === "published" || status === "scheduled") && (!slug || !postForm.excerpt.trim() || !postForm.content.trim() || !postForm.category.trim())) {
       toast.error("Missing required fields", {
-        description: "Slug, excerpt, content, and category are required to publish.",
+        description: "Slug, excerpt, content, and category are required.",
       });
       return;
     }
@@ -303,6 +328,7 @@ function AdminDashboard() {
           meta_description: postForm.metaDescription.trim() || postForm.excerpt.trim(),
           keywords,
           status,
+          publish_at: status === "scheduled" ? new Date(postForm.publishAt).toISOString() : null,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "id" }
@@ -310,7 +336,10 @@ function AdminDashboard() {
 
       if (error) throw new Error(error.message || "Failed to save post");
 
-      const label = status === "draft" ? "Draft saved" : editingPostId ? "Post updated" : "Post published";
+      const label =
+        status === "draft" ? "Draft saved" :
+        status === "scheduled" ? `Scheduled for ${new Date(postForm.publishAt).toLocaleString()}` :
+        editingPostId ? "Post updated" : "Post published";
       toast.success(label, { description: "The blog post has been saved to Supabase." });
 
       setEditingPostId(null);
@@ -998,38 +1027,49 @@ function AdminDashboard() {
             {/* List view */}
             {postsView === "list" && (
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle>All Posts ({allPosts.length})</CardTitle>
+                <CardHeader className="flex flex-row items-center justify-between pb-3">
+                  <CardTitle>Posts</CardTitle>
                   <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={fetchAllPosts}
-                      disabled={isFetchingPosts}
-                      className="rounded-none border-gray-300"
-                    >
-                      <RefreshCw className={`w-4 h-4 mr-1 ${isFetchingPosts ? "animate-spin" : ""}`} />
-                      Refresh
+                    <Button variant="outline" size="sm" onClick={fetchAllPosts} disabled={isFetchingPosts} className="rounded-none border-gray-300">
+                      <RefreshCw className={`w-4 h-4 mr-1 ${isFetchingPosts ? "animate-spin" : ""}`} />Refresh
                     </Button>
-                    <Button
-                      size="sm"
-                      onClick={() => { setEditingPostId(null); setPostForm(getInitialPostForm()); setPostsView("form"); }}
-                      className="rounded-none"
-                    >
-                      <Plus className="w-4 h-4 mr-1" />
-                      New Post
+                    <Button size="sm" onClick={() => { setEditingPostId(null); setPostForm(getInitialPostForm()); setPostsView("form"); }} className="rounded-none">
+                      <Plus className="w-4 h-4 mr-1" />New Post
                     </Button>
                   </div>
                 </CardHeader>
-                <CardContent>
+
+                {/* Filter bar */}
+                <div className="px-6 pb-3 flex gap-2 flex-wrap border-b border-gray-100">
+                  {(["all", "published", "draft", "scheduled"] as const).map((f) => {
+                    const count = f === "all" ? allPosts.length : allPosts.filter((p) => p.status === f).length;
+                    const active = postsFilter === f;
+                    const colours =
+                      f === "draft"      ? active ? "bg-yellow-500 text-white border-yellow-500"    : "border-yellow-300 text-yellow-700 hover:bg-yellow-50"
+                    : f === "scheduled"  ? active ? "bg-purple-600 text-white border-purple-600"    : "border-purple-300 text-purple-700 hover:bg-purple-50"
+                    : f === "published"  ? active ? "bg-green-600  text-white border-green-600"     : "border-green-300  text-green-700  hover:bg-green-50"
+                    :                     active ? "bg-blue-600   text-white border-blue-600"      : "border-gray-200   text-gray-600   hover:bg-gray-50";
+                    return (
+                      <button
+                        key={f}
+                        onClick={() => { setPostsFilter(f); setPostsPage(1); }}
+                        className={`px-3 py-1 text-xs font-medium rounded-full border transition-colors ${colours}`}
+                      >
+                        {f === "all" ? "All" : f.charAt(0).toUpperCase() + f.slice(1)} ({count})
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <CardContent className="pt-4">
                   {isFetchingPosts ? (
                     <div className="py-12 text-center text-gray-500">
                       <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin text-blue-600" />
                       <p>Loading posts…</p>
                     </div>
-                  ) : allPosts.length === 0 ? (
+                  ) : filteredPosts.length === 0 ? (
                     <div className="py-12 text-center text-gray-500">
-                      <p>No posts found in Supabase.</p>
+                      <p>{allPosts.length === 0 ? "No posts found in Supabase." : `No ${postsFilter} posts.`}</p>
                     </div>
                   ) : (
                     <div className="overflow-x-auto">
@@ -1047,13 +1087,21 @@ function AdminDashboard() {
                           {pagedPosts.map((post) => (
                             <tr key={post.id} className={`border-b border-gray-100 hover:bg-gray-50 ${post.status === "draft" ? "opacity-70" : ""}`}>
                               <td className="py-2 px-3 max-w-[280px]">
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 flex-wrap">
                                   <span className="font-medium text-gray-900 line-clamp-1">{post.title}</span>
                                   {post.status === "draft" && (
-                                    <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded bg-yellow-100 text-yellow-700 uppercase tracking-wide">Draft</span>
+                                    <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded-full bg-yellow-100 text-yellow-700">Draft</span>
+                                  )}
+                                  {post.status === "scheduled" && (
+                                    <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded-full bg-purple-100 text-purple-700">Scheduled</span>
                                   )}
                                 </div>
-                                <span className="block text-xs text-gray-400 mt-0.5">{post.slug}</span>
+                                <span className="block text-xs text-gray-400 mt-0.5">
+                                  {post.slug}
+                                  {post.status === "scheduled" && post.publish_at && (
+                                    <span className="ml-2 text-purple-500 font-medium">→ {new Date(post.publish_at).toLocaleString()}</span>
+                                  )}
+                                </span>
                               </td>
                               <td className="py-2 px-3 text-gray-600">{post.category}</td>
                               <td className="py-2 px-3 text-gray-600 whitespace-nowrap">{post.date}</td>
@@ -1066,11 +1114,7 @@ function AdminDashboard() {
                               </td>
                               <td className="py-2 px-3 text-right">
                                 <div className="flex items-center justify-end gap-2">
-                                  <button
-                                    onClick={() => handleEditPost(post)}
-                                    className="p-1.5 rounded hover:bg-blue-50 text-blue-600"
-                                    title="Edit"
-                                  >
+                                  <button onClick={() => handleEditPost(post)} className="p-1.5 rounded hover:bg-blue-50 text-blue-600" title="Edit">
                                     <Pencil className="w-4 h-4" />
                                   </button>
                                   <button
@@ -1087,42 +1131,7 @@ function AdminDashboard() {
                           ))}
                         </tbody>
                       </table>
-                      {totalPostPages > 1 && (
-                        <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                          <p className="text-xs text-gray-500">
-                            Showing {(postsPage - 1) * POSTS_PER_PAGE + 1}–{Math.min(postsPage * POSTS_PER_PAGE, allPosts.length)} of {allPosts.length} posts
-                          </p>
-                          <div className="flex items-center gap-1">
-                            <button
-                              onClick={() => setPostsPage((p) => Math.max(1, p - 1))}
-                              disabled={postsPage === 1}
-                              className="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
-                            >
-                              ← Prev
-                            </button>
-                            {Array.from({ length: totalPostPages }, (_, i) => i + 1).map((page) => (
-                              <button
-                                key={page}
-                                onClick={() => setPostsPage(page)}
-                                className={`px-2.5 py-1 text-xs border rounded ${
-                                  page === postsPage
-                                    ? "bg-blue-600 text-white border-blue-600"
-                                    : "border-gray-200 hover:bg-gray-50"
-                                }`}
-                              >
-                                {page}
-                              </button>
-                            ))}
-                            <button
-                              onClick={() => setPostsPage((p) => Math.min(totalPostPages, p + 1))}
-                              disabled={postsPage === totalPostPages}
-                              className="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
-                            >
-                              Next →
-                            </button>
-                          </div>
-                        </div>
-                      )}
+                      <PagerBar total={filteredPosts.length} page={postsPage} perPage={POSTS_PER_PAGE} onPageChange={(p) => setPostsPage(p)} />
                     </div>
                   )}
                 </CardContent>
@@ -1382,6 +1391,40 @@ function AdminDashboard() {
                       <span className="text-sm font-medium text-gray-700">Feature this post</span>
                       <span className="text-[11px] text-gray-400">(Pinned to the top of the blog listing page)</span>
                     </label>
+
+                    {/* Schedule section — only for new posts and drafts, not already-published */}
+                    {postForm.status !== "published" && (
+                      <div className="border border-purple-200 rounded p-4 bg-purple-50">
+                        <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide mb-1">Schedule to go live</p>
+                        <p className="text-[11px] text-purple-500 mb-3">Pick a date and time — the post will automatically publish at that moment.</p>
+                        <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                          <input
+                            type="datetime-local"
+                            value={postForm.publishAt}
+                            min={new Date(Date.now() + 60000).toISOString().slice(0, 16)}
+                            onChange={(e) => {
+                              handlePostFieldChange("publishAt", e.target.value);
+                              if (e.target.value) handlePostFieldChange("date", e.target.value.slice(0, 10));
+                            }}
+                            className="border border-purple-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white"
+                          />
+                          <Button
+                            type="button"
+                            variant="outline"
+                            disabled={isPublishingPost || !postForm.publishAt}
+                            onClick={() => handleSavePost("scheduled")}
+                            className="rounded-none border-purple-400 text-purple-700 hover:bg-purple-100 disabled:opacity-40"
+                          >
+                            Schedule Post
+                          </Button>
+                          {postForm.publishAt && (
+                            <span className="text-xs text-purple-600 font-medium">
+                              Goes live: {new Date(postForm.publishAt).toLocaleString()}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
 
                     <div className="flex flex-col sm:flex-row justify-between gap-3">
                       <Button type="button" variant="outline" onClick={handleCancelEdit} className="rounded-none">
