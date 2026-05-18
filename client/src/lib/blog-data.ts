@@ -19,7 +19,7 @@ function mapRowToPostIndex(row: any): BlogPostIndexItem {
     excerpt: row.excerpt || "",
     author: EDITORIAL_BYLINE,
     date: row.date,
-    updated: row.updated || undefined,
+    updated: row.updated_at || undefined,
     category: row.category,
     tags: Array.isArray(row.tags) ? row.tags : [],
     readingTime: row.reading_time || 5,
@@ -32,33 +32,19 @@ function mapRowToPostIndex(row: any): BlogPostIndexItem {
   };
 }
 
-async function autoPublishScheduled() {
-  try {
-    await supabase
-      .from("blog_posts")
-      .update({ status: "published", publish_at: null })
-      .eq("status", "scheduled")
-      .lte("publish_at", new Date().toISOString());
-  } catch {
-    // silent — best-effort
-  }
-}
-
 export async function fetchPublishedPostIndex(): Promise<BlogPostIndexItem[]> {
   try {
-    await autoPublishScheduled();
-
     const { data, error } = await supabase
       .from("blog_posts")
       .select(
-        "id,title,slug,excerpt,author,date,updated,category,tags,reading_time,featured,image,meta_description,keywords"
+        "id,title,slug,excerpt,author,date,updated_at,category,tags,reading_time,featured,image,meta_description,keywords"
       )
       .eq("status", "published")
       .order("date", { ascending: false });
 
-    if (error || !data || data.length === 0) {
-      return postIndex;
-    }
+    // Only fall back to static data on a real error (network/RLS), not when DB has 0 published posts
+    if (error) return postIndex;
+    if (!data) return postIndex;
 
     return data.map(mapRowToPostIndex);
   } catch {
@@ -70,12 +56,10 @@ export async function fetchPostBySlugWithContent(
   slug: string
 ): Promise<BlogPost | null> {
   try {
-    await autoPublishScheduled();
-
     const { data, error } = await supabase
       .from("blog_posts")
       .select(
-        "id,title,slug,excerpt,content,author,date,updated,category,tags,reading_time,featured,image,meta_description,keywords"
+        "id,title,slug,excerpt,content,author,date,updated_at,category,tags,reading_time,featured,image,meta_description,keywords"
       )
       .eq("slug", slug)
       .eq("status", "published")

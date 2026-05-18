@@ -177,23 +177,25 @@ export async function fetchTopPosts(limit: number = 10): Promise<TopPost[]> {
 
 export async function fetchTrafficSources(): Promise<TrafficSource[]> {
   try {
+    // Fetch all page views including null referrers (= Direct traffic)
     const { data } = await supabase
       .from("page_views")
       .select("referrer")
-      .gte("created_at", daysAgo(30))
-      .not("referrer", "is", null);
+      .gte("created_at", daysAgo(30));
 
-    const map: Record<string, number> = { Direct: 0 };
+    const map: Record<string, number> = {};
     (data || []).forEach((row) => {
-      const ref = row.referrer as string;
-      if (!ref) { map["Direct"]++; return; }
-      let source = "Other";
-      if (ref.includes("google")) source = "Google";
-      else if (ref.includes("bing")) source = "Bing";
-      else if (ref.includes("facebook") || ref.includes("fb.com")) source = "Facebook";
-      else if (ref.includes("twitter") || ref.includes("x.com")) source = "Twitter/X";
-      else if (ref.includes("linkedin")) source = "LinkedIn";
-      else if (ref.includes("reddit")) source = "Reddit";
+      const ref = row.referrer as string | null;
+      let source = "Direct";
+      if (ref) {
+        if (ref.includes("google")) source = "Google";
+        else if (ref.includes("bing")) source = "Bing";
+        else if (ref.includes("facebook") || ref.includes("fb.com")) source = "Facebook";
+        else if (ref.includes("twitter") || ref.includes("x.com")) source = "Twitter/X";
+        else if (ref.includes("linkedin")) source = "LinkedIn";
+        else if (ref.includes("reddit")) source = "Reddit";
+        else source = "Other";
+      }
       map[source] = (map[source] ?? 0) + 1;
     });
 

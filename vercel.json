@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/publish-scheduled",
-      "schedule": "* * * * *"
+      "schedule": "*/15 * * * *"
     }
   ],
   "buildCommand": "pnpm install && pnpm build",

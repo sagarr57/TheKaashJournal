@@ -187,13 +187,6 @@ function AdminDashboard() {
   const fetchAllPosts = async () => {
     setIsFetchingPosts(true);
     try {
-      // Auto-publish any scheduled posts whose time has passed (no pg_cron needed)
-      await supabase
-        .from("blog_posts")
-        .update({ status: "published", publish_at: null })
-        .eq("status", "scheduled")
-        .lte("publish_at", new Date().toISOString());
-
       const { data, error } = await supabase
         .from("blog_posts")
         .select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,status,publish_at,updated_at")
@@ -201,7 +194,6 @@ function AdminDashboard() {
       if (error) throw new Error(error.message);
       setAllPosts((data as BlogPostRow[]) || []);
       setPostsPage(1);
-      setPostsFilter("all");
     } catch (err: any) {
       toast.error("Failed to load posts", { description: err?.message });
     } finally {
@@ -1392,8 +1384,8 @@ function AdminDashboard() {
                       <span className="text-[11px] text-gray-400">(Pinned to the top of the blog listing page)</span>
                     </label>
 
-                    {/* Schedule section — only for new posts and drafts, not already-published */}
-                    {postForm.status !== "published" && (
+                    {/* Schedule section — for new posts, drafts, and scheduled; not for already-published */}
+                    {(!editingPostId || postForm.status !== "published") && (
                       <div className="border border-purple-200 rounded p-4 bg-purple-50">
                         <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide mb-1">Schedule to go live</p>
                         <p className="text-[11px] text-purple-500 mb-3">Pick a date and time — the post will automatically publish at that moment.</p>

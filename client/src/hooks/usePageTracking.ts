@@ -9,8 +9,9 @@ export function usePageTracking() {
 
   useEffect(() => {
     if (!hasAnalyticsConsent()) return;
+    // Never track admin pages — would inflate visitor counts with your own visits
+    if (location.startsWith("/admin")) return;
 
-    // Track page view when route changes
     const pagePath = location;
     const pageTitle = document.title;
 

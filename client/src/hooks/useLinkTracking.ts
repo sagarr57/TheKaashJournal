@@ -6,6 +6,8 @@ import { hasAnalyticsConsent } from '@/lib/cookie-consent';
 export function useLinkTracking() {
   useEffect(() => {
     if (!hasAnalyticsConsent()) return;
+    // Never track clicks on admin pages
+    if (window.location.pathname.startsWith("/admin")) return;
 
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
