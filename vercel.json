@@ -5,7 +5,7 @@
       "schedule": "*/15 * * * *"
     }
   ],
-  "buildCommand": "pnpm install && pnpm build",
+  "buildCommand": "pnpm build",
   "outputDirectory": "client/dist",
   "devCommand": "pnpm dev",
   "installCommand": "pnpm install",
