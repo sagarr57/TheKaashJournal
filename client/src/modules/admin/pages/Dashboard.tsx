@@ -47,6 +47,7 @@ const getInitialPostForm = () => ({
   image: DEFAULT_POST_IMAGE,
   metaDescription: "",
   keywords: "",
+  status: "published" as "published" | "draft",
 });
 
 type BlogPostRow = {
@@ -64,6 +65,7 @@ type BlogPostRow = {
   image: string;
   meta_description: string;
   keywords: string[];
+  status: "published" | "draft";
   updated_at: string;
 };
 
@@ -181,7 +183,7 @@ function AdminDashboard() {
     try {
       const { data, error } = await supabase
         .from("blog_posts")
-        .select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,updated_at")
+        .select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,status,updated_at")
         .order("date", { ascending: false });
       if (error) throw new Error(error.message);
       setAllPosts((data as BlogPostRow[]) || []);
@@ -209,6 +211,7 @@ function AdminDashboard() {
       image: post.image || DEFAULT_POST_IMAGE,
       metaDescription: post.meta_description || "",
       keywords: (post.keywords || []).join(", "),
+      status: post.status || "published",
     });
     setPostsView("form");
   };
@@ -263,13 +266,17 @@ function AdminDashboard() {
     setPostsView("list");
   };
 
-  const handlePublishPost = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSavePost = async (status: "published" | "draft") => {
     const slug = postForm.slug.trim() || slugify(postForm.title);
 
-    if (!postForm.title.trim() || !slug || !postForm.excerpt.trim() || !postForm.content.trim() || !postForm.category.trim()) {
+    if (!postForm.title.trim()) {
+      toast.error("Title is required");
+      return;
+    }
+
+    if (status === "published" && (!slug || !postForm.excerpt.trim() || !postForm.content.trim() || !postForm.category.trim())) {
       toast.error("Missing required fields", {
-        description: "Title, slug, excerpt, content, and category are required.",
+        description: "Slug, excerpt, content, and category are required to publish.",
       });
       return;
     }
@@ -295,16 +302,16 @@ function AdminDashboard() {
           image: postForm.image.trim() || DEFAULT_POST_IMAGE,
           meta_description: postForm.metaDescription.trim() || postForm.excerpt.trim(),
           keywords,
+          status,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "id" }
       );
 
-      if (error) throw new Error(error.message || "Failed to publish post");
+      if (error) throw new Error(error.message || "Failed to save post");
 
-      toast.success(editingPostId ? "Post updated" : "Post published", {
-        description: "The blog post has been saved to Supabase.",
-      });
+      const label = status === "draft" ? "Draft saved" : editingPostId ? "Post updated" : "Post published";
+      toast.success(label, { description: "The blog post has been saved to Supabase." });
 
       setEditingPostId(null);
       setPostForm(getInitialPostForm());
@@ -317,6 +324,11 @@ function AdminDashboard() {
     } finally {
       setIsPublishingPost(false);
     }
+  };
+
+  const handlePublishPost = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await handleSavePost("published");
   };
 
   const loadData = async () => {
@@ -1033,9 +1045,14 @@ function AdminDashboard() {
                         </thead>
                         <tbody>
                           {pagedPosts.map((post) => (
-                            <tr key={post.id} className="border-b border-gray-100 hover:bg-gray-50">
+                            <tr key={post.id} className={`border-b border-gray-100 hover:bg-gray-50 ${post.status === "draft" ? "opacity-70" : ""}`}>
                               <td className="py-2 px-3 max-w-[280px]">
-                                <span className="font-medium text-gray-900 line-clamp-1">{post.title}</span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900 line-clamp-1">{post.title}</span>
+                                  {post.status === "draft" && (
+                                    <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded bg-yellow-100 text-yellow-700 uppercase tracking-wide">Draft</span>
+                                  )}
+                                </div>
                                 <span className="block text-xs text-gray-400 mt-0.5">{post.slug}</span>
                               </td>
                               <td className="py-2 px-3 text-gray-600">{post.category}</td>
@@ -1366,13 +1383,24 @@ function AdminDashboard() {
                       <span className="text-[11px] text-gray-400">(Pinned to the top of the blog listing page)</span>
                     </label>
 
-                    <div className="flex justify-end gap-3">
+                    <div className="flex flex-col sm:flex-row justify-between gap-3">
                       <Button type="button" variant="outline" onClick={handleCancelEdit} className="rounded-none">
                         Cancel
                       </Button>
-                      <Button type="submit" disabled={isPublishingPost} className="rounded-none">
-                        {isPublishingPost ? "Saving…" : editingPostId ? "Update Post" : "Publish Post"}
-                      </Button>
+                      <div className="flex gap-3">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={isPublishingPost}
+                          onClick={() => handleSavePost("draft")}
+                          className="rounded-none border-yellow-400 text-yellow-700 hover:bg-yellow-50"
+                        >
+                          {isPublishingPost ? "Saving…" : "Save as Draft"}
+                        </Button>
+                        <Button type="submit" disabled={isPublishingPost} className="rounded-none">
+                          {isPublishingPost ? "Publishing…" : editingPostId ? "Update Post" : "Publish Post"}
+                        </Button>
+                      </div>
                     </div>
                   </form>
                 </CardContent>
