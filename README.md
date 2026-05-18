@@ -2,7 +2,7 @@
 
 ![The Kaash Journal Logo](./client/public/images/Kaash_logo.png)
 
-Welcome to **The Kaash Journal** - your trusted source for insights at the intersection of artificial intelligence and financial technology.
+Welcome to **The Kaash Journal** — your trusted source for insights at the intersection of artificial intelligence and financial technology.
 
 ## Who We Are
 
