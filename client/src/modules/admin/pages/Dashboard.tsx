@@ -86,6 +86,13 @@ function AdminDashboard() {
   const [deleteModal, setDeleteModal] = useState<{ id: string; title: string } | null>(null);
   const [postsView, setPostsView] = useState<"list" | "form">("list");
   const [postsPage, setPostsPage] = useState(1);
+
+  type PageViewRow = { id: string; page_path: string; page_title: string; referrer: string; device_type: string; browser: string; view_time_seconds: number; created_at: string };
+  type EventRow = { id: string; event_type: string; event_name: string; page_path: string; element_text: string; created_at: string };
+  const [trackingPageViews, setTrackingPageViews] = useState<PageViewRow[]>([]);
+  const [trackingEvents, setTrackingEvents] = useState<EventRow[]>([]);
+  const [isFetchingTracking, setIsFetchingTracking] = useState(false);
+  const [trackingTab, setTrackingTab] = useState<"pageviews" | "events">("pageviews");
   const POSTS_PER_PAGE = 10;
   const [contentEditorTab, setContentEditorTab] = useState<"write" | "preview">("write");
 
@@ -177,6 +184,22 @@ function AdminDashboard() {
       toast.error("Failed to delete post", { description: err?.message });
     } finally {
       setDeletingPostId(null);
+    }
+  };
+
+  const fetchTrackingData = async () => {
+    setIsFetchingTracking(true);
+    try {
+      const [pvRes, evRes] = await Promise.all([
+        supabase.from("page_views").select("id,page_path,page_title,referrer,device_type,browser,view_time_seconds,created_at").order("created_at", { ascending: false }).limit(100),
+        supabase.from("events").select("id,event_type,event_name,page_path,element_text,created_at").order("created_at", { ascending: false }).limit(100),
+      ]);
+      setTrackingPageViews((pvRes.data as PageViewRow[]) || []);
+      setTrackingEvents((evRes.data as EventRow[]) || []);
+    } catch (err: any) {
+      toast.error("Failed to load tracking data", { description: err?.message });
+    } finally {
+      setIsFetchingTracking(false);
     }
   };
 
@@ -373,6 +396,7 @@ function AdminDashboard() {
   useEffect(() => {
     loadData();
     fetchAllPosts();
+    fetchTrackingData();
     const interval = setInterval(loadData, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
@@ -738,15 +762,113 @@ function AdminDashboard() {
           {/* Tracking Data Tab */}
           <TabsContent value="tracking" className="space-y-6">
             <Card>
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Tracking Data</CardTitle>
+                <Button variant="outline" size="sm" onClick={fetchTrackingData} disabled={isFetchingTracking} className="rounded-none border-gray-300">
+                  <RefreshCw className={`w-4 h-4 mr-1 ${isFetchingTracking ? "animate-spin" : ""}`} />Refresh
+                </Button>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-12 text-gray-500">
-                  <Eye className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                  <p>Tracking data viewer coming soon</p>
-                  <p className="text-sm mt-2">View page views, events, conversions, and redirections from Supabase</p>
+                {/* Sub-tabs */}
+                <div className="flex gap-1 border-b border-gray-200 mb-4">
+                  {(["pageviews", "events"] as const).map((t) => (
+                    <button
+                      key={t}
+                      onClick={() => setTrackingTab(t)}
+                      className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
+                        trackingTab === t ? "border-blue-600 text-blue-600" : "border-transparent text-gray-500 hover:text-gray-700"
+                      }`}
+                    >
+                      {t === "pageviews" ? `Page Views (${trackingPageViews.length})` : `Events (${trackingEvents.length})`}
+                    </button>
+                  ))}
                 </div>
+
+                {isFetchingTracking ? (
+                  <div className="py-12 text-center text-gray-500">
+                    <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin text-blue-600" />
+                    <p>Loading tracking data…</p>
+                  </div>
+                ) : trackingTab === "pageviews" ? (
+                  trackingPageViews.length === 0 ? (
+                    <div className="py-12 text-center text-gray-400">
+                      <Eye className="w-10 h-10 mx-auto mb-3 text-gray-300" />
+                      <p className="font-medium">No page views recorded yet</p>
+                      <p className="text-sm mt-1">Data appears here once visitors land on your site with cookie consent enabled.</p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[700px] text-sm">
+                        <thead>
+                          <tr className="border-b border-gray-200 text-left text-xs text-gray-500 uppercase">
+                            <th className="py-2 px-3">Page</th>
+                            <th className="py-2 px-3">Referrer</th>
+                            <th className="py-2 px-3">Device</th>
+                            <th className="py-2 px-3">Browser</th>
+                            <th className="py-2 px-3 text-right">Time (s)</th>
+                            <th className="py-2 px-3 text-right">When</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {trackingPageViews.map((row) => (
+                            <tr key={row.id} className="border-b border-gray-100 hover:bg-gray-50">
+                              <td className="py-2 px-3 max-w-[220px]">
+                                <span className="block font-medium text-gray-800 truncate">{row.page_title || "—"}</span>
+                                <span className="text-xs text-gray-400 truncate block">{row.page_path}</span>
+                              </td>
+                              <td className="py-2 px-3 text-gray-500 text-xs max-w-[160px] truncate">
+                                {row.referrer ? new URL(row.referrer).hostname : <span className="italic">direct</span>}
+                              </td>
+                              <td className="py-2 px-3 text-gray-600 capitalize">{row.device_type || "—"}</td>
+                              <td className="py-2 px-3 text-gray-600">{row.browser || "—"}</td>
+                              <td className="py-2 px-3 text-right text-gray-600">{row.view_time_seconds ?? 0}</td>
+                              <td className="py-2 px-3 text-right text-gray-400 text-xs whitespace-nowrap">
+                                {new Date(row.created_at).toLocaleString("en-GB", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )
+                ) : (
+                  trackingEvents.length === 0 ? (
+                    <div className="py-12 text-center text-gray-400">
+                      <MousePointerClick className="w-10 h-10 mx-auto mb-3 text-gray-300" />
+                      <p className="font-medium">No events recorded yet</p>
+                      <p className="text-sm mt-1">Click events and custom events will appear here.</p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[600px] text-sm">
+                        <thead>
+                          <tr className="border-b border-gray-200 text-left text-xs text-gray-500 uppercase">
+                            <th className="py-2 px-3">Event</th>
+                            <th className="py-2 px-3">Type</th>
+                            <th className="py-2 px-3">Page</th>
+                            <th className="py-2 px-3">Element</th>
+                            <th className="py-2 px-3 text-right">When</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {trackingEvents.map((row) => (
+                            <tr key={row.id} className="border-b border-gray-100 hover:bg-gray-50">
+                              <td className="py-2 px-3 font-medium text-gray-800">{row.event_name}</td>
+                              <td className="py-2 px-3">
+                                <span className="px-2 py-0.5 text-xs rounded bg-blue-50 text-blue-700">{row.event_type}</span>
+                              </td>
+                              <td className="py-2 px-3 text-gray-500 text-xs max-w-[180px] truncate">{row.page_path || "—"}</td>
+                              <td className="py-2 px-3 text-gray-500 text-xs max-w-[160px] truncate">{row.element_text || "—"}</td>
+                              <td className="py-2 px-3 text-right text-gray-400 text-xs whitespace-nowrap">
+                                {new Date(row.created_at).toLocaleString("en-GB", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )
+                )}
               </CardContent>
             </Card>
           </TabsContent>

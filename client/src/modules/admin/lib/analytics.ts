@@ -1,237 +1,169 @@
-// Analytics API client for admin module
-// Uses Supabase client-side directly (no API endpoints needed)
-
-import type {
-  AnalyticsData,
-  ChartDataPoint,
-  TopPost,
-  TrafficSource,
-} from "../types";
+// Analytics — reads directly from Supabase page_views, events, conversions tables
+import type { AnalyticsData, ChartDataPoint, TopPost, TrafficSource } from "../types";
 import { supabase } from "@/lib/supabase";
 
-/**
- * Fetch analytics overview data (from Supabase)
- */
+function daysAgo(n: number) {
+  const d = new Date();
+  d.setDate(d.getDate() - n);
+  return d.toISOString();
+}
+
+function toDateKey(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
 export async function fetchAnalyticsOverview(): Promise<AnalyticsData> {
   try {
-    const today = new Date();
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(today.getDate() - 30);
-    const sixtyDaysAgo = new Date();
-    sixtyDaysAgo.setDate(today.getDate() - 60);
+    const [
+      { count: currentViews },
+      { count: prevViews },
+      { count: totalSubscribers },
+      { count: newSubscribers },
+      { count: prevSubscribers },
+      { count: currentClicks },
+      { count: prevClicks },
+    ] = await Promise.all([
+      // Page views last 30 days
+      supabase.from("page_views").select("*", { count: "exact", head: true }).gte("created_at", daysAgo(30)),
+      // Page views prev 30 days
+      supabase.from("page_views").select("*", { count: "exact", head: true }).gte("created_at", daysAgo(60)).lt("created_at", daysAgo(30)),
+      // Total active subscribers
+      supabase.from("newsletter_subscribers").select("*", { count: "exact", head: true }).is("unsubscribed_at", null),
+      // New subscribers last 30 days
+      supabase.from("newsletter_subscribers").select("*", { count: "exact", head: true }).is("unsubscribed_at", null).gte("subscribed_at", daysAgo(30)),
+      // New subscribers prev 30 days
+      supabase.from("newsletter_subscribers").select("*", { count: "exact", head: true }).is("unsubscribed_at", null).gte("subscribed_at", daysAgo(60)).lt("subscribed_at", daysAgo(30)),
+      // Outbound clicks last 30 days
+      supabase.from("redirections").select("*", { count: "exact", head: true }).eq("is_external", true).gte("created_at", daysAgo(30)),
+      // Outbound clicks prev 30 days
+      supabase.from("redirections").select("*", { count: "exact", head: true }).eq("is_external", true).gte("created_at", daysAgo(60)).lt("created_at", daysAgo(30)),
+    ]);
 
-    const currentStart = thirtyDaysAgo.toISOString().split('T')[0];
-    const currentEnd = today.toISOString().split('T')[0];
-    const previousStart = sixtyDaysAgo.toISOString().split('T')[0];
-    const previousEnd = thirtyDaysAgo.toISOString().split('T')[0];
-
-    // Fetch current period analytics
-    const { data: currentData } = await supabase
-      .from('analytics_daily')
-      .select('*')
-      .gte('date', currentStart)
-      .lte('date', currentEnd);
-
-    // Fetch previous period analytics
-    const { data: previousData } = await supabase
-      .from('analytics_daily')
-      .select('*')
-      .gte('date', previousStart)
-      .lte('date', previousEnd);
-
-    // Get subscriber counts
-    const { count: currentSubscribersCount } = await supabase
-      .from('newsletter_subscribers')
-      .select('*', { count: 'exact', head: true })
-      .is('unsubscribed_at', null)
-      .gte('subscribed_at', currentStart);
-
-    const { count: previousSubscribersCount } = await supabase
-      .from('newsletter_subscribers')
-      .select('*', { count: 'exact', head: true })
-      .is('unsubscribed_at', null)
-      .gte('subscribed_at', previousStart)
-      .lt('subscribed_at', previousEnd);
-
-    // Calculate totals
-    const current = {
-      visitors: currentData?.reduce((sum, row) => sum + (row.visitors || 0), 0) || 0,
-      clicks: currentData?.reduce((sum, row) => sum + (row.clicks || 0), 0) || 0,
-      revenue: currentData?.reduce((sum, row) => sum + (row.revenue || 0), 0) || 0,
-      subscribers: currentSubscribersCount || 0,
-    };
-
-    const previous = {
-      visitors: previousData?.reduce((sum, row) => sum + (row.visitors || 0), 0) || 0,
-      clicks: previousData?.reduce((sum, row) => sum + (row.clicks || 0), 0) || 0,
-      revenue: previousData?.reduce((sum, row) => sum + (row.revenue || 0), 0) || 0,
-      subscribers: previousSubscribersCount || 0,
-    };
-
-    // Calculate percentage changes
-    const calculateChange = (current: number, previous: number) => {
-      if (previous === 0) return current > 0 ? 100 : 0;
-      return Math.round(((current - previous) / previous) * 100 * 10) / 10;
-    };
+    const pct = (curr: number, prev: number) =>
+      prev === 0 ? (curr > 0 ? 100 : 0) : Math.round(((curr - prev) / prev) * 1000) / 10;
 
     return {
-      visitors: current.visitors,
-      subscribers: current.subscribers,
-      clicks: current.clicks,
-      revenue: current.revenue,
-      visitorsChange: calculateChange(current.visitors, previous.visitors),
-      subscribersChange: calculateChange(current.subscribers, previous.subscribers),
-      clicksChange: calculateChange(current.clicks, previous.clicks),
-      revenueChange: calculateChange(current.revenue, previous.revenue),
+      visitors: currentViews ?? 0,
+      subscribers: totalSubscribers ?? 0,
+      clicks: currentClicks ?? 0,
+      revenue: 0, // AdSense revenue not available via API yet
+      visitorsChange: pct(currentViews ?? 0, prevViews ?? 0),
+      subscribersChange: pct(newSubscribers ?? 0, prevSubscribers ?? 0),
+      clicksChange: pct(currentClicks ?? 0, prevClicks ?? 0),
+      revenueChange: 0,
     };
-  } catch (error: any) {
-    // Re-throw with context for better error handling in Dashboard
-    const errorMessage = error?.message || "Failed to fetch analytics overview";
-    throw new Error(`Analytics Overview: ${errorMessage}`);
+  } catch (err: any) {
+    throw new Error(`Analytics Overview: ${err?.message}`);
   }
 }
 
-/**
- * Fetch visitors chart data (from Supabase)
- */
 export async function fetchVisitorsData(days: number = 30): Promise<ChartDataPoint[]> {
   try {
-    const today = new Date();
-    const startDate = new Date();
-    startDate.setDate(today.getDate() - days);
-
     const { data } = await supabase
-      .from('analytics_daily')
-      .select('date, visitors')
-      .gte('date', startDate.toISOString().split('T')[0])
-      .lte('date', today.toISOString().split('T')[0])
-      .order('date', { ascending: true });
+      .from("page_views")
+      .select("created_at")
+      .gte("created_at", daysAgo(days))
+      .order("created_at", { ascending: true });
 
-    return (data || []).map((row) => ({
-      date: new Date(row.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-      value: row.visitors || 0,
-    }));
-  } catch (error: any) {
-    // Re-throw with context for better error handling
-    const errorMessage = error?.message || "Failed to fetch data";
-    throw new Error(`Visitors Data: ${errorMessage}`);
+    // Group by date
+    const map: Record<string, number> = {};
+    (data || []).forEach((row) => {
+      const key = toDateKey(row.created_at);
+      map[key] = (map[key] ?? 0) + 1;
+    });
+    return Object.entries(map).map(([date, value]) => ({ date, value }));
+  } catch (err: any) {
+    throw new Error(`Visitors Data: ${err?.message}`);
   }
 }
 
-/**
- * Fetch clicks chart data (from Supabase)
- */
 export async function fetchClicksData(days: number = 30): Promise<ChartDataPoint[]> {
   try {
-    const today = new Date();
-    const startDate = new Date();
-    startDate.setDate(today.getDate() - days);
-
     const { data } = await supabase
-      .from('analytics_daily')
-      .select('date, clicks')
-      .gte('date', startDate.toISOString().split('T')[0])
-      .lte('date', today.toISOString().split('T')[0])
-      .order('date', { ascending: true });
+      .from("redirections")
+      .select("created_at")
+      .eq("is_external", true)
+      .gte("created_at", daysAgo(days))
+      .order("created_at", { ascending: true });
 
-    return (data || []).map((row) => ({
-      date: new Date(row.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-      value: row.clicks || 0,
-    }));
-  } catch (error: any) {
-    // Re-throw with context for better error handling
-    const errorMessage = error?.message || "Failed to fetch data";
-    throw new Error(`Clicks Data: ${errorMessage}`);
+    const map: Record<string, number> = {};
+    (data || []).forEach((row) => {
+      const key = toDateKey(row.created_at);
+      map[key] = (map[key] ?? 0) + 1;
+    });
+    return Object.entries(map).map(([date, value]) => ({ date, value }));
+  } catch (err: any) {
+    throw new Error(`Clicks Data: ${err?.message}`);
   }
 }
 
-/**
- * Fetch revenue chart data (from Supabase)
- */
-export async function fetchRevenueData(days: number = 30): Promise<ChartDataPoint[]> {
-  try {
-    const today = new Date();
-    const startDate = new Date();
-    startDate.setDate(today.getDate() - days);
-
-    const { data } = await supabase
-      .from('analytics_daily')
-      .select('date, revenue')
-      .gte('date', startDate.toISOString().split('T')[0])
-      .lte('date', today.toISOString().split('T')[0])
-      .order('date', { ascending: true });
-
-    return (data || []).map((row) => ({
-      date: new Date(row.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-      value: row.revenue || 0,
-    }));
-  } catch (error: any) {
-    // Re-throw with context for better error handling
-    const errorMessage = error?.message || "Failed to fetch data";
-    throw new Error(`Revenue Data: ${errorMessage}`);
-  }
+export async function fetchRevenueData(_days: number = 30): Promise<ChartDataPoint[]> {
+  // AdSense revenue API not integrated — return empty so chart shows "no data" placeholder
+  return [];
 }
 
-/**
- * Fetch top performing posts (from Supabase)
- */
 export async function fetchTopPosts(limit: number = 10): Promise<TopPost[]> {
   try {
-    const today = new Date();
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(today.getDate() - 30);
-
-    // Get page views grouped by page_path
     const { data } = await supabase
-      .from('page_views')
-      .select('page_path, page_title')
-      .gte('created_at', thirtyDaysAgo.toISOString())
-      .like('page_path', '%/blog/%');
+      .from("page_views")
+      .select("page_path, page_title")
+      .gte("created_at", daysAgo(30))
+      .like("page_path", "%/blog/%");
 
-    // Aggregate by page_path
-    const pageStats: Record<string, TopPost> = {};
+    const map: Record<string, TopPost> = {};
     (data || []).forEach((row) => {
       const path = row.page_path;
-      if (!pageStats[path]) {
-        pageStats[path] = {
-          title: row.page_title || 'Untitled Post',
-          views: 0,
-          clicks: 0,
-          revenue: 0,
-        };
+      if (!map[path]) {
+        map[path] = { title: row.page_title || path.split("/").pop() || path, views: 0, clicks: 0, revenue: 0 };
       }
-      pageStats[path].views += 1;
+      map[path].views += 1;
     });
 
-    // Convert to array and sort by views
-    return Object.values(pageStats)
+    return Object.values(map)
       .sort((a, b) => b.views - a.views)
       .slice(0, limit);
-  } catch (error: any) {
-    // Re-throw with context for better error handling
-    const errorMessage = error?.message || "Failed to fetch data";
-    throw new Error(`Top Posts: ${errorMessage}`);
+  } catch (err: any) {
+    throw new Error(`Top Posts: ${err?.message}`);
   }
 }
 
-/**
- * Fetch traffic sources (from Supabase)
- */
 export async function fetchTrafficSources(): Promise<TrafficSource[]> {
   try {
-    // For now, return empty array as we need to track referrer in page_views
-    // Can be implemented later by aggregating referrer data from page_views table
+    const { data } = await supabase
+      .from("page_views")
+      .select("referrer")
+      .gte("created_at", daysAgo(30))
+      .not("referrer", "is", null);
+
+    const map: Record<string, number> = { Direct: 0 };
+    (data || []).forEach((row) => {
+      const ref = row.referrer as string;
+      if (!ref) { map["Direct"]++; return; }
+      let source = "Other";
+      if (ref.includes("google")) source = "Google";
+      else if (ref.includes("bing")) source = "Bing";
+      else if (ref.includes("facebook") || ref.includes("fb.com")) source = "Facebook";
+      else if (ref.includes("twitter") || ref.includes("x.com")) source = "Twitter/X";
+      else if (ref.includes("linkedin")) source = "LinkedIn";
+      else if (ref.includes("reddit")) source = "Reddit";
+      map[source] = (map[source] ?? 0) + 1;
+    });
+
+    const colors: Record<string, string> = {
+      Direct: "#6366f1", Google: "#0066FF", Bing: "#00a2ed",
+      Facebook: "#1877f2", "Twitter/X": "#000000", LinkedIn: "#0a66c2",
+      Reddit: "#ff4500", Other: "#9ca3af",
+    };
+
+    return Object.entries(map)
+      .filter(([, v]) => v > 0)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, value]) => ({ name, value, color: colors[name] ?? "#9ca3af" }));
+  } catch {
     return [];
-  } catch (error: any) {
-    // Re-throw with context for better error handling
-    const errorMessage = error?.message || "Failed to fetch data";
-    throw new Error(`Visitors Data: ${errorMessage}`);
   }
 }
 
-/**
- * Fetch newsletter subscribers
- */
 export interface Subscriber {
   id: string;
   email: string;
@@ -243,21 +175,13 @@ export interface Subscriber {
 
 export async function fetchSubscribers(): Promise<Subscriber[]> {
   try {
-    // Use Supabase client directly (client-side)
     const { data, error } = await supabase
-      .from('newsletter_subscribers')
-      .select('*')
-      .order('subscribed_at', { ascending: false });
-
-    if (error) {
-      // Re-throw with context for better error handling
-      throw new Error(`Subscribers: ${error.message || 'Failed to fetch subscribers'}`);
-    }
-
+      .from("newsletter_subscribers")
+      .select("*")
+      .order("subscribed_at", { ascending: false });
+    if (error) throw new Error(error.message);
     return data || [];
-  } catch (error: any) {
-    // Re-throw with context for better error handling
-    const errorMessage = error?.message || "Failed to fetch subscribers";
-    throw new Error(`Subscribers: ${errorMessage}`);
+  } catch (err: any) {
+    throw new Error(`Subscribers: ${err?.message}`);
   }
 }
