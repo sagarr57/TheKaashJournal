@@ -13,6 +13,7 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "seed:blogs:sql": "pnpm tsx scripts/generate-blog-seed-sql.ts",
+    "seed:supabase": "pnpm tsx scripts/seed-supabase.ts",
     "generate:sitemap": "pnpm tsx scripts/generate-sitemap.ts"
   },
   "dependencies": {

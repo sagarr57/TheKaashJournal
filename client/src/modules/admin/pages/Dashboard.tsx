@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SEO } from "@/components/SEO";
@@ -8,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
-import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw } from "lucide-react";
+import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw, Pencil, Trash2, Plus, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { author, categories } from "@/lib/categories";
 import {
@@ -47,6 +49,24 @@ const getInitialPostForm = () => ({
   keywords: "",
 });
 
+type BlogPostRow = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  date: string;
+  category: string;
+  tags: string[];
+  reading_time: number;
+  featured: boolean;
+  image: string;
+  meta_description: string;
+  keywords: string[];
+  updated_at: string;
+};
+
 function AdminDashboard() {
   const [overview, setOverview] = useState<AnalyticsData | null>(null);
   const [visitors, setVisitors] = useState<ChartDataPoint[]>([]);
@@ -59,6 +79,31 @@ function AdminDashboard() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isPublishingPost, setIsPublishingPost] = useState(false);
   const [postForm, setPostForm] = useState(getInitialPostForm());
+  const [allPosts, setAllPosts] = useState<BlogPostRow[]>([]);
+  const [isFetchingPosts, setIsFetchingPosts] = useState(false);
+  const [editingPostId, setEditingPostId] = useState<string | null>(null);
+  const [deletingPostId, setDeletingPostId] = useState<string | null>(null);
+  const [deleteModal, setDeleteModal] = useState<{ id: string; title: string } | null>(null);
+  const [postsView, setPostsView] = useState<"list" | "form">("list");
+  const [postsPage, setPostsPage] = useState(1);
+  const POSTS_PER_PAGE = 10;
+  const [contentEditorTab, setContentEditorTab] = useState<"write" | "preview">("write");
+
+  const totalPostPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+  const pagedPosts = useMemo(
+    () => allPosts.slice((postsPage - 1) * POSTS_PER_PAGE, postsPage * POSTS_PER_PAGE),
+    [allPosts, postsPage]
+  );
+
+  const tocItems = useMemo(() => {
+    return postForm.content
+      .split("\n")
+      .map((line) => {
+        const m = line.match(/^(#{1,3})\s+(.*)/);
+        return m ? { level: m[1].length, text: m[2].trim() } : null;
+      })
+      .filter(Boolean) as { level: number; text: string }[];
+  }, [postForm.content]);
 
   const slugify = (value: string) =>
     value
@@ -78,6 +123,69 @@ function AdminDashboard() {
     }
   };
 
+  const fetchAllPosts = async () => {
+    setIsFetchingPosts(true);
+    try {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,updated_at")
+        .order("date", { ascending: false });
+      if (error) throw new Error(error.message);
+      setAllPosts((data as BlogPostRow[]) || []);
+      setPostsPage(1);
+    } catch (err: any) {
+      toast.error("Failed to load posts", { description: err?.message });
+    } finally {
+      setIsFetchingPosts(false);
+    }
+  };
+
+  const handleEditPost = (post: BlogPostRow) => {
+    setEditingPostId(post.id);
+    setPostForm({
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      content: post.content,
+      author: post.author,
+      date: post.date,
+      category: post.category,
+      tags: (post.tags || []).join(", "),
+      readingTime: post.reading_time,
+      featured: post.featured,
+      image: post.image || DEFAULT_POST_IMAGE,
+      metaDescription: post.meta_description || "",
+      keywords: (post.keywords || []).join(", "),
+    });
+    setPostsView("form");
+  };
+
+  const handleDeletePost = (id: string, title: string) => {
+    setDeleteModal({ id, title });
+  };
+
+  const confirmDeletePost = async () => {
+    if (!deleteModal) return;
+    setDeletingPostId(deleteModal.id);
+    setDeleteModal(null);
+    try {
+      const { error } = await supabase.from("blog_posts").delete().eq("id", deleteModal.id);
+      if (error) throw new Error(error.message);
+      toast.success("Post deleted");
+      await fetchAllPosts();
+    } catch (err: any) {
+      toast.error("Failed to delete post", { description: err?.message });
+    } finally {
+      setDeletingPostId(null);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingPostId(null);
+    setPostForm(getInitialPostForm());
+    setPostsView("list");
+  };
+
   const handlePublishPost = async (e: React.FormEvent) => {
     e.preventDefault();
     const slug = postForm.slug.trim() || slugify(postForm.title);
@@ -91,18 +199,12 @@ function AdminDashboard() {
 
     setIsPublishingPost(true);
     try {
-      const tags = postForm.tags
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean);
-      const keywords = postForm.keywords
-        .split(",")
-        .map((k) => k.trim())
-        .filter(Boolean);
+      const tags = postForm.tags.split(",").map((t) => t.trim()).filter(Boolean);
+      const keywords = postForm.keywords.split(",").map((k) => k.trim()).filter(Boolean);
 
       const { error } = await supabase.from("blog_posts").upsert(
         {
-          id: slug,
+          id: editingPostId || slug,
           title: postForm.title.trim(),
           slug,
           excerpt: postForm.excerpt.trim(),
@@ -121,17 +223,18 @@ function AdminDashboard() {
         { onConflict: "id" }
       );
 
-      if (error) {
-        throw new Error(error.message || "Failed to publish post");
-      }
+      if (error) throw new Error(error.message || "Failed to publish post");
 
-      toast.success("Post published", {
+      toast.success(editingPostId ? "Post updated" : "Post published", {
         description: "The blog post has been saved to Supabase.",
       });
 
+      setEditingPostId(null);
       setPostForm(getInitialPostForm());
+      setPostsView("list");
+      await fetchAllPosts();
     } catch (error: any) {
-      toast.error("Failed to publish post", {
+      toast.error("Failed to save post", {
         description: error?.message || "Please check inputs and try again.",
       });
     } finally {
@@ -269,8 +372,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     loadData();
-    
-    // Auto-refresh every 5 minutes
+    fetchAllPosts();
     const interval = setInterval(loadData, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
@@ -651,124 +753,402 @@ function AdminDashboard() {
 
           {/* Posts Tab */}
           <TabsContent value="posts" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Publish Blog Post</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handlePublishPost} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input
-                      value={postForm.title}
-                      onChange={(e) => handlePostFieldChange("title", e.target.value)}
-                      onBlur={handlePostTitleBlur}
-                      placeholder="Title *"
-                      className="w-full border border-gray-300 px-3 py-2 rounded"
-                      required
-                    />
-                    <input
-                      value={postForm.slug}
-                      onChange={(e) => handlePostFieldChange("slug", slugify(e.target.value))}
-                      placeholder="slug-example *"
-                      className="w-full border border-gray-300 px-3 py-2 rounded"
-                      required
-                    />
-                    <input
-                      value={postForm.author}
-                      onChange={(e) => handlePostFieldChange("author", e.target.value)}
-                      placeholder="Author"
-                      className="w-full border border-gray-300 px-3 py-2 rounded"
-                    />
-                    <input
-                      type="date"
-                      value={postForm.date}
-                      onChange={(e) => handlePostFieldChange("date", e.target.value)}
-                      className="w-full border border-gray-300 px-3 py-2 rounded"
-                    />
-                    <select
-                      value={postForm.category}
-                      onChange={(e) => handlePostFieldChange("category", e.target.value)}
-                      className="w-full border border-gray-300 px-3 py-2 rounded bg-white"
-                      required
+
+            {/* List view */}
+            {postsView === "list" && (
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle>All Posts ({allPosts.length})</CardTitle>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={fetchAllPosts}
+                      disabled={isFetchingPosts}
+                      className="rounded-none border-gray-300"
                     >
-                      {categories.map((category) => (
-                        <option key={category.id} value={category.name}>
-                          {category.name}
-                        </option>
-                      ))}
-                    </select>
-                    <input
-                      type="number"
-                      min={1}
-                      value={postForm.readingTime}
-                      onChange={(e) => handlePostFieldChange("readingTime", Number(e.target.value))}
-                      placeholder="Reading time (min)"
-                      className="w-full border border-gray-300 px-3 py-2 rounded"
-                    />
-                  </div>
-
-                  <input
-                    value={postForm.image}
-                    onChange={(e) => handlePostFieldChange("image", e.target.value)}
-                    placeholder="Image URL/path (e.g. /images/hero-abstract.jpg)"
-                    className="w-full border border-gray-300 px-3 py-2 rounded"
-                  />
-
-                  <textarea
-                    value={postForm.excerpt}
-                    onChange={(e) => handlePostFieldChange("excerpt", e.target.value)}
-                    placeholder="Excerpt *"
-                    className="w-full border border-gray-300 px-3 py-2 rounded min-h-[90px]"
-                    required
-                  />
-
-                  <textarea
-                    value={postForm.content}
-                    onChange={(e) => handlePostFieldChange("content", e.target.value)}
-                    placeholder="Markdown content *"
-                    className="w-full border border-gray-300 px-3 py-2 rounded min-h-[260px] font-mono text-sm"
-                    required
-                  />
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input
-                      value={postForm.tags}
-                      onChange={(e) => handlePostFieldChange("tags", e.target.value)}
-                      placeholder="Tags (comma separated)"
-                      className="w-full border border-gray-300 px-3 py-2 rounded"
-                    />
-                    <input
-                      value={postForm.keywords}
-                      onChange={(e) => handlePostFieldChange("keywords", e.target.value)}
-                      placeholder="SEO keywords (comma separated)"
-                      className="w-full border border-gray-300 px-3 py-2 rounded"
-                    />
-                  </div>
-
-                  <input
-                    value={postForm.metaDescription}
-                    onChange={(e) => handlePostFieldChange("metaDescription", e.target.value)}
-                    placeholder="Meta description (optional)"
-                    className="w-full border border-gray-300 px-3 py-2 rounded"
-                  />
-
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={postForm.featured}
-                      onChange={(e) => handlePostFieldChange("featured", e.target.checked)}
-                    />
-                    Feature this post
-                  </label>
-
-                  <div className="flex justify-end">
-                    <Button type="submit" disabled={isPublishingPost} className="rounded-none">
-                      {isPublishingPost ? "Publishing..." : "Publish Post"}
+                      <RefreshCw className={`w-4 h-4 mr-1 ${isFetchingPosts ? "animate-spin" : ""}`} />
+                      Refresh
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => { setEditingPostId(null); setPostForm(getInitialPostForm()); setPostsView("form"); }}
+                      className="rounded-none"
+                    >
+                      <Plus className="w-4 h-4 mr-1" />
+                      New Post
                     </Button>
                   </div>
-                </form>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent>
+                  {isFetchingPosts ? (
+                    <div className="py-12 text-center text-gray-500">
+                      <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin text-blue-600" />
+                      <p>Loading posts…</p>
+                    </div>
+                  ) : allPosts.length === 0 ? (
+                    <div className="py-12 text-center text-gray-500">
+                      <p>No posts found in Supabase.</p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[700px] text-sm">
+                        <thead>
+                          <tr className="border-b border-gray-200 text-left">
+                            <th className="py-2 px-3 font-semibold text-gray-700">Title</th>
+                            <th className="py-2 px-3 font-semibold text-gray-700">Category</th>
+                            <th className="py-2 px-3 font-semibold text-gray-700">Date</th>
+                            <th className="py-2 px-3 font-semibold text-gray-700">Featured</th>
+                            <th className="py-2 px-3 font-semibold text-gray-700 text-right">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {pagedPosts.map((post) => (
+                            <tr key={post.id} className="border-b border-gray-100 hover:bg-gray-50">
+                              <td className="py-2 px-3 max-w-[280px]">
+                                <span className="font-medium text-gray-900 line-clamp-1">{post.title}</span>
+                                <span className="block text-xs text-gray-400 mt-0.5">{post.slug}</span>
+                              </td>
+                              <td className="py-2 px-3 text-gray-600">{post.category}</td>
+                              <td className="py-2 px-3 text-gray-600 whitespace-nowrap">{post.date}</td>
+                              <td className="py-2 px-3">
+                                {post.featured ? (
+                                  <span className="px-2 py-0.5 text-xs rounded bg-blue-100 text-blue-700">Yes</span>
+                                ) : (
+                                  <span className="px-2 py-0.5 text-xs rounded bg-gray-100 text-gray-500">No</span>
+                                )}
+                              </td>
+                              <td className="py-2 px-3 text-right">
+                                <div className="flex items-center justify-end gap-2">
+                                  <button
+                                    onClick={() => handleEditPost(post)}
+                                    className="p-1.5 rounded hover:bg-blue-50 text-blue-600"
+                                    title="Edit"
+                                  >
+                                    <Pencil className="w-4 h-4" />
+                                  </button>
+                                  <button
+                                    onClick={() => handleDeletePost(post.id, post.title)}
+                                    disabled={deletingPostId === post.id}
+                                    className="p-1.5 rounded hover:bg-red-50 text-red-500 disabled:opacity-40"
+                                    title="Delete"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {totalPostPages > 1 && (
+                        <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                          <p className="text-xs text-gray-500">
+                            Showing {(postsPage - 1) * POSTS_PER_PAGE + 1}–{Math.min(postsPage * POSTS_PER_PAGE, allPosts.length)} of {allPosts.length} posts
+                          </p>
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => setPostsPage((p) => Math.max(1, p - 1))}
+                              disabled={postsPage === 1}
+                              className="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                            >
+                              ← Prev
+                            </button>
+                            {Array.from({ length: totalPostPages }, (_, i) => i + 1).map((page) => (
+                              <button
+                                key={page}
+                                onClick={() => setPostsPage(page)}
+                                className={`px-2.5 py-1 text-xs border rounded ${
+                                  page === postsPage
+                                    ? "bg-blue-600 text-white border-blue-600"
+                                    : "border-gray-200 hover:bg-gray-50"
+                                }`}
+                              >
+                                {page}
+                              </button>
+                            ))}
+                            <button
+                              onClick={() => setPostsPage((p) => Math.min(totalPostPages, p + 1))}
+                              disabled={postsPage === totalPostPages}
+                              className="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                            >
+                              Next →
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Create / Edit form */}
+            {postsView === "form" && (
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle>{editingPostId ? "Edit Post" : "New Post"}</CardTitle>
+                  <button onClick={handleCancelEdit} className="p-1.5 rounded hover:bg-gray-100 text-gray-500" title="Back to list">
+                    <X className="w-5 h-5" />
+                  </button>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handlePublishPost} className="space-y-5">
+
+                    {/* Row 1: Title + Slug */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Post Title <span className="text-red-500">*</span></span>
+                        <input
+                          value={postForm.title}
+                          onChange={(e) => handlePostFieldChange("title", e.target.value)}
+                          onBlur={handlePostTitleBlur}
+                          placeholder="e.g. How AI is Changing Personal Finance"
+                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          required
+                        />
+                      </label>
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">URL Slug <span className="text-red-500">*</span></span>
+                        <input
+                          value={postForm.slug}
+                          onChange={(e) => handlePostFieldChange("slug", slugify(e.target.value))}
+                          placeholder="e.g. how-ai-is-changing-personal-finance"
+                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          required
+                        />
+                        <span className="text-[11px] text-gray-400">Auto-generated from title. Used in the blog URL.</span>
+                      </label>
+                    </div>
+
+                    {/* Row 2: Author + Publish Date */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Author Name</span>
+                        <input
+                          value={postForm.author}
+                          onChange={(e) => handlePostFieldChange("author", e.target.value)}
+                          placeholder="Team Kaash"
+                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <span className="text-[11px] text-gray-400">Defaults to "Team Kaash" if left blank.</span>
+                      </label>
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Publish Date <span className="text-red-500">*</span></span>
+                        <input
+                          type="date"
+                          value={postForm.date}
+                          onChange={(e) => handlePostFieldChange("date", e.target.value)}
+                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </label>
+                    </div>
+
+                    {/* Row 3: Category + Reading Time */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Category <span className="text-red-500">*</span></span>
+                        <select
+                          value={postForm.category}
+                          onChange={(e) => handlePostFieldChange("category", e.target.value)}
+                          className="w-full border border-gray-300 px-3 py-2 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          required
+                        >
+                          {categories.map((cat) => (
+                            <option key={cat.id} value={cat.name}>{cat.name}</option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Reading Time (minutes)</span>
+                        <input
+                          type="number"
+                          min={1}
+                          value={postForm.readingTime}
+                          onChange={(e) => handlePostFieldChange("readingTime", Number(e.target.value))}
+                          placeholder="5"
+                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <span className="text-[11px] text-gray-400">Shown as "5 min read" on the blog post.</span>
+                      </label>
+                    </div>
+
+                    {/* Cover Image */}
+                    <label className="flex flex-col gap-1">
+                      <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Cover Image Path</span>
+                      <input
+                        value={postForm.image}
+                        onChange={(e) => handlePostFieldChange("image", e.target.value)}
+                        placeholder="/images/hero-abstract.jpg"
+                        className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <span className="text-[11px] text-gray-400">Path to the post's hero image. Leave as default if unsure.</span>
+                    </label>
+
+                    {/* Excerpt */}
+                    <label className="flex flex-col gap-1">
+                      <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Excerpt / Summary <span className="text-red-500">*</span></span>
+                      <textarea
+                        value={postForm.excerpt}
+                        onChange={(e) => handlePostFieldChange("excerpt", e.target.value)}
+                        placeholder="A short 1–2 sentence summary shown on the blog listing page and in Google search results."
+                        className="w-full border border-gray-300 px-3 py-2 rounded min-h-[80px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                      />
+                      <span className="text-[11px] text-gray-400">Keep under 160 characters for best SEO results.</span>
+                    </label>
+
+                    {/* Content editor with live preview + TOC */}
+                    <div className="flex flex-col gap-1">
+                      <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Main Content <span className="text-red-500">*</span></span>
+                      <span className="text-[11px] text-gray-400 mb-1">Write in Markdown. Use ## for headings, **bold**, - for bullet lists. Switch to Preview to see how it looks.</span>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                      <div className="lg:col-span-2">
+                        {/* Write / Preview tabs */}
+                        <div className="flex border-b border-gray-200 mb-2">
+                          <button
+                            type="button"
+                            onClick={() => setContentEditorTab("write")}
+                            className={`px-4 py-1.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
+                              contentEditorTab === "write"
+                                ? "border-blue-600 text-blue-600"
+                                : "border-transparent text-gray-500 hover:text-gray-700"
+                            }`}
+                          >
+                            Write
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setContentEditorTab("preview")}
+                            className={`px-4 py-1.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
+                              contentEditorTab === "preview"
+                                ? "border-blue-600 text-blue-600"
+                                : "border-transparent text-gray-500 hover:text-gray-700"
+                            }`}
+                          >
+                            Preview
+                          </button>
+                        </div>
+                        {contentEditorTab === "write" ? (
+                          <textarea
+                            value={postForm.content}
+                            onChange={(e) => handlePostFieldChange("content", e.target.value)}
+                            placeholder="Markdown content *"
+                            className="w-full border border-gray-300 px-3 py-2 rounded min-h-[400px] font-mono text-sm"
+                            required
+                          />
+                        ) : (
+                          <div className="w-full border border-gray-200 rounded px-4 py-3 min-h-[400px] overflow-y-auto prose prose-sm max-w-none">
+                            <ReactMarkdown
+                              remarkPlugins={[remarkGfm]}
+                              components={{
+                                h1: ({ children }) => <h1 className="text-2xl font-bold mt-6 mb-3">{children}</h1>,
+                                h2: ({ children }) => <h2 className="text-xl font-bold mt-5 mb-2">{children}</h2>,
+                                h3: ({ children }) => <h3 className="text-lg font-semibold mt-4 mb-2">{children}</h3>,
+                                h4: ({ children }) => <h4 className="text-base font-semibold mt-3 mb-1">{children}</h4>,
+                                p: ({ children }) => <p className="mb-3 leading-relaxed">{children}</p>,
+                                ul: ({ children }) => <ul className="list-disc pl-5 mb-3">{children}</ul>,
+                                ol: ({ children }) => <ol className="list-decimal pl-5 mb-3">{children}</ol>,
+                                li: ({ children }) => <li className="mb-1">{children}</li>,
+                                strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+                                a: ({ href, children }) => <a href={href} className="text-blue-600 underline">{children}</a>,
+                                blockquote: ({ children }) => <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-3">{children}</blockquote>,
+                                code: ({ children }) => <code className="bg-gray-100 px-1 py-0.5 rounded text-xs font-mono">{children}</code>,
+                              }}
+                            >
+                              {postForm.content || "*Nothing to preview yet…*"}
+                            </ReactMarkdown>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Live Table of Contents */}
+                      <div className="lg:col-span-1">
+                        <div className="border border-gray-200 rounded p-3 sticky top-4">
+                          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Table of Contents</p>
+                          {tocItems.length === 0 ? (
+                            <p className="text-xs text-gray-400 italic">Add ## headings to see TOC</p>
+                          ) : (
+                            <ol className="space-y-1">
+                              {tocItems.map((item, i) => (
+                                <li
+                                  key={i}
+                                  className={`text-xs text-gray-700 leading-snug ${
+                                    item.level === 1 ? "font-bold" :
+                                    item.level === 2 ? "font-semibold pl-2" :
+                                    "pl-4 text-gray-500"
+                                  }`}
+                                >
+                                  {item.text}
+                                </li>
+                              ))}
+                            </ol>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    </div> {/* close content label wrapper */}
+
+                    {/* Tags + SEO Keywords */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Tags</span>
+                        <input
+                          value={postForm.tags}
+                          onChange={(e) => handlePostFieldChange("tags", e.target.value)}
+                          placeholder="e.g. AI, Fintech, Personal Finance"
+                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <span className="text-[11px] text-gray-400">Comma-separated. Used for filtering and related posts.</span>
+                      </label>
+                      <label className="flex flex-col gap-1">
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">SEO Keywords</span>
+                        <input
+                          value={postForm.keywords}
+                          onChange={(e) => handlePostFieldChange("keywords", e.target.value)}
+                          placeholder="e.g. AI finance tools, debt management 2026"
+                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <span className="text-[11px] text-gray-400">Comma-separated. Added to the page's meta keywords tag.</span>
+                      </label>
+                    </div>
+
+                    {/* Meta Description */}
+                    <label className="flex flex-col gap-1">
+                      <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Meta Description</span>
+                      <input
+                        value={postForm.metaDescription}
+                        onChange={(e) => handlePostFieldChange("metaDescription", e.target.value)}
+                        placeholder="Short description shown in Google search results (max 160 chars)"
+                        className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <span className="text-[11px] text-gray-400">Falls back to the excerpt if left blank.</span>
+                    </label>
+
+                    {/* Featured toggle */}
+                    <label className="flex items-center gap-3 cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={postForm.featured}
+                        onChange={(e) => handlePostFieldChange("featured", e.target.checked)}
+                        className="w-4 h-4 accent-blue-600"
+                      />
+                      <span className="text-sm font-medium text-gray-700">Feature this post</span>
+                      <span className="text-[11px] text-gray-400">(Pinned to the top of the blog listing page)</span>
+                    </label>
+
+                    <div className="flex justify-end gap-3">
+                      <Button type="button" variant="outline" onClick={handleCancelEdit} className="rounded-none">
+                        Cancel
+                      </Button>
+                      <Button type="submit" disabled={isPublishingPost} className="rounded-none">
+                        {isPublishingPost ? "Saving…" : editingPostId ? "Update Post" : "Publish Post"}
+                      </Button>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
 
           {/* Settings Tab */}
@@ -789,6 +1169,32 @@ function AdminDashboard() {
       </main>
 
       <Footer />
+
+      {/* Delete confirmation modal */}
+      {deleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-sm mx-4 p-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-2">Delete Post?</h2>
+            <p className="text-sm text-gray-600 mb-1">You are about to permanently delete:</p>
+            <p className="text-sm font-semibold text-gray-800 mb-5 line-clamp-2">"{deleteModal.title}"</p>
+            <p className="text-xs text-gray-400 mb-6">This action cannot be undone.</p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setDeleteModal(null)}
+                className="px-5 py-2 text-sm font-medium rounded bg-green-600 text-white hover:bg-green-700 transition-colors"
+              >
+                Keep
+              </button>
+              <button
+                onClick={confirmDeletePost}
+                className="px-5 py-2 text-sm font-medium rounded bg-red-600 text-white hover:bg-red-700 transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
