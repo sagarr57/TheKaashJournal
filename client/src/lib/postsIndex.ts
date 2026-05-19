@@ -54,7 +54,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["ChatGPT", "AI", "Personal Finance", "Budgeting"],
     readingTime: 9,
     featured: true,
-    image: "/images/icon-ai.png",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "Use ChatGPT safely for budgets, debt strategy sketches, and learning investing terms—with UK prompts, GOV.UK debt signposting, and FCA/MoneyHelper links.",
@@ -73,7 +73,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Fintech", "AI", "Startups", "Investment"],
     readingTime: 10,
     featured: false,
-    image: "/images/icon-finance.png",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "AI in fintech: underwriting speed, robo journeys, invisible fraud controls, and chat support—with FCA register and MoneyHelper signposts for UK readers.",
@@ -92,7 +92,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Budgeting", "Automation", "AI", "Personal Finance"],
     readingTime: 8,
     featured: false,
-    image: "/images/icon-marketing.png",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "Automated budgeting tutorial: Mint’s closure, YNAB/Goodbudget/Undebt.it, UK open banking consent, weekly review habit, and CSV snapshots.",
@@ -130,7 +130,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Tools", "Finance", "Updates", "Technology"],
     readingTime: 11,
     featured: true,
-    image: "/images/icon-ai.png",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "Early-2026 AI finance landscape: assistants, Microsoft/Google copilots, YNAB, Goodbudget, Undebt.it, UK neobanks, TrueLayer, FCA scam guidance—with official links.",
@@ -339,7 +339,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI wearables", "Digital health", "Preventive care", "Privacy"],
     readingTime: 9,
     featured: false,
-    image: "/images/icon-ai.png",
+    image: "/images/ai-health.jpg",
     seo: {
       metaDescription:
         "How AI wearables in 2026 are used for early health signals, AFib screening, and trend detection—plus practical limits and privacy considerations.",
@@ -358,7 +358,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Precision nutrition", "Microbiome", "CGM", "AI health"],
     readingTime: 9,
     featured: false,
-    image: "/images/icon-finance.png",
+    image: "/images/nutrition.jpg",
     seo: {
       metaDescription:
         "A practical guide to AI-driven precision nutrition in 2026: microbiome insights, CGM feedback loops, benefits, limits, and data privacy trade-offs.",
@@ -377,7 +377,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Health", "Wearables", "Longevity", "Digital Health", "Wellness"],
     readingTime: 10,
     featured: true,
-    image: "/images/icon-ai.png",
+    image: "/images/ai-health.jpg",
     seo: {
       metaDescription:
         "How agentic AI health coaches in 2026 merge biometric data, bloodwork, and your calendar to deliver proactive wellness planning — before you feel the burnout coming.",
@@ -403,7 +403,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Skin Longevity", "AI Diagnostics", "Biotech", "Skincare", "Regenerative Beauty"],
     readingTime: 9,
     featured: false,
-    image: "/images/icon-ai.png",
+    image: "/images/ai-health.jpg",
     seo: {
       metaDescription:
         "How AI skin diagnostics and biotech ingredients like senolytics and NAD+ boosters are replacing anti-aging with skin longevity — a data-driven approach to cellular health.",
@@ -430,7 +430,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Nutrition", "Meal Planning", "Precision Nutrition", "Digital Health", "CGM"],
     readingTime: 10,
     featured: false,
-    image: "/images/icon-finance.png",
+    image: "/images/nutrition.jpg",
     seo: {
       metaDescription:
         "How AI nutritionists in 2026 use wearable data, CGM readings, and microbiome insights to replace manual calorie counting with automated, personalised meal planning.",
@@ -457,7 +457,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Mental Health", "AI Therapy", "Digital Wellbeing", "CBT", "AI Health"],
     readingTime: 11,
     featured: true,
-    image: "/images/icon-ai.png",
+    image: "/images/wellness-mental.jpg",
     seo: {
       metaDescription:
         "AI therapy chatbots offer 24/7 mental health support — but can they replace human therapists? An honest look at the benefits, ethical risks, and the 2026 hybrid model.",
@@ -484,7 +484,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Longevity", "Biological Age", "Epigenetics", "AI Health", "Preventive Health"],
     readingTime: 11,
     featured: true,
-    image: "/images/icon-ai.png",
+    image: "/images/ai-health.jpg",
     seo: {
       metaDescription:
         "What do biological age tests actually measure and can they predict how long you live? A clear guide to epigenetic clocks, AI longevity tools, and what the science says in 2026.",
@@ -511,7 +511,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Sleep", "Wearables", "AI Health", "Sleep Apnoea", "Recovery"],
     readingTime: 10,
     featured: false,
-    image: "/images/icon-ai.png",
+    image: "/images/sleep-health.jpg",
     seo: {
       metaDescription:
         "Sleep tracking in 2026 goes far beyond step counting — AI now analyses your sleep architecture, detects apnoea risk, and creates personalised improvement plans. Here is what works.",
@@ -538,7 +538,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Gut Health", "Microbiome", "Mental Health", "AI Health", "Nutrition"],
     readingTime: 11,
     featured: false,
-    image: "/images/icon-ai.png",
+    image: "/images/nutrition.jpg",
     seo: {
       metaDescription:
         "Your gut microbiome influences your mood, anxiety, and cognitive performance. A clear guide to the gut-brain axis science, microbiome testing, and AI-driven personalised interventions in 2026.",
@@ -565,7 +565,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Diagnostics", "Preventive Health", "NHS", "Cancer Detection", "AI Health"],
     readingTime: 12,
     featured: true,
-    image: "/images/icon-ai.png",
+    image: "/images/ai-health.jpg",
     seo: {
       metaDescription:
         "AI is detecting cancer, heart disease, and neurological conditions years before symptoms appear. A clear look at AI diagnostics, NHS pilots, and what preventive healthcare looks like in 2026.",
@@ -592,7 +592,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Digital Wellness", "Mental Health", "Screen Time", "Social Media", "Intentional Living"],
     readingTime: 11,
     featured: false,
-    image: "/images/icon-ai.png",
+    image: "/images/wellness-mental.jpg",
     seo: {
       metaDescription:
         "Heavy social media use has documented negative effects on mental health, sleep, and attention. A practical, evidence-backed guide to intentional technology use and digital wellness in 2026.",
@@ -619,7 +619,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Robo-Advisors", "Financial Planning", "AI Finance", "Investing", "Fintech Trends"],
     readingTime: 10,
     featured: false,
-    image: "/images/icon-finance.png",
+    image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
         "Robo-advisor or human financial advisor? An honest, evidence-based comparison of costs, capabilities, and limitations — and a practical framework for making the right choice in 2026.",
@@ -646,7 +646,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Blockchain", "AI Finance", "Case Studies", "DeFi", "Fintech"],
     readingTime: 11,
     featured: false,
-    image: "/images/icon-finance.png",
+    image: "/images/business-case.jpg",
     seo: {
       metaDescription:
         "Four real case studies where blockchain and AI are delivering genuine financial value in 2026 — JP Morgan, HSBC, Chainalysis, and Aave. What actually works and why.",
@@ -673,7 +673,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Fitness", "Personal Training", "Zone 2 Training", "Wearables", "AI Health"],
     readingTime: 12,
     featured: false,
-    image: "/images/icon-ai.png",
+    image: "/images/fitness.jpg",
     seo: {
       metaDescription:
         "AI fitness coaching in 2026 adapts your workout plan daily based on HRV, sleep quality, and recovery data. A deep dive into zone 2 training, AI movement analysis, and recovery-based programming.",
@@ -835,7 +835,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Voice Banking", "Conversational AI", "LLM Finance", "AI Banking", "Fintech"],
     readingTime: 10,
     featured: false,
-    image: "/images/icon-finance.png",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "How large language models are replacing call centres in banking in 2026 — from Bank of America Erica to UK neobank AI. A practical look at what's deployed, the economics, and the privacy trade-offs.",
@@ -862,7 +862,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Agentic AI", "Personal Finance AI", "Open Banking", "Fintech", "Automation"],
     readingTime: 11,
     featured: true,
-    image: "/images/icon-finance.png",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "Agentic AI finance tools in 2026 autonomously negotiate bills, optimise cash flow, and automate business finance — built on open banking APIs. A practical guide to what's real and what the risks are.",
@@ -889,7 +889,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Gig Economy", "Freelancer Finance", "AI Fintech", "Creator Economy", "Self-Employed"],
     readingTime: 10,
     featured: false,
-    image: "/images/icon-finance.png",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "How AI fintech in 2026 is solving the financial problems freelancers, gig workers, and creators face — irregular income planning, alternative credit underwriting, and automated tax tools.",
@@ -916,7 +916,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["ESG", "Climate Finance", "AI Investing", "Sustainable Investing", "Fintech"],
     readingTime: 12,
     featured: true,
-    image: "/images/icon-finance.png",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "How AI is fixing ESG investing's greenwashing problem in 2026 — satellite data, NLP corporate analysis, and physical climate risk tools from Clarity AI, Arabesque, and Jupiter Intelligence.",
@@ -943,7 +943,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Stress", "Burnout", "Nervous System", "AI Health", "Mental Health"],
     readingTime: 11,
     featured: false,
-    image: "/images/icon-ai.png",
+    image: "/images/wellness-mental.jpg",
     seo: {
       metaDescription:
         "Burnout is a measurable nervous system state, not just exhaustion. AI tools in 2026 detect HRV dysregulation, cortisol patterns, and recovery deficits — and create personalised recovery plans.",
