@@ -17,7 +17,7 @@
     },
     {
       "source": "/ads.txt",
-      "destination": "/ads.txt"
+      "destination": "/api/ads-txt"
     },
     {
       "source": "/robots.txt",
