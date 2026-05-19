@@ -70,6 +70,8 @@ export async function fetchPostBySlugWithContent(
   slug: string
 ): Promise<BlogPost | null> {
   try {
+    await autoPublishScheduled();
+
     const { data, error } = await supabase
       .from("blog_posts")
       .select(
