@@ -32,8 +32,22 @@ function mapRowToPostIndex(row: any): BlogPostIndexItem {
   };
 }
 
+async function autoPublishScheduled() {
+  try {
+    await supabase
+      .from("blog_posts")
+      .update({ status: "published", publish_at: null })
+      .eq("status", "scheduled")
+      .lte("publish_at", new Date().toISOString());
+  } catch {
+    // silent — best-effort, cron is the authoritative mechanism
+  }
+}
+
 export async function fetchPublishedPostIndex(): Promise<BlogPostIndexItem[]> {
   try {
+    await autoPublishScheduled();
+
     const { data, error } = await supabase
       .from("blog_posts")
       .select(

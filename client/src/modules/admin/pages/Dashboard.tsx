@@ -187,6 +187,13 @@ function AdminDashboard() {
   const fetchAllPosts = async () => {
     setIsFetchingPosts(true);
     try {
+      // Publish any overdue scheduled posts (fallback for when cron hasn't run yet)
+      await supabase
+        .from("blog_posts")
+        .update({ status: "published", publish_at: null })
+        .eq("status", "scheduled")
+        .lte("publish_at", new Date().toISOString());
+
       const { data, error } = await supabase
         .from("blog_posts")
         .select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,status,publish_at,updated_at")
