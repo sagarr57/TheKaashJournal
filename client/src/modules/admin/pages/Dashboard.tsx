@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
-import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw, Pencil, Trash2, Plus, X } from "lucide-react";
+import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw, Pencil, Trash2, Plus, X, Upload, ImageIcon } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { author, categories } from "@/lib/categories";
 import {
@@ -33,23 +33,49 @@ import { toast } from "sonner";
 
 const DEFAULT_POST_IMAGE = "/images/hero-abstract.jpg";
 const DEFAULT_READING_TIME = 5;
-const getInitialPostForm = () => ({
-  title: "",
-  slug: "",
-  excerpt: "",
-  content: "",
-  author: author.name,
-  date: new Date().toISOString().split("T")[0],
-  category: categories[0]?.name || "",
-  tags: "",
-  readingTime: DEFAULT_READING_TIME,
-  featured: false,
-  image: DEFAULT_POST_IMAGE,
-  metaDescription: "",
-  keywords: "",
-  status: "published" as "published" | "draft" | "scheduled",
-  publishAt: "",
-});
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  "AI and Health":    "/images/ai-health.jpg",
+  "Debt Management":  "/images/debt-money.jpg",
+  "Real-Time Finance": "/images/fintech.jpg",
+  "Fintech Trends":   "/images/fintech.jpg",
+  "Case Studies":     "/images/business-analytics.jpg",
+};
+
+const IMAGE_PRESETS = [
+  { label: "AI & Health",  value: "/images/ai-health.jpg" },
+  { label: "Finance",      value: "/images/fintech.jpg" },
+  { label: "Debt",         value: "/images/debt-money.jpg" },
+  { label: "Nutrition",    value: "/images/nutrition.jpg" },
+  { label: "Fitness",      value: "/images/fitness.jpg" },
+  { label: "Sleep",        value: "/images/sleep-health.jpg" },
+  { label: "Wellness",     value: "/images/wellness-mental.jpg" },
+  { label: "Analytics",    value: "/images/business-analytics.jpg" },
+  { label: "Case Study",   value: "/images/business-case.jpg" },
+  { label: "Abstract",     value: "/images/hero-abstract.jpg" },
+  { label: "Data Viz",     value: "/images/data-visualization-bg.jpg" },
+];
+
+const getInitialPostForm = () => {
+  const firstCategory = categories[0]?.name || "";
+  return {
+    title: "",
+    slug: "",
+    excerpt: "",
+    content: "",
+    author: author.name,
+    date: new Date().toISOString().split("T")[0],
+    category: firstCategory,
+    tags: "",
+    readingTime: DEFAULT_READING_TIME,
+    featured: false,
+    image: CATEGORY_IMAGES[firstCategory] || DEFAULT_POST_IMAGE,
+    metaDescription: "",
+    keywords: "",
+    status: "published" as "published" | "draft" | "scheduled",
+    publishAt: "",
+  };
+};
 
 type BlogPostRow = {
   id: string;
@@ -113,6 +139,7 @@ function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isPublishingPost, setIsPublishingPost] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [postForm, setPostForm] = useState(getInitialPostForm());
   const [allPosts, setAllPosts] = useState<BlogPostRow[]>([]);
   const [isFetchingPosts, setIsFetchingPosts] = useState(false);
@@ -181,6 +208,28 @@ function AdminDashboard() {
   const handlePostTitleBlur = () => {
     if (!postForm.slug.trim() && postForm.title.trim()) {
       handlePostFieldChange("slug", slugify(postForm.title));
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploadingImage(true);
+    try {
+      const ext = file.name.split(".").pop();
+      const fileName = `blog-${Date.now()}.${ext}`;
+      const { data, error } = await supabase.storage
+        .from("blog-images")
+        .upload(fileName, file, { contentType: file.type, upsert: false });
+      if (error) throw error;
+      const { data: urlData } = supabase.storage.from("blog-images").getPublicUrl(data.path);
+      handlePostFieldChange("image", urlData.publicUrl);
+      toast.success("Image uploaded successfully");
+    } catch (err: any) {
+      toast.error("Upload failed", { description: err?.message || "Check that the 'blog-images' storage bucket exists in Supabase." });
+    } finally {
+      setIsUploadingImage(false);
+      e.target.value = "";
     }
   };
 
@@ -1204,7 +1253,14 @@ function AdminDashboard() {
                         <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Category <span className="text-red-500">*</span></span>
                         <select
                           value={postForm.category}
-                          onChange={(e) => handlePostFieldChange("category", e.target.value)}
+                          onChange={(e) => {
+                            const cat = e.target.value;
+                            handlePostFieldChange("category", cat);
+                            const currentIsPreset = IMAGE_PRESETS.some((p) => p.value === postForm.image);
+                            if (currentIsPreset || !postForm.image) {
+                              handlePostFieldChange("image", CATEGORY_IMAGES[cat] || DEFAULT_POST_IMAGE);
+                            }
+                          }}
                           className="w-full border border-gray-300 px-3 py-2 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
                         >
@@ -1228,16 +1284,77 @@ function AdminDashboard() {
                     </div>
 
                     {/* Cover Image */}
-                    <label className="flex flex-col gap-1">
-                      <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Cover Image Path</span>
-                      <input
-                        value={postForm.image}
-                        onChange={(e) => handlePostFieldChange("image", e.target.value)}
-                        placeholder="/images/hero-abstract.jpg"
-                        className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                      <span className="text-[11px] text-gray-400">Path to the post's hero image. Leave as default if unsure.</span>
-                    </label>
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Cover Image</span>
+                      <div className="flex gap-4 items-start">
+                        {/* Preview */}
+                        <div className="w-36 h-24 rounded-lg overflow-hidden border border-gray-200 bg-gray-100 flex-shrink-0">
+                          {postForm.image ? (
+                            <img
+                              src={postForm.image}
+                              alt="Cover preview"
+                              className="w-full h-full object-cover"
+                              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                            />
+                          ) : (
+                            <div className="w-full h-full flex flex-col items-center justify-center text-gray-300 gap-1">
+                              <ImageIcon className="w-6 h-6" />
+                              <span className="text-[10px]">No image</span>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex-1 flex flex-col gap-2 min-w-0">
+                          {/* Quick-pick presets */}
+                          <div className="flex flex-wrap gap-1.5">
+                            <span className="text-[11px] text-gray-500 self-center mr-0.5">Quick pick:</span>
+                            {IMAGE_PRESETS.map((opt) => (
+                              <button
+                                key={opt.value}
+                                type="button"
+                                onClick={() => handlePostFieldChange("image", opt.value)}
+                                className={`px-2 py-0.5 text-[11px] rounded border transition-colors ${
+                                  postForm.image === opt.value
+                                    ? "bg-blue-600 text-white border-blue-600"
+                                    : "border-gray-300 text-gray-600 hover:bg-gray-50"
+                                }`}
+                              >
+                                {opt.label}
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Manual URL input */}
+                          <input
+                            value={postForm.image}
+                            onChange={(e) => handlePostFieldChange("image", e.target.value)}
+                            placeholder="/images/hero-abstract.jpg or https://..."
+                            className="w-full border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+
+                          {/* Upload button */}
+                          <div className="flex items-center gap-2">
+                            <label className="cursor-pointer">
+                              <input
+                                type="file"
+                                accept="image/jpeg,image/png,image/webp,image/gif"
+                                className="hidden"
+                                onChange={handleImageUpload}
+                              />
+                              <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border rounded transition-colors ${
+                                isUploadingImage
+                                  ? "border-blue-300 text-blue-400 bg-blue-50 cursor-not-allowed"
+                                  : "border-gray-300 text-gray-700 hover:bg-gray-50 cursor-pointer"
+                              }`}>
+                                <Upload className="w-3.5 h-3.5" />
+                                {isUploadingImage ? "Uploading…" : "Upload image"}
+                              </span>
+                            </label>
+                            <span className="text-[11px] text-gray-400">JPG, PNG, WebP · uploads to Supabase Storage</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     {/* Excerpt */}
                     <label className="flex flex-col gap-1">
