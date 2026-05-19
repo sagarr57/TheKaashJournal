@@ -16,7 +16,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "Debt", "Tools", "Finance"],
     readingTime: 8,
     featured: true,
-    image: "/images/hero-abstract.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "Hands-on look at YNAB, Rocket Money, Undebt.it, Copilot, and Goodbudget for budgeting and debt—with links to each product and UK debt help resources.",
@@ -35,7 +35,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "Investment", "Real-Time Data", "Trading"],
     readingTime: 6,
     featured: true,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "Discover how real-time financial data and AI are revolutionizing investment decisions. Learn strategies for leveraging this technology.",
@@ -111,7 +111,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Robo-Advisors", "Investment", "AI", "Comparison"],
     readingTime: 10,
     featured: false,
-    image: "/images/hero-abstract.jpg",
+    image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
         "Robo-advisor comparison framework: costs, portfolios, cash drag, ISAs, risk questionnaires, UK platform links, and when you need a human adviser—not hype.",
@@ -149,7 +149,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt", "AI", "Budgeting", "Teaching example"],
     readingTime: 12,
     featured: true,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "Composite teaching example: phases from honest inventory through budgeting apps, avalanche vs snowball, automation, and when to use free UK debt advice—not a news story.",
@@ -168,7 +168,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt stress", "Mental health", "Budgeting", "UK finance"],
     readingTime: 11,
     featured: false,
-    image: "/images/hero-abstract.jpg",
+    image: "/images/wellness-mental.jpg",
     seo: {
       metaDescription:
         "Understand how debt stress affects thinking and motivation, and learn practical, non-judgemental steps to regain control of your finances in the UK.",
@@ -187,7 +187,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Loans", "Repayments", "Refinancing", "UK"],
     readingTime: 12,
     featured: false,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "Practical ways to manage loan repayment stress: clarity on numbers, lender conversations, automation, and when to seek free debt advice.",
@@ -206,7 +206,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt collection", "Consumer rights", "UK", "Scams"],
     readingTime: 10,
     featured: false,
-    image: "/images/hero-abstract.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "What to do if a debt collector calls: verify the debt, know UK protections, avoid pressure tactics, and use official channels before you pay.",
@@ -225,7 +225,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["IVA", "Insolvency", "UK debt", "Advice"],
     readingTime: 13,
     featured: false,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "An impartial overview of UK IVAs: duration, voting rules, credit file impact, fees, and why free debt charities should be part of your research.",
@@ -244,7 +244,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Multiple debts", "Snowball", "Avalanche", "Consolidation"],
     readingTime: 12,
     featured: false,
-    image: "/images/hero-abstract.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "Manage multiple loans with a clear inventory, a repayment strategy that matches your personality, and pitfalls that keep people cycling back into debt.",
@@ -263,7 +263,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt advice", "Scams", "UK", "Consumer protection"],
     readingTime: 11,
     featured: false,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "How to spot debt advice scams in the UK: red flags, verification steps, and safe alternatives through free FCA-authorised support.",
@@ -282,7 +282,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt plan", "Budgeting", "Repayment strategy", "Financial wellbeing"],
     readingTime: 10,
     featured: false,
-    image: "/images/hero-abstract.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "Create a practical debt payoff plan in one hour with a simple template, realistic budget rules, and a follow-through routine.",
@@ -301,7 +301,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Emergency cash", "Debt", "Borrowing", "Personal finance"],
     readingTime: 11,
     featured: false,
-    image: "/images/hero-abstract.jpg",
+    image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
         "Compare emergency loan alternatives in 2026 by cost and speed: savings, earned wage access, credit union loans, payment plans, BNPL, and personal loans.",
@@ -320,7 +320,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI investing", "Risk management", "Portfolio", "Markets"],
     readingTime: 9,
     featured: false,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/fintech.jpg",
     seo: {
       metaDescription:
         "Can AI co-pilots beat the market in 2026? Understand where AI helps, where it fails, and how to use a core-plus-satellite approach with risk controls.",
@@ -700,7 +700,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["JPMorgan Chase", "AI Banking", "Machine Learning Finance", "Case Study", "Fintech"],
     readingTime: 12,
     featured: true,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/business-case.jpg",
     seo: {
       metaDescription:
         "JPMorgan Chase spends $17 billion a year on technology and has 2,000 AI experts. A detailed case study in how the world's largest bank by assets is deploying AI across trading, fraud, risk, and customer service.",
@@ -727,7 +727,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Klarna", "AI Customer Service", "OpenAI", "BNPL", "Case Study"],
     readingTime: 11,
     featured: false,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/business-case.jpg",
     seo: {
       metaDescription:
         "Klarna's AI assistant handled 2.3 million customer service chats in one month, saving $40 million. A detailed case study of what worked, what the real costs were, and what every business should learn before replacing humans with AI.",
@@ -754,7 +754,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Nubank", "Neobank", "AI Credit", "Financial Inclusion", "Case Study"],
     readingTime: 12,
     featured: false,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
         "How Nubank used machine learning and alternative data to extend credit to 100 million customers the traditional banking system refused to serve. A case study in AI-powered financial inclusion.",
@@ -781,7 +781,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Mastercard", "Fraud Detection", "AI Payments", "Decision Intelligence", "Case Study"],
     readingTime: 11,
     featured: false,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
         "How Mastercard's Decision Intelligence AI catches fraud in 50 milliseconds across 143 billion annual transactions — a case study in generative AI, behavioural biometrics, and the payment fraud arms race.",
@@ -808,7 +808,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Deutsche Bank", "AI Transformation", "Cloud Banking", "Case Study", "Fintech"],
     readingTime: 12,
     featured: true,
-    image: "/images/data-visualization-bg.jpg",
+    image: "/images/business-case.jpg",
     seo: {
       metaDescription:
         "How Deutsche Bank went from four years of losses to decade-high profits using Google Cloud and NVIDIA AI infrastructure. A practical case study in legacy bank digital transformation.",
