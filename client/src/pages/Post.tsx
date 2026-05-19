@@ -149,7 +149,8 @@ export default function Post() {
       }
     }
 
-    if (postMeta) load();
+    // Always fetch from Supabase — posts created via admin won't be in static data
+    load();
     return () => {
       cancelled = true;
     };
