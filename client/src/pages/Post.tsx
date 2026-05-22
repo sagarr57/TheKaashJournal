@@ -11,6 +11,7 @@ import { Image } from "@/components/ui/image";
 import { SEO } from "@/components/SEO";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { SocialShare } from "@/components/SocialShare";
+import { AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
 
@@ -174,6 +175,11 @@ export default function Post() {
 
   const tocItems = content ? extractToc(content) : [];
   const postUrl = `${SITE_URL}/blog/${postMeta.slug}`;
+
+  const FINANCE_CATEGORIES = ["Debt Management", "Real-Time Finance", "Fintech Trends", "Case Studies"];
+  const HEALTH_CATEGORIES = ["AI and Health"];
+  const isFinancePost = FINANCE_CATEGORIES.includes(postMeta.category || "");
+  const isHealthPost = HEALTH_CATEGORIES.includes(postMeta.category || "");
   const postImage = postMeta.image?.startsWith("http")
     ? postMeta.image
     : `${SITE_URL}${postMeta.image}`;
@@ -331,6 +337,19 @@ export default function Post() {
                 <PostMeta post={postMeta as any} />
               </div>
 
+              {/* YMYL Disclaimer */}
+              {(isFinancePost || isHealthPost) && (
+                <div className="flex gap-3 border border-amber-200 bg-amber-50 rounded p-4 mb-5 text-sm text-amber-900">
+                  <AlertTriangle className="w-5 h-5 shrink-0 text-amber-600 mt-0.5" />
+                  <p>
+                    <strong>Disclaimer:</strong>{" "}
+                    {isHealthPost
+                      ? "This article is for general educational and informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional before making decisions about your health, treatment, or wellbeing."
+                      : "This article is for educational and informational purposes only and does not constitute financial or legal advice. Always consult a qualified financial adviser or debt specialist before making financial decisions."}
+                  </p>
+                </div>
+              )}
+
               {/* Table of Contents */}
               {content && <TableOfContents items={tocItems} />}
 
@@ -453,6 +472,25 @@ export default function Post() {
                   >
                     {content || ""}
                   </ReactMarkdown>
+                </div>
+              </div>
+
+              {/* Author Bio */}
+              <div className="border border-gray-200 rounded-lg p-5 md:p-6 mb-8 bg-gray-50">
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xl shrink-0 select-none">
+                    TK
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 mb-0.5">Team Kaash — Editorial Team</p>
+                    <p className="text-xs text-blue-600 font-medium mb-2 uppercase tracking-wide">The Kaash Journal</p>
+                    <p className="text-gray-700 text-sm leading-relaxed">
+                      The Kaash Journal editorial team is made up of writers and researchers specialising in artificial intelligence, health technology, personal finance, and UK consumer debt. Our team draws on backgrounds in financial services, digital health, and investigative journalism to produce guides that are accurate, source-linked, and genuinely useful. Every article is fact-checked against primary sources — including government publications, peer-reviewed research, and official company disclosures — before publication.
+                    </p>
+                    <a href="/about" className="inline-block mt-2 text-sm text-blue-700 hover:text-blue-800 font-medium hover:underline">
+                      Learn more about us →
+                    </a>
+                  </div>
                 </div>
               </div>
 
