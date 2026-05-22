@@ -1,16 +1,38 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PostCard } from "@/components/blog/PostCard";
-import { getFeaturedPosts, getRecentPosts } from "@/lib/blog-utils";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { cn } from "@/lib/utils";
+import { useState, useEffect, useMemo } from "react";
+import { fetchPublishedPostIndex } from "@/lib/blog-data";
+import { postIndex } from "@/lib/postsIndex";
 
 export default function Home() {
-  const featuredPosts = getFeaturedPosts();
-  const recentPosts = getRecentPosts(6);
+  const [posts, setPosts] = useState(postIndex);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadPosts() {
+      const data = await fetchPublishedPostIndex();
+      if (!cancelled && data.length > 0) setPosts(data);
+    }
+    loadPosts();
+    return () => { cancelled = true; };
+  }, []);
+
+  const featuredPosts = useMemo(
+    () => posts.filter((p) => p.featured).slice(0, 3),
+    [posts]
+  );
+  const recentPosts = useMemo(
+    () => [...posts]
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 6),
+    [posts]
+  );
 
   const heroCtaClass =
     "box-border h-10 sm:h-11 w-full sm:w-44 md:w-48 justify-center rounded-none text-sm md:text-base font-semibold px-4 md:px-5 border-2";
