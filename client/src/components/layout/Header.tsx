@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { postIndex } from "@/lib/postsIndex";
+import { usePostIndex } from "@/lib/post-cache";
 import { useMemo } from "react";
 import { SkipToContent } from "@/components/SkipToContent";
 
@@ -57,19 +57,22 @@ export function Header() {
     return () => window.removeEventListener("scroll", syncHeader);
   }, [isBlogPage, isOpen, location]);
 
+  const allPosts = usePostIndex();
+
   // Search functionality
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
-    
     const query = searchQuery.toLowerCase();
-    return postIndex.filter(
-      (post) =>
-        post.title.toLowerCase().includes(query) ||
-        post.excerpt.toLowerCase().includes(query) ||
-        post.tags.some((tag) => tag.toLowerCase().includes(query)) ||
-        post.category.toLowerCase().includes(query)
-    ).slice(0, 5);
-  }, [searchQuery]);
+    return allPosts
+      .filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.excerpt.toLowerCase().includes(query) ||
+          post.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+          post.category.toLowerCase().includes(query)
+      )
+      .slice(0, 5);
+  }, [searchQuery, allPosts]);
 
   const handleSearchClick = () => {
     setIsSearchOpen(true);

@@ -1,10 +1,18 @@
-import { getRecentPosts } from "@/lib/blog-utils";
+import { useMemo } from "react";
+import { usePostIndex } from "@/lib/post-cache";
 import { categories } from "@/lib/categories";
 import { formatDate } from "@/lib/blog-utils";
 import { NewsletterForm } from "@/components/NewsletterForm";
 
 export function Sidebar() {
-  const recentPosts = getRecentPosts(5);
+  const allPosts = usePostIndex();
+  const recentPosts = useMemo(
+    () =>
+      [...allPosts]
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 5),
+    [allPosts]
+  );
 
   return (
     <aside className="space-y-5 md:space-y-6">

@@ -2,11 +2,16 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
-import { postIndex } from "@/lib/postsIndex";
 import { categories } from "@/lib/categories";
 import { useState, useMemo } from "react";
 import { useParams } from "wouter";
 import { SEO } from "@/components/SEO";
+import { usePostIndex } from "@/lib/post-cache";
+
+const SITE_URL =
+  typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
+    ? import.meta.env.VITE_SITE_URL
+    : "https://www.thekaashjournal.com";
 
 export default function Category() {
   const params = useParams();
@@ -14,19 +19,16 @@ export default function Category() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
 
-  // Find category by slug
+  const allPosts = usePostIndex();
   const category = categories.find((cat) => cat.slug === categorySlug);
 
-  // Filter posts by category
   const filteredPosts = useMemo(() => {
     if (!category) return [];
-    
-    return postIndex
+    return [...allPosts]
       .filter((post) => post.category === category.name)
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, [category]);
+  }, [category, allPosts]);
 
-  // Pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const startIndex = (currentPage - 1) * postsPerPage;
   const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
@@ -47,12 +49,43 @@ export default function Category() {
     );
   }
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${category.name} Articles`,
+    description: category.description,
+    url: `${SITE_URL}/category/${category.slug}`,
+    inLanguage: "en-GB",
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+        { "@type": "ListItem", position: 3, name: category.name, item: `${SITE_URL}/category/${category.slug}` },
+      ],
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: filteredPosts.length,
+      itemListElement: filteredPosts.map((post, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: post.title,
+        url: `${SITE_URL}/blog/${post.slug}`,
+      })),
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <SEO
         title={`${category.name} Articles`}
         description={category.description}
         url={`/category/${category.slug}`}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
       <Header />
 

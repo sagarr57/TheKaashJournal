@@ -3,43 +3,34 @@ import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
 import { categories } from "@/lib/categories";
-import { postIndex } from "@/lib/postsIndex";
 import { useState, useMemo, useEffect } from "react";
 import { Search } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { fetchPublishedPostIndex } from "@/lib/blog-data";
+import { usePostIndex } from "@/lib/post-cache";
+import { useSearch } from "wouter";
 
 export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [posts, setPosts] = useState(postIndex);
+  const posts = usePostIndex();
   const postsPerPage = 9;
 
+  // Pre-fill search from ?q= (supports Google sitelinks search box)
+  const search = useSearch();
   useEffect(() => {
-    let cancelled = false;
-    async function loadPosts() {
-      const data = await fetchPublishedPostIndex();
-      if (!cancelled && data.length > 0) {
-        setPosts(data);
-      }
-    }
-    loadPosts();
-    return () => {
-      cancelled = true;
-    };
+    const q = new URLSearchParams(search).get("q");
+    if (q) setSearchQuery(q);
   }, []);
 
   // Filter posts
   const filteredPosts = useMemo(() => {
     let filtered = [...posts];
 
-    // Filter by category
     if (selectedCategory) {
       filtered = filtered.filter((post) => post.category === selectedCategory);
     }
 
-    // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
@@ -50,7 +41,6 @@ export default function Blog() {
       );
     }
 
-    // Sort by date (newest first)
     return filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }, [searchQuery, selectedCategory, posts]);
 
@@ -67,7 +57,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="The Kaash Journal — articles on money, AI, and debt"
+        title="Blog — Money, AI & Fintech Articles"
         description="Long-form articles on AI, fintech, debt, and personal finance—with sources linked in the text."
         url="/blog"
       />

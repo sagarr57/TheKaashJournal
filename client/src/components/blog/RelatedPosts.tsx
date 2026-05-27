@@ -1,5 +1,6 @@
+import { useMemo } from "react";
 import { PostCard } from "./PostCard";
-import { getRelatedPosts } from "@/lib/blog-utils";
+import { usePostIndex } from "@/lib/post-cache";
 import { BlogPost } from "@/lib/types";
 
 interface RelatedPostsProps {
@@ -7,11 +8,22 @@ interface RelatedPostsProps {
 }
 
 export function RelatedPosts({ currentPost }: RelatedPostsProps) {
-  const relatedPosts = getRelatedPosts(currentPost, 3);
+  const allPosts = usePostIndex();
 
-  if (relatedPosts.length === 0) {
-    return null;
-  }
+  const relatedPosts = useMemo(
+    () =>
+      allPosts
+        .filter(
+          (p) =>
+            p.id !== currentPost.id &&
+            (p.category === currentPost.category ||
+              p.tags.some((tag) => currentPost.tags.includes(tag)))
+        )
+        .slice(0, 3),
+    [allPosts, currentPost]
+  );
+
+  if (relatedPosts.length === 0) return null;
 
   return (
     <section className="mt-10 pt-8 md:pt-10 border-t border-gray-200">

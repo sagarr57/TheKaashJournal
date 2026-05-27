@@ -14,6 +14,7 @@ import { SocialShare } from "@/components/SocialShare";
 import { AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
+import { AdUnit } from "@/components/AdUnit";
 
 const SITE_URL =
   typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
@@ -117,6 +118,36 @@ function slugifyHeading(text: string): string {
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
     .replace(/\s+/g, "-");
+}
+
+function extractFaqSchema(content: string) {
+  const marker = "## Frequently Asked Questions";
+  const faqIdx = content.indexOf(marker);
+  if (faqIdx === -1) return null;
+  const section = content.slice(faqIdx + marker.length);
+  const pairs: Array<{ question: string; answer: string }> = [];
+  // Match **Question?** followed by answer text until the next bold question or end
+  const re = /\*\*([^*]+\?[^*]*)\*\*\s*\n+([\s\S]*?)(?=\n\*\*[^*]+\?|$)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(section)) !== null) {
+    const question = m[1].trim();
+    const answer = m[2]
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/[*_`#]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (question && answer) pairs.push({ question, answer });
+  }
+  if (pairs.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: pairs.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  };
 }
 
 export default function Post() {
@@ -288,6 +319,15 @@ export default function Post() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {content && (() => {
+        const faq = extractFaqSchema(content);
+        return faq ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+          />
+        ) : null;
+      })()}
 
       <ReadingProgress />
       <Header />
@@ -352,6 +392,15 @@ export default function Post() {
 
               {/* Table of Contents */}
               {content && <TableOfContents items={tocItems} />}
+
+              {/* In-content ad — set VITE_ADSENSE_SLOT_IN_CONTENT in Vercel env vars */}
+              {import.meta.env.VITE_ADSENSE_SLOT_IN_CONTENT && (
+                <AdUnit
+                  slot={import.meta.env.VITE_ADSENSE_SLOT_IN_CONTENT}
+                  format="horizontal"
+                  className="my-5"
+                />
+              )}
 
               {/* Content */}
               <div className="prose prose-sm md:prose-base max-w-none mb-8 md:mb-10">

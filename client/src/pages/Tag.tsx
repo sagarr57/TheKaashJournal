@@ -2,10 +2,15 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
-import { getPostsByTag, getAllTags } from "@/lib/blog-utils";
 import { useState, useMemo } from "react";
 import { useParams } from "wouter";
 import { SEO } from "@/components/SEO";
+import { usePostIndex } from "@/lib/post-cache";
+
+const SITE_URL =
+  typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
+    ? import.meta.env.VITE_SITE_URL
+    : "https://www.thekaashjournal.com";
 
 export default function Tag() {
   const params = useParams();
@@ -13,24 +18,30 @@ export default function Tag() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
 
-  // Convert slug back to tag (capitalize first letter)
+  const allPosts = usePostIndex();
+
+  // Convert slug to display name
   const tagName = tagSlug
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-  const allTags = getAllTags();
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    allPosts.forEach((p) => p.tags.forEach((tag) => tags.add(tag)));
+    return Array.from(tags).sort();
+  }, [allPosts]);
+
   const tagExists = allTags.some((t) => t.toLowerCase() === tagSlug.toLowerCase());
 
   const filteredPosts = useMemo(() => {
     if (!tagExists) return [];
-    // Find the actual tag name (case-insensitive)
     const actualTag = allTags.find((t) => t.toLowerCase() === tagSlug.toLowerCase());
     if (!actualTag) return [];
-    return getPostsByTag(actualTag).sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
-  }, [tagSlug, tagExists, allTags]);
+    return [...allPosts]
+      .filter((post) => post.tags.includes(actualTag))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }, [tagSlug, tagExists, allTags, allPosts]);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const startIndex = (currentPage - 1) * postsPerPage;
@@ -54,12 +65,43 @@ export default function Tag() {
     );
   }
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `#${tagName} Articles`,
+    description: `All articles tagged with "${tagName}"`,
+    url: `${SITE_URL}/tag/${tagSlug}`,
+    inLanguage: "en-GB",
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+        { "@type": "ListItem", position: 3, name: `#${tagName}`, item: `${SITE_URL}/tag/${tagSlug}` },
+      ],
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: filteredPosts.length,
+      itemListElement: filteredPosts.map((post, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: post.title,
+        url: `${SITE_URL}/blog/${post.slug}`,
+      })),
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <SEO
         title={`#${tagName} Articles`}
         description={`All articles tagged with "${tagName}"`}
         url={`/tag/${tagSlug}`}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
       <Header />
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
