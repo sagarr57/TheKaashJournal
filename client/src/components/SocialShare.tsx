@@ -39,7 +39,7 @@ export function SocialShare({ title, url, description }: SocialShareProps) {
         <Button
           asChild
           variant="outline"
-          className="border-2 border-gray-300 hover:bg-gray-50 rounded-none"
+          className="border border-gray-200 hover:bg-gray-50 rounded-lg"
           aria-label="Share on Twitter"
         >
           <a
@@ -55,7 +55,7 @@ export function SocialShare({ title, url, description }: SocialShareProps) {
         <Button
           asChild
           variant="outline"
-          className="border-2 border-gray-300 hover:bg-gray-50 rounded-none"
+          className="border border-gray-200 hover:bg-gray-50 rounded-lg"
           aria-label="Share on LinkedIn"
         >
           <a
@@ -71,7 +71,7 @@ export function SocialShare({ title, url, description }: SocialShareProps) {
         <Button
           asChild
           variant="outline"
-          className="border-2 border-gray-300 hover:bg-gray-50 rounded-none"
+          className="border border-gray-200 hover:bg-gray-50 rounded-lg"
           aria-label="Share on Facebook"
         >
           <a
@@ -86,7 +86,7 @@ export function SocialShare({ title, url, description }: SocialShareProps) {
         </Button>
         <Button
           variant="outline"
-          className="border-2 border-gray-300 hover:bg-gray-50 rounded-none"
+          className="border border-gray-200 hover:bg-gray-50 rounded-lg"
           onClick={copyToClipboard}
           aria-label="Copy link to clipboard"
         >
