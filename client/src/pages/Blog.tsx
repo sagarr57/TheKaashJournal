@@ -21,7 +21,7 @@ export default function Blog() {
   useEffect(() => {
     const q = new URLSearchParams(search).get("q");
     if (q) setSearchQuery(q);
-  }, []);
+  }, [search]);
 
   // Filter posts
   const filteredPosts = useMemo(() => {

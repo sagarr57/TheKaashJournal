@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { SEO } from "@/components/SEO";
 import { getContactEmail } from "@/lib/site-contact";
 import { Mail, Clock, ShieldCheck, Users, Handshake, MessageSquare, AlertCircle } from "lucide-react";
@@ -17,16 +18,10 @@ export default function Contact() {
       <Header />
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
-        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
-          <div className="container">
-            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5 md:mb-2">
-              Contact <span className="text-blue-600">Us</span>
-            </h1>
-            <p className="text-gray-600 text-sm md:text-base max-w-2xl">
-              We're a small editorial team committed to accuracy and transparency. Whether you've spotted an error, want to collaborate, or just have a question — we want to hear from you.
-            </p>
-          </div>
-        </section>
+        <PageHeader
+          title={<>Contact <span className="text-blue-600">Us</span></>}
+          subtitle="We're a small editorial team committed to accuracy and transparency. Whether you've spotted an error, want to collaborate, or just have a question — we want to hear from you."
+        />
 
         <div className="container py-6 md:py-8">
           <div className="max-w-3xl mx-auto space-y-6">

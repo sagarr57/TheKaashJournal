@@ -123,7 +123,7 @@ export function LoginForm() {
             </div>
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold h-12 rounded-none"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold h-12 rounded-xl"
               disabled={isLoading}
             >
               {isLoading ? "Logging in..." : "Login"}

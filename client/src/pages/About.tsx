@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { SEO } from "@/components/SEO";
 import { Mail } from "lucide-react";
 
@@ -14,17 +15,10 @@ export default function About() {
       <Header />
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
-        {/* Page Header */}
-        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
-          <div className="container">
-            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5 md:mb-2">
-              About <span className="text-blue-600">The Kaash Journal</span>
-            </h1>
-            <p className="text-gray-600 text-sm md:text-base max-w-2xl">
-              In-depth, source-linked guides on AI, fintech, debt management, and personal finance — written for curious readers everywhere.
-            </p>
-          </div>
-        </section>
+        <PageHeader
+          title={<>About <span className="text-blue-600">The Kaash Journal</span></>}
+          subtitle="In-depth, source-linked guides on AI, fintech, debt management, and personal finance — written for curious readers everywhere."
+        />
 
         <div className="container py-6 md:py-8">
           <div className="max-w-3xl mx-auto space-y-6 md:space-y-7">

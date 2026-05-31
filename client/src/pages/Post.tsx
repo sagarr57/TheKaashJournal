@@ -15,11 +15,7 @@ import { AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
 import { AdUnit } from "@/components/AdUnit";
-
-const SITE_URL =
-  typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
-    ? import.meta.env.VITE_SITE_URL
-    : "https://www.thekaashjournal.com";
+import { SITE_URL } from "@/lib/config";
 
 function MarkdownCode({
   inline,

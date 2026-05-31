@@ -637,7 +637,7 @@ function AdminDashboard() {
               onClick={handleRefresh}
               disabled={isRefreshing}
               variant="outline"
-              className="border-2 border-gray-300 rounded-none w-full sm:w-auto"
+              className="border border-gray-300 rounded-lg w-full sm:w-auto"
             >
               <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
               Refresh
@@ -645,7 +645,7 @@ function AdminDashboard() {
             <Button
               onClick={logout}
               variant="outline"
-              className="border-2 border-gray-300 rounded-none w-full sm:w-auto"
+              className="border border-gray-300 rounded-lg w-full sm:w-auto"
             >
               <LogOut className="w-4 h-4 mr-2" />
               Logout
@@ -928,7 +928,7 @@ function AdminDashboard() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Tracking Data</CardTitle>
-                <Button variant="outline" size="sm" onClick={fetchTrackingData} disabled={isFetchingTracking} className="rounded-none border-gray-300">
+                <Button variant="outline" size="sm" onClick={fetchTrackingData} disabled={isFetchingTracking} className="rounded-lg border-gray-300">
                   <RefreshCw className={`w-4 h-4 mr-1 ${isFetchingTracking ? "animate-spin" : ""}`} />Refresh
                 </Button>
               </CardHeader>
@@ -1092,10 +1092,10 @@ function AdminDashboard() {
                 <CardHeader className="flex flex-row items-center justify-between pb-3">
                   <CardTitle>Posts</CardTitle>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={fetchAllPosts} disabled={isFetchingPosts} className="rounded-none border-gray-300">
+                    <Button variant="outline" size="sm" onClick={fetchAllPosts} disabled={isFetchingPosts} className="rounded-lg border-gray-300">
                       <RefreshCw className={`w-4 h-4 mr-1 ${isFetchingPosts ? "animate-spin" : ""}`} />Refresh
                     </Button>
-                    <Button size="sm" onClick={() => { setEditingPostId(null); setPostForm(getInitialPostForm()); setPostsView("form"); }} className="rounded-none">
+                    <Button size="sm" onClick={() => { setEditingPostId(null); setPostForm(getInitialPostForm()); setPostsView("form"); }} className="rounded-lg">
                       <Plus className="w-4 h-4 mr-1" />New Post
                     </Button>
                   </div>
@@ -1221,7 +1221,7 @@ function AdminDashboard() {
                           onChange={(e) => handlePostFieldChange("title", e.target.value)}
                           onBlur={handlePostTitleBlur}
                           placeholder="e.g. How AI is Changing Personal Finance"
-                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
                         />
                       </label>
@@ -1231,7 +1231,7 @@ function AdminDashboard() {
                           value={postForm.slug}
                           onChange={(e) => handlePostFieldChange("slug", slugify(e.target.value))}
                           placeholder="e.g. how-ai-is-changing-personal-finance"
-                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
                         />
                         <span className="text-[11px] text-gray-400">Auto-generated from title. Used in the blog URL.</span>
@@ -1245,7 +1245,7 @@ function AdminDashboard() {
                         <select
                           value={postForm.author}
                           onChange={(e) => handlePostFieldChange("author", e.target.value)}
-                          className="w-full border border-gray-300 px-3 py-2 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                           {PEN_NAME_OPTIONS.map((opt) => (
                             <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -1259,7 +1259,7 @@ function AdminDashboard() {
                           type="date"
                           value={postForm.date}
                           onChange={(e) => handlePostFieldChange("date", e.target.value)}
-                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </label>
                     </div>
@@ -1280,7 +1280,7 @@ function AdminDashboard() {
                               handlePostFieldChange("image", CATEGORY_IMAGES[cat] || DEFAULT_POST_IMAGE);
                             }
                           }}
-                          className="w-full border border-gray-300 px-3 py-2 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
                         >
                           {categories.map((cat) => (
@@ -1296,7 +1296,7 @@ function AdminDashboard() {
                           value={postForm.readingTime}
                           onChange={(e) => handlePostFieldChange("readingTime", Number(e.target.value))}
                           placeholder="5"
-                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         <span className="text-[11px] text-gray-400">Shown as "5 min read" on the blog post.</span>
                       </label>
@@ -1348,7 +1348,7 @@ function AdminDashboard() {
                             value={postForm.image}
                             onChange={(e) => handlePostFieldChange("image", e.target.value)}
                             placeholder="/images/hero-abstract.jpg or https://..."
-                            className="w-full border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                           />
 
                           {/* Upload button */}
@@ -1382,7 +1382,7 @@ function AdminDashboard() {
                         value={postForm.excerpt}
                         onChange={(e) => handlePostFieldChange("excerpt", e.target.value)}
                         placeholder="A short 1–2 sentence summary shown on the blog listing page and in Google search results."
-                        className="w-full border border-gray-300 px-3 py-2 rounded min-h-[80px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border border-gray-300 px-3 py-2 rounded-lg min-h-[80px] focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required
                       />
                       <span className="text-[11px] text-gray-400">Keep under 160 characters for best SEO results.</span>
@@ -1424,11 +1424,11 @@ function AdminDashboard() {
                             value={postForm.content}
                             onChange={(e) => handlePostFieldChange("content", e.target.value)}
                             placeholder="Markdown content *"
-                            className="w-full border border-gray-300 px-3 py-2 rounded min-h-[400px] font-mono text-sm"
+                            className="w-full border border-gray-300 px-3 py-2 rounded-lg min-h-[400px] font-mono text-sm"
                             required
                           />
                         ) : (
-                          <div className="w-full border border-gray-200 rounded px-4 py-3 min-h-[400px] overflow-y-auto prose prose-sm max-w-none">
+                          <div className="w-full border border-gray-200 rounded-lg px-4 py-3 min-h-[400px] overflow-y-auto prose prose-sm max-w-none">
                             <ReactMarkdown
                               remarkPlugins={[remarkGfm]}
                               components={{
@@ -1454,7 +1454,7 @@ function AdminDashboard() {
 
                       {/* Live Table of Contents */}
                       <div className="lg:col-span-1">
-                        <div className="border border-gray-200 rounded p-3 sticky top-4">
+                        <div className="border border-gray-200 rounded-lg p-3 sticky top-4">
                           <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Table of Contents</p>
                           {tocItems.length === 0 ? (
                             <p className="text-xs text-gray-400 italic">Add ## headings to see TOC</p>
@@ -1487,7 +1487,7 @@ function AdminDashboard() {
                           value={postForm.tags}
                           onChange={(e) => handlePostFieldChange("tags", e.target.value)}
                           placeholder="e.g. AI, Fintech, Personal Finance"
-                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         <span className="text-[11px] text-gray-400">Comma-separated. Used for filtering and related posts.</span>
                       </label>
@@ -1497,7 +1497,7 @@ function AdminDashboard() {
                           value={postForm.keywords}
                           onChange={(e) => handlePostFieldChange("keywords", e.target.value)}
                           placeholder="e.g. AI finance tools, debt management 2026"
-                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         <span className="text-[11px] text-gray-400">Comma-separated. Added to the page's meta keywords tag.</span>
                       </label>
@@ -1510,7 +1510,7 @@ function AdminDashboard() {
                         value={postForm.metaDescription}
                         onChange={(e) => handlePostFieldChange("metaDescription", e.target.value)}
                         placeholder="Short description shown in Google search results (max 160 chars)"
-                        className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                       <span className="text-[11px] text-gray-400">Falls back to the excerpt if left blank.</span>
                     </label>
@@ -1541,14 +1541,14 @@ function AdminDashboard() {
                               handlePostFieldChange("publishAt", e.target.value);
                               if (e.target.value) handlePostFieldChange("date", e.target.value.slice(0, 10));
                             }}
-                            className="border border-purple-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white"
+                            className="border border-purple-300 px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white"
                           />
                           <Button
                             type="button"
                             variant="outline"
                             disabled={isPublishingPost || !postForm.publishAt}
                             onClick={() => handleSavePost("scheduled")}
-                            className="rounded-none border-purple-400 text-purple-700 hover:bg-purple-100 disabled:opacity-40"
+                            className="rounded-lg border-purple-400 text-purple-700 hover:bg-purple-100 disabled:opacity-40"
                           >
                             Schedule Post
                           </Button>
@@ -1562,7 +1562,7 @@ function AdminDashboard() {
                     )}
 
                     <div className="flex flex-col sm:flex-row justify-between gap-3">
-                      <Button type="button" variant="outline" onClick={handleCancelEdit} className="rounded-none">
+                      <Button type="button" variant="outline" onClick={handleCancelEdit} className="rounded-lg">
                         Cancel
                       </Button>
                       <div className="flex gap-3">
@@ -1571,11 +1571,11 @@ function AdminDashboard() {
                           variant="outline"
                           disabled={isPublishingPost}
                           onClick={() => handleSavePost("draft")}
-                          className="rounded-none border-yellow-400 text-yellow-700 hover:bg-yellow-50"
+                          className="rounded-lg border-yellow-400 text-yellow-700 hover:bg-yellow-50"
                         >
                           {isPublishingPost ? "Saving…" : "Save as Draft"}
                         </Button>
-                        <Button type="submit" disabled={isPublishingPost} className="rounded-none">
+                        <Button type="submit" disabled={isPublishingPost} className="rounded-lg">
                           {isPublishingPost ? "Publishing…" : editingPostId ? "Update Post" : "Publish Post"}
                         </Button>
                       </div>

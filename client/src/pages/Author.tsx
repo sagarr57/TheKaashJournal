@@ -6,11 +6,7 @@ import { SEO } from "@/components/SEO";
 import { useParams } from "wouter";
 import { useMemo } from "react";
 import { usePostIndex } from "@/lib/post-cache";
-
-const SITE_URL =
-  typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
-    ? import.meta.env.VITE_SITE_URL
-    : "https://www.thekaashjournal.com";
+import { SITE_URL } from "@/lib/config";
 
 interface AuthorProfile {
   name: string;
@@ -164,8 +160,8 @@ export default function Author() {
 
               {/* Bio */}
               <section className="max-w-3xl space-y-4">
-                {profile.bio.map((para, i) => (
-                  <p key={i} className="text-gray-700 text-base leading-relaxed">{para}</p>
+                {profile.bio.map((para) => (
+                  <p key={para.slice(0, 40)} className="text-gray-700 text-base leading-relaxed">{para}</p>
                 ))}
               </section>
 

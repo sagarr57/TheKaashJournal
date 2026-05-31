@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { SEO } from "@/components/SEO";
 
 export default function EditorialPolicy() {
@@ -13,17 +14,12 @@ export default function EditorialPolicy() {
       <Header />
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
-        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
-          <div className="container">
-            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5 md:mb-2">
-              Editorial <span className="text-blue-600">Policy</span>
-            </h1>
-            <p className="text-gray-600 text-sm md:text-base max-w-2xl">
-              How we research, write, review, and publish content at The Kaash Journal.
-            </p>
-            <p className="text-gray-500 text-sm mt-2">Last updated: 1 May 2026</p>
-          </div>
-        </section>
+        <PageHeader
+          title={<>Editorial <span className="text-blue-600">Policy</span></>}
+          subtitle="How we research, write, review, and publish content at The Kaash Journal."
+        >
+          <p className="text-gray-500 text-sm mt-2">Last updated: 1 May 2026</p>
+        </PageHeader>
 
         <div className="container py-6 md:py-8">
           <div className="max-w-3xl mx-auto prose prose-gray prose-base md:prose-lg max-w-none space-y-5 md:space-y-6">

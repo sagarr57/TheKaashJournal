@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
 import { categories } from "@/lib/categories";
@@ -7,11 +8,7 @@ import { useState, useMemo } from "react";
 import { useParams } from "wouter";
 import { SEO } from "@/components/SEO";
 import { usePostIndex } from "@/lib/post-cache";
-
-const SITE_URL =
-  typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
-    ? import.meta.env.VITE_SITE_URL
-    : "https://www.thekaashjournal.com";
+import { SITE_URL } from "@/lib/config";
 
 export default function Category() {
   const params = useParams();
@@ -90,17 +87,7 @@ export default function Category() {
       <Header />
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
-        {/* Page Header */}
-        <section className="bg-gray-50 border-b border-gray-200 py-5 md:py-6">
-          <div className="container">
-            <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-1.5 md:mb-2">
-              {category.name}
-            </h1>
-            <p className="text-gray-600 text-sm md:text-base">
-              {category.description}
-            </p>
-          </div>
-        </section>
+        <PageHeader title={category.name} subtitle={category.description} />
 
         {/* Content */}
         <div className="container py-6 md:py-8">

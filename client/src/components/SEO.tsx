@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { SITE_URL } from "@/lib/config";
 
 interface SEOProps {
   title?: string;
@@ -20,10 +21,6 @@ const defaultTitle = "The Kaash Journal - AI & Fintech Insights for UK Audiences
 const defaultDescription =
   "Expert guides on AI, fintech, and debt management for UK readers. FCA-aware, jargon-free insights on personal finance, open banking, and smart money tools.";
 const defaultImage = "/images/Kaash_logo.png";
-const SITE_URL =
-  typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL
-    ? import.meta.env.VITE_SITE_URL
-    : "https://www.thekaashjournal.com";
 
 export function SEO({
   title,
