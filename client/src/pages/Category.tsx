@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
+import { Pagination } from "@/components/ui/Pagination";
 import { categories } from "@/lib/categories";
 import { useState, useMemo } from "react";
 import { useParams } from "wouter";
@@ -96,44 +97,17 @@ export default function Category() {
             <div className="lg:col-span-3">
               {paginatedPosts.length > 0 ? (
                 <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 md:mb-9">
-                    {paginatedPosts.map((post) => (
-                      <PostCard key={post.id} post={post} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                    {paginatedPosts.map((post, i) => (
+                      <PostCard
+                        key={post.id}
+                        post={post}
+                        className={paginatedPosts.length % 2 === 1 && i === paginatedPosts.length - 1 ? "md:col-span-2" : ""}
+                      />
                     ))}
                   </div>
 
-                  {/* Pagination */}
-                  {totalPages > 1 && (
-                    <div className="flex flex-wrap justify-center gap-2 py-5">
-                      <button
-                        onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                        disabled={currentPage === 1}
-                        className="px-3 md:px-4 py-2 text-sm border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                      >
-                        Previous
-                      </button>
-                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                        <button
-                          key={page}
-                          onClick={() => setCurrentPage(page)}
-                          className={`px-3 md:px-4 py-2 text-sm rounded font-semibold ${
-                            currentPage === page
-                              ? "bg-black text-white"
-                              : "border border-gray-300 hover:bg-gray-50"
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      ))}
-                      <button
-                        onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                        disabled={currentPage === totalPages}
-                        className="px-3 md:px-4 py-2 text-sm border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  )}
+                  <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                 </>
               ) : (
                 <div className="text-center py-8">

@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   const featuredPosts = useMemo(
-    () => posts.filter((p) => p.featured).slice(0, 3),
+    () => posts.filter((p) => p.featured).slice(0, 4),
     [posts]
   );
   const recentPosts = useMemo(
@@ -93,41 +93,42 @@ export default function Home() {
             </div>
 
             {featuredPosts.length > 0 ? (
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
-                {/* Hero post — takes 3 of 5 cols */}
+              <>
                 {featuredPosts[0] && (
-                  <article className="lg:col-span-3 group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
-                    <a href={`/blog/${featuredPosts[0].slug}`} className="block relative h-56 sm:h-64 md:h-72 overflow-hidden bg-gray-100 shrink-0">
+                  <article className="group relative rounded-2xl overflow-hidden">
+                    <a href={`/blog/${featuredPosts[0].slug}`} className="block relative h-72 md:h-96 overflow-hidden bg-gray-900">
                       <img
                         src={featuredPosts[0].image}
                         alt={featuredPosts[0].title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                         loading="eager"
                         fetchPriority="high"
                         decoding="async"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
                     </a>
-                    <div className="p-5 md:p-6 flex flex-col flex-1">
-                      <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-2">{featuredPosts[0].category}</span>
-                      <h3 className="font-oswald text-xl md:text-2xl font-bold normal-case tracking-tight mb-2 group-hover:text-blue-600 transition-colors leading-snug">
+                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-white">
+                      <span className="inline-block text-xs font-semibold uppercase tracking-wide text-blue-300 mb-3">{featuredPosts[0].category}</span>
+                      <h3 className="font-oswald text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-2 group-hover:text-blue-200 transition-colors">
                         <a href={`/blog/${featuredPosts[0].slug}`}>{featuredPosts[0].title}</a>
                       </h3>
-                      <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-3 flex-1">{featuredPosts[0].excerpt}</p>
-                      <div className="flex items-center gap-3 text-xs text-gray-400 pt-3 border-t border-gray-100">
-                        <span className="font-medium text-gray-500">{featuredPosts[0].author}</span>
+                      <p className="text-white/70 text-sm md:text-base leading-relaxed line-clamp-2 max-w-2xl mb-4 hidden sm:block">{featuredPosts[0].excerpt}</p>
+                      <div className="flex items-center gap-3 text-xs text-white/60">
+                        <span className="font-medium">{featuredPosts[0].author}</span>
                         <span aria-hidden>·</span>
                         <span>{featuredPosts[0].readingTime} min read</span>
                       </div>
                     </div>
                   </article>
                 )}
-                {/* Secondary posts — take 2 of 5 cols, stacked */}
-                <div className="lg:col-span-2 flex flex-col gap-5">
-                  {featuredPosts.slice(1, 3).map((post) => (
-                    <PostCard key={post.id} post={post} />
-                  ))}
-                </div>
-              </div>
+                {featuredPosts.length > 1 && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+                    {featuredPosts.slice(1, 4).map((post) => (
+                      <PostCard key={post.id} post={post} />
+                    ))}
+                  </div>
+                )}
+              </>
             ) : (
               <div className="text-center py-8 text-gray-400">No featured posts available.</div>
             )}

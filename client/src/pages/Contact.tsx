@@ -12,7 +12,7 @@ export default function Contact() {
     <div className="min-h-screen bg-white">
       <SEO
         title="Contact Us — The Kaash Journal"
-        description="Contact the Team Kaash editorial team for corrections, partnership enquiries, reader feedback, and media requests. We respond within 1–2 business days."
+        description="Contact The Kaash Journal editorial team for corrections, partnership enquiries, reader feedback, and media requests. We respond within 1–2 business days."
         url="/contact"
       />
       <Header />

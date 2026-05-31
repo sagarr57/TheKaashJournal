@@ -6,13 +6,14 @@ import { Image } from "@/components/ui/image";
 
 interface PostCardProps {
   post: BlogPost;
+  className?: string;
 }
 
-export function PostCard({ post }: PostCardProps) {
+export function PostCard({ post, className }: PostCardProps) {
   const categoryColor = getCategoryColor(post.category);
 
   return (
-    <article className="group bg-white rounded-2xl border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
+    <article className={`group bg-white rounded-2xl border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col ${className || ""}`}>
       {/* Image */}
       <a href={`/blog/${post.slug}`} className="block relative h-48 overflow-hidden bg-gray-100 shrink-0">
         <Image
