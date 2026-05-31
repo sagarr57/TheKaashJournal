@@ -29,28 +29,9 @@ export default defineConfig({
     chunkSizeWarningLimit: 900, // React 19 is inherently large (~900KB), this is expected
     rollupOptions: {
       output: {
-        format: 'es',
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-        manualChunks: (id) => {
-          // React core — single shared chunk
-          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
-            return 'vendor-react';
-          }
-          // Recharts + d3 — only used in admin, keep out of public pages
-          if (id.includes('node_modules/recharts') || id.includes('node_modules/d3') || id.includes('node_modules/victory')) {
-            return 'vendor-charts';
-          }
-          // Markdown rendering — only used on post pages
-          if (id.includes('node_modules/react-markdown') || id.includes('node_modules/remark') || id.includes('node_modules/rehype') || id.includes('node_modules/micromark') || id.includes('node_modules/mdast') || id.includes('node_modules/unified')) {
-            return 'vendor-markdown';
-          }
-          // Radix UI + shadcn components
-          if (id.includes('node_modules/@radix-ui')) {
-            return 'vendor-ui';
-          }
-        },
       },
     },
   },
