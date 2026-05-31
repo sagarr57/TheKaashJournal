@@ -10,7 +10,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "top-5-ai-tools-debt-management-2026",
     excerpt:
       "A straight comparison of YNAB, Rocket Money, Undebt.it, Copilot, and Goodbudget—what each is for, with links so you can check pricing and coverage yourself.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-15",
     category: "Debt Management",
     tags: ["AI", "Debt", "Tools", "Finance"],
@@ -29,7 +29,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "real-time-financial-data-investment",
     excerpt:
       "Real-time data combined with AI is revolutionizing how investors make decisions. Learn how to leverage this technology for better returns.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-12",
     category: "Real-Time Finance",
     tags: ["AI", "Investment", "Real-Time Data", "Trading"],
@@ -48,7 +48,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "chatgpt-personal-finance-guide",
     excerpt:
       "Concrete prompts for budgeting (UK and US examples), using ChatGPT for investing vocabulary—not stock tips—and when to switch to FCA-regulated human advice.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-10",
     category: "Fintech Trends",
     tags: ["ChatGPT", "AI", "Personal Finance", "Budgeting"],
@@ -67,7 +67,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-fintech-startups-2026",
     excerpt:
       "How AI shows up in lending, wealth apps, fraud detection, and support—and what to verify before you trust a startup with your money.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-08",
     category: "Fintech Trends",
     tags: ["Fintech", "AI", "Startups", "Investment"],
@@ -86,7 +86,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "automate-budget-ai-tutorial",
     excerpt:
       "Five steps: pick an app after Mint, connect safely via UK open banking, slim categories, weekly reviews, and month-end exports—plus YNAB, Goodbudget, Undebt.it.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-05",
     category: "Debt Management",
     tags: ["Budgeting", "Automation", "AI", "Personal Finance"],
@@ -105,7 +105,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-robo-advisors-comparison",
     excerpt:
       "What robo-advisors actually do, how to compare fees and ISAs, when chat features help, and UK platforms to research—Moneybox, Vanguard, interactive investor—plus the FCA register.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-02",
     category: "Real-Time Finance",
     tags: ["Robo-Advisors", "Investment", "AI", "Comparison"],
@@ -124,7 +124,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "latest-ai-finance-tools-january-2026",
     excerpt:
       "A January 2026 snapshot: ChatGPT, Claude, Gemini, Copilot, real budgeting apps, UK bank analytics, open banking—and how to tell signal from social hype.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-20",
     category: "Fintech Trends",
     tags: ["AI Tools", "Finance", "Updates", "Technology"],
@@ -143,7 +143,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "case-study-ai-debt-payoff-50000",
     excerpt:
       "A fictional-but-realistic path: full debt list, one weekly budgeting habit, avalanche vs snowball, automated minimums, and when to call free UK advisers—not a verified household story.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-01-18",
     category: "Case Studies",
     tags: ["Debt", "AI", "Budgeting", "Teaching example"],
@@ -162,7 +162,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "debt-stress-mindset-practical-steps",
     excerpt:
       "Money worries can crowd out everything else. Here is a calmer way to understand what is happening emotionally — and a practical path back toward clarity.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-14",
     category: "Debt Management",
     tags: ["Debt stress", "Mental health", "Budgeting", "UK finance"],
@@ -181,7 +181,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "loan-repayment-stress-seven-approaches",
     excerpt:
       "Fixed monthly payments can feel like a treadmill. These approaches focus on communication, structure, and small buffers — not willpower alone.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-12",
     category: "Debt Management",
     tags: ["Loans", "Repayments", "Refinancing", "UK"],
@@ -200,7 +200,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "debt-collector-call-uk-verify-rights",
     excerpt:
       "Unexpected calls about money you may or may not owe are unsettling. This guide walks through verification, records, and where to get trustworthy help.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-10",
     category: "Debt Management",
     tags: ["Debt collection", "Consumer rights", "UK", "Scams"],
@@ -219,7 +219,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "iva-uk-explained-trade-offs",
     excerpt:
       "Individual Voluntary Arrangements are widely advertised. This piece explains the mechanics, typical trade-offs, and how to get advice that is not selling you a product.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-08",
     category: "Debt Management",
     tags: ["IVA", "Insolvency", "UK debt", "Advice"],
@@ -238,7 +238,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "multiple-loans-strategy-consolidation-pitfalls",
     excerpt:
       "More than one repayment each month is mentally expensive. Here is how to rank debts, when consolidation helps, and the habits that undo good plans.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-06",
     category: "Debt Management",
     tags: ["Multiple debts", "Snowball", "Avalanche", "Consolidation"],
@@ -257,7 +257,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "debt-advice-scams-red-flags-uk",
     excerpt:
       "Not every company promising debt relief is acting in your best interest. Learn the warning signs and how to verify providers before you commit.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-04",
     category: "Debt Management",
     tags: ["Debt advice", "Scams", "UK", "Consumer protection"],
@@ -276,7 +276,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "build-debt-payoff-plan-in-60-minutes",
     excerpt:
       "You do not need complex apps to start. This one-hour planning method helps you map balances, priorities, and realistic monthly actions.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-02",
     category: "Debt Management",
     tags: ["Debt plan", "Budgeting", "Repayment strategy", "Financial wellbeing"],
@@ -295,7 +295,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "best-emergency-loan-alternatives-2026",
     excerpt:
       "A practical ranking of emergency cash options by speed, total cost, and repayment risk—plus red flags to avoid before signing any high-cost loan.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-04-21",
     category: "Debt Management",
     tags: ["Emergency cash", "Debt", "Borrowing", "Personal finance"],
@@ -314,7 +314,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "wall-street-in-your-pocket-ai-copilot-beat-market",
     excerpt:
       "AI can speed up research and portfolio checks, but it cannot erase market risk. A practical 2026 guide to using AI investing tools without overpromising returns.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-04-20",
     category: "Real-Time Finance",
     tags: ["AI investing", "Risk management", "Portfolio", "Markets"],
@@ -333,7 +333,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-wearables-predicting-illness-2026",
     excerpt:
       "AI wearables are shifting from step tracking to early-warning health signals. A practical look at what is promising, what is overhyped, and what privacy risks matter.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-04-19",
     category: "AI and Health",
     tags: ["AI wearables", "Digital health", "Preventive care", "Privacy"],
@@ -352,7 +352,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-microbiome-precision-nutrition-2026",
     excerpt:
       "Precision nutrition is moving from generic diet rules to personalised responses. Here is what AI, CGM data, and microbiome analysis can do—and what they still cannot.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-04-18",
     category: "AI and Health",
     tags: ["Precision nutrition", "Microbiome", "CGM", "AI health"],
@@ -371,7 +371,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-health-agent-proactive-wellness-2026",
     excerpt:
       "AI health agents now merge wearable data, bloodwork, and your calendar to act as 24/7 wellness concierges — shifting from passive tracking to proactive intervention before burnout arrives.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-04-25",
     category: "AI and Health",
     tags: ["AI Health", "Wearables", "Longevity", "Digital Health", "Wellness"],
@@ -397,7 +397,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-skin-longevity-biotech-2026",
     excerpt:
       "The beauty industry has retired 'anti-aging' in favour of skin longevity. AI diagnostics and biotech ingredients like senolytics and NAD+ boosters are redefining skincare as cellular health science.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-04-26",
     category: "AI and Health",
     tags: ["Skin Longevity", "AI Diagnostics", "Biotech", "Skincare", "Regenerative Beauty"],
@@ -424,7 +424,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-nutritionist-meal-planning-2026",
     excerpt:
       "Manual calorie counting is over. AI nutritionists in 2026 integrate wearables, CGM data, and grocery apps to create fully automated, bio-individual meal plans that evolve with your physiology.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-04-27",
     category: "AI and Health",
     tags: ["AI Nutrition", "Meal Planning", "Precision Nutrition", "Digital Health", "CGM"],
@@ -451,7 +451,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-mental-health-digital-therapist-2026",
     excerpt:
       "Millions are turning to AI chatbots for 24/7 emotional support. But can an algorithm truly empathise? A balanced look at AI therapy's real benefits, ethical risks, and the hybrid model reshaping mental healthcare in 2026.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-04-28",
     category: "AI and Health",
     tags: ["Mental Health", "AI Therapy", "Digital Wellbeing", "CBT", "AI Health"],
@@ -478,7 +478,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "longevity-science-biological-age-ai-2026",
     excerpt:
       "Biological age tests now claim to predict your health trajectory years in advance. We break down the science behind epigenetic clocks, what the results actually mean, and how AI is turning longevity data into personalised action plans.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-05",
     category: "AI and Health",
     tags: ["Longevity", "Biological Age", "Epigenetics", "AI Health", "Preventive Health"],
@@ -505,7 +505,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "sleep-optimization-technology-ai-2026",
     excerpt:
       "Sleep trackers have evolved from step counters to clinical-grade monitors that detect apnoea, analyse sleep architecture, and generate personalised recovery plans. Here is what the technology can and cannot do for your nights.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-05",
     category: "AI and Health",
     tags: ["Sleep", "Wearables", "AI Health", "Sleep Apnoea", "Recovery"],
@@ -532,7 +532,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "gut-brain-axis-microbiome-mental-health-2026",
     excerpt:
       "The gut-brain axis is no longer fringe science. Microbiome research now links your digestive bacteria to anxiety, depression, cognitive performance, and immune function — and AI-powered gut tests are making personalised intervention possible.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-06",
     category: "AI and Health",
     tags: ["Gut Health", "Microbiome", "Mental Health", "AI Health", "Nutrition"],
@@ -559,7 +559,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-diagnostics-preventive-healthcare-2026",
     excerpt:
       "AI diagnostic models are detecting cancer, heart disease, and neurological conditions from scans, blood panels, and wearable data before symptoms appear. A practical look at where the technology stands, what the NHS is trialling, and what you can do today.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-06",
     category: "AI and Health",
     tags: ["AI Diagnostics", "Preventive Health", "NHS", "Cancer Detection", "AI Health"],
@@ -586,7 +586,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "digital-detox-intentional-tech-use-2026",
     excerpt:
       "The same technology driving AI health breakthroughs is also engineered to hijack your attention. A research-backed guide to distinguishing tools that serve your biology from platforms that extract from it — and the practical strategies for taking back control.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-07",
     category: "AI and Health",
     tags: ["Digital Wellness", "Mental Health", "Screen Time", "Social Media", "Intentional Living"],
@@ -613,7 +613,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "robo-advisors-vs-human-financial-advisors-2026",
     excerpt:
       "The robo vs human debate has been framed as a binary for too long. In 2026 the honest answer is a framework — matching your financial complexity to the right combination of automated efficiency and human expertise.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-05-08",
     category: "Fintech Trends",
     tags: ["Robo-Advisors", "Financial Planning", "AI Finance", "Investing", "Fintech Trends"],
@@ -640,7 +640,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "blockchain-ai-case-studies-financial-value-2026",
     excerpt:
       "Four documented deployments where blockchain and AI are producing measurable financial outcomes — from JP Morgan's smart contract auditing to HSBC's trade finance fraud prevention and Chainalysis blockchain forensics.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-08",
     category: "Case Studies",
     tags: ["Blockchain", "AI Finance", "Case Studies", "DeFi", "Fintech"],
@@ -667,7 +667,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "ai-fitness-coaching-personal-trainer-2026",
     excerpt:
       "Static workout programs fail because they cannot adapt to your biology in real time. In 2026, AI coaching platforms connected to wearable data are changing that — building programs around your daily HRV, recovery score, and movement patterns rather than a fixed schedule.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-05",
     category: "AI and Health",
     tags: ["AI Fitness", "Personal Training", "Zone 2 Training", "Wearables", "AI Health"],
@@ -694,7 +694,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "jpmorgan-ai-banking-strategy-case-study",
     excerpt:
       "JPMorgan Chase employs more software engineers than Google, has 2,000 AI and machine learning experts, and has deployed AI across fraud detection, trading, risk management, and customer service. A case study in what it looks like when a $3.9 trillion bank treats AI as existential infrastructure.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-15",
     category: "Case Studies",
     tags: ["JPMorgan Chase", "AI Banking", "Machine Learning Finance", "Case Study", "Fintech"],
@@ -721,7 +721,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "klarna-ai-customer-service-case-study",
     excerpt:
       "In February 2024, Klarna announced its AI assistant handled 2.3 million customer service conversations in one month — equivalent to 700 agents — and projected $40 million in savings. A case study that goes beyond the headline to examine what actually happened, what it cost, and what every business can learn.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-14",
     category: "Case Studies",
     tags: ["Klarna", "AI Customer Service", "OpenAI", "BNPL", "Case Study"],
@@ -748,7 +748,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "nubank-ai-strategy-100-million-customers",
     excerpt:
       "Nubank found a founding insight in a Brazilian bank branch and built the world's largest digital bank using machine learning, alternative credit underwriting, and a data flywheel that the incumbent banks couldn't replicate. A case study in AI-powered financial inclusion at scale.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-13",
     category: "Case Studies",
     tags: ["Nubank", "Neobank", "AI Credit", "Financial Inclusion", "Case Study"],
@@ -775,7 +775,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "mastercard-ai-fraud-detection-decision-intelligence",
     excerpt:
       "Every card tap triggers a 50-millisecond AI decision across 143 billion annual transactions. A detailed case study of Mastercard's Decision Intelligence, Decision Intelligence Pro's generative AI layer, behavioural biometrics, and the organised criminal networks it is competing against.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-13",
     category: "Case Studies",
     tags: ["Mastercard", "Fraud Detection", "AI Payments", "Decision Intelligence", "Case Study"],
@@ -802,7 +802,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "deutsche-bank-google-cloud-ai-transformation",
     excerpt:
       "In 2019, Deutsche Bank was losing billions and cutting 18,000 jobs. That same year it signed a billion-dollar Google Cloud partnership. By 2024 it was reporting decade-high profits. A detailed case study in legacy bank AI transformation — what they built, what it cost, and what every financial institution can learn.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-13",
     category: "Case Studies",
     tags: ["Deutsche Bank", "AI Transformation", "Cloud Banking", "Case Study", "Fintech"],
@@ -829,7 +829,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "voice-banking-conversational-ai-2026",
     excerpt:
       "Conversational AI powered by large language models is dismantling the hated phone menu — Bank of America's Erica has handled 2 billion interactions; Wells Fargo, NatWest, and Monzo are all accelerating. A practical guide to what's real, what the economics are, and what the limits remain.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-05-12",
     category: "Fintech Trends",
     tags: ["Voice Banking", "Conversational AI", "LLM Finance", "AI Banking", "Fintech"],
@@ -856,7 +856,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "agentic-finance-ai-2026",
     excerpt:
       "Agentic AI in finance doesn't wait for questions — it negotiates bills, optimises cash flow, and automates business expense processing autonomously. A practical guide to Rocket Money, Monarch Money, Ramp, and the open banking infrastructure making it possible.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-05-11",
     category: "Fintech Trends",
     tags: ["Agentic AI", "Personal Finance AI", "Open Banking", "Fintech", "Automation"],
@@ -883,7 +883,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "fintech-gig-economy-ai-2026",
     excerpt:
       "The gig economy has five million self-employed UK workers and tens of millions globally — but the financial system still wasn't built for them. AI fintech is fixing that with income smoothing, cash flow credit underwriting, and automated tax provisioning.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-05-10",
     category: "Fintech Trends",
     tags: ["Gig Economy", "Freelancer Finance", "AI Fintech", "Creator Economy", "Self-Employed"],
@@ -910,7 +910,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "climate-fintech-esg-investing-ai-2026",
     excerpt:
       "AI is solving ESG investing's credibility problem — satellite imagery, NLP analysis of corporate disclosures, and continuous scoring are replacing greenwashing with verifiable data. A practical guide to the platforms changing sustainable finance.",
-    author: "Team Kaash",
+    author: "Saga",
     date: "2026-05-09",
     category: "Fintech Trends",
     tags: ["ESG", "Climate Finance", "AI Investing", "Sustainable Investing", "Fintech"],
@@ -937,7 +937,7 @@ export const postIndex: PostIndexItem[] = [
     slug: "stress-burnout-nervous-system-ai-2026",
     excerpt:
       "Chronic stress and burnout are measurable physiological states, not just feelings. In 2026, AI-powered biometric tools can detect nervous system dysregulation before you consciously register it — and guide you back to balance with personalised precision.",
-    author: "Team Kaash",
+    author: "Kash",
     date: "2026-05-07",
     category: "AI and Health",
     tags: ["Stress", "Burnout", "Nervous System", "AI Health", "Mental Health"],
