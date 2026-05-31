@@ -74,7 +74,7 @@ export default function About() {
                 <div>
                   <h3 className="font-oswald text-base md:text-lg font-bold uppercase mb-1.5 text-blue-600">Case Studies</h3>
                   <p className="text-gray-700 text-sm leading-relaxed">
-                    Composite teaching examples and worked scenarios that illustrate real financial decisions — clearly labelled as illustrative, not verified news stories.
+                    In-depth analytical guides and worked examples showing how AI and fintech tools apply to real-world financial and technology decisions — with supporting data and source links throughout.
                   </p>
                 </div>
               </div>
@@ -161,6 +161,44 @@ export default function About() {
               <p className="text-gray-700 text-base md:text-lg leading-relaxed">
                 Display advertising on this site is served by Google AdSense. Advertisers have no influence over which topics we cover, how we cover them, or what conclusions we reach.
               </p>
+            </section>
+
+            {/* Meet the Team */}
+            <section>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-3">Meet the Team</h2>
+              <p className="text-gray-700 text-base leading-relaxed mb-5">
+                The Kaash Journal is written and edited by two specialists with direct professional experience in the fields we cover — UK financial services and regulation, and AI-driven health technology. Every article you read has been researched, written, and reviewed by one of our contributors.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="border border-gray-200 rounded-lg p-5 bg-gray-50">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
+                      —
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 text-sm">Contributor — Fintech &amp; Regulation</p>
+                      <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Finance &amp; FCA Policy</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    Covers UK fintech investment, FCA regulatory developments, open banking, BNPL, and RegTech. Background in UK financial services and compliance.
+                  </p>
+                </div>
+                <div className="border border-gray-200 rounded-lg p-5 bg-gray-50">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
+                      —
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 text-sm">Contributor — AI &amp; Health Technology</p>
+                      <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Digital Health &amp; AI</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    Covers AI in NHS services, wearable health technology, digital therapeutics, and clinical AI tools. Background in health technology and digital health research.
+                  </p>
+                </div>
+              </div>
             </section>
 
             {/* Contact */}

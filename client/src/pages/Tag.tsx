@@ -98,6 +98,7 @@ export default function Tag() {
         title={`#${tagName} Articles`}
         description={`All articles tagged with "${tagName}"`}
         url={`/tag/${tagSlug}`}
+        noIndex={true}
       />
       <script
         type="application/ld+json"

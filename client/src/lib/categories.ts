@@ -33,7 +33,7 @@ export const categories: Category[] = [
     id: "5",
     name: "Case Studies",
     slug: "case-studies",
-    description: "Real-world applications and success stories",
+    description: "In-depth analytical guides and worked examples",
     color: "#00C7BE",
   },
 ];

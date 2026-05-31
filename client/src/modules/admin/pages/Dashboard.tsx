@@ -592,7 +592,7 @@ function AdminDashboard() {
   if (isLoading && !overview) {
     return (
       <div className="min-h-screen bg-white">
-        <SEO title="Admin Dashboard" description="Analytics and revenue dashboard" />
+        <SEO title="Admin Dashboard" description="Analytics and revenue dashboard" noIndex={true} />
         <Header />
         <main id="main-content" className="container py-12">
           <div className="text-center py-20">
@@ -607,7 +607,7 @@ function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-white">
-      <SEO title="Admin Dashboard" description="Analytics and revenue dashboard" />
+      <SEO title="Admin Dashboard" description="Analytics and revenue dashboard" noIndex={true} />
       <Header />
       
       <main id="main-content" className="container py-8 md:py-12">

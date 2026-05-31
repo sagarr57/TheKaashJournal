@@ -13,6 +13,7 @@ interface SEOProps {
   modifiedTime?: string;
   tags?: string[];
   category?: string;
+  noIndex?: boolean;
 }
 
 const defaultTitle = "The Kaash Journal - AI & Fintech Insights for UK Audiences";
@@ -37,6 +38,7 @@ export function SEO({
   modifiedTime,
   tags = [],
   category,
+  noIndex = false,
 }: SEOProps) {
   const fullTitle = title ? `${title} | The Kaash Journal` : defaultTitle;
   const canonicalUrl = url ? `${SITE_URL}${url}` : SITE_URL;
@@ -48,6 +50,7 @@ export function SEO({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="author" content={author} />
+      {noIndex && <meta name="robots" content="noindex, follow" />}
       <meta name="language" content="en-GB" />
       {tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
 

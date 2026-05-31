@@ -215,6 +215,14 @@ export default function Post() {
     ? postMeta.image
     : `${SITE_URL}${postMeta.image}`;
 
+  const GENERIC_AUTHOR_NAMES = ["The Kaash Journal", "Team Kaash", "Kaash", ""];
+  const isNamedAuthor = postMeta.author &&
+    !GENERIC_AUTHOR_NAMES.includes(postMeta.author.trim());
+
+  const authorSchema = isNamedAuthor
+    ? { "@type": "Person", name: postMeta.author, url: `${SITE_URL}/about` }
+    : { "@type": "Organization", name: "The Kaash Journal", url: `${SITE_URL}/about` };
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -226,10 +234,7 @@ export default function Post() {
     dateModified: postMeta.updated
       ? new Date(postMeta.updated).toISOString()
       : new Date(postMeta.date).toISOString(),
-    author: {
-      "@type": "Person",
-      name: postMeta.author,
-    },
+    author: authorSchema,
     publisher: {
       "@type": "Organization",
       name: "The Kaash Journal",
@@ -525,23 +530,37 @@ export default function Post() {
               </div>
 
               {/* Author Bio */}
-              <div className="border border-gray-200 rounded-lg p-5 md:p-6 mb-8 bg-gray-50">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xl shrink-0 select-none">
-                    TK
+              {(() => {
+                const displayName = postMeta.author && postMeta.author.trim()
+                  ? postMeta.author
+                  : "The Kaash Journal";
+                const initials = displayName
+                  .split(" ")
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .map((w: string) => w[0].toUpperCase())
+                  .join("");
+                return (
+                  <div className="border border-gray-200 rounded-lg p-5 md:p-6 mb-8 bg-gray-50">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Written by</p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xl shrink-0 select-none">
+                        {initials}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 mb-0.5">{displayName}</p>
+                        <p className="text-xs text-blue-600 font-medium mb-2 uppercase tracking-wide">The Kaash Journal</p>
+                        <p className="text-gray-700 text-sm leading-relaxed">
+                          The Kaash Journal editorial team combines backgrounds in financial services, digital health, and investigative journalism. Every article is fact-checked against primary sources — including FCA guidance, NHS resources, GOV.UK, and peer-reviewed research — before publication.
+                        </p>
+                        <a href="/about" className="inline-block mt-2 text-sm text-blue-700 hover:text-blue-800 font-medium hover:underline">
+                          About our editorial team →
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-gray-900 mb-0.5">Team Kaash — Editorial Team</p>
-                    <p className="text-xs text-blue-600 font-medium mb-2 uppercase tracking-wide">The Kaash Journal</p>
-                    <p className="text-gray-700 text-sm leading-relaxed">
-                      The Kaash Journal editorial team is made up of writers and researchers specialising in artificial intelligence, health technology, personal finance, and UK consumer debt. Our team draws on backgrounds in financial services, digital health, and investigative journalism to produce guides that are accurate, source-linked, and genuinely useful. Every article is fact-checked against primary sources — including government publications, peer-reviewed research, and official company disclosures — before publication.
-                    </p>
-                    <a href="/about" className="inline-block mt-2 text-sm text-blue-700 hover:text-blue-800 font-medium hover:underline">
-                      Learn more about us →
-                    </a>
-                  </div>
-                </div>
-              </div>
+                );
+              })()}
 
               {/* Social Share */}
               <SocialShare
