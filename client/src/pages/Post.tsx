@@ -341,11 +341,12 @@ export default function Post() {
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
         {/* Hero Image */}
-        <div className="w-full h-44 sm:h-52 md:h-64 lg:h-72 overflow-hidden bg-gray-200">
+        <div className="w-full h-56 sm:h-72 md:h-96 lg:h-[420px] overflow-hidden bg-gray-200">
           <Image
             src={postMeta.image}
             alt={postMeta.title}
             className="w-full h-full object-cover"
+            priority={true}
           />
         </div>
 

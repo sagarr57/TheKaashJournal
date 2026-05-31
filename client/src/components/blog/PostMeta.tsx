@@ -24,21 +24,21 @@ export function PostMeta({ post }: PostMetaProps) {
 
       <p className="text-sm text-gray-600 flex flex-wrap items-center gap-x-1 gap-y-1">
         <span className="inline-flex items-center gap-1.5">
-          <User className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden />
+          <User className="w-4 h-4 text-gray-500 flex-shrink-0" aria-hidden />
           <span className="text-gray-900 font-medium">{post.author}</span>
         </span>
         <span className="text-gray-300" aria-hidden>
           ·
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden />
+          <Calendar className="w-4 h-4 text-gray-500 flex-shrink-0" aria-hidden />
           <time dateTime={post.date}>{formatDate(post.date)}</time>
         </span>
         <span className="text-gray-300" aria-hidden>
           ·
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <Clock className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden />
+          <Clock className="w-4 h-4 text-gray-500 flex-shrink-0" aria-hidden />
           <span>{post.readingTime} min read</span>
         </span>
         {post.updated && (
