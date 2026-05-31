@@ -215,12 +215,14 @@ export default function Post() {
     ? postMeta.image
     : `${SITE_URL}${postMeta.image}`;
 
-  const GENERIC_AUTHOR_NAMES = ["The Kaash Journal", "Team Kaash", "Kaash", ""];
-  const isNamedAuthor = postMeta.author &&
-    !GENERIC_AUTHOR_NAMES.includes(postMeta.author.trim());
+  const GENERIC_AUTHOR_NAMES = ["The Kaash Journal", "Team Kaash", ""];
+  const authorName = postMeta.author?.trim() || "";
+  const isNamedAuthor = authorName && !GENERIC_AUTHOR_NAMES.includes(authorName);
+  const authorSlug = authorName.toLowerCase(); // "Kash" → "kash", "Saga" → "saga"
+  const authorPageUrl = isNamedAuthor ? `${SITE_URL}/author/${authorSlug}` : `${SITE_URL}/about`;
 
   const authorSchema = isNamedAuthor
-    ? { "@type": "Person", name: postMeta.author, url: `${SITE_URL}/about` }
+    ? { "@type": "Person", name: authorName, url: authorPageUrl }
     : { "@type": "Organization", name: "The Kaash Journal", url: `${SITE_URL}/about` };
 
   const articleSchema = {
@@ -531,15 +533,31 @@ export default function Post() {
 
               {/* Author Bio */}
               {(() => {
-                const displayName = postMeta.author && postMeta.author.trim()
-                  ? postMeta.author
-                  : "The Kaash Journal";
+                const displayName = authorName || "The Kaash Journal";
                 const initials = displayName
                   .split(" ")
                   .filter(Boolean)
                   .slice(0, 2)
                   .map((w: string) => w[0].toUpperCase())
                   .join("");
+
+                const AUTHOR_BIOS: Record<string, { role: string; bio: string }> = {
+                  kash: {
+                    role: "Contributor — AI & Health Technology",
+                    bio: "Kash covers AI in NHS services, wearable health technology, digital therapeutics, clinical AI tools, and real-time finance. Background in health technology, digital health research, and AI-driven financial systems. Every article is fact-checked against primary sources including NHS, GOV.UK, and peer-reviewed research.",
+                  },
+                  saga: {
+                    role: "Contributor — Fintech & Regulation",
+                    bio: "Saga covers UK fintech investment, FCA regulatory developments, open banking, BNPL, debt management strategies, and consumer finance. Background in UK financial services and compliance. All articles reference FCA guidance, MoneyHelper, and official regulatory sources.",
+                  },
+                };
+
+                const authorBio = isNamedAuthor ? AUTHOR_BIOS[authorSlug] : null;
+                const role = authorBio?.role || "The Kaash Journal";
+                const bio = authorBio?.bio || "The Kaash Journal editorial team combines backgrounds in financial services, digital health, and investigative journalism. Every article is fact-checked against primary sources — including FCA guidance, NHS resources, GOV.UK, and peer-reviewed research — before publication.";
+                const profileLink = isNamedAuthor ? `/author/${authorSlug}` : "/about";
+                const profileLinkText = isNamedAuthor ? `About ${displayName} →` : "About our editorial team →";
+
                 return (
                   <div className="border border-gray-200 rounded-lg p-5 md:p-6 mb-8 bg-gray-50">
                     <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Written by</p>
@@ -549,12 +567,10 @@ export default function Post() {
                       </div>
                       <div>
                         <p className="font-semibold text-gray-900 mb-0.5">{displayName}</p>
-                        <p className="text-xs text-blue-600 font-medium mb-2 uppercase tracking-wide">The Kaash Journal</p>
-                        <p className="text-gray-700 text-sm leading-relaxed">
-                          The Kaash Journal editorial team combines backgrounds in financial services, digital health, and investigative journalism. Every article is fact-checked against primary sources — including FCA guidance, NHS resources, GOV.UK, and peer-reviewed research — before publication.
-                        </p>
-                        <a href="/about" className="inline-block mt-2 text-sm text-blue-700 hover:text-blue-800 font-medium hover:underline">
-                          About our editorial team →
+                        <p className="text-xs text-blue-600 font-medium mb-2 uppercase tracking-wide">{role}</p>
+                        <p className="text-gray-700 text-sm leading-relaxed">{bio}</p>
+                        <a href={profileLink} className="inline-block mt-2 text-sm text-blue-700 hover:text-blue-800 font-medium hover:underline">
+                          {profileLinkText}
                         </a>
                       </div>
                     </div>

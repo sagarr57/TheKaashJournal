@@ -173,30 +173,36 @@ export default function About() {
                 <div className="border border-gray-200 rounded-lg p-5 bg-gray-50">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
-                      —
+                      S
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900 text-sm">Contributor — Fintech &amp; Regulation</p>
-                      <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Finance &amp; FCA Policy</p>
+                      <p className="font-semibold text-gray-900 text-sm">Saga</p>
+                      <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Contributor — Fintech &amp; Regulation</p>
                     </div>
                   </div>
-                  <p className="text-gray-700 text-sm leading-relaxed">
-                    Covers UK fintech investment, FCA regulatory developments, open banking, BNPL, and RegTech. Background in UK financial services and compliance.
+                  <p className="text-gray-700 text-sm leading-relaxed mb-3">
+                    Covers UK fintech investment, FCA regulatory developments, open banking, BNPL, debt management strategies, and consumer finance. Background in UK financial services and compliance.
                   </p>
+                  <a href="/author/saga" className="text-sm text-blue-700 hover:text-blue-800 font-medium hover:underline">
+                    View profile →
+                  </a>
                 </div>
                 <div className="border border-gray-200 rounded-lg p-5 bg-gray-50">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
-                      —
+                      K
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900 text-sm">Contributor — AI &amp; Health Technology</p>
-                      <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Digital Health &amp; AI</p>
+                      <p className="font-semibold text-gray-900 text-sm">Kash</p>
+                      <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Contributor — AI &amp; Health Technology</p>
                     </div>
                   </div>
-                  <p className="text-gray-700 text-sm leading-relaxed">
-                    Covers AI in NHS services, wearable health technology, digital therapeutics, and clinical AI tools. Background in health technology and digital health research.
+                  <p className="text-gray-700 text-sm leading-relaxed mb-3">
+                    Covers AI in NHS services, wearable health technology, digital therapeutics, clinical AI tools, and real-time financial data. Background in health technology and digital health research.
                   </p>
+                  <a href="/author/kash" className="text-sm text-blue-700 hover:text-blue-800 font-medium hover:underline">
+                    View profile →
+                  </a>
                 </div>
               </div>
             </section>

@@ -36,6 +36,7 @@ const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
 const EditorialPolicy = lazy(() => import("./pages/EditorialPolicy"));
 const Admin = lazy(() => import("./pages/Admin"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const Author = lazy(() => import("./pages/Author"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Loading fallback component
@@ -64,6 +65,7 @@ function Router() {
         <Route path={"/blog/:slug"} component={Post} />
         <Route path={"/category/:slug"} component={Category} />
         <Route path={"/tag/:tag"} component={Tag} />
+        <Route path={"/author/:slug"} component={Author} />
         <Route path={"/about"} component={About} />
         <Route path={"/contact"} component={Contact} />
         <Route path={"/privacy-policy"} component={PrivacyPolicy} />
