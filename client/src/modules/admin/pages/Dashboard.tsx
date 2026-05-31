@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw, Pencil, Trash2, Plus, X, Upload, ImageIcon } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { author, categories } from "@/lib/categories";
+import { categories } from "@/lib/categories";
 import {
   fetchAnalyticsOverview,
   fetchVisitorsData,
@@ -42,6 +42,20 @@ const CATEGORY_IMAGES: Record<string, string> = {
   "Case Studies":     "/images/business-analytics.jpg",
 };
 
+const CATEGORY_AUTHOR: Record<string, string> = {
+  "AI and Health":    "Kash",
+  "Real-Time Finance": "Kash",
+  "Case Studies":     "Kash",
+  "Debt Management":  "Saga",
+  "Fintech Trends":   "Saga",
+};
+
+const PEN_NAME_OPTIONS = [
+  { value: "Kash",              label: "Kash — AI & Health, Real-Time Finance, Case Studies" },
+  { value: "Saga",              label: "Saga — Debt Management, Fintech Trends" },
+  { value: "The Kaash Journal", label: "The Kaash Journal (generic / no pen name)" },
+];
+
 const IMAGE_PRESETS = [
   { label: "AI & Health",  value: "/images/ai-health.jpg" },
   { label: "Finance",      value: "/images/fintech.jpg" },
@@ -63,7 +77,7 @@ const getInitialPostForm = () => {
     slug: "",
     excerpt: "",
     content: "",
-    author: author.name,
+    author: CATEGORY_AUTHOR[firstCategory] || "The Kaash Journal",
     date: new Date().toISOString().split("T")[0],
     category: firstCategory,
     tags: "",
@@ -366,7 +380,7 @@ function AdminDashboard() {
           slug,
           excerpt: postForm.excerpt.trim(),
           content: postForm.content,
-          author: postForm.author.trim() || author.name,
+          author: postForm.author.trim() || "The Kaash Journal",
           date: postForm.date,
           category: postForm.category.trim(),
           tags,
@@ -1227,14 +1241,17 @@ function AdminDashboard() {
                     {/* Row 2: Author + Publish Date */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <label className="flex flex-col gap-1">
-                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Author Name</span>
-                        <input
+                        <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Author</span>
+                        <select
                           value={postForm.author}
                           onChange={(e) => handlePostFieldChange("author", e.target.value)}
-                          placeholder="Team Kaash"
-                          className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        <span className="text-[11px] text-gray-400">Defaults to "Team Kaash" if left blank.</span>
+                          className="w-full border border-gray-300 px-3 py-2 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                          {PEN_NAME_OPTIONS.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
+                        </select>
+                        <span className="text-[11px] text-gray-400">Auto-selected when you pick a category. Override here if needed.</span>
                       </label>
                       <label className="flex flex-col gap-1">
                         <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Publish Date <span className="text-red-500">*</span></span>
@@ -1256,6 +1273,8 @@ function AdminDashboard() {
                           onChange={(e) => {
                             const cat = e.target.value;
                             handlePostFieldChange("category", cat);
+                            // Auto-assign pen name based on category
+                            handlePostFieldChange("author", CATEGORY_AUTHOR[cat] || "The Kaash Journal");
                             const currentIsPreset = IMAGE_PRESETS.some((p) => p.value === postForm.image);
                             if (currentIsPreset || !postForm.image) {
                               handlePostFieldChange("image", CATEGORY_IMAGES[cat] || DEFAULT_POST_IMAGE);
