@@ -3,6 +3,11 @@ import { BlogPost } from "@/lib/types";
 import { formatDate } from "@/lib/blog-utils";
 import { Clock, User } from "lucide-react";
 import { Image } from "@/components/ui/image";
+import { fetchPostBySlugWithContent } from "@/lib/blog-data";
+
+function prefetchPost(slug: string) {
+  fetchPostBySlugWithContent(slug).catch(() => {});
+}
 
 interface PostCardProps {
   post: BlogPost;
@@ -15,7 +20,7 @@ export function PostCard({ post, className }: PostCardProps) {
   return (
     <article className={`group bg-white rounded-2xl border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col ${className || ""}`}>
       {/* Image */}
-      <a href={`/blog/${post.slug}`} className="block relative h-48 overflow-hidden bg-gray-100 shrink-0">
+      <a href={`/blog/${post.slug}`} className="block relative h-48 overflow-hidden bg-gray-100 shrink-0" onMouseEnter={() => prefetchPost(post.slug)} onFocus={() => prefetchPost(post.slug)}>
         <Image
           src={post.image}
           alt={post.title}
@@ -36,7 +41,7 @@ export function PostCard({ post, className }: PostCardProps) {
       <div className="p-4 md:p-5 flex flex-col flex-1">
         {/* Title */}
         <h3 className="font-oswald text-base md:text-lg font-bold normal-case tracking-tight mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
-          <a href={`/blog/${post.slug}`}>{post.title}</a>
+          <a href={`/blog/${post.slug}`} onMouseEnter={() => prefetchPost(post.slug)}>{post.title}</a>
         </h3>
 
         {/* Excerpt */}

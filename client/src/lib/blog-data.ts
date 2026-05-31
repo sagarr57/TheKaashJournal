@@ -3,7 +3,6 @@
 // Repo edits to `postsContent.ts` apply live only after you upsert SQL (see `documentation/SUPABASE_BLOG_SEED.sql`)
 // or publish via admin — otherwise production keeps the previous DB content.
 import { postIndex } from "@/lib/postsIndex";
-import { postContentBySlug } from "@/lib/postsContent";
 import { supabase } from "@/lib/supabase";
 import type { BlogPost } from "@/lib/types";
 
@@ -30,7 +29,11 @@ function mapRowToPostIndex(row: any): BlogPostIndexItem {
   };
 }
 
+// Run at most once per JS session — it's best-effort, the cron is authoritative
+let autoPublishRan = false;
 async function autoPublishScheduled() {
+  if (autoPublishRan) return;
+  autoPublishRan = true;
   try {
     await supabase
       .from("blog_posts")
@@ -38,8 +41,28 @@ async function autoPublishScheduled() {
       .eq("status", "scheduled")
       .lte("publish_at", new Date().toISOString());
   } catch {
-    // silent — best-effort, cron is the authoritative mechanism
+    // silent
   }
+}
+
+// --- Per-post content cache (sessionStorage, 30-min TTL) ---
+const POST_TTL = 30 * 60 * 1000;
+function postCacheKey(slug: string) { return `kaash_post_${slug}`; }
+
+function loadPostFromSession(slug: string): BlogPost | null {
+  try {
+    const raw = sessionStorage.getItem(postCacheKey(slug));
+    if (!raw) return null;
+    const { data, ts } = JSON.parse(raw);
+    if (Date.now() - ts > POST_TTL) return null;
+    return data as BlogPost;
+  } catch { return null; }
+}
+
+function savePostToSession(slug: string, post: BlogPost) {
+  try {
+    sessionStorage.setItem(postCacheKey(slug), JSON.stringify({ data: post, ts: Date.now() }));
+  } catch {}
 }
 
 export async function fetchPublishedPostIndex(): Promise<BlogPostIndexItem[]> {
@@ -67,6 +90,10 @@ export async function fetchPublishedPostIndex(): Promise<BlogPostIndexItem[]> {
 export async function fetchPostBySlugWithContent(
   slug: string
 ): Promise<BlogPost | null> {
+  // Serve from session cache first for instant repeat visits
+  const cached = loadPostFromSession(slug);
+  if (cached) return cached;
+
   try {
     await autoPublishScheduled();
 
@@ -80,6 +107,8 @@ export async function fetchPostBySlugWithContent(
       .single();
 
     if (error || !data) {
+      // postsContent.ts (432KB) loaded lazily — only when Supabase fails
+      const { postContentBySlug } = await import("@/lib/postsContent");
       const fallbackMeta = postIndex.find((p) => p.slug === slug);
       const fallbackContent = postContentBySlug[slug];
       if (!fallbackMeta || !fallbackContent) return null;
@@ -87,8 +116,11 @@ export async function fetchPostBySlugWithContent(
     }
 
     const mapped = mapRowToPostIndex(data);
-    return { ...mapped, content: data.content || "" };
+    const post: BlogPost = { ...mapped, content: data.content || "" };
+    savePostToSession(slug, post);
+    return post;
   } catch {
+    const { postContentBySlug } = await import("@/lib/postsContent");
     const fallbackMeta = postIndex.find((p) => p.slug === slug);
     const fallbackContent = postContentBySlug[slug];
     if (!fallbackMeta || !fallbackContent) return null;

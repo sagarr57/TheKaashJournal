@@ -415,7 +415,22 @@ export default function Post() {
                     </div>
                   )}
                   {!content && !contentError && (
-                    <div className="text-gray-500">Loading article...</div>
+                    <div className="animate-pulse space-y-3" aria-label="Loading article content">
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="h-4 bg-gray-200 rounded w-11/12" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="h-4 bg-gray-200 rounded w-4/5" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="mt-6 h-5 bg-gray-200 rounded w-2/3" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="h-4 bg-gray-200 rounded w-10/12" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="mt-6 h-5 bg-gray-200 rounded w-1/2" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="h-4 bg-gray-200 rounded w-9/12" />
+                    </div>
                   )}
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
