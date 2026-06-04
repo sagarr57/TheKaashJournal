@@ -58,7 +58,7 @@ export function PostMeta({ post }: PostMetaProps) {
           {post.tags.map((tag) => (
             <a
               key={tag}
-              href={`/tag/${tag.toLowerCase()}`}
+              href={`/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
               className="inline-block text-xs text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200/80 px-2.5 py-1 rounded-md transition-colors"
             >
               {tag}

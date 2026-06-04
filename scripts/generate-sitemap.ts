@@ -59,7 +59,20 @@ const postRoutes: SitemapUrl[] = postIndex.map((post) => ({
   priority: post.featured ? "0.8" : "0.7",
 }));
 
-const allRoutes = [...staticRoutes, ...categoryRoutes, ...postRoutes];
+// Collect unique tags and generate slugified URLs
+const uniqueTagSlugs = new Set<string>();
+postIndex.forEach((post) => {
+  (post.tags || []).forEach((tag: string) => {
+    uniqueTagSlugs.add(tag.toLowerCase().replace(/\s+/g, "-"));
+  });
+});
+const tagRoutes: SitemapUrl[] = Array.from(uniqueTagSlugs).sort().map((slug) => ({
+  loc: `${SITE_URL}/tag/${slug}`,
+  changefreq: "weekly",
+  priority: "0.5",
+}));
+
+const allRoutes = [...staticRoutes, ...categoryRoutes, ...postRoutes, ...tagRoutes];
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allRoutes.map(buildUrlEntry).join("\n")}

@@ -14,6 +14,7 @@ import { SocialShare } from "@/components/SocialShare";
 import { AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
+import { postContentBySlug } from "@/lib/postsContent";
 import { AdUnit } from "@/components/AdUnit";
 import { SITE_URL } from "@/lib/config";
 
@@ -150,12 +151,14 @@ export default function Post() {
   const params = useParams();
   const slug = params.slug as string;
   const [postMeta, setPostMeta] = useState(getPostBySlug(slug));
-  const [content, setContent] = useState<string | null>(null);
+  // Initialize from static data so Googlebot sees full content on first paint;
+  // useEffect then updates with the latest version from Supabase.
+  const [content, setContent] = useState<string | null>(postContentBySlug[slug] ?? null);
   const [contentError, setContentError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    setContent(null);
+    setContent(postContentBySlug[slug] ?? null);
     setContentError(null);
     setPostMeta(getPostBySlug(slug));
 
