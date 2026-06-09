@@ -58,19 +58,29 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
 
   const today = new Date().toISOString().split("T")[0];
 
-  let posts: Array<{ slug: string; date: string; updated_at?: string | null }> = [];
+  let posts: Array<{ slug: string; date: string; updated_at?: string | null; tags?: string[] | null }> = [];
 
   if (supabaseUrl && supabaseKey) {
     try {
       const sb = createClient(supabaseUrl, supabaseKey);
       const { data } = await sb
         .from("blog_posts")
-        .select("slug,date,updated_at")
+        .select("slug,date,updated_at,tags")
         .eq("status", "published")
         .order("date", { ascending: false });
       if (data) posts = data;
     } catch {
       // Supabase unreachable — sitemap will still include static pages
+    }
+  }
+
+  // Collect unique tag slugs from all published posts
+  const uniqueTagSlugs = new Set<string>();
+  for (const post of posts) {
+    if (Array.isArray(post.tags)) {
+      for (const tag of post.tags) {
+        uniqueTagSlugs.add(String(tag).toLowerCase().replace(/\s+/g, "-"));
+      }
     }
   }
 
@@ -87,6 +97,10 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
   for (const post of posts) {
     const lastmod = toDateString(post.updated_at || post.date, today);
     entries.push(urlEntry(`${SITE_URL}/blog/${post.slug}`, lastmod, "monthly", "0.8"));
+  }
+
+  for (const tagSlug of [...uniqueTagSlugs].sort()) {
+    entries.push(urlEntry(`${SITE_URL}/tag/${tagSlug}`, today, "weekly", "0.5"));
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join("\n")}\n</urlset>`;

@@ -4,11 +4,26 @@ import { hasAnalyticsConsent } from "@/lib/cookie-consent";
 
 interface GTMProps {
   gtmId: string;
+  consentGranted: boolean;
 }
 
-export function GTM({ gtmId }: GTMProps) {
+export function GTM({ gtmId, consentGranted }: GTMProps) {
   useEffect(() => {
-    // Add GTM script to head (exact Google Tag Manager code)
+    if (!gtmId) return;
+
+    // Consent Mode v2: push default denied state BEFORE GTM loads so tags
+    // inside the container start with no-cookie mode (GDPR default-deny).
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "default_consent",
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      functionality_storage: "denied",
+      personalization_storage: "denied",
+      security_storage: "granted",
+    });
+
+    // Inject the GTM snippet (always — Tag Assistant needs to detect it)
     const script = document.createElement("script");
     script.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -17,7 +32,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${gtmId}');`;
     document.head.appendChild(script);
 
-    // Add noscript iframe to body
     const noscript = document.createElement("noscript");
     const iframe = document.createElement("iframe");
     iframe.src = `https://www.googletagmanager.com/ns.html?id=${gtmId}`;
@@ -29,15 +43,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     document.body.insertBefore(noscript, document.body.firstChild);
 
     return () => {
-      // Cleanup
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-      if (noscript.parentNode) {
-        noscript.parentNode.removeChild(noscript);
-      }
+      if (script.parentNode) script.parentNode.removeChild(script);
+      if (noscript.parentNode) noscript.parentNode.removeChild(noscript);
     };
   }, [gtmId]);
+
+  // Propagate consent changes to GTM tags via dataLayer update
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.dataLayer) return;
+    const state = consentGranted ? "granted" : "denied";
+    window.dataLayer.push({
+      event: "update_consent",
+      analytics_storage: state,
+      ad_storage: state,
+      functionality_storage: state,
+      personalization_storage: state,
+    });
+  }, [consentGranted]);
 
   return null;
 }

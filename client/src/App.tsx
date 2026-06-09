@@ -126,7 +126,7 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          {gtmId && consentStatus === "accepted" && <GTM gtmId={gtmId} />}
+          {gtmId && <GTM gtmId={gtmId} consentGranted={consentStatus === "accepted"} />}
           <Router />
           <CookieConsentBanner />
         </TooltipProvider>
