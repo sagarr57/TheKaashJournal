@@ -7,6 +7,9 @@ dist/
 build/
 *.dist
 
+# Generated sitemap — served dynamically via /api/sitemap, never commit the static file
+client/public/sitemap.xml
+
 # Environment variables
 .env
 .env.local
