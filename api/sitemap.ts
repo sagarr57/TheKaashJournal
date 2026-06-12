@@ -1,15 +1,18 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createClient } from "@supabase/supabase-js";
+import { buildCanonicalUrl, DEFAULT_SITE_URL, normalizeSiteUrl } from "../shared/site-url";
 
-const SITE_URL = process.env.VITE_SITE_URL || "https://www.thekaashjournal.com";
+const SITE_URL = normalizeSiteUrl(process.env.VITE_SITE_URL || DEFAULT_SITE_URL);
 
 const STATIC_PAGES = [
-  { path: "/",                    priority: "1.0", changefreq: "daily"   },
-  { path: "/blog",                priority: "0.9", changefreq: "daily"   },
-  { path: "/about",               priority: "0.6", changefreq: "monthly" },
-  { path: "/contact",             priority: "0.6", changefreq: "monthly" },
-  { path: "/privacy-policy",      priority: "0.3", changefreq: "monthly" },
-  { path: "/terms-and-conditions",priority: "0.3", changefreq: "monthly" },
+  { path: "/",                     priority: "1.0", changefreq: "daily"   },
+  { path: "/blog",                 priority: "0.9", changefreq: "daily"   },
+  { path: "/about",                priority: "0.6", changefreq: "monthly" },
+  { path: "/contact",              priority: "0.6", changefreq: "monthly" },
+  { path: "/editorial-policy",     priority: "0.4", changefreq: "monthly" },
+  { path: "/privacy-policy",       priority: "0.3", changefreq: "monthly" },
+  { path: "/terms-and-conditions", priority: "0.3", changefreq: "monthly" },
+  { path: "/cookie-policy",        priority: "0.3", changefreq: "monthly" },
 ];
 
 const CATEGORY_SLUGS = [
@@ -74,33 +77,42 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
     }
   }
 
-  // Collect unique tag slugs from all published posts
-  const uniqueTagSlugs = new Set<string>();
-  for (const post of posts) {
-    if (Array.isArray(post.tags)) {
-      for (const tag of post.tags) {
-        uniqueTagSlugs.add(String(tag).toLowerCase().replace(/\s+/g, "-"));
-      }
-    }
-  }
-
   const entries: string[] = [];
 
   for (const page of STATIC_PAGES) {
-    entries.push(urlEntry(`${SITE_URL}${page.path}`, today, page.changefreq, page.priority));
+    entries.push(
+      urlEntry(buildCanonicalUrl(SITE_URL, page.path), today, page.changefreq, page.priority)
+    );
   }
 
   for (const slug of CATEGORY_SLUGS) {
-    entries.push(urlEntry(`${SITE_URL}/category/${slug}`, today, "weekly", "0.7"));
+    entries.push(
+      urlEntry(buildCanonicalUrl(SITE_URL, `/category/${slug}`), today, "weekly", "0.7")
+    );
   }
 
   for (const post of posts) {
     const lastmod = toDateString(post.updated_at || post.date, today);
-    entries.push(urlEntry(`${SITE_URL}/blog/${post.slug}`, lastmod, "monthly", "0.8"));
+    entries.push(
+      urlEntry(buildCanonicalUrl(SITE_URL, `/blog/${post.slug}`), lastmod, "monthly", "0.8")
+    );
   }
 
-  for (const tagSlug of [...uniqueTagSlugs].sort()) {
-    entries.push(urlEntry(`${SITE_URL}/tag/${tagSlug}`, today, "weekly", "0.5"));
+  // Include tag pages that have enough posts to be worth indexing (mirrors Tag.tsx threshold).
+  const MIN_POSTS_TO_INDEX = 5;
+  const tagCounts = new Map<string, number>();
+  for (const post of posts) {
+    if (Array.isArray(post.tags)) {
+      for (const tag of post.tags) {
+        const slug = String(tag).toLowerCase().replace(/\s+/g, "-");
+        tagCounts.set(slug, (tagCounts.get(slug) ?? 0) + 1);
+      }
+    }
+  }
+  for (const [tagSlug, count] of [...tagCounts.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+    if (count >= MIN_POSTS_TO_INDEX) {
+      entries.push(urlEntry(buildCanonicalUrl(SITE_URL, `/tag/${tagSlug}`), today, "weekly", "0.6"));
+    }
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join("\n")}\n</urlset>`;

@@ -45,9 +45,15 @@ export default function Tag() {
   const startIndex = (currentPage - 1) * postsPerPage;
   const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
 
+  // Index tag pages only when there is enough content for Google to value them.
+  // Thin tag pages (<5 posts) are noindex to protect domain quality score.
+  const MIN_POSTS_TO_INDEX = 5;
+  const shouldIndexTag = filteredPosts.length >= MIN_POSTS_TO_INDEX;
+
   if (!tagExists) {
     return (
       <div className="min-h-screen bg-white">
+        <SEO title="Tag Not Found" description="This tag does not exist." url={`/tag/${tagSlug}`} noIndex />
         <Header />
         <main id="main-content" className="container pt-24 sm:pt-28 pb-20 text-center">
           <h1 className="font-oswald text-2xl sm:text-3xl font-bold mb-3">Tag Not Found</h1>
@@ -96,7 +102,7 @@ export default function Tag() {
         title={`#${tagName} Articles`}
         description={`All articles tagged with "${tagName}"`}
         url={`/tag/${tagSlug}`}
-        noIndex={false}
+        noIndex={!shouldIndexTag}
       />
       <script
         type="application/ld+json"

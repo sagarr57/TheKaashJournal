@@ -3,9 +3,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { postIndex } from "../client/src/lib/postsIndex";
 import { categories } from "../client/src/lib/categories";
+import { buildCanonicalUrl, DEFAULT_SITE_URL, normalizeSiteUrl } from "../shared/site-url";
 
-const DEFAULT_SITE_URL = "https://www.thekaashjournal.com";
-const SITE_URL = (process.env.SITE_URL || process.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+const SITE_URL = normalizeSiteUrl(
+  process.env.SITE_URL || process.env.VITE_SITE_URL || DEFAULT_SITE_URL
+);
 
 type SitemapUrl = {
   loc: string;
@@ -37,42 +39,31 @@ ${lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ""}${changefreq ? `    <chan
 }
 
 const staticRoutes: SitemapUrl[] = [
-  { loc: `${SITE_URL}/`, changefreq: "daily", priority: "1.0" },
-  { loc: `${SITE_URL}/blog`, changefreq: "daily", priority: "0.9" },
-  { loc: `${SITE_URL}/about`, changefreq: "monthly", priority: "0.6" },
-  { loc: `${SITE_URL}/contact`, changefreq: "monthly", priority: "0.6" },
-  { loc: `${SITE_URL}/privacy-policy`, changefreq: "monthly", priority: "0.3" },
-  { loc: `${SITE_URL}/terms-and-conditions`, changefreq: "monthly", priority: "0.3" },
-  { loc: `${SITE_URL}/cookie-policy`, changefreq: "monthly", priority: "0.3" },
+  { loc: buildCanonicalUrl(SITE_URL, "/"), changefreq: "daily", priority: "1.0" },
+  { loc: buildCanonicalUrl(SITE_URL, "/blog"), changefreq: "daily", priority: "0.9" },
+  { loc: buildCanonicalUrl(SITE_URL, "/about"), changefreq: "monthly", priority: "0.6" },
+  { loc: buildCanonicalUrl(SITE_URL, "/contact"), changefreq: "monthly", priority: "0.6" },
+  { loc: buildCanonicalUrl(SITE_URL, "/editorial-policy"), changefreq: "monthly", priority: "0.4" },
+  { loc: buildCanonicalUrl(SITE_URL, "/privacy-policy"), changefreq: "monthly", priority: "0.3" },
+  { loc: buildCanonicalUrl(SITE_URL, "/terms-and-conditions"), changefreq: "monthly", priority: "0.3" },
+  { loc: buildCanonicalUrl(SITE_URL, "/cookie-policy"), changefreq: "monthly", priority: "0.3" },
 ];
 
 const categoryRoutes: SitemapUrl[] = categories.map((category) => ({
-  loc: `${SITE_URL}/category/${category.slug}`,
+  loc: buildCanonicalUrl(SITE_URL, `/category/${category.slug}`),
   changefreq: "weekly",
   priority: "0.7",
 }));
 
 const postRoutes: SitemapUrl[] = postIndex.map((post) => ({
-  loc: `${SITE_URL}/blog/${post.slug}`,
+  loc: buildCanonicalUrl(SITE_URL, `/blog/${post.slug}`),
   lastmod: normalizeDate(post.updated || post.date),
   changefreq: "weekly",
   priority: post.featured ? "0.8" : "0.7",
 }));
 
-// Collect unique tags and generate slugified URLs
-const uniqueTagSlugs = new Set<string>();
-postIndex.forEach((post) => {
-  (post.tags || []).forEach((tag: string) => {
-    uniqueTagSlugs.add(tag.toLowerCase().replace(/\s+/g, "-"));
-  });
-});
-const tagRoutes: SitemapUrl[] = Array.from(uniqueTagSlugs).sort().map((slug) => ({
-  loc: `${SITE_URL}/tag/${slug}`,
-  changefreq: "weekly",
-  priority: "0.5",
-}));
-
-const allRoutes = [...staticRoutes, ...categoryRoutes, ...postRoutes, ...tagRoutes];
+// Tag archive pages are noindex (thin listings) — do not submit them in the sitemap.
+const allRoutes = [...staticRoutes, ...categoryRoutes, ...postRoutes];
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allRoutes.map(buildUrlEntry).join("\n")}

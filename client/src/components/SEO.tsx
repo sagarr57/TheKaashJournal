@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { buildCanonicalUrl } from "@shared/site-url";
 import { SITE_URL } from "@/lib/config";
 
 interface SEOProps {
@@ -38,7 +39,7 @@ export function SEO({
   noIndex = false,
 }: SEOProps) {
   const fullTitle = title ? `${title} | The Kaash Journal` : defaultTitle;
-  const canonicalUrl = url ? `${SITE_URL}${url}` : SITE_URL;
+  const canonicalUrl = buildCanonicalUrl(SITE_URL, url ?? "");
   const fullImage = image.startsWith("http") ? image : `${SITE_URL}${image}`;
 
   return (
@@ -47,7 +48,7 @@ export function SEO({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="author" content={author} />
-      {noIndex && <meta name="robots" content="noindex, follow" />}
+      <meta name="robots" content={noIndex ? "noindex, follow" : "index, follow"} />
       <meta name="language" content="en-GB" />
       {tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
 

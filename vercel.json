@@ -16,6 +16,11 @@
       "has": [{ "type": "host", "value": "thekaashjournal.com" }],
       "destination": "https://www.thekaashjournal.com/$1",
       "permanent": true
+    },
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "permanent": true
     }
   ],
   "rewrites": [

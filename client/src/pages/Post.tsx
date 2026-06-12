@@ -17,6 +17,7 @@ import { fetchPostBySlugWithContent } from "@/lib/blog-data";
 import { postContentBySlug } from "@/lib/postsContent";
 import { AdUnit } from "@/components/AdUnit";
 import { SITE_URL } from "@/lib/config";
+import { buildCanonicalUrl } from "@shared/site-url";
 
 function MarkdownCode({
   inline,
@@ -123,17 +124,31 @@ function extractFaqSchema(content: string) {
   if (faqIdx === -1) return null;
   const section = content.slice(faqIdx + marker.length);
   const pairs: Array<{ question: string; answer: string }> = [];
-  // Match **Question?** followed by answer text until the next bold question or end
-  const re = /\*\*([^*]+\?[^*]*)\*\*\s*\n+([\s\S]*?)(?=\n\*\*[^*]+\?|$)/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(section)) !== null) {
-    const question = m[1].trim();
-    const answer = m[2]
+
+  const cleanAnswer = (raw: string) =>
+    raw
       .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
       .replace(/[*_`#]/g, "")
       .replace(/\s+/g, " ")
       .trim();
+
+  // Format 1: ### Heading question (used in newer articles)
+  const h3Re = /###\s+([^\n]+)\n+([\s\S]*?)(?=\n###\s|\n##\s|$)/g;
+  let m: RegExpExecArray | null;
+  while ((m = h3Re.exec(section)) !== null) {
+    const question = m[1].trim();
+    const answer = cleanAnswer(m[2]);
     if (question && answer) pairs.push({ question, answer });
+  }
+
+  // Format 2: **Bold question?** (used in older articles) — only if no H3 pairs found
+  if (pairs.length === 0) {
+    const boldRe = /\*\*([^*]+\?[^*]*)\*\*\s*\n+([\s\S]*?)(?=\n\*\*[^*]+\?|$)/g;
+    while ((m = boldRe.exec(section)) !== null) {
+      const question = m[1].trim();
+      const answer = cleanAnswer(m[2]);
+      if (question && answer) pairs.push({ question, answer });
+    }
   }
   if (pairs.length === 0) return null;
   return {
@@ -204,7 +219,7 @@ export default function Post() {
   }
 
   const tocItems = content ? extractToc(content) : [];
-  const postUrl = `${SITE_URL}/blog/${postMeta.slug}`;
+  const postUrl = buildCanonicalUrl(SITE_URL, `/blog/${postMeta.slug}`);
 
   const FINANCE_CATEGORIES = ["Debt Management", "Real-Time Finance", "Fintech Trends", "Case Studies"];
   const HEALTH_CATEGORIES = ["AI and Health"];
@@ -546,6 +561,15 @@ export default function Post() {
                 </div>
               </div>
 
+              {/* Post-content ad — high-engagement placement (reader just finished the article) */}
+              {import.meta.env.VITE_ADSENSE_SLOT_POST_CONTENT && (
+                <AdUnit
+                  slot={import.meta.env.VITE_ADSENSE_SLOT_POST_CONTENT}
+                  format="horizontal"
+                  className="my-6"
+                />
+              )}
+
               {/* Author Bio */}
               {(() => {
                 const displayName = authorName || "The Kaash Journal";
@@ -599,6 +623,15 @@ export default function Post() {
                 url={`/blog/${postMeta.slug}`}
                 description={postMeta.excerpt}
               />
+
+              {/* Post-related-posts ad — reader is browsing more content, high intent */}
+              {import.meta.env.VITE_ADSENSE_SLOT_END_OF_ARTICLE && (
+                <AdUnit
+                  slot={import.meta.env.VITE_ADSENSE_SLOT_END_OF_ARTICLE}
+                  format="horizontal"
+                  className="mb-6"
+                />
+              )}
 
               {/* Related Posts */}
               <RelatedPosts currentPost={postMeta as any} />
