@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { getAuthorProfilePath } from "@/lib/authors";
 import { formatDate, getCategoryColor } from "@/lib/blog-utils";
 import { BlogPost } from "@/lib/types";
 import { Calendar, Clock, User } from "lucide-react";
@@ -9,6 +10,7 @@ interface PostMetaProps {
 
 export function PostMeta({ post }: PostMetaProps) {
   const categoryColor = getCategoryColor(post.category);
+  const authorProfilePath = getAuthorProfilePath(post.author);
 
   return (
     <div className="space-y-5">
@@ -25,7 +27,16 @@ export function PostMeta({ post }: PostMetaProps) {
       <p className="text-sm text-gray-600 flex flex-wrap items-center gap-x-1 gap-y-1">
         <span className="inline-flex items-center gap-1.5">
           <User className="w-4 h-4 text-gray-500 flex-shrink-0" aria-hidden />
-          <span className="text-gray-900 font-medium">{post.author}</span>
+          {authorProfilePath ? (
+            <a
+              href={authorProfilePath}
+              className="text-gray-900 font-medium hover:text-blue-700 hover:underline"
+            >
+              {post.author}
+            </a>
+          ) : (
+            <span className="text-gray-900 font-medium">{post.author}</span>
+          )}
         </span>
         <span className="text-gray-300" aria-hidden>
           ·

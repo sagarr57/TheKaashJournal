@@ -29,16 +29,16 @@
       "destination": "/api/$1"
     },
     {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
       "source": "/ads.txt",
       "destination": "/api/ads-txt"
     },
     {
       "source": "/robots.txt",
       "destination": "/robots.txt"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap"
     },
     {
       "source": "/(.*)",

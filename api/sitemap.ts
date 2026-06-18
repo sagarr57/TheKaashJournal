@@ -1,6 +1,32 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createClient } from "@supabase/supabase-js";
-import { buildCanonicalUrl, DEFAULT_SITE_URL, normalizeSiteUrl } from "../shared/site-url";
+
+const DEFAULT_SITE_URL = "https://www.thekaashjournal.com";
+
+function normalizeSiteUrl(url: string): string {
+  const trimmed = url.trim().replace(/\/+$/, "");
+  if (!trimmed) return DEFAULT_SITE_URL;
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.hostname === "thekaashjournal.com") {
+      parsed.hostname = "www.thekaashjournal.com";
+    }
+    parsed.protocol = "https:";
+    return parsed.origin;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
+}
+
+function buildCanonicalUrl(siteUrl: string, path = ""): string {
+  const base = normalizeSiteUrl(siteUrl);
+  if (!path) return base;
+  let normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  if (normalizedPath.length > 1 && normalizedPath.endsWith("/")) {
+    normalizedPath = normalizedPath.slice(0, -1);
+  }
+  return `${base}${normalizedPath}`;
+}
 
 const SITE_URL = normalizeSiteUrl(process.env.VITE_SITE_URL || DEFAULT_SITE_URL);
 
@@ -10,6 +36,9 @@ const STATIC_PAGES = [
   { path: "/about",                priority: "0.6", changefreq: "monthly" },
   { path: "/contact",              priority: "0.6", changefreq: "monthly" },
   { path: "/editorial-policy",     priority: "0.4", changefreq: "monthly" },
+  { path: "/disclaimer",           priority: "0.4", changefreq: "monthly" },
+  { path: "/author/kash",          priority: "0.5", changefreq: "monthly" },
+  { path: "/author/saga",          priority: "0.5", changefreq: "monthly" },
   { path: "/privacy-policy",       priority: "0.3", changefreq: "monthly" },
   { path: "/terms-and-conditions", priority: "0.3", changefreq: "monthly" },
   { path: "/cookie-policy",        priority: "0.3", changefreq: "monthly" },
@@ -98,22 +127,7 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
     );
   }
 
-  // Include tag pages that have enough posts to be worth indexing (mirrors Tag.tsx threshold).
-  const MIN_POSTS_TO_INDEX = 5;
-  const tagCounts = new Map<string, number>();
-  for (const post of posts) {
-    if (Array.isArray(post.tags)) {
-      for (const tag of post.tags) {
-        const slug = String(tag).toLowerCase().replace(/\s+/g, "-");
-        tagCounts.set(slug, (tagCounts.get(slug) ?? 0) + 1);
-      }
-    }
-  }
-  for (const [tagSlug, count] of [...tagCounts.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
-    if (count >= MIN_POSTS_TO_INDEX) {
-      entries.push(urlEntry(buildCanonicalUrl(SITE_URL, `/tag/${tagSlug}`), today, "weekly", "0.6"));
-    }
-  }
+  // Tag archives are noindex (thin listings) — do not submit them in the sitemap.
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join("\n")}\n</urlset>`;
 

@@ -45,11 +45,7 @@ export default function Tag() {
   const startIndex = (currentPage - 1) * postsPerPage;
   const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
 
-  // Index tag pages only when there is enough content for Google to value them.
-  // Thin tag pages (<5 posts) are noindex to protect domain quality score.
-  const MIN_POSTS_TO_INDEX = 5;
-  const shouldIndexTag = filteredPosts.length >= MIN_POSTS_TO_INDEX;
-
+  // Tag archive pages are thin listings — keep them out of Google's index.
   if (!tagExists) {
     return (
       <div className="min-h-screen bg-white">
@@ -102,7 +98,7 @@ export default function Tag() {
         title={`#${tagName} Articles`}
         description={`All articles tagged with "${tagName}"`}
         url={`/tag/${tagSlug}`}
-        noIndex={!shouldIndexTag}
+        noIndex
       />
       <script
         type="application/ld+json"

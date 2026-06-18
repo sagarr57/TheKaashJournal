@@ -107,6 +107,9 @@ export function Footer() {
             <a href="/editorial-policy" className="hover:text-gray-900 transition-colors">
               Editorial Policy
             </a>
+            <a href="/disclaimer" className="hover:text-gray-900 transition-colors">
+              Disclaimer
+            </a>
           </div>
         </div>
       </div>

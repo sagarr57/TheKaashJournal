@@ -34,6 +34,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
 const EditorialPolicy = lazy(() => import("./pages/EditorialPolicy"));
+const Disclaimer = lazy(() => import("./pages/Disclaimer"));
 const Admin = lazy(() => import("./pages/Admin"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const Author = lazy(() => import("./pages/Author"));
@@ -72,6 +73,7 @@ function Router() {
         <Route path={"/terms-and-conditions"} component={TermsAndConditions} />
         <Route path={"/cookie-policy"} component={CookiePolicy} />
         <Route path={"/editorial-policy"} component={EditorialPolicy} />
+        <Route path={"/disclaimer"} component={Disclaimer} />
         <Route path={"/admin/login"} component={AdminLogin} />
         <Route path={"/admin"} component={Admin} />
         <Route path={"/404"} component={NotFound} />
