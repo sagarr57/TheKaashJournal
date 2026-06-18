@@ -690,10 +690,10 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "41",
-    title: "How JPMorgan Chase Built the Most Powerful AI Banking Operation in the World",
+    title: "JPMorgan Chase: Artificial Intelligence in Banking — Case Study",
     slug: "jpmorgan-ai-banking-strategy-case-study",
     excerpt:
-      "JPMorgan Chase employs more software engineers than Google, has 2,000 AI and machine learning experts, and has deployed AI across fraud detection, trading, risk management, and customer service. A case study in what it looks like when a $3.9 trillion bank treats AI as existential infrastructure.",
+      "JPMorgan Chase employs more software engineers than Google, has 2,000 AI and machine learning experts, and has deployed artificial intelligence across fraud detection, trading, risk management, and customer service. A case study in what it looks like when a $3.9 trillion bank treats AI as existential infrastructure.",
     author: "Kash",
     date: "2026-05-15",
     category: "Case Studies",
@@ -703,13 +703,13 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-case.jpg",
     seo: {
       metaDescription:
-        "JPMorgan Chase spends $17 billion a year on technology and has 2,000 AI experts. A detailed case study in how the world's largest bank by assets is deploying AI across trading, fraud, risk, and customer service.",
+        "A detailed artificial intelligence in banking case study: JPMorgan Chase spends $17 billion a year on technology and has 2,000 AI experts deploying machine learning across trading, fraud detection, risk management, and customer service.",
       keywords: [
+        "artificial intelligence in banking case study",
         "JPMorgan Chase AI strategy",
         "JPMorgan AI banking case study",
         "largest bank AI deployment",
         "Wall Street AI machine learning",
-        "JPMorgan IndexGPT",
         "AI fraud detection banking",
         "bank technology investment 2026",
       ],
