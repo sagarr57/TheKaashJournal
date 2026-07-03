@@ -77,8 +77,8 @@ export default function Category() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title={`${category.name} Articles`}
-        description={category.description}
+        title={`${category.name} Articles — The Kaash Journal`}
+        description={category.longDescription ?? category.description}
         url={`/category/${category.slug}`}
       />
       <script
@@ -89,6 +89,31 @@ export default function Category() {
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
         <PageHeader title={category.name} subtitle={category.description} />
+
+        {/* Category intro — unique content that helps Google index this page */}
+        {(category.longDescription || category.topics) && (
+          <div className="border-b border-gray-100 bg-gray-50">
+            <div className="container py-5 md:py-6 max-w-3xl">
+              {category.longDescription && (
+                <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-3">
+                  {category.longDescription}
+                </p>
+              )}
+              {category.topics && category.topics.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {category.topics.map((topic) => (
+                    <span
+                      key={topic}
+                      className="text-xs font-medium px-2.5 py-1 rounded-full bg-white border border-gray-200 text-gray-600"
+                    >
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Content */}
         <div className="container py-6 md:py-8">

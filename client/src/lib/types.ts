@@ -23,6 +23,8 @@ export interface Category {
   name: string;
   slug: string;
   description: string;
+  longDescription?: string;
+  topics?: string[];
   color: string;
 }
 
