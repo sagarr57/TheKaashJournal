@@ -122,7 +122,7 @@ None of the tools above replace qualified debt advice when you are in arrears or
   ARRAY['AI', 'Debt', 'Tools', 'Finance']::text[],
   8,
   TRUE,
-  '/images/hero-abstract.jpg',
+  '/images/debt-money.jpg',
   'Hands-on look at YNAB, Rocket Money, Undebt.it, Copilot, and Goodbudget for budgeting and debt—with links to each product and UK debt help resources.',
   ARRAY['YNAB', 'Undebt.it', 'Rocket Money', 'debt payoff tools', 'budgeting apps UK']::text[]
 ),
@@ -206,6 +206,28 @@ For most people, the evidence from academic research (particularly the work of r
 
 **False precision**: a six-decimal-place valuation on your portfolio app is precise but not necessarily accurate. Models used to estimate "fair value" have large uncertainty ranges. Treating AI-generated valuations as fact rather than one input among many is a common error.
 
+## UK retail investor platform comparison
+
+| Platform type | Examples | FSCS/FSCS-equivalent protection | Typical use |
+|---|---|---|---|
+| UK stockbroker | interactive investor, Hargreaves Lansdown | Yes — client money rules apply | ISA/SIPP investing |
+| Robo-advisor | Nutmeg, Wealthify | Yes when FCA-authorised | Managed portfolios |
+| Portfolio tracker | Sharesight | N/A (tracking only) | Performance reporting |
+| Free screener | Finviz, Koyfin freemium | N/A | Research, not execution |
+
+Verify every execution platform on the [FCA register](https://register.fca.org.uk/s/) before depositing funds. Trackers and screeners do not need authorisation because they do not hold your money.
+
+## Frequently Asked Questions
+
+### Does faster data help me beat the market?
+Usually not directly — it helps you implement a plan with fewer emotional errors. Academic evidence still favours low-cost diversified long-term investing for most retail investors after fees and tax.
+
+### Should I day-trade with real-time quotes?
+Day-trading increases transaction costs, tax events, and behavioural mistakes for most people. Real-time data is more valuable for monitoring a long-term allocation than for frequent trading.
+
+### What is the FCA''s role here?
+The FCA regulates firms that provide investment services and protects consumers from unauthorised operators. It does not guarantee investment returns.
+
 ## Conclusion
 
 The investors who tend to sleep best are not always those with the fastest dashboards — they are the ones who know **what they own, what it costs, and why they own it**. Real-time data helps when it supports a written plan. It cannot replace the plan, and it cannot protect against decisions made from fear or excitement.
@@ -218,7 +240,7 @@ For UK investors, two bookmark-worthy resources that cut through noise: the **[F
   ARRAY['AI', 'Investment', 'Real-Time Data', 'Trading']::text[],
   6,
   TRUE,
-  '/images/data-visualization-bg.jpg',
+  '/images/fintech.jpg',
   'Discover how real-time financial data and AI are revolutionizing investment decisions. Learn strategies for leveraging this technology.',
   ARRAY['real-time financial data', 'AI investing', 'algorithmic trading', 'investment AI']::text[]
 ),
@@ -338,7 +360,7 @@ Keep the **[FCA consumer hub](https://www.fca.org.uk/consumers)** open in anothe
   ARRAY['ChatGPT', 'AI', 'Personal Finance', 'Budgeting']::text[],
   9,
   TRUE,
-  '/images/icon-ai.png',
+  '/images/fintech.jpg',
   'Use ChatGPT safely for budgets, debt strategy sketches, and learning investing terms—with UK prompts, GOV.UK debt signposting, and FCA/MoneyHelper links.',
   ARRAY['ChatGPT finance', 'AI budgeting', 'personal finance AI', 'ChatGPT money']::text[]
 ),
@@ -445,7 +467,7 @@ For how UK regulators think about fintech innovation — not just marketing — 
   ARRAY['Fintech', 'AI', 'Startups', 'Investment']::text[],
   10,
   FALSE,
-  '/images/icon-finance.png',
+  '/images/fintech.jpg',
   'AI in fintech: underwriting speed, robo journeys, invisible fraud controls, and chat support—with FCA register and MoneyHelper signposts for UK readers.',
   ARRAY['AI fintech', 'fintech startups', 'fintech innovation', 'AI finance companies']::text[]
 ),
@@ -554,7 +576,7 @@ Pick one app, connect honestly through proper consent flows, review weekly, and 
   ARRAY['Budgeting', 'Automation', 'AI', 'Personal Finance']::text[],
   8,
   FALSE,
-  '/images/icon-marketing.png',
+  '/images/debt-money.jpg',
   'Automated budgeting tutorial: Mint’s closure, YNAB/Goodbudget/Undebt.it, UK open banking consent, weekly review habit, and CSV snapshots.',
   ARRAY['automated budgeting', 'AI budget', 'budget automation', 'smart budgeting']::text[]
 ),
@@ -668,7 +690,7 @@ Confirm the firm on the **[FCA register](https://register.fca.org.uk/s/)** befor
   ARRAY['Robo-Advisors', 'Investment', 'AI', 'Comparison']::text[],
   10,
   FALSE,
-  '/images/hero-abstract.jpg',
+  '/images/business-analytics.jpg',
   'Robo-advisor comparison framework: costs, portfolios, cash drag, ISAs, risk questionnaires, UK platform links, and when you need a human adviser—not hype.',
   ARRAY['robo-advisor comparison', 'best robo-advisors', 'AI investment', 'automated investing']::text[]
 ),
@@ -743,6 +765,32 @@ The FCA''s **ScamSmart** tool (available from fca.org.uk/consumers/protect-yours
 5. **What happens if the answer is wrong?** For tax, benefits, or court deadlines, you still own the outcome.
 6. **Can you export or leave?** CSV export and account deletion matter more than launch hype.
 
+## UK product comparison at a glance (January 2026)
+
+| Category | Examples | Best for | Verify on FCA register? |
+|---|---|---|---|
+| Envelope budgeting | YNAB, Goodbudget | Overspenders who need proactive plans | No (software, not advice) |
+| Debt payoff maths | Undebt.it | People who know balances and need order | No |
+| UK neobanks | Monzo, Starling, Revolut | Spending visibility and instant notifications | Yes (deposit-taking permissions) |
+| Investing apps | Moneybox, interactive investor | Long-term ISA/SIPP savers | Yes before transferring money |
+| General AI assistants | ChatGPT, Claude, Gemini | Explaining terms and drafting budget outlines | N/A — never paste card numbers |
+
+Always confirm current pricing on each vendor''s official site — features change quarterly.
+
+## Frequently Asked Questions
+
+### Which AI finance tool should I start with?
+One general assistant for research plus one budgeting app you will open weekly. Adding five apps creates dashboard fatigue without better outcomes.
+
+### Are neobanks safer than legacy banks?
+UK neobanks with full FCA banking permissions offer the same £85,000 FSCS protection as traditional banks when they are licensed deposit-takers. Verify permissions on the register — not all fintech apps are banks.
+
+### Can ChatGPT file my self-assessment?
+No — it can explain concepts, but submission and liability remain yours. Use HMRC''s own tools or an accountant for filing.
+
+### Is open banking safe?
+Regulated open banking uses encrypted APIs through FCA-authorised providers. Check which licensed firm sits behind any app requesting bank access.
+
 ## Bottom line
 
 You deserve tools that respect your attention, not ones that farm it. Pair one AI assistant for research and one budgeting habit you can keep, then let the **[FCA consumer hub](https://www.fca.org.uk/consumers)** be your anchor when stakes get high. The "latest" finance AI is whatever you will actually reopen next Sunday when motivation is average — not whichever product had the loudest launch. For a broader picture of which AI startups are reshaping how these tools work under the hood, our overview of [AI-powered fintech startups in 2026](/blog/ai-fintech-startups-2026) puts the landscape in context. And if you''re curious where the sector is heading next, [agentic finance AI](/blog/agentic-finance-ai-2026) explains how autonomous systems are beginning to act on your behalf without waiting to be asked.',
@@ -753,7 +801,7 @@ You deserve tools that respect your attention, not ones that farm it. Pair one A
   ARRAY['AI Tools', 'Finance', 'Updates', 'Technology']::text[],
   11,
   TRUE,
-  '/images/icon-ai.png',
+  '/images/fintech.jpg',
   'Early-2026 AI finance landscape: assistants, Microsoft/Google copilots, YNAB, Goodbudget, Undebt.it, UK neobanks, TrueLayer, FCA scam guidance—with official links.',
   ARRAY['AI finance tools', 'financial technology', 'AI updates', 'fintech 2026']::text[]
 ),
@@ -832,6 +880,30 @@ The Debt Respite Scheme (Breathing Space) launched in the UK in May 2021. It giv
 
 If the maths in this example does not work — if essential spending plus minimum payments already exceeds income — Breathing Space is the appropriate first call, not a tighter spreadsheet.
 
+## Month-by-month snapshot (avalanche strategy)
+
+Continuing the composite example with £308/month extra after minimums, targeting the 24.9% card after clearing BNPL:
+
+| Phase | Target debt | Extra paid monthly | Outcome |
+|---|---|---|---|
+| Months 1–2 | BNPL (£640) | £308 | BNPL cleared before rate reversal |
+| Months 3–20 | Card A (£8,200 @ 24.9%) | £308 | Balance falls to ~£2,100 |
+| Months 21–26 | Card A | £308 + rolled minimums | Card A cleared |
+| Months 27+ | Card B, then loan | Accelerated snowball | Total debt ~£27k → £0 over time |
+
+Figures are illustrative — real balances shift with daily interest. **26 months of consistency** beats 25 years of minimum-only payments on high-APR revolving debt.
+
+## Frequently Asked Questions
+
+### Is this a real person''s story?
+No — it is a composite teaching example. Run your own numbers in [Undebt.it](https://undebt.it/) or with a free adviser.
+
+### When should this person call StepChange instead?
+When essentials plus minimums exceed income, when court letters arrive, or when the plan fails two months running despite honest effort.
+
+### Does Breathing Space stop all interest?
+During the 60-day moratorium, qualifying debts should not accrue further interest or enforcement while you work with an adviser. It is protected breathing room, not a write-off.
+
 ## Life changes and plan wobbles
 
 Redundancy, hours cuts, unexpected large expenses, family changes — plans built for best-case months fail in average-case months. Build the plan around your **realistic monthly income**, not your highest-earning month. Keep a small buffer (even £100–£200) in a separate pot before directing surplus to debt, so a flat tyre does not become a credit card charge.
@@ -851,7 +923,7 @@ Keep these numbers saved in your phone:
   ARRAY['Debt', 'AI', 'Budgeting', 'Teaching example']::text[],
   12,
   TRUE,
-  '/images/data-visualization-bg.jpg',
+  '/images/debt-money.jpg',
   'Composite teaching example: phases from honest inventory through budgeting apps, avalanche vs snowball, automation, and when to use free UK debt advice—not a news story.',
   ARRAY['debt payoff plan', 'AI budgeting tools', 'debt management UK', 'financial habits']::text[]
 ),
@@ -970,7 +1042,7 @@ You did not arrive here in a single day, and you will not unwind it in a single 
   ARRAY['Debt stress', 'Mental health', 'Budgeting', 'UK finance']::text[],
   11,
   FALSE,
-  '/images/hero-abstract.jpg',
+  '/images/wellness-mental.jpg',
   'Understand how debt stress affects thinking and motivation, and learn practical, non-judgemental steps to regain control of your finances in the UK.',
   ARRAY['debt stress', 'money anxiety', 'debt help UK', 'financial wellbeing']::text[]
 ),
@@ -1094,7 +1166,7 @@ For free, regulated UK debt help, start from **[GOV.UK’s debt advice hub](http
   ARRAY['Loans', 'Repayments', 'Refinancing', 'UK']::text[],
   12,
   FALSE,
-  '/images/data-visualization-bg.jpg',
+  '/images/debt-money.jpg',
   'Practical ways to manage loan repayment stress: clarity on numbers, lender conversations, automation, and when to seek free debt advice.',
   ARRAY['loan stress', 'repayment help', 'debt advice UK', 'personal loans']::text[]
 ),
@@ -1223,7 +1295,7 @@ A call is a signal to move from anxiety to paperwork: who is asking, for what, u
   ARRAY['Debt collection', 'Consumer rights', 'UK', 'Scams']::text[],
   10,
   FALSE,
-  '/images/hero-abstract.jpg',
+  '/images/debt-money.jpg',
   'What to do if a debt collector calls: verify the debt, know UK protections, avoid pressure tactics, and use official channels before you pay.',
   ARRAY['debt collector UK', 'verify debt', 'FCA debt collection', 'consumer rights']::text[]
 ),
@@ -1304,6 +1376,45 @@ The right route depends on your assets, income, profession, and long-term goals 
 
 UK charities such as **StepChange**, **National Debtline**, and **Citizens Advice** can explain all options side by side at no cost. A good adviser will sometimes tell you that an IVA is **not** the right tool — that honesty is a feature, not a failure.
 
+## IVA eligibility: who typically qualifies (and who does not)
+
+There is no single income threshold, but licensed insolvency practitioners and free debt charities assess cases against common patterns. The table below is illustrative — your IP or adviser will apply the full rules to your situation.
+
+| Factor | Often relevant for IVA consideration | Often points to a different route |
+|---|---|---|
+| Unsecured debt level | Usually £6,000+ across 2+ creditors | Lower totals may suit a DMP or informal plan |
+| Income | Stable enough to fund monthly contributions for 5–6 years | No surplus after essentials → DRO or bankruptcy may be discussed |
+| Home ownership | Possible with equity-release clause in final year | Significant equity without ability to release may block approval |
+| Employment | Most employed/self-employed people qualify | Some regulated professions restrict bankruptcy — IVA sometimes preferred |
+| Prior insolvency | Previous IVA or bankruptcy affects timing and options | Recent insolvency may limit routes — adviser will confirm |
+
+**Debts usually excluded from IVAs:** student loans, magistrates'' court fines, child maintenance arrears, and most secured lending. Your IP must list inclusions and exclusions in writing before you sign.
+
+## Worked example: what an IVA might cost in practice
+
+Illustrative only — not a quote for your case:
+
+- **Unsecured debt included:** £28,000 across four creditors
+- **Agreed monthly contribution:** £285/month for 60 months = £17,100 paid in
+- **Nominee + supervisor fees:** typically deducted from contributions — ask for the total fee figure in pounds
+- **Remaining included debt written off on successful completion:** depends on what creditors receive; marketing "write off 70%" figures are not guarantees
+
+The critical question is whether **£285/month is sustainable for five years** after rent, council tax, food, and transport.
+
+## Frequently Asked Questions
+
+### Can I keep my car on an IVA?
+Usually yes if the vehicle is essential and payments are affordable, but hire-purchase agreements are treated separately. Tell your IP about every finance agreement before the proposal is drafted.
+
+### Will my employer find out?
+IVAs are on the public Individual Insolvency Register. Most employers do not check unless your contract requires disclosure.
+
+### Can I get a mortgage during or after an IVA?
+Mainstream mortgages are very difficult during an IVA and for several years after. Specialist lenders may consider you once the marker ages — expect higher rates.
+
+### Is an IVA better than a Debt Relief Order (DRO)?
+A DRO is for people with low assets, low surplus income, and qualifying debt under the current cap. If you qualify, it is usually simpler than an IVA. A good adviser compares both honestly.
+
 ## Honest takeaway
 
 An IVA can be the right structured exit for some people. It can also be an expensive detour if your problem was actually short-term cashflow or if a simpler arrangement would have worked. Slow down, compare alternatives, and let paperwork — not marketing — lead the decision. Before reaching the IVA conversation, many people benefit from first understanding what a debt collector can and cannot legally do — our guide to [verifying your rights when a debt collector calls](/blog/debt-collector-call-uk-verify-rights) is a useful companion piece.
@@ -1316,7 +1427,7 @@ Start with the **[GOV.UK overview of IVAs](https://www.gov.uk/options-for-dealin
   ARRAY['IVA', 'Insolvency', 'UK debt', 'Advice']::text[],
   13,
   FALSE,
-  '/images/data-visualization-bg.jpg',
+  '/images/debt-money.jpg',
   'An impartial overview of UK IVAs: duration, voting rules, credit file impact, fees, and why free debt charities should be part of your research.',
   ARRAY['IVA UK', 'Individual Voluntary Arrangement', 'debt solutions', 'insolvency practitioner']::text[]
 ),
@@ -1437,7 +1548,7 @@ You do not need a perfect month to begin. You need a truthful list, a single cho
   ARRAY['Multiple debts', 'Snowball', 'Avalanche', 'Consolidation']::text[],
   12,
   FALSE,
-  '/images/hero-abstract.jpg',
+  '/images/debt-money.jpg',
   'Manage multiple loans with a clear inventory, a repayment strategy that matches your personality, and pitfalls that keep people cycling back into debt.',
   ARRAY['multiple loans', 'debt snowball', 'debt avalanche', 'consolidation loan UK']::text[]
 ),
@@ -1533,6 +1644,23 @@ Act quickly. Gather all records: invoices, emails, call notes, and bank transact
 3. If you believe you have been defrauded, report to **[Action Fraud](https://www.actionfraud.police.uk/)** (0300 123 2040).
 4. Speak to Citizens Advice for guidance on what options you have to recover costs or complain formally.
 
+## Frequently Asked Questions
+
+### Are all paid debt help services scams?
+No — some firms are FCA-authorised and charge legitimate fees. The risk is paying upfront before understanding free charity options that may serve you better. Always compare against StepChange or National Debtline first.
+
+### How do I verify an IVA provider?
+The firm should be FCA-authorised for debt counselling/adjusting **and** the insolvency practitioner must appear on the [Insolvency Service register](https://www.gov.uk/search-registered-insolvency-practitioners). Both checks take two minutes online.
+
+### Can a debt company guarantee to write off 80% of my debt?
+No legitimate adviser guarantees a write-off percentage before assessing your finances. IVAs require creditor votes; DROs and bankruptcy have strict eligibility rules. Broad promises without conditions are marketing, not advice.
+
+### What should I do if I already signed with a suspicious firm?
+Gather every document, call your bank about chargeback options, report to the FCA and Action Fraud, and speak to Citizens Advice the same week. Do not make further payments until you have a second opinion from a free charity.
+
+### Is social media "debt relief" content trustworthy?
+Treat TikTok and Instagram debt content as awareness only — not personalised advice. Scammers use the same platforms as legitimate educators. Verify every firm on the FCA register before engaging.
+
 ## Bottom line
 
 Good debt help should make your options clearer, not foggier. If a service increases pressure, hides costs, or blocks comparison, step back. Reliable support does not need fear-based selling. If you have cleared the scam hurdle and want to understand which formal debt solutions might apply to your situation, our [plain-English guide to IVAs](/blog/iva-uk-explained-trade-offs) covers eligibility, costs, and the full list of questions to ask before signing.
@@ -1545,7 +1673,7 @@ Before you pay anyone for "debt help," check the **[Financial Services Register]
   ARRAY['Debt advice', 'Scams', 'UK', 'Consumer protection']::text[],
   11,
   FALSE,
-  '/images/data-visualization-bg.jpg',
+  '/images/debt-money.jpg',
   'How to spot debt advice scams in the UK: red flags, verification steps, and safe alternatives through free FCA-authorised support.',
   ARRAY['debt scam warning signs', 'FCA authorised debt advice', 'debt help UK', 'financial scams']::text[]
 ),
@@ -1656,6 +1784,41 @@ Copy this anywhere you can access it monthly:
 - **Forgetting irregular expenses.** Car insurance renewals, school uniform costs, boiler servicing — add these to your calendar and set aside a monthly buffer.
 - **Closing accounts immediately after clearing them.** Some older accounts contribute positively to your credit history. Ask a free adviser before closing anything you have had for several years.
 
+## Worked example: avalanche vs snowball on three debts
+
+Illustrative balances only:
+
+| Debt | Balance | APR | Minimum |
+|---|---|---|---|
+| Card A | £2,400 | 26.9% | £48 |
+| Card B | £900 | 19.9% | £18 |
+| Loan | £5,100 | 11.9% | £110 |
+
+**Monthly surplus after essentials and all minimums:** £120.
+
+**Avalanche:** Pay £120 extra to Card A each month. Card A clears in roughly 22 months; total interest saved versus minimums-only is substantial because the highest APR is attacked first.
+
+**Snowball:** Pay £120 extra to Card B first. Card B clears in about 8 months — a visible win — then roll £120 + Card B''s £18 minimum into Card A. You pay slightly more total interest than avalanche, but many people stick with snowball longer because early progress feels real.
+
+Neither method works if you skip months when motivation dips. Automate the minimums; manually send the extra payment on payday every month without exception.
+
+## Frequently Asked Questions
+
+### What if I can only afford minimum payments right now?
+That is still a plan — minimums on time protect your credit file and stop late fees. Contact lenders before you miss a payment; FCA rules require forbearance options for customers in genuine difficulty. If minimums plus essentials exceed income, call National Debtline before trying to optimise strategy.
+
+### Should I use a debt consolidation loan instead?
+Only if the new loan''s **total amount repayable** is lower than your current trajectory and you will close the cards you pay off. Consolidation that leaves old lines open often creates a second problem within 12 months.
+
+### Do AI budgeting apps replace this process?
+No — apps like YNAB, Emma, or Undebt.it make the list and maths easier, but you still choose the strategy and stick to it. See our [comparison of five debt and budgeting apps](/blog/top-5-ai-tools-debt-management-2026) for UK-specific options.
+
+### How often should I review the plan?
+Monthly, for five minutes: did minimums clear, did extra go to the target debt, did any balance or rate change? Annually, rebuild the full table — income, essentials, and debts all shift over time.
+
+### When is a formal arrangement (IVA, DRO) the right call?
+When the maths shows no sustainable surplus after essentials, or when creditors are threatening enforcement. Free advisers at StepChange and Citizens Advice map those routes without charging you.
+
 ## Final thought
 
 Progress rarely feels cinematic. It feels like one cleared minimum, one awkward call returned, one evening where you looked at the numbers without flinching. That is still movement — and movement compounds the same way interest does, only in your favour. If the emotional weight of debt repayment is running alongside the financial one, our piece on [when debt takes over your headspace](/blog/debt-stress-mindset-practical-steps) addresses the psychological dimension alongside practical steps. And for a round-up of the apps best suited to tracking your progress, see our [guide to AI tools for budgeting and debt management](/blog/top-5-ai-tools-debt-management-2026).
@@ -1668,7 +1831,7 @@ Progress rarely feels cinematic. It feels like one cleared minimum, one awkward 
   ARRAY['Debt plan', 'Budgeting', 'Repayment strategy', 'Financial wellbeing']::text[],
   10,
   FALSE,
-  '/images/hero-abstract.jpg',
+  '/images/debt-money.jpg',
   'Create a practical debt payoff plan in one hour with a simple template, realistic budget rules, and a follow-through routine.',
   ARRAY['debt payoff plan', 'budget for debt', 'repayment strategy', 'debt management steps']::text[]
 ),
@@ -1790,6 +1953,34 @@ Ignore marketing messages about "no credit check" or "guaranteed approval" — t
 - Requests for unusual upfront payment before disbursal
 - "No affordability checks" as the main sales message — any responsible lender is required by the FCA to assess affordability
 
+## Cost comparison: £1,000 emergency over 12 months
+
+Illustrative total repayable (actual offers vary by credit profile):
+
+| Option | Typical APR / cost | Total repayable on £1,000 | Speed |
+|---|---|---|---|
+| Emergency savings | 0% | £1,000 | Instant |
+| Credit union loan | 12% APR | ~£1,066 | 1–5 days |
+| Personal loan (good credit) | 8% APR | ~£1,044 | 2–5 days |
+| 0% credit card (paid in term) | 0% | £1,000 | Instant |
+| Payday loan (FCA cap) | 0.8%/day max | ~£1,292+ | Same day |
+
+The payday row shows why speed is expensive: the same £1,000 emergency can cost nearly £300 more in interest over a year. Always ask for **total amount repayable** before signing.
+
+## Frequently Asked Questions
+
+### Should I use a payday loan for a boiler repair?
+Exhaust council welfare assistance, credit unions, and provider payment plans first. Payday credit is a last resort when no lower-cost route exists and you have a clear repayment plan for the following month.
+
+### Does Universal Credit offer emergency loans?
+Eligible claimants can apply for a Budgeting Advance (up to £812) for essential items — interest-free, repaid from future UC payments. Check current rules on [GOV.UK](https://www.gov.uk/universal-credit/other-financial-support).
+
+### Will an emergency loan hurt my credit score?
+A hard search is recorded when you apply. Missing repayments damages your file for six years. On-time repayment can gradually improve your profile if you had thin credit history.
+
+### Can my employer help?
+Some employers offer salary advances or hardship funds — ask HR confidentially before borrowing externally.
+
 ## Bottom line
 
 In emergencies, the **fastest money is often the most expensive money**. A 24-hour comparison of safer options — welfare assistance, credit unions, payment plans — can save months of repayment stress. Start with low-cost paths, negotiate bills before borrowing, and use high-cost credit only when every other route is genuinely exhausted. Once the immediate emergency is resolved, a structured [debt payoff plan](/blog/build-debt-payoff-plan-in-60-minutes) can help you avoid repeating the cycle, and our overview of [nine red flags to check before using a debt help service](/blog/debt-advice-scams-red-flags-uk) is essential reading before engaging anyone who offers to "sort out your debt."',
@@ -1800,7 +1991,7 @@ In emergencies, the **fastest money is often the most expensive money**. A 24-ho
   ARRAY['Emergency cash', 'Debt', 'Borrowing', 'Personal finance']::text[],
   11,
   FALSE,
-  '/images/hero-abstract.jpg',
+  '/images/debt-money.jpg',
   'Compare emergency loan alternatives in 2026 by cost and speed: savings, earned wage access, credit union loans, payment plans, BNPL, and personal loans.',
   ARRAY['emergency loan alternatives', 'payday loan alternatives', 'quick cash options', 'debt management']::text[]
 ),
@@ -1889,6 +2080,30 @@ The MoneyHelper service ([moneyhelper.org.uk](https://www.moneyhelper.org.uk/)) 
 
 If you cannot explain it simply, you probably cannot manage it under stress — which is precisely when stress-testing matters most.
 
+## What academic research says about retail outperformance
+
+Several landmark studies inform realistic expectations:
+
+- **SPIVA reports** (S&P Dow Jones Indices) consistently show most active fund managers underperform their benchmark index over 10- and 15-year periods after fees.
+- **Fama & French** factor research explains some return patterns but does not provide a free lunch — factors can underperform for long stretches.
+- **Dalbar studies** (US-focused but directionally relevant) highlight that investor behaviour — buying high, selling low — often destroys more value than fund selection.
+
+AI tools may improve your process discipline, but they do not repeal these structural realities. A core index holding with a small experimental satellite remains the evidence-aligned structure for most UK retail investors.
+
+## Frequently Asked Questions
+
+### Can ChatGPT pick stocks for me?
+It can summarise filings and explain sectors, but it has no access to future earnings and may hallucinate figures. Treat every output as a draft to verify against primary sources.
+
+### Do robo-advisors use AI to beat the market?
+Most UK robo-advisors use algorithmic asset allocation and rebalancing — not stock-picking AI. They compete on cost and discipline, not clairvoyance. See our [robo-advisor vs human adviser comparison](/blog/robo-advisors-vs-human-financial-advisors-2026).
+
+### Is copy-trading the same as an AI co-pilot?
+No — copy-trading follows another person''s positions and introduces different risks (liquidity, slippage, incentive misalignment). Verify FCA authorisation for any social trading platform.
+
+### Should I use AI inside my ISA?
+An ISA wrapper is about tax efficiency, not AI edge. Use AI for research if helpful; keep the wrapper and low-cost core allocation as the foundation.
+
 ## Bottom line
 
 AI can make you a better **operator**: faster research, cleaner process, fewer emotional errors. It does not guarantee alpha, and it does not remove the possibility of being wrong. The real edge in 2026 is often not a secret model — it is consistent risk management, realistic fee awareness, and a written investment plan you can follow when markets are ugly and the headlines are loud. AI helps you execute that plan. It cannot write it for you. For a grounding look at how the underlying data infrastructure powers these tools, our piece on [how real-time financial data is changing investment decisions](/blog/real-time-financial-data-investment) is a useful companion, and the [honest comparison of robo-advisors versus human financial advisors](/blog/robo-advisors-vs-human-financial-advisors-2026) helps frame which layer of service you actually need.',
@@ -1899,7 +2114,7 @@ AI can make you a better **operator**: faster research, cleaner process, fewer e
   ARRAY['AI investing', 'Risk management', 'Portfolio', 'Markets']::text[],
   9,
   FALSE,
-  '/images/data-visualization-bg.jpg',
+  '/images/fintech.jpg',
   'Can AI co-pilots beat the market in 2026? Understand where AI helps, where it fails, and how to use a core-plus-satellite approach with risk controls.',
   ARRAY['AI copilot investing', 'beat the market', 'algorithmic investing', 'portfolio risk']::text[]
 ),
@@ -1989,6 +2204,31 @@ The data from wearables becomes far more actionable when paired with a proactive
 - Keep app permissions minimal and review what each connected third-party app can see quarterly.
 - Do not use consumer wearable data to make clinical decisions like stopping medication or self-diagnosing conditions.
 
+## NHS and UK clinical pathways for wearable data
+
+Consumer wearables are not NHS diagnostic devices, but the boundary is shifting:
+
+- **NHS England''s virtual wards** programme uses remote monitoring for some discharged patients — typically medical-grade equipment, not consumer watches.
+- **GP appointments:** bringing a 30-day export of resting heart rate, HRV, and sleep trends can make a 10-minute consultation more productive. Ask your practice whether they accept PDF/CSV exports from your device app.
+- **Atrial fibrillation:** if Apple Watch or KardiaMobile flags irregular rhythm, NHS pathways usually require a clinical 12-lead ECG or ambulatory monitor for confirmation before treatment decisions.
+- **Data governance:** NHS App integrations with third-party health apps are expanding under NHS England digital standards — check whether your device platform participates and what consent model applies.
+
+The practical rule: wearables **start conversations** with clinicians; they do not replace NHS diagnostic pathways.
+
+## Frequently Asked Questions
+
+### Can my Apple Watch diagnose a heart attack?
+No — it can flag irregular rhythms and some cardiac patterns, but acute events require emergency services (999). Do not delay calling an ambulance because a watch alert was negative.
+
+### Are Oura readiness scores medically validated?
+Oura''s algorithms are informed by research but readiness scores are wellness metrics, not clinical diagnoses. Use them for trend awareness, not treatment decisions.
+
+### Will insurers use my wearable data against me?
+UK insurers cannot use genetic data without consent under the Code on Genetic Testing and Insurance, but wearable wellness programme data sharing varies by employer scheme. Read opt-in terms carefully.
+
+### How long until baseline alerts are reliable?
+Most manufacturers recommend 2–4 weeks of consistent wear before treating deviation alerts as meaningful.
+
 ## Bottom line
 
 AI wearables in 2026 are most valuable when they reduce blind spots and encourage earlier action — earlier rest, earlier clinical conversation, earlier recognition that the body is under unusual stress. They are least useful when marketed as certainty machines that replace medical judgment. Treat them like a smart warning light on a dashboard: worth prompt attention, the starting point for a conversation, and never the final diagnosis. For a broader look at how AI is transforming early disease detection beyond wearables, our piece on [AI diagnostics and preventive healthcare](/blog/ai-diagnostics-preventive-healthcare-2026) covers liquid biopsy, medical imaging AI, and at-home biomarker testing.',
@@ -1999,7 +2239,7 @@ AI wearables in 2026 are most valuable when they reduce blind spots and encourag
   ARRAY['AI wearables', 'Digital health', 'Preventive care', 'Privacy']::text[],
   9,
   FALSE,
-  '/images/icon-ai.png',
+  '/images/ai-health.jpg',
   'How AI wearables in 2026 are used for early health signals, AFib screening, and trend detection—plus practical limits and privacy considerations.',
   ARRAY['AI wearables', 'predictive health', 'digital health 2026', 'health data privacy']::text[]
 ),
@@ -2091,6 +2331,31 @@ A useful, evidence-based nutrition plan does not require premium hardware:
 
 Technology should improve adherence, not become another financial burden or source of anxiety.
 
+## UK services and tools available in 2026
+
+| Service type | Examples | Cost range | Evidence level |
+|---|---|---|---|
+| Microbiome testing | Zoe, Biomes, Atlas Biomed (check current UK availability) | £100–£250 per kit | Research-stage for healthy optimisation |
+| CGM (non-diabetic) | Abbott FreeStyle Libre via some wellness programmes | £30–£80 per 14-day sensor | Strong for glucose response; less for general health |
+| NHS dietetic referral | GP → community dietitian | Free at point of use | Gold standard for clinical conditions |
+| Registered dietitian (private) | BDA directory search | £80–£150/session | Strong for personalised medical nutrition |
+
+The NHS Eatwell Guide and BDA fact sheets remain the baseline for UK readers without budget for premium testing.
+
+## Frequently Asked Questions
+
+### Do I need a microbiome test to eat better?
+No — increasing plant diversity (aim for 30+ different plants weekly), fibre, and consistent meal timing improves gut health for most people without a kit.
+
+### Can AI meal apps replace a dietitian?
+Not for clinical conditions (IBS, diabetes, eating disorders). Apps help motivated healthy adults with pattern recognition; dietitians handle medical nutrition therapy.
+
+### Is CGM useful if I am not diabetic?
+It can reveal personal glucose responses to meals, but sensors cost money and may increase food anxiety. Try a two-week food diary first unless you have a specific metabolic goal discussed with a clinician.
+
+### Are Zoe and similar programmes worth it?
+Some users find sustained behaviour change; others get interesting data without long-term habit shifts. Treat programmes as education, not prescription.
+
 ## Bottom line
 
 Precision nutrition is most powerful when it stays practical: fewer guesses, better pattern recognition, and habits you can maintain on a normal week — not just a motivated Monday. AI can improve that feedback loop, but the goal is not perfect data. It is sustainable eating that supports your energy, digestion, and long-term health, with or without a sensor on your arm. For the science behind why your gut bacteria may be influencing far more than digestion, our deep dive on the [gut-brain axis and microbiome](/blog/gut-brain-axis-microbiome-mental-health-2026) explains the research in plain language. And if you want the full picture of AI-driven meal planning beyond microbiome testing, our piece on [the rise of AI nutritionists](/blog/ai-nutritionist-meal-planning-2026) covers where the tools stand in 2026.',
@@ -2101,7 +2366,7 @@ Precision nutrition is most powerful when it stays practical: fewer guesses, bet
   ARRAY['Precision nutrition', 'Microbiome', 'CGM', 'AI health']::text[],
   9,
   FALSE,
-  '/images/icon-finance.png',
+  '/images/nutrition.jpg',
   'A practical guide to AI-driven precision nutrition in 2026: microbiome insights, CGM feedback loops, benefits, limits, and data privacy trade-offs.',
   ARRAY['precision nutrition', 'AI microbiome', 'CGM insights', 'personalized diet AI']::text[]
 ),
@@ -2237,7 +2502,7 @@ The shift from measurement to proactive planning is already happening. The quest
   ARRAY['AI Health', 'Wearables', 'Longevity', 'Digital Health', 'Wellness']::text[],
   10,
   TRUE,
-  '/images/icon-ai.png',
+  '/images/ai-health.jpg',
   'How agentic AI health coaches in 2026 merge biometric data, bloodwork, and your calendar to deliver proactive wellness planning — before you feel the burnout coming.',
   ARRAY['AI health agent', 'proactive wellness planning', 'agentic AI health coach', 'personalised longevity', 'AI wearables 2026', 'digital health coach UK']::text[]
 ),
@@ -2355,7 +2620,7 @@ The science is real. The commercial noise around it is considerable. The skill i
   ARRAY['Skin Longevity', 'AI Diagnostics', 'Biotech', 'Skincare', 'Regenerative Beauty']::text[],
   9,
   FALSE,
-  '/images/icon-ai.png',
+  '/images/ai-health.jpg',
   'How AI skin diagnostics and biotech ingredients like senolytics and NAD+ boosters are replacing anti-aging with skin longevity — a data-driven approach to cellular health.',
   ARRAY['skin longevity', 'AI skin diagnostics', 'senolytics skincare', 'NAD+ skincare', 'regenerative beauty 2026', 'anti-aging replaced', 'biological age skin']::text[]
 ),
@@ -2471,7 +2736,7 @@ But the technology is a support layer, not a substitute for clinical expertise. 
   ARRAY['AI Nutrition', 'Meal Planning', 'Precision Nutrition', 'Digital Health', 'CGM']::text[],
   10,
   FALSE,
-  '/images/icon-finance.png',
+  '/images/nutrition.jpg',
   'How AI nutritionists in 2026 use wearable data, CGM readings, and microbiome insights to replace manual calorie counting with automated, personalised meal planning.',
   ARRAY['AI nutritionist', 'AI meal planning 2026', 'precision nutrition AI', 'personalised diet app', 'CGM meal planning', 'automated nutrition', 'bio-individual diet']::text[]
 ),
@@ -2600,7 +2865,7 @@ In 2026, we are learning that while a chatbot can give you the tools to build a 
   ARRAY['Mental Health', 'AI Therapy', 'Digital Wellbeing', 'CBT', 'AI Health']::text[],
   11,
   TRUE,
-  '/images/icon-ai.png',
+  '/images/wellness-mental.jpg',
   'AI therapy chatbots offer 24/7 mental health support — but can they replace human therapists? An honest look at the benefits, ethical risks, and the 2026 hybrid model.',
   ARRAY['AI therapy', 'AI mental health chatbot', 'digital therapist 2026', 'AI counselling', 'mental health app UK', 'Woebot Wysa AI', 'AI CBT therapy']::text[]
 ),
@@ -2665,7 +2930,7 @@ The fundamental shift that AI is driving in longevity science is the movement fr
   ARRAY['Longevity', 'Biological Age', 'Epigenetics', 'AI Health', 'Preventive Health']::text[],
   11,
   TRUE,
-  '/images/icon-ai.png',
+  '/images/ai-health.jpg',
   'What do biological age tests actually measure and can they predict how long you live? A clear guide to epigenetic clocks, AI longevity tools, and what the science says in 2026.',
   ARRAY['biological age test', 'longevity science 2026', 'epigenetic clock', 'AI longevity', 'biological age vs chronological age', 'how to live longer', 'TruAge Elysium test UK']::text[]
 ),
@@ -2728,7 +2993,7 @@ The data picture that emerges from two to four weeks of consistent tracking is a
   ARRAY['Sleep', 'Wearables', 'AI Health', 'Sleep Apnoea', 'Recovery']::text[],
   10,
   FALSE,
-  '/images/icon-ai.png',
+  '/images/sleep-health.jpg',
   'Sleep tracking in 2026 goes far beyond step counting — AI now analyses your sleep architecture, detects apnoea risk, and creates personalised improvement plans. Here is what works.',
   ARRAY['sleep optimization technology 2026', 'best sleep tracker 2026', 'AI sleep analysis', 'sleep apnoea detector', 'Oura ring sleep', 'fix sleep problems', 'sleep architecture deep REM']::text[]
 ),
@@ -2797,7 +3062,7 @@ The gut-brain axis is no longer a fringe concept in clinical science. It is one 
   ARRAY['Gut Health', 'Microbiome', 'Mental Health', 'AI Health', 'Nutrition']::text[],
   11,
   FALSE,
-  '/images/icon-ai.png',
+  '/images/nutrition.jpg',
   'Your gut microbiome influences your mood, anxiety, and cognitive performance. A clear guide to the gut-brain axis science, microbiome testing, and AI-driven personalised interventions in 2026.',
   ARRAY['gut brain axis 2026', 'microbiome mental health', 'gut health anxiety depression', 'microbiome test UK', 'AI gut health', 'probiotics anxiety', 'psychobiotics']::text[]
 ),
@@ -2872,7 +3137,7 @@ The goal of all of it is the same: to shrink the window between when disease beg
   ARRAY['AI Diagnostics', 'Preventive Health', 'NHS', 'Cancer Detection', 'AI Health']::text[],
   12,
   TRUE,
-  '/images/icon-ai.png',
+  '/images/ai-health.jpg',
   'AI is detecting cancer, heart disease, and neurological conditions years before symptoms appear. A clear look at AI diagnostics, NHS pilots, and what preventive healthcare looks like in 2026.',
   ARRAY['AI diagnostics 2026', 'AI cancer detection', 'preventive healthcare AI', 'NHS AI pilot', 'AI early disease detection', 'machine learning medical imaging', 'AI blood test disease']::text[]
 ),
@@ -2953,7 +3218,7 @@ That discernment, knowing which technology deserves your time and biological dat
   ARRAY['Digital Wellness', 'Mental Health', 'Screen Time', 'Social Media', 'Intentional Living']::text[],
   11,
   FALSE,
-  '/images/icon-ai.png',
+  '/images/wellness-mental.jpg',
   'Heavy social media use has documented negative effects on mental health, sleep, and attention. A practical, evidence-backed guide to intentional technology use and digital wellness in 2026.',
   ARRAY['digital detox 2026', 'intentional technology use', 'screen time mental health', 'social media anxiety', 'smartphone addiction health effects', 'digital wellness 2026', 'doomscrolling health']::text[]
 ),
@@ -3020,7 +3285,7 @@ The comparison nobody is having honestly is this one: it is not about which mode
   ARRAY['Robo-Advisors', 'Financial Planning', 'AI Finance', 'Investing', 'Fintech Trends']::text[],
   10,
   FALSE,
-  '/images/icon-finance.png',
+  '/images/business-analytics.jpg',
   'Robo-advisor or human financial advisor? An honest, evidence-based comparison of costs, capabilities, and limitations — and a practical framework for making the right choice in 2026.',
   ARRAY['robo advisor vs human advisor 2026', 'best robo advisor 2026', 'AI financial advisor', 'Betterment vs Wealthfront', 'should I use a robo advisor', 'hybrid financial advisor model', 'fiduciary financial advisor']::text[]
 ),
@@ -3091,7 +3356,7 @@ Institutions still treating blockchain and AI as separate evaluation questions a
   ARRAY['Blockchain', 'AI Finance', 'Case Studies', 'DeFi', 'Fintech']::text[],
   11,
   FALSE,
-  '/images/icon-finance.png',
+  '/images/business-case.jpg',
   'Four real case studies where blockchain and AI are delivering genuine financial value in 2026 — JP Morgan, HSBC, Chainalysis, and Aave. What actually works and why.',
   ARRAY['blockchain AI finance 2026', 'AI blockchain case studies', 'JP Morgan smart contract AI', 'HSBC blockchain trade finance', 'Chainalysis AI forensics', 'DeFi artificial intelligence', 'AI smart contracts']::text[]
 ),
@@ -3162,16 +3427,16 @@ The best fitness outcomes in 2026 come from the combination of sound exercise sc
   ARRAY['AI Fitness', 'Personal Training', 'Zone 2 Training', 'Wearables', 'AI Health']::text[],
   12,
   FALSE,
-  '/images/icon-ai.png',
+  '/images/fitness.jpg',
   'AI fitness coaching in 2026 adapts your workout plan daily based on HRV, sleep quality, and recovery data. A deep dive into zone 2 training, AI movement analysis, and recovery-based programming.',
   ARRAY['AI fitness coaching 2026', 'AI personal trainer', 'zone 2 cardio benefits', 'adaptive workout program', 'WHOOP fitness coaching', 'HRV workout optimization', 'AI movement analysis']::text[]
 ),
 (
   '41',
-  'How JPMorgan Chase Built the Most Powerful AI Banking Operation in the World',
+  'JPMorgan Chase: Artificial Intelligence in Banking — Case Study',
   'jpmorgan-ai-banking-strategy-case-study',
-  'JPMorgan Chase employs more software engineers than Google, has 2,000 AI and machine learning experts, and has deployed AI across fraud detection, trading, risk management, and customer service. A case study in what it looks like when a $3.9 trillion bank treats AI as existential infrastructure.',
-  '# How JPMorgan Chase Built the Most Powerful AI Banking Operation in the World
+  'JPMorgan Chase employs more software engineers than Google, has 2,000 AI and machine learning experts, and has deployed artificial intelligence across fraud detection, trading, risk management, and customer service. A case study in what it looks like when a $3.9 trillion bank treats AI as existential infrastructure.',
+  '# JPMorgan Chase: How Artificial Intelligence Is Reshaping Banking — A Case Study
 
 > *This article is an educational case study drawing on publicly available information from JPMorgan Chase filings, press releases, and verified industry sources. It does not constitute financial or investment advice. JPMorgan Chase & Co. (NYSE: JPM) is a publicly listed company; nothing in this article constitutes a recommendation to buy or sell its securities.*
 
@@ -3255,9 +3520,9 @@ The JPMorgan AI case study contains several lessons transferable to financial in
   ARRAY['JPMorgan Chase', 'AI Banking', 'Machine Learning Finance', 'Case Study', 'Fintech']::text[],
   12,
   TRUE,
-  '/images/data-visualization-bg.jpg',
-  'JPMorgan Chase spends $17 billion a year on technology and has 2,000 AI experts. A detailed case study in how the world''s largest bank by assets is deploying AI across trading, fraud, risk, and customer service.',
-  ARRAY['JPMorgan Chase AI strategy', 'JPMorgan AI banking case study', 'largest bank AI deployment', 'Wall Street AI machine learning', 'JPMorgan IndexGPT', 'AI fraud detection banking', 'bank technology investment 2026']::text[]
+  '/images/business-case.jpg',
+  'A detailed artificial intelligence in banking case study: JPMorgan Chase spends $17 billion a year on technology and has 2,000 AI experts deploying machine learning across trading, fraud detection, risk management, and customer service.',
+  ARRAY['artificial intelligence in banking case study', 'JPMorgan Chase AI strategy', 'JPMorgan AI banking case study', 'largest bank AI deployment', 'Wall Street AI machine learning', 'AI fraud detection banking', 'bank technology investment 2026']::text[]
 ),
 (
   '40',
@@ -3354,7 +3619,7 @@ The $40 million in savings was real. So was the rehiring. The lesson is that bot
   ARRAY['Klarna', 'AI Customer Service', 'OpenAI', 'BNPL', 'Case Study']::text[],
   11,
   FALSE,
-  '/images/data-visualization-bg.jpg',
+  '/images/business-case.jpg',
   'Klarna''s AI assistant handled 2.3 million customer service chats in one month, saving $40 million. A detailed case study of what worked, what the real costs were, and what every business should learn before replacing humans with AI.',
   ARRAY['Klarna AI customer service case study', 'Klarna AI assistant OpenAI', 'AI replacing customer service agents', 'BNPL fintech AI', 'Klarna 700 jobs AI', 'AI customer service cost savings', 'fintech AI automation 2026']::text[]
 ),
@@ -3445,7 +3710,7 @@ Nubank''s case study distils to three lessons that are transferable to financial
   ARRAY['Nubank', 'Neobank', 'AI Credit', 'Financial Inclusion', 'Case Study']::text[],
   12,
   FALSE,
-  '/images/data-visualization-bg.jpg',
+  '/images/business-analytics.jpg',
   'How Nubank used machine learning and alternative data to extend credit to 100 million customers the traditional banking system refused to serve. A case study in AI-powered financial inclusion.',
   ARRAY['Nubank case study', 'Nubank AI strategy', 'largest digital bank world', 'Brazilian fintech AI', 'neobank credit scoring AI', 'Nu Holdings case study', 'digital bank emerging markets']::text[]
 ),
@@ -3540,7 +3805,7 @@ The combination of scale, speed, continuous learning, and network data advantage
   ARRAY['Mastercard', 'Fraud Detection', 'AI Payments', 'Decision Intelligence', 'Case Study']::text[],
   11,
   FALSE,
-  '/images/data-visualization-bg.jpg',
+  '/images/business-analytics.jpg',
   'How Mastercard''s Decision Intelligence AI catches fraud in 50 milliseconds across 143 billion annual transactions — a case study in generative AI, behavioural biometrics, and the payment fraud arms race.',
   ARRAY['Mastercard AI fraud detection', 'Decision Intelligence Mastercard', 'AI payment fraud prevention', 'credit card fraud AI case study', 'real time fraud detection 2026', 'machine learning payments security', 'generative AI fraud detection']::text[]
 ),
@@ -3625,7 +3890,7 @@ For UK institutions specifically, the FCA''s operational resilience requirements
   ARRAY['Deutsche Bank', 'AI Transformation', 'Cloud Banking', 'Case Study', 'Fintech']::text[],
   12,
   TRUE,
-  '/images/data-visualization-bg.jpg',
+  '/images/business-case.jpg',
   'How Deutsche Bank went from four years of losses to decade-high profits using Google Cloud and NVIDIA AI infrastructure. A practical case study in legacy bank digital transformation.',
   ARRAY['Deutsche Bank AI transformation', 'Deutsche Bank Google Cloud case study', 'bank digital transformation AI', 'legacy bank AI modernization', 'cloud banking transformation 2026', 'Deutsche Bank NVIDIA', 'financial institution AI overhaul']::text[]
 ),
@@ -3746,7 +4011,7 @@ The voice banking experience in 2026 is genuinely better than the phone menu it 
   ARRAY['Voice Banking', 'Conversational AI', 'LLM Finance', 'AI Banking', 'Fintech']::text[],
   10,
   FALSE,
-  '/images/icon-finance.png',
+  '/images/fintech.jpg',
   'How large language models are replacing call centres in banking in 2026 — from Bank of America Erica to UK neobank AI. A practical look at what''s deployed, the economics, and the privacy trade-offs.',
   ARRAY['voice banking 2026', 'conversational AI banking', 'LLM financial services', 'Bank of America Erica AI', 'AI call center banking', 'natural language banking UK', 'AI banking assistant 2026']::text[]
 ),
@@ -3863,7 +4128,7 @@ For now, the practical starting point is identifying one specific, bounded task 
   ARRAY['Agentic AI', 'Personal Finance AI', 'Open Banking', 'Fintech', 'Automation']::text[],
   11,
   TRUE,
-  '/images/icon-finance.png',
+  '/images/fintech.jpg',
   'Agentic AI finance tools in 2026 autonomously negotiate bills, optimise cash flow, and automate business finance — built on open banking APIs. A practical guide to what''s real and what the risks are.',
   ARRAY['agentic AI finance 2026', 'autonomous financial management', 'AI bill negotiation', 'open banking AI', 'Rocket Money AI', 'Monarch Money review', 'Ramp expense automation']::text[]
 ),
@@ -3948,7 +4213,7 @@ The tools now exist to manage self-employed finances with a level of automation 
   ARRAY['Gig Economy', 'Freelancer Finance', 'AI Fintech', 'Creator Economy', 'Self-Employed']::text[],
   10,
   FALSE,
-  '/images/icon-finance.png',
+  '/images/fintech.jpg',
   'How AI fintech in 2026 is solving the financial problems freelancers, gig workers, and creators face — irregular income planning, alternative credit underwriting, and automated tax tools.',
   ARRAY['gig economy fintech 2026', 'freelancer banking AI', 'creator economy finance', 'irregular income financial planning', 'self employed AI finance', 'gig worker financial products', 'freelancer tax AI UK']::text[]
 ),
@@ -4023,7 +4288,7 @@ This does not make ESG investing risk-free or guarantee that sustainable portfol
   ARRAY['ESG', 'Climate Finance', 'AI Investing', 'Sustainable Investing', 'Fintech']::text[],
   12,
   TRUE,
-  '/images/icon-finance.png',
+  '/images/fintech.jpg',
   'How AI is fixing ESG investing''s greenwashing problem in 2026 — satellite data, NLP corporate analysis, and physical climate risk tools from Clarity AI, Arabesque, and Jupiter Intelligence.',
   ARRAY['ESG investing AI 2026', 'climate fintech', 'sustainable investing UK', 'greenwashing AI', 'ESG fund analysis', 'physical climate risk investing', 'FCA SDR labels']::text[]
 ),
@@ -4098,7 +4363,7 @@ The most significant thing AI is adding to this picture in 2026 is not a new int
   ARRAY['Stress', 'Burnout', 'Nervous System', 'AI Health', 'Mental Health']::text[],
   11,
   FALSE,
-  '/images/icon-ai.png',
+  '/images/wellness-mental.jpg',
   'Burnout is a measurable nervous system state, not just exhaustion. AI tools in 2026 detect HRV dysregulation, cortisol patterns, and recovery deficits — and create personalised recovery plans.',
   ARRAY['burnout recovery AI 2026', 'stress nervous system', 'HRV stress monitoring', 'AI burnout detection', 'polyvagal theory stress', 'chronic stress AI tools', 'nervous system regulation']::text[]
 )

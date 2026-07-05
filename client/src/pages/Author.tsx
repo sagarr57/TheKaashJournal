@@ -11,6 +11,8 @@ import { SITE_URL } from "@/lib/config";
 interface AuthorProfile {
   name: string;
   role: string;
+  experience: string[];
+  researchSources: string[];
   specialisms: string[];
   bio: string[];
   categories: string[];
@@ -20,6 +22,19 @@ const AUTHORS: Record<string, AuthorProfile> = {
   kash: {
     name: "Kash",
     role: "Contributor — AI & Health Technology",
+    experience: [
+      "Health technology research and digital health product analysis",
+      "NHS digital transformation and clinical AI policy review",
+      "Wearable diagnostics and preventive health evidence assessment",
+      "Real-time financial data and investment technology reporting",
+    ],
+    researchSources: [
+      "NHS England and NHS Digital publications",
+      "GOV.UK and NICE guidance",
+      "Peer-reviewed journals (NEJM, The Lancet, Nature Medicine)",
+      "Company SEC filings and annual reports for case studies",
+      "FCA register for UK financial product verification",
+    ],
     specialisms: [
       "AI in NHS services",
       "Wearable health technology",
@@ -38,6 +53,19 @@ const AUTHORS: Record<string, AuthorProfile> = {
   saga: {
     name: "Saga",
     role: "Contributor — Fintech & Regulation",
+    experience: [
+      "UK financial services compliance and consumer protection",
+      "FCA regulatory policy and open banking developments",
+      "Debt management strategies and insolvency route comparison",
+      "Fintech investment analysis and neobank market coverage",
+    ],
+    researchSources: [
+      "FCA policy statements and consumer guidance",
+      "HM Treasury and Bank of England publications",
+      "GOV.UK debt advice and insolvency resources",
+      "MoneyHelper and StepChange public materials",
+      "TheCityUK and UK Finance industry data",
+    ],
     specialisms: [
       "FCA regulatory developments",
       "Open banking & BNPL",
@@ -163,6 +191,47 @@ export default function Author() {
                 {profile.bio.map((para) => (
                   <p key={para.slice(0, 40)} className="text-gray-700 text-base leading-relaxed">{para}</p>
                 ))}
+              </section>
+
+              {/* Experience */}
+              <section className="max-w-3xl border border-gray-200 rounded-lg p-5 md:p-6 bg-gray-50">
+                <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-3">Background &amp; Experience</h2>
+                <ul className="space-y-2">
+                  {profile.experience.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-2" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              {/* Research methodology */}
+              <section className="max-w-3xl border border-gray-200 rounded-lg p-5 md:p-6">
+                <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-3">How {profile.name} Researches Articles</h2>
+                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                  Every article follows The Kaash Journal&apos;s{" "}
+                  <a href="/editorial-policy" className="text-blue-700 hover:underline font-medium">
+                    editorial policy
+                  </a>
+                  : primary sources are linked in the text, regulatory context is included for UK finance topics, and limitations in the evidence are stated clearly.
+                </p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Primary sources consulted</p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {profile.researchSources.map((source) => (
+                    <li key={source} className="flex items-center gap-2 text-sm text-gray-700">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0" />
+                      {source}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-gray-600 mt-4">
+                  Found an error?{" "}
+                  <a href="/contact" className="text-blue-700 hover:underline font-medium">
+                    Report a correction
+                  </a>
+                  .
+                </p>
               </section>
 
               {/* Specialisms */}

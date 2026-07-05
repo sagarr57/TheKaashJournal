@@ -2,6 +2,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostMeta } from "@/components/blog/PostMeta";
+import { PostEditorialFooter } from "@/components/blog/PostEditorialFooter";
+import { YmylDisclaimer } from "@/components/blog/YmylDisclaimer";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { getPostBySlug } from "@/lib/blog-utils";
 import { useParams } from "wouter";
@@ -11,7 +13,6 @@ import { Image } from "@/components/ui/image";
 import { SEO } from "@/components/SEO";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { SocialShare } from "@/components/SocialShare";
-import { AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
 import { postContentBySlug } from "@/lib/postsContent";
@@ -401,15 +402,7 @@ export default function Post() {
 
               {/* YMYL Disclaimer */}
               {(isFinancePost || isHealthPost) && (
-                <div className="flex gap-3 border border-amber-200 bg-amber-50 rounded p-4 mb-5 text-sm text-amber-900">
-                  <AlertTriangle className="w-5 h-5 shrink-0 text-amber-600 mt-0.5" />
-                  <p>
-                    <strong>Disclaimer:</strong>{" "}
-                    {isHealthPost
-                      ? "This article is for general educational and informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional before making decisions about your health, treatment, or wellbeing."
-                      : "This article is for educational and informational purposes only and does not constitute financial or legal advice. Always consult a qualified financial adviser or debt specialist before making financial decisions."}
-                  </p>
-                </div>
+                <YmylDisclaimer type={isHealthPost ? "health" : "finance"} />
               )}
 
               {/* Table of Contents */}
@@ -569,6 +562,8 @@ export default function Post() {
                   className="my-6"
                 />
               )}
+
+              <PostEditorialFooter post={postMeta} />
 
               {/* Author Bio */}
               {(() => {

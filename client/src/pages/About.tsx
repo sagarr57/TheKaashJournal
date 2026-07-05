@@ -104,7 +104,7 @@ export default function About() {
                   <div>
                     <strong className="text-gray-900">Disclaimers on every applicable article.</strong>
                     <p className="text-gray-700 text-sm mt-1 leading-relaxed">
-                      Every article covering financial products, health decisions, or investment carries a clear disclaimer at the top stating it is not professional advice and directing readers to qualified services.
+                      Every article covering financial products, health decisions, or investment displays a visible disclaimer at the top of the page — plus in-article notices where relevant — directing readers to qualified services. See our <a href="/disclaimer" className="text-blue-600 hover:underline">full disclaimer</a>.
                     </p>
                   </div>
                 </li>

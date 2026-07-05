@@ -71,8 +71,16 @@ export default function Blog() {
             <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold normal-case tracking-tight mb-1.5 md:mb-2 text-gray-900">
               The <span className="text-blue-600">Kaash Journal</span>
             </h1>
-            <p className="text-gray-600 text-sm md:text-base max-w-2xl leading-relaxed">
+            <p className="text-gray-600 text-sm md:text-base max-w-2xl leading-relaxed mb-3">
               Long-form guides on AI, fintech, debt, and money psychology—sources linked in the copy so you can verify claims yourself.
+            </p>
+            <p className="text-gray-500 text-xs sm:text-sm max-w-2xl leading-relaxed">
+              Written by{" "}
+              <a href="/author/saga" className="text-blue-700 hover:underline font-medium">Saga</a>{" "}
+              and{" "}
+              <a href="/author/kash" className="text-blue-700 hover:underline font-medium">Kash</a>.{" "}
+              <a href="/editorial-policy" className="text-blue-700 hover:underline">Editorial standards</a> ·{" "}
+              <a href="/disclaimer" className="text-blue-700 hover:underline">Disclaimers</a>
             </p>
           </div>
         </section>
