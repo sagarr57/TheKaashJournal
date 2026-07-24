@@ -16,7 +16,7 @@ import { SocialShare } from "@/components/SocialShare";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
 import { postContentBySlug } from "@/lib/postsContent";
-import { AdUnit } from "@/components/AdUnit";
+import { EzoicAd } from "@/components/EzoicAd";
 import { SITE_URL } from "@/lib/config";
 import { buildCanonicalUrl } from "@shared/site-url";
 
@@ -408,14 +408,8 @@ export default function Post() {
               {/* Table of Contents */}
               {content && <TableOfContents items={tocItems} />}
 
-              {/* In-content ad — set VITE_ADSENSE_SLOT_IN_CONTENT in Vercel env vars */}
-              {import.meta.env.VITE_ADSENSE_SLOT_IN_CONTENT && (
-                <AdUnit
-                  slot={import.meta.env.VITE_ADSENSE_SLOT_IN_CONTENT}
-                  format="horizontal"
-                  className="my-5"
-                />
-              )}
+              {/* Ezoic in-content ad */}
+              <EzoicAd className="my-5" />
 
               {/* Content */}
               <div className="prose prose-sm md:prose-base max-w-none mb-8 md:mb-10">
@@ -554,14 +548,8 @@ export default function Post() {
                 </div>
               </div>
 
-              {/* Post-content ad — high-engagement placement (reader just finished the article) */}
-              {import.meta.env.VITE_ADSENSE_SLOT_POST_CONTENT && (
-                <AdUnit
-                  slot={import.meta.env.VITE_ADSENSE_SLOT_POST_CONTENT}
-                  format="horizontal"
-                  className="my-6"
-                />
-              )}
+              {/* Ezoic post-content ad */}
+              <EzoicAd className="my-6" />
 
               <PostEditorialFooter post={postMeta} />
 
@@ -619,14 +607,8 @@ export default function Post() {
                 description={postMeta.excerpt}
               />
 
-              {/* Post-related-posts ad — reader is browsing more content, high intent */}
-              {import.meta.env.VITE_ADSENSE_SLOT_END_OF_ARTICLE && (
-                <AdUnit
-                  slot={import.meta.env.VITE_ADSENSE_SLOT_END_OF_ARTICLE}
-                  format="horizontal"
-                  className="mb-6"
-                />
-              )}
+              {/* Ezoic end-of-article ad */}
+              <EzoicAd className="mb-6" />
 
               {/* Related Posts */}
               <RelatedPosts currentPost={postMeta as any} />

@@ -21,16 +21,17 @@
       "source": "/:path+/",
       "destination": "/:path+",
       "permanent": true
+    },
+    {
+      "source": "/ads.txt",
+      "destination": "https://srv.adstxtmanager.com/19390/thekaashjournal.com",
+      "permanent": false
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/api/$1"
-    },
-    {
-      "source": "/ads.txt",
-      "destination": "/api/ads-txt"
     },
     {
       "source": "/robots.txt",

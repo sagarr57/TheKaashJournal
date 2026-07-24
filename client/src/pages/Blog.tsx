@@ -2,6 +2,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PostCard } from "@/components/blog/PostCard";
+import { EzoicAd } from "@/components/EzoicAd";
 import { Pagination } from "@/components/ui/Pagination";
 import { categories } from "@/lib/categories";
 import { useState, useMemo, useEffect } from "react";
@@ -84,6 +85,9 @@ export default function Blog() {
             </p>
           </div>
         </section>
+
+        {/* Ezoic ad — below page header */}
+        <EzoicAd className="container pt-4" />
 
         {/* Content */}
         <div className="container py-6 md:py-8">

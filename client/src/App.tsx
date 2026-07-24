@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import { lazy, Suspense, useEffect, useState } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -52,11 +52,24 @@ function PageLoader() {
   );
 }
 
+function useEzoicPageRefresh() {
+  const [location] = useLocation();
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.ezstandalone?.cmd) {
+      window.ezstandalone.cmd.push(function () {
+        window.ezstandalone.showAds();
+      });
+    }
+  }, [location]);
+}
+
 function Router() {
   // Track page views automatically
   usePageTracking();
   // Track link clicks automatically
   useLinkTracking();
+  // Refresh Ezoic ads on every route change (required for SPAs)
+  useEzoicPageRefresh();
   
   return (
     <Suspense fallback={<PageLoader />}>
