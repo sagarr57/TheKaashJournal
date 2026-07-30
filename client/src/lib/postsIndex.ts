@@ -932,6 +932,120 @@ export const postIndex: PostIndexItem[] = [
     },
   },
   {
+    id: "42",
+    title: "Real-Time Fraud Detection UK Banking: How Banks Fight Fraud",
+    slug: "real-time-fraud-detection-uk-banking",
+    excerpt:
+      "Real-Time Fraud Detection in UK Banking: How NatWest, Lloyds and Monzo Are Stopping Criminals in Milliseconds",
+    author: "Saga",
+    date: "2026-05-27",
+    category: "Real-Time Finance",
+    tags: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "Real-time fraud detection in UK banking is stopping criminals in milliseconds. Discover how NatWest, Lloyds and Monzo use AI to protect your money. Read the expert guide.",
+      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    },
+  },
+  {
+    id: "43",
+    title: "New Payments Architecture UK: What It Means for Your Business",
+    slug: "new-payments-architecture-uk",
+    excerpt:
+      "New Payments Architecture UK: What Every Founder and Business Owner Needs to Know",
+    author: "Saga",
+    date: "2026-05-28",
+    category: "Real-Time Finance",
+    tags: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "The New Payments Architecture UK is being overhauled. Discover what the National Payments Vision means for UK entrepreneurs and how to prepare your business now.",
+      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    },
+  },
+  {
+    id: "44",
+    title: "Open Banking UK Explained: What It Means for Your Money Now",
+    slug: "open-banking-uk-explained",
+    excerpt:
+      "More than 16 million UK consumers and businesses are already using open banking — that is roughly one in three adults in this country (Open Banking Limited / FCA, 2025). Yet surveys consistently show…",
+    author: "Saga",
+    date: "2026-05-29",
+    category: "Real-Time Finance",
+    tags: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    readingTime: 8,
+    featured: true,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "Open Banking UK explained in plain English. Discover how it works, whether it's safe, your data rights, and the top apps using it to improve your finances today.",
+      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    },
+  },
+  {
+    id: "45",
+    title: "Real-Time Payments UK Small Business: Get Paid Faster Today",
+    slug: "real-time-payments-uk-small-business",
+    excerpt:
+      "Real-Time Payments for UK Small Businesses: The Definitive Guide to Getting Paid Faster",
+    author: "Saga",
+    date: "2026-05-30",
+    category: "Real-Time Finance",
+    tags: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "Real-time payments UK small business guide: use Faster Payments, Request to Pay and open banking to fix cash flow, cut late invoices and get paid in seconds.",
+      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    },
+  },
+  {
+    id: "46",
+    title: "Real-Time Credit Decisioning UK: How Lenders Approve in Seconds",
+    slug: "real-time-credit-decisioning-uk",
+    excerpt:
+      "Real-Time Credit Decisioning UK: How FCA-Regulated Lenders Are Approving Loans in Seconds",
+    author: "Saga",
+    date: "2026-05-31",
+    category: "Real-Time Finance",
+    tags: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "Real-time credit decisioning UK is transforming lending. Discover how FCA-regulated lenders use open banking, live data and AI to approve loans in seconds. Read now.",
+      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+    },
+  },
+  {
+    id: "47",
+    title: "Best AI Health Apps UK 2025: Reviewed, Rated and NHS-Safe",
+    slug: "best-ai-health-apps-uk-2025",
+    excerpt:
+      "Best AI Health Apps UK 2025: Your Expert-Backed Guide to Safe, Effective Digital Health",
+    author: "Kash",
+    date: "2026-06-01",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: true,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "Discover the best AI health apps UK 2025 has to offer — from MHRA-regulated symptom checkers to NHS-approved mental health tools. Expert-rated, evidence-based. Read now.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
     id: "48",
     title: "AI Workplace Mental Health UK Employers 2026: What You Must Do",
     slug: "ai-workplace-mental-health-uk-employers-2026",
@@ -1241,6 +1355,291 @@ export const postIndex: PostIndexItem[] = [
         "chronic stress AI tools",
         "nervous system regulation",
       ],
+    },
+  },
+  {
+    id: "59",
+    title: "AI Mental Health UK: Can Technology Help Solve the NHS Crisis?",
+    slug: "ai-mental-health-uk",
+    excerpt:
+      "An estimated 1.7 million people are currently on NHS mental health waiting lists in England — and latest projections from the British Medical Association suggest the true figure of unmet need is…",
+    author: "Kash",
+    date: "2026-06-02",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: true,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "AI mental health UK tools are transforming NHS care — from chatbots and digital CBT to predictive triage. Discover what works, what's safe, and what's next. Read now.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "60",
+    title: "AI Cancer Detection UK: How NHS Doctors Are Finding It Earlier",
+    slug: "ai-cancer-detection-uk",
+    excerpt:
+      "AI Cancer Detection UK: How NHS Doctors Are Finding Cancer Earlier — and Saving More Lives",
+    author: "Kash",
+    date: "2026-06-03",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "AI cancer detection UK is transforming NHS screening. Discover how AI is finding breast, bowel, lung and skin cancer earlier — with real survival data. Expert guide.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "61",
+    title: "Wearable Health Technology UK: What Your Device Is Telling You",
+    slug: "wearable-health-technology-uk",
+    excerpt:
+      "Wearable Health Technology UK: What Your Device Is Really Telling You — and When to Take It Seriously",
+    author: "Kash",
+    date: "2026-06-04",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/sleep-health.jpg",
+    seo: {
+      metaDescription:
+        "Wearable health technology UK is booming — but how accurate are smartwatch ECGs, blood oxygen sensors and AI biometrics? Read the expert, evidence-based guide for UK users.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "62",
+    title: "AI NHS UK Healthcare Transformation: The £10bn Plan Explained",
+    slug: "ai-nhs-uk-healthcare-transformation",
+    excerpt:
+      "The NHS operates at a scale that is difficult to comprehend. With a £192 billion annual budget, approximately 1.5 million staff, and around 600 million patient contacts every year across GP,…",
+    author: "Kash",
+    date: "2026-06-05",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "AI NHS UK healthcare transformation is backed by £10bn in Government funding. Discover the 10 Year Health Plan, HDRS, AI scribing and what it means for you. Read now.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "63",
+    title: "AI Drug Discovery UK: How Biotech Is Getting Medicines Faster",
+    slug: "ai-drug-discovery-uk",
+    excerpt:
+      "AI Drug Discovery UK: How Biotech Is Delivering New Medicines to Patients Faster Than Ever",
+    author: "Kash",
+    date: "2026-06-06",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "AI drug discovery UK is cutting clinical trial timelines from years to months. Discover how BenevolentAI, Exscientia and AlphaFold are transforming medicines for UK patients.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "64",
+    title: "AI Symptom Checker UK: Are They Safe, Accurate and Regulated?",
+    slug: "ai-symptom-checker-uk-safe",
+    excerpt:
+      "In a single month in April 2024, 661,987 NHS 111 online sessions were completed — generating outcomes ranging from ambulance dispatch to self-care advice for hundreds of thousands of UK adults who…",
+    author: "Kash",
+    date: "2026-06-07",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "Is your AI symptom checker UK safe to use? We review NHS 111, Ada Health and Babylon against MHRA standards — with evidence-based accuracy data. Read the expert guide.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "65",
+    title: "Predictive AI NHS Patient Data UK: Stopping Admissions Before They Happen",
+    slug: "predictive-ai-nhs-patient-data-uk",
+    excerpt:
+      "Predictive AI and NHS Patient Data: How Live Data Is Preventing Hospital Admissions Across the UK",
+    author: "Kash",
+    date: "2026-06-08",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "Predictive AI NHS patient data UK is preventing hospital admissions before they happen. Discover how trusts use early-warning AI to save lives and cut A&E pressure.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "66",
+    title: "AI Elderly Care UK Technology: Keeping People at Home Longer",
+    slug: "ai-elderly-care-uk-technology",
+    excerpt:
+      "AI Elderly Care UK Technology: How Smart Innovation Is Keeping People at Home Longer",
+    author: "Kash",
+    date: "2026-06-09",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "AI elderly care UK technology is transforming independent living — from fall detection saving £1m a day to dementia monitoring at home. Read the expert evidence guide.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    },
+  },
+  {
+    id: "67",
+    title: "BNPL Regulation UK 2026: What the New FCA Rules Mean for You",
+    slug: "bnpl-regulation-uk-2026",
+    excerpt:
+      "Buy now, pay later is no longer a regulatory grey area. From 15 July 2026, the Financial Conduct Authority brings BNPL — formally classified as Deferred Payment Credit (DPC) — into the UK’s regulated…",
+    author: "Saga",
+    date: "2026-06-10",
+    category: "Fintech Trends",
+    tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    readingTime: 8,
+    featured: true,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "BNPL regulation UK 2026 arrives on 15 July. Discover what FCA's new deferred payment credit rules mean for Klarna, Clearpay users and lenders. Expert guide. Read now.",
+      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    },
+  },
+  {
+    id: "68",
+    title: "UK Fintech Investment 2026: Where Is the Money Going This Year?",
+    slug: "uk-fintech-investment-2026",
+    excerpt:
+      "The UK retained its position as Europe’s number one and the world’s second-largest fintech investment destination in 2025, attracting $3.6 billion across 534 deals — more than the next five European…",
+    author: "Saga",
+    date: "2026-06-11",
+    category: "Fintech Trends",
+    tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "UK fintech investment 2026 is backed by record data. Discover where VC is flowing, how Mansion House capital unlocks billions, and which sectors lead growth. Read now.",
+      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    },
+  },
+  {
+    id: "69",
+    title: "RegTech UK 2026 FCA Compliance: How AI Is Transforming Regulation",
+    slug: "regtech-uk-2026-fca-compliance",
+    excerpt:
+      "RegTech UK 2026 FCA Compliance: How AI and Automation Are Transforming the Way Firms Regulate Themselves",
+    author: "Saga",
+    date: "2026-06-12",
+    category: "Fintech Trends",
+    tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    readingTime: 8,
+    featured: false,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "RegTech UK 2026 FCA compliance is being transformed by AI, automation and real-time monitoring. Discover how smart firms are cutting costs and avoiding record fines.",
+      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    },
+  },
+  {
+    id: "70",
+    title: "Neobanks UK 2026 Comparison: Monzo, Starling and Revolut Ranked",
+    slug: "neobanks-uk-2026-comparison",
+    excerpt:
+      "A decade after Starling Bank launched and began what became one of the most disruptive periods in UK retail banking history, the neobanks UK 2026 comparison looks markedly different from any previous…",
+    author: "Saga",
+    date: "2026-06-13",
+    category: "Fintech Trends",
+    tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    readingTime: 8,
+    featured: true,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "Neobanks UK 2026 comparison: Revolut is now a fully licensed bank, Monzo eyes a £6bn IPO, and Starling is regrouping. Expert data-driven guide to which one to choose.",
+      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    },
+  },
+  {
+    id: "71",
+    title: "AI UK Jobs Market 2026: Which Roles Are at Risk and Which Will Grow?",
+    slug: "ai-uk-jobs-market-2026-risk-growth",
+    excerpt:
+      "Up to 8 million UK jobs could be lost to artificial intelligence in a worst-case scenario, according to the Institute for Public Policy Research (IPPR) — making the current moment one of the most…",
+    author: "Kash",
+    date: "2026-06-14",
+    category: "Case Studies",
+    tags: ["AI", "Jobs", "UK Economy", "Technology"],
+    readingTime: 10,
+    featured: true,
+    image: "/images/business-case.jpg",
+    seo: {
+      metaDescription:
+        "AI UK jobs market 2026: up to 8 million roles at risk but 3.9 million new AI jobs by 2035. Discover which sectors are most exposed — and what to do right now.",
+      keywords: ["AI", "Jobs", "UK Economy", "Technology"],
+    },
+  },
+  {
+    id: "72",
+    title: "Generative AI UK Financial Services FCA: Benefits, Risks, Rules",
+    slug: "generative-ai-uk-financial-services-fca",
+    excerpt:
+      "Generative AI in UK Financial Services: Benefits, Risks, and What the FCA Expects in 2026",
+    author: "Saga",
+    date: "2026-06-15",
+    category: "Fintech Trends",
+    tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    readingTime: 10,
+    featured: false,
+    image: "/images/fintech.jpg",
+    seo: {
+      metaDescription:
+        "Generative AI UK financial services FCA rules are live. Discover how banks deploy LLMs, what Consumer Duty and SM&CR require, and your firm's 2026 compliance checklist.",
+      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+    },
+  },
+  {
+    id: "73",
+    title: "AI Therapy Apps UK 2026: What Works, What's Risky, What to Know",
+    slug: "ai-therapy-apps-uk-2026-safe",
+    excerpt:
+      "AI Therapy Apps UK 2026: What Works, What’s Risky, and What the Research Actually Says",
+    author: "Kash",
+    date: "2026-06-16",
+    category: "AI and Health",
+    tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+    readingTime: 10,
+    featured: false,
+    image: "/images/wellness-mental.jpg",
+    seo: {
+      metaDescription:
+        "Are AI therapy apps UK 2026 safe? We review Wysa, Limbic and Kooth against MHRA safety standards and NICE evidence — and expose the real risks of chatbot mental health care.",
+      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     },
   },
 ];
