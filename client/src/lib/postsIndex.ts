@@ -945,9 +945,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Real-time fraud detection in UK banking is stopping criminals in milliseconds. Discover how NatWest, Lloyds and Monzo use AI to protect your money. Read the expert guide.",
-      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+      metaDescription: "Real-time fraud detection in UK banking stops criminals in milliseconds. How NatWest, Lloyds and Monzo use AI to protect your money.",
+      keywords: ["real-time fraud detection UK", "UK banking fraud prevention", "AI fraud detection banking", "open banking security", "NatWest Monzo fraud AI"],
     },
   },
   {
@@ -964,9 +963,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "The New Payments Architecture UK is being overhauled. Discover what the National Payments Vision means for UK entrepreneurs and how to prepare your business now.",
-      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+      metaDescription: "The New Payments Architecture UK is being overhauled. What the National Payments Vision means for UK businesses and how to prepare now.",
+      keywords: ["New Payments Architecture UK", "NPA UK businesses", "Faster Payments upgrade UK", "ISO 20022 UK", "UK payment infrastructure 2026"],
     },
   },
   {
@@ -983,9 +981,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Open Banking UK explained in plain English. Discover how it works, whether it's safe, your data rights, and the top apps using it to improve your finances today.",
-      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+      metaDescription: "Open Banking UK explained in plain English. How it works, whether it's safe, your data rights and the top apps improving your finances.",
+      keywords: ["open banking UK explained", "open banking apps UK", "FCA open banking safety", "open banking data rights UK", "best open banking apps 2026"],
     },
   },
   {
@@ -1002,9 +999,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Real-time payments UK small business guide: use Faster Payments, Request to Pay and open banking to fix cash flow, cut late invoices and get paid in seconds.",
-      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+      metaDescription: "Real-time payments UK small business guide: use Faster Payments, Request to Pay and open banking to fix cash flow and get paid in seconds.",
+      keywords: ["real-time payments UK small business", "Faster Payments UK", "Request to Pay UK", "open banking invoicing UK", "cash flow UK small business"],
     },
   },
   {
@@ -1021,9 +1017,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Real-time credit decisioning UK is transforming lending. Discover how FCA-regulated lenders use open banking, live data and AI to approve loans in seconds. Read now.",
-      keywords: ["FinTech", "Payments", "UK Banking", "Open Banking"],
+      metaDescription: "Real-time credit decisioning UK is transforming lending. How FCA-regulated lenders use open banking and AI to approve loans in seconds.",
+      keywords: ["real-time credit decisioning UK", "open banking lending UK", "AI loan approval UK", "FCA regulated instant credit", "instant loan decisioning UK"],
     },
   },
   {
@@ -1040,9 +1035,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "Discover the best AI health apps UK 2025 has to offer — from MHRA-regulated symptom checkers to NHS-approved mental health tools. Expert-rated, evidence-based. Read now.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "The best AI health apps UK 2025 — from MHRA-regulated symptom checkers to NHS-approved mental health tools. Expert-rated and evidence-based.",
+      keywords: ["best AI health apps UK 2025", "MHRA approved health apps", "NHS digital health tools 2025", "AI symptom checker UK", "evidence-based health apps UK"],
     },
   },
   {
@@ -1059,16 +1053,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI workplace mental health UK employers 2026: HSE investigations are live, Employment Rights Act is in force. Expert guide to EAP tech, burnout AI, and your legal obligations.",
-      keywords: [
-        "AI workplace mental health UK employers 2026",
-        "UK employer mental health duty of care 2026",
-        "AI burnout detection UK workplace",
-        "EAP technology AI UK 2026",
-        "HSE mental health enforcement UK",
-        "Employment Rights Act 2025 mental health",
-      ],
+      metaDescription: "AI workplace mental health UK 2026: HSE investigations are live. Expert guide to EAP technology, burnout AI tools and your legal obligations.",
+      keywords: ["AI workplace mental health UK 2026", "UK employer mental health duty of care", "AI burnout detection UK", "EAP technology UK 2026", "HSE mental health enforcement UK"],
     },
   },
   {
@@ -1085,16 +1071,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Commercial VRPs UK 2026 are officially live. Discover how cVRPs replace Direct Debits, which sectors are eligible first, Wave 2 expansion, and your step-by-step action plan.",
-      keywords: [
-        "commercial VRP UK 2026 businesses",
-        "variable recurring payments UKPI UK",
-        "cVRP vs Direct Debit UK",
-        "open banking recurring payments UK",
-        "UKPI Wave 1 eligible sectors UK",
-        "pay by bank recurring UK 2026",
-      ],
+      metaDescription: "Commercial VRPs UK 2026 are live. How cVRPs replace Direct Debits, which sectors qualify first, Wave 2 timeline and your action plan.",
+      keywords: ["commercial VRP UK 2026", "variable recurring payments UK", "cVRP vs Direct Debit UK", "open banking recurring payments UK", "UKPI Wave 1 eligible sectors"],
     },
   },
   {
@@ -1111,15 +1089,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Agentic commerce UK payments 2026: AI agents now initiate, authorise and reconcile payments autonomously. Discover what it means, the FCA's response, and your firm's obligations.",
-      keywords: [
-        "agentic commerce UK payments 2026",
-        "agentic AI payments FCA regulation UK",
-        "autonomous AI payments UK businesses",
-        "AI agent payments Consumer Duty UK",
-        "FCA agentic payments regulatory priorities 2026",
-      ],
+      metaDescription: "Agentic commerce UK payments 2026: AI agents now initiate and authorise payments autonomously. What it means, the FCA's response and your obligations.",
+      keywords: ["agentic commerce UK payments 2026", "agentic AI payments FCA regulation", "autonomous AI payments UK", "AI agent payments Consumer Duty UK", "FCA agentic payments 2026"],
     },
   },
   {
@@ -1136,16 +1107,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "The open finance UK FCA roadmap 2026 is published. Discover how pensions, mortgages and SME credit will be transformed by 2030 — and what you need to do right now.",
-      keywords: [
-        "open finance UK FCA roadmap 2026",
-        "FCA open finance strategy 2030",
-        "Data Use and Access Act open finance UK",
-        "open finance mortgages pensions UK",
-        "PRISM taskforce FCA open finance",
-        "open finance SME lending UK 2026",
-      ],
+      metaDescription: "The open finance UK FCA roadmap 2026 is published. How pensions, mortgages and SME credit will be transformed by 2030 and what to do now.",
+      keywords: ["open finance UK FCA roadmap 2026", "FCA open finance strategy 2030", "Data Use Access Act open finance UK", "open finance mortgages pensions UK", "PRISM taskforce FCA open finance"],
     },
   },
   {
@@ -1162,16 +1125,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Digital identity in payments UK 2026 could slash fraud losses. Explore the GOV.UK Wallet, expert-backed strategies and what businesses must do now.",
-      keywords: [
-        "digital identity in payments UK 2026",
-        "GOV.UK Wallet payments",
-        "identity verification fraud UK",
-        "Authorised Push Payment fraud prevention",
-        "digital ID scheme UK",
-        "Confirmation of Payee digital identity",
-      ],
+      metaDescription: "Digital identity in payments UK 2026: how GOV.UK Wallet, DVS and reusable identity will cut the £1.17bn APP fraud bill. Expert guide.",
+      keywords: ["digital identity payments UK 2026", "GOV.UK Wallet payments UK", "DVS digital verification UK", "APP fraud digital identity UK", "reusable digital identity UK"],
     },
   },
   {
@@ -1188,16 +1143,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Real-time treasury management UK 2026 is reshaping corporate liquidity. Discover data-driven strategies, FPS trends and expert guidance to act now.",
-      keywords: [
-        "real-time treasury management UK 2026",
-        "corporate liquidity management UK",
-        "Faster Payments Service treasury",
-        "ISO 20022 reconciliation UK",
-        "cash flow forecasting instant payments",
-        "connected treasury J.P. Morgan 2026",
-      ],
+      metaDescription: "Real-time treasury management UK 2026: how AI, Faster Payments and ISO 20022 let CFOs manage liquidity, FX and fraud in seconds. Expert guide.",
+      keywords: ["real-time treasury management UK", "corporate treasury AI UK 2026", "ISO 20022 treasury UK", "Faster Payments treasury UK", "AI cash management UK 2026"],
     },
   },
   {
@@ -1214,16 +1161,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI financial wellbeing apps UK 2026 are transforming how Britons manage money stress. Discover proven tools, open banking data and expert-backed strategies.",
-      keywords: [
-        "AI financial wellbeing apps UK 2026",
-        "open banking financial health UK",
-        "money stress UK apps",
-        "personalised budgeting apps UK",
-        "FCA Consumer Duty financial wellbeing",
-        "digital money management UK 2026",
-      ],
+      metaDescription: "AI financial wellbeing apps UK 2026 use open banking to automate savings and debt payoff. Expert guide to Plum, Chip, Emma and Snoop.",
+      keywords: ["AI financial wellbeing apps UK 2026", "open banking savings apps UK", "Plum Chip Emma Snoop UK", "AI budgeting app UK 2026", "FCA financial wellbeing technology UK"],
     },
   },
   {
@@ -1240,16 +1179,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "NHS AI scribing UK 2026 is freeing clinicians from admin and transforming patient care. Discover the guidance, registry, pilots and what it means for the NHS.",
-      keywords: [
-        "NHS AI scribing UK 2026",
-        "ambient voice technology NHS",
-        "AI clinical documentation UK",
-        "NHS digital transformation 2026",
-        "MHRA medical device AI health",
-        "NHS AI procurement framework 2026",
-      ],
+      metaDescription: "NHS AI scribing UK 2026: ambient voice technology is reducing admin by 23% and boosting patient time. The definitive guide for clinicians.",
+      keywords: ["NHS AI scribing UK 2026", "ambient voice technology NHS", "AI clinical documentation UK", "NHS DTAC scribing tools", "AI GP notes UK 2026"],
     },
   },
   {
@@ -1266,16 +1197,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/sleep-health.jpg",
     seo: {
-      metaDescription:
-        "AI sleep health apps UK 2026 are targeting a £40bn productivity crisis. Discover proven tools, wearable tech and expert-backed strategies to sleep better.",
-      keywords: [
-        "AI sleep health apps UK 2026",
-        "sleep deprivation UK economy",
-        "digital sleep tracking UK",
-        "wearable sleep technology UK",
-        "CBT-I sleep app UK",
-        "workplace sleep wellbeing UK 2026",
-      ],
+      metaDescription: "AI sleep health apps UK 2026 reviewed: which use CBT-I evidence, what MHRA guidance says and which apps are genuinely worth using.",
+      keywords: ["AI sleep apps UK 2026", "CBT-I sleep app UK", "MHRA digital sleep health", "AI insomnia tracker UK", "NHS sleep support digital UK"],
     },
   },
   {
@@ -1292,16 +1215,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI chronic disease management UK 2026 is transforming care for 15 million patients. Discover NHS virtual wards, proven tools and expert-backed strategies.",
-      keywords: [
-        "AI chronic disease management UK 2026",
-        "NHS virtual wards technology",
-        "remote patient monitoring UK",
-        "long-term conditions NHS AI",
-        "AI preventive healthcare UK",
-        "NHS 10 Year Plan AI chronic care",
-      ],
+      metaDescription: "AI chronic disease management UK 2026: how NHS virtual wards, remote monitoring and predictive AI are transforming care for 15 million patients.",
+      keywords: ["AI chronic disease management UK", "NHS virtual wards AI UK", "remote patient monitoring UK", "AI diabetes COPD UK", "predictive AI chronic disease NHS"],
     },
   },
   {
@@ -1318,16 +1233,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI and the UK loneliness crisis in 2026: 3.9 million chronically lonely adults, MHRA guidance live. Discover proven tools, real risks and expert strategies.",
-      keywords: [
-        "AI and UK loneliness crisis 2026",
-        "AI companion apps UK",
-        "digital mental health tools UK",
-        "MHRA digital health guidance 2026",
-        "loneliness statistics UK 2025",
-        "social prescribing AI UK",
-      ],
+      metaDescription: "AI and the UK loneliness crisis 2026: how AI companions, social prescribing tech and NHS digital tools are reaching 3.8 million isolated people.",
+      keywords: ["AI loneliness UK 2026", "AI companion apps UK", "social prescribing technology UK", "NHS loneliness intervention UK", "AI mental health elderly UK 2026"],
     },
   },
   {
@@ -1371,9 +1278,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI mental health UK tools are transforming NHS care — from chatbots and digital CBT to predictive triage. Discover what works, what's safe, and what's next. Read now.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "AI mental health UK tools are transforming NHS care — from chatbots and digital CBT to predictive triage. What works, what's safe and what's next.",
+      keywords: ["AI mental health UK", "NHS mental health AI tools", "digital CBT UK", "AI therapy chatbot NHS", "mental health technology UK 2026"],
     },
   },
   {
@@ -1390,9 +1296,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI cancer detection UK is transforming NHS screening. Discover how AI is finding breast, bowel, lung and skin cancer earlier — with real survival data. Expert guide.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "AI cancer detection UK is transforming NHS screening. How AI finds breast, bowel, lung and skin cancer earlier — with real survival data.",
+      keywords: ["AI cancer detection UK", "NHS AI cancer screening", "AI breast cancer screening UK", "AI bowel cancer NHS", "AI diagnostics NHS cancer"],
     },
   },
   {
@@ -1409,9 +1314,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/sleep-health.jpg",
     seo: {
-      metaDescription:
-        "Wearable health technology UK is booming — but how accurate are smartwatch ECGs, blood oxygen sensors and AI biometrics? Read the expert, evidence-based guide for UK users.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "Wearable health technology UK: how accurate are smartwatch ECGs and AI biometrics? The expert, evidence-based guide for UK users.",
+      keywords: ["wearable health technology UK", "smartwatch ECG accuracy UK", "Apple Watch health UK", "AI health wearables NHS", "fitness tracker health UK 2026"],
     },
   },
   {
@@ -1428,9 +1332,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI NHS UK healthcare transformation is backed by £10bn in Government funding. Discover the 10 Year Health Plan, HDRS, AI scribing and what it means for you. Read now.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "AI NHS UK healthcare transformation is backed by £10bn. Discover the 10 Year Health Plan, HDRS, AI scribing and what it means for you.",
+      keywords: ["AI NHS UK healthcare 2026", "NHS 10 Year Health Plan AI", "NHS AI transformation strategy", "HDRS NHS data UK", "NHS AI scribing 2026"],
     },
   },
   {
@@ -1447,9 +1350,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI drug discovery UK is cutting clinical trial timelines from years to months. Discover how BenevolentAI, Exscientia and AlphaFold are transforming medicines for UK patients.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "AI drug discovery UK is cutting clinical trial timelines from years to months. How BenevolentAI, Exscientia and AlphaFold transform UK medicines.",
+      keywords: ["AI drug discovery UK", "BenevolentAI UK medicines", "Exscientia AI drug design", "AlphaFold drug discovery UK", "UK biotech AI clinical trials"],
     },
   },
   {
@@ -1466,9 +1368,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "Is your AI symptom checker UK safe to use? We review NHS 111, Ada Health and Babylon against MHRA standards — with evidence-based accuracy data. Read the expert guide.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "Is your AI symptom checker UK safe? We review NHS 111, Ada Health and Babylon against MHRA standards — with evidence-based accuracy data.",
+      keywords: ["AI symptom checker UK safe", "NHS 111 online AI", "Ada Health UK review", "MHRA digital health standards", "AI health app safety UK 2026"],
     },
   },
   {
@@ -1485,9 +1386,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "Predictive AI NHS patient data UK is preventing hospital admissions before they happen. Discover how trusts use early-warning AI to save lives and cut A&E pressure.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "Predictive AI NHS patient data UK is preventing hospital admissions before they happen. How trusts use early-warning AI to save lives and cut A&E pressure.",
+      keywords: ["predictive AI NHS UK", "NHS patient data AI analytics", "AI hospital admissions prevention", "early warning system NHS AI", "NHS AI data analytics UK"],
     },
   },
   {
@@ -1504,9 +1404,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "AI elderly care UK technology is transforming independent living — from fall detection saving £1m a day to dementia monitoring at home. Read the expert evidence guide.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "AI elderly care UK technology transforms independent living — from fall detection saving £1m a day to dementia monitoring at home.",
+      keywords: ["AI elderly care UK", "fall detection technology UK", "AI dementia monitoring UK", "assistive technology elderly UK", "NHS elderly care AI tools 2026"],
     },
   },
   {
@@ -1523,9 +1422,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "BNPL regulation UK 2026 arrives on 15 July. Discover what FCA's new deferred payment credit rules mean for Klarna, Clearpay users and lenders. Expert guide. Read now.",
-      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+      metaDescription: "BNPL regulation UK 2026 arrives on 15 July. What FCA's new deferred payment credit rules mean for Klarna, Clearpay users and lenders.",
+      keywords: ["BNPL regulation UK 2026", "Klarna FCA regulation UK", "buy now pay later UK rules 2026", "FCA deferred payment credit", "BNPL consumer protection UK"],
     },
   },
   {
@@ -1542,9 +1440,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "UK fintech investment 2026 is backed by record data. Discover where VC is flowing, how Mansion House capital unlocks billions, and which sectors lead growth. Read now.",
-      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+      metaDescription: "UK fintech investment 2026: record data revealed. Where VC is flowing, how Mansion House capital unlocks billions and which sectors lead growth.",
+      keywords: ["UK fintech investment 2026", "Mansion House fintech funding UK", "UK fintech VC 2026", "fintech growth sectors UK", "UK startup investment fintech"],
     },
   },
   {
@@ -1561,9 +1458,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "RegTech UK 2026 FCA compliance is being transformed by AI, automation and real-time monitoring. Discover how smart firms are cutting costs and avoiding record fines.",
-      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+      metaDescription: "RegTech UK 2026 FCA compliance is being transformed by AI and automation. How smart firms cut costs and avoid record fines. Expert guide.",
+      keywords: ["RegTech UK 2026", "FCA compliance automation UK", "AI regulatory technology UK", "FCA enforcement AI 2026", "compliance technology UK firms"],
     },
   },
   {
@@ -1580,9 +1476,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Neobanks UK 2026 comparison: Revolut is now a fully licensed bank, Monzo eyes a £6bn IPO, and Starling is regrouping. Expert data-driven guide to which one to choose.",
-      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+      metaDescription: "Neobanks UK 2026 comparison: Revolut is fully licensed, Monzo eyes a major IPO and Starling is regrouping. Data-driven guide to the best choice.",
+      keywords: ["neobanks UK 2026 comparison", "Revolut vs Monzo 2026", "Starling Bank 2026", "Monzo IPO 2026", "best neobank UK 2026 review"],
     },
   },
   {
@@ -1599,9 +1494,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/business-case.jpg",
     seo: {
-      metaDescription:
-        "AI UK jobs market 2026: up to 8 million roles at risk but 3.9 million new AI jobs by 2035. Discover which sectors are most exposed — and what to do right now.",
-      keywords: ["AI", "Jobs", "UK Economy", "Technology"],
+      metaDescription: "AI UK jobs market 2026: up to 8 million roles at risk but 3.9 million new AI jobs by 2035. Which sectors are most exposed and what to do now.",
+      keywords: ["AI UK jobs 2026", "AI job displacement UK", "AI employment impact UK 2026", "jobs at risk from AI UK", "AI new jobs UK economy 2035"],
     },
   },
   {
@@ -1618,9 +1512,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/fintech.jpg",
     seo: {
-      metaDescription:
-        "Generative AI UK financial services FCA rules are live. Discover how banks deploy LLMs, what Consumer Duty and SM&CR require, and your firm's 2026 compliance checklist.",
-      keywords: ["FinTech", "UK Finance", "FCA", "Regulation"],
+      metaDescription: "Generative AI UK financial services: FCA rules are live. How banks deploy LLMs, what Consumer Duty and SM&CR require and your compliance checklist.",
+      keywords: ["generative AI financial services UK", "FCA AI rules 2026 UK", "LLM banking compliance UK", "Consumer Duty AI UK", "SM&CR AI compliance UK"],
     },
   },
   {
@@ -1637,9 +1530,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription:
-        "Are AI therapy apps UK 2026 safe? We review Wysa, Limbic and Kooth against MHRA safety standards and NICE evidence — and expose the real risks of chatbot mental health care.",
-      keywords: ["AI", "NHS", "Digital Health", "UK Healthcare"],
+      metaDescription: "Are AI therapy apps UK 2026 safe? We review Wysa, Limbic and Kooth against MHRA standards and NICE evidence — exposing the real risks.",
+      keywords: ["AI therapy apps UK 2026", "Wysa mental health UK", "Limbic AI therapy review", "MHRA mental health apps UK", "AI counselling safety UK 2026"],
     },
   },
 ];
