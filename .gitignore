@@ -17,6 +17,9 @@ client/public/sitemap.xml
 .env.test.local
 .env.production.local
 
+# Documentation / working notes — never commit to repo
+documentation/
+
 # IDE and editor files
 .vscode/
 .idea/
