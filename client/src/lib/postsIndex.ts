@@ -25,10 +25,10 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "2",
-    title: "How Real-Time Financial Data is Changing Investment Decisions",
+    title: "How Real-Time Financial Data is Changing Investment Decisions in 2026",
     slug: "real-time-financial-data-investment",
     excerpt:
-      "Real-time data combined with AI is revolutionizing how investors make decisions. Learn how to leverage this technology for better returns.",
+      "Retail investors now access the same millisecond market feeds that hedge funds once paid millions for. This guide explains how real-time price data, AI-driven alerts, and open banking APIs are reshaping individual investment decisions — and where the risks lie.",
     author: "Saga",
     date: "2026-01-12",
     category: "Real-Time Finance",
@@ -38,8 +38,8 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/fintech.jpg",
     seo: {
       metaDescription:
-        "Discover how real-time financial data and AI are revolutionizing investment decisions. Learn strategies for leveraging this technology.",
-      keywords: ["real-time financial data", "AI investing", "algorithmic trading", "investment AI"],
+        "How real-time financial data and AI alerts are changing retail investment in 2026 — from millisecond price feeds and open banking APIs to the risks of acting on live data without context.",
+      keywords: ["real-time financial data", "AI investing", "algorithmic trading", "retail investment tools 2026", "open banking investment"],
     },
   },
   {

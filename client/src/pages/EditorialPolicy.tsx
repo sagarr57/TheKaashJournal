@@ -82,7 +82,7 @@ export default function EditorialPolicy() {
                 We do not accept payment for editorial coverage or sponsored reviews. Any sponsored content — if published in future — will be clearly labelled as "Sponsored" at the top of the page and excluded from our regular editorial standards.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                Display advertising on this site is served by Google AdSense. Advertisers have no influence over our editorial content.
+                Display advertising on this site is served by Ezoic, a Google Certified Publishing Partner. Advertisers have no influence over our editorial content.
               </p>
             </section>
 

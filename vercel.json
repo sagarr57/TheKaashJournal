@@ -25,7 +25,7 @@
     {
       "source": "/ads.txt",
       "destination": "https://srv.adstxtmanager.com/19390/thekaashjournal.com",
-      "permanent": false
+      "permanent": true
     }
   ],
   "rewrites": [

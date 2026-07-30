@@ -153,7 +153,7 @@ export default function About() {
                 The Kaash Journal is independently operated. We are not owned by or affiliated with any financial institution, insurance company, debt management firm, or technology company whose products we cover.
               </p>
               <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-                Display advertising on this site is served by Google AdSense. Advertisers have no influence over which topics we cover, how we cover them, or what conclusions we reach.
+                Display advertising on this site is served by Ezoic, a Google Certified Publishing Partner. Advertisers have no influence over which topics we cover, how we cover them, or what conclusions we reach.
               </p>
             </section>
 

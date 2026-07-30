@@ -123,21 +123,20 @@ export default function Disclaimer() {
 
             <div className="bg-amber-50 border border-amber-200 rounded p-5 md:p-6">
               <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">
-                4. Advertising Disclosure (Google AdSense)
+                4. Advertising Disclosure (Ezoic)
               </h2>
               <p className="mb-3">
                 This site displays advertisements served by{" "}
-                <strong>Google AdSense</strong> (publisher ID: ca-pub-5606354728180472). Google
-                and its partners may use cookies and similar technologies to serve ads based on
-                your visits to this and other websites. You can manage ad personalisation in
-                Google&apos;s{" "}
+                <strong>Ezoic</strong>, a Google Certified Publishing Partner. Ezoic and its
+                demand partners may use cookies and similar technologies to serve ads based on
+                your visits to this and other websites. You can manage ad personalisation via{" "}
                 <a
-                  href="https://adssettings.google.com/"
+                  href="https://www.aboutads.info/"
                   className="text-blue-600 hover:underline"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  Ads Settings
+                  aboutads.info
                 </a>{" "}
                 and learn more in our{" "}
                 <a href="/cookie-policy" className="text-blue-600 hover:underline">

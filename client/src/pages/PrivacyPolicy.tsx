@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
     <div className="min-h-screen bg-white">
       <SEO
         title="Privacy Policy"
-        description="Read the privacy policy for The Kaash Journal, including data collection, Google AdSense advertising, cookies, analytics, and your rights under UK GDPR."
+        description="Read the privacy policy for The Kaash Journal, including data collection, Ezoic advertising, cookies, analytics, and your rights under UK GDPR."
         url="/privacy-policy"
       />
       <Header />
@@ -44,7 +44,7 @@ export default function PrivacyPolicy() {
                 <li>To deliver and improve site content and performance</li>
                 <li>To send newsletters and editorial updates when you have opted in</li>
                 <li>To analyse site engagement and optimise user experience</li>
-                <li>To display relevant advertisements via Google AdSense (see Section 4)</li>
+                <li>To display relevant advertisements via Ezoic (see Section 4)</li>
                 <li>To maintain security and prevent abuse</li>
               </ul>
             </div>
@@ -58,33 +58,37 @@ export default function PrivacyPolicy() {
               </p>
               <p>
                 Types of cookies used on this site include: strictly necessary cookies (site function), analytics cookies
-                (Google Analytics), and advertising cookies (Google AdSense).
+                (Google Analytics), and advertising cookies (Ezoic and its demand partners).
               </p>
             </div>
 
             <div>
-              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">4. Google AdSense Advertising</h2>
+              <h2 className="font-oswald text-lg md:text-xl font-bold uppercase mb-2 text-gray-900">4. Advertising — Ezoic</h2>
               <p className="mb-3">
-                This site uses <strong>Google AdSense</strong>, a third-party advertising service operated by Google LLC.
-                Google AdSense uses cookies to serve advertisements based on your prior visits to this and other websites.
+                This site uses <strong>Ezoic</strong>, a Google Certified Publishing Partner, to serve display advertisements.
+                Ezoic and its demand partners use cookies and similar technologies to serve ads based on your prior visits to this
+                and other websites. Ezoic acts as a data processor under UK GDPR and operates its own consent management platform
+                (GatekeeperConsent), which you interact with via the cookie banner on your first visit.
               </p>
               <ul className="list-disc pl-6 space-y-2 mb-3">
-                <li>Google may use the DoubleClick cookie to serve ads across the web based on your browsing history.</li>
-                <li>Google's use of advertising cookies enables it and its partners to serve ads based on your visits to this site and other sites on the internet.</li>
-                <li>We do not control the cookies set by Google AdSense. Google's data practices are governed by the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Privacy Policy</a>.</li>
+                <li>Ezoic may work with Google Ad Exchange, Amazon, and other demand partners to fill ad slots.</li>
+                <li>Advertising cookies are only set after you have given consent via the cookie banner.</li>
+                <li>Ezoic's data practices are governed by the{" "}
+                  <a href="https://www.ezoic.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Ezoic Privacy Policy</a>.
+                </li>
               </ul>
               <p className="mb-3">
-                <strong>Opt out of personalised advertising:</strong> You can opt out of personalised ads from Google by visiting{" "}
-                <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                  Google Ads Settings
-                </a>{" "}
-                or{" "}
+                <strong>Opt out of personalised advertising:</strong> You can opt out via{" "}
                 <a href="https://www.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                   aboutads.info
+                </a>{" "}
+                or{" "}
+                <a href="https://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  youronlinechoices.eu
                 </a>.
               </p>
               <p>
-                Under UK GDPR, personalised advertising cookies are only activated after you have given consent via our cookie banner.
+                Under UK GDPR, personalised advertising cookies are only activated after you have given explicit consent via our cookie banner.
               </p>
             </div>
 

@@ -72,10 +72,13 @@ export default function Blog() {
             <h1 className="font-oswald text-xl sm:text-2xl md:text-3xl font-bold normal-case tracking-tight mb-1.5 md:mb-2 text-gray-900">
               The <span className="text-blue-600">Kaash Journal</span>
             </h1>
-            <p className="text-gray-600 text-sm md:text-base max-w-2xl leading-relaxed mb-3">
-              Long-form guides on AI, fintech, debt, and money psychology—sources linked in the copy so you can verify claims yourself.
+            <p className="text-gray-600 text-sm md:text-base max-w-2xl leading-relaxed mb-2">
+              Long-form guides on AI, fintech, debt management, and money psychology — written for UK readers who want to understand the technology reshaping their finances. Every claim is linked to a primary source so you can verify it yourself.
             </p>
-            <p className="text-gray-500 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            <p className="text-gray-500 text-xs sm:text-sm max-w-2xl leading-relaxed mb-3">
+              We cover five areas: <a href="/category/ai-and-health" className="text-blue-700 hover:underline">AI and Health</a>, <a href="/category/debt-management" className="text-blue-700 hover:underline">Debt Management</a>, <a href="/category/fintech-trends" className="text-blue-700 hover:underline">Fintech Trends</a>, <a href="/category/case-studies" className="text-blue-700 hover:underline">Case Studies</a>, and <a href="/category/real-time-finance" className="text-blue-700 hover:underline">Real-Time Finance</a>. Content is FCA-aware and references UK-specific services where relevant.
+            </p>
+            <p className="text-gray-400 text-xs max-w-2xl leading-relaxed">
               Written by{" "}
               <a href="/author/saga" className="text-blue-700 hover:underline font-medium">Saga</a>{" "}
               and{" "}
