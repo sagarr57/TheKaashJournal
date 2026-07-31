@@ -339,7 +339,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI wearables", "Digital health", "Preventive care", "Privacy"],
     readingTime: 9,
     featured: false,
-    image: "/images/ai-health.jpg",
+    image: "/images/fitness.jpg",
     seo: {
       metaDescription:
         "How AI wearables in 2026 are used for early health signals, AFib screening, and trend detection—plus practical limits and privacy considerations.",
@@ -403,7 +403,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Skin Longevity", "AI Diagnostics", "Biotech", "Skincare", "Regenerative Beauty"],
     readingTime: 9,
     featured: false,
-    image: "/images/ai-health.jpg",
+    image: "/images/fitness.jpg",
     seo: {
       metaDescription:
         "How AI skin diagnostics and biotech ingredients like senolytics and NAD+ boosters are replacing anti-aging with skin longevity — a data-driven approach to cellular health.",
@@ -484,7 +484,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Longevity", "Biological Age", "Epigenetics", "AI Health", "Preventive Health"],
     readingTime: 11,
     featured: true,
-    image: "/images/ai-health.jpg",
+    image: "/images/fitness.jpg",
     seo: {
       metaDescription:
         "What do biological age tests actually measure and can they predict how long you live? A clear guide to epigenetic clocks, AI longevity tools, and what the science says in 2026.",
@@ -1312,7 +1312,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     readingTime: 8,
     featured: false,
-    image: "/images/sleep-health.jpg",
+    image: "/images/fitness.jpg",
     seo: {
       metaDescription: "Wearable health technology UK: how accurate are smartwatch ECGs and AI biometrics? The expert, evidence-based guide for UK users.",
       keywords: ["wearable health technology UK", "smartwatch ECG accuracy UK", "Apple Watch health UK", "AI health wearables NHS", "fitness tracker health UK 2026"],
