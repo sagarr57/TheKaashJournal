@@ -20,11 +20,11 @@ export function PostCard({ post, className }: PostCardProps) {
   return (
     <article className={`group bg-white rounded-2xl border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col ${className || ""}`}>
       {/* Image */}
-      <a href={`/blog/${post.slug}`} className="block relative h-48 overflow-hidden bg-gray-100 shrink-0" onMouseEnter={() => prefetchPost(post.slug)} onFocus={() => prefetchPost(post.slug)}>
+      <a href={`/blog/${post.slug}`} className="block relative aspect-[16/9] overflow-hidden bg-gray-100 shrink-0" onMouseEnter={() => prefetchPost(post.slug)} onFocus={() => prefetchPost(post.slug)}>
         <Image
           src={post.image}
           alt={post.title}
-          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
         />
         {/* Category pill over image */}
         <div className="absolute top-3 left-3">
