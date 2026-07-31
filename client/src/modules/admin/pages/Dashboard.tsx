@@ -37,8 +37,8 @@ const DEFAULT_READING_TIME = 5;
 const CATEGORY_IMAGES: Record<string, string> = {
   "AI and Health":    "/images/ai-health.jpg",
   "Debt Management":  "/images/debt-money.jpg",
-  "Real-Time Finance": "/images/fintech.jpg",
-  "Fintech Trends":   "/images/fintech.jpg",
+  "Real-Time Finance": "/images/investment-charts.jpg",
+  "Fintech Trends":   "/images/investment-charts.jpg",
   "Case Studies":     "/images/business-analytics.jpg",
 };
 
@@ -57,17 +57,25 @@ const PEN_NAME_OPTIONS = [
 ];
 
 const IMAGE_PRESETS = [
-  { label: "AI & Health",  value: "/images/ai-health.jpg" },
-  { label: "Finance",      value: "/images/fintech.jpg" },
-  { label: "Debt",         value: "/images/debt-money.jpg" },
-  { label: "Nutrition",    value: "/images/nutrition.jpg" },
-  { label: "Fitness",      value: "/images/fitness.jpg" },
-  { label: "Sleep",        value: "/images/sleep-health.jpg" },
-  { label: "Wellness",     value: "/images/wellness-mental.jpg" },
-  { label: "Analytics",    value: "/images/business-analytics.jpg" },
-  { label: "Case Study",   value: "/images/business-case.jpg" },
-  { label: "Abstract",     value: "/images/hero-abstract.jpg" },
-  { label: "Data Viz",     value: "/images/data-visualization-bg.jpg" },
+  { label: "AI & Health",      value: "/images/ai-health.jpg" },
+  { label: "Finance/Fintech",  value: "/images/fintech.jpg" },
+  { label: "Investment Charts", value: "/images/investment-charts.jpg" },
+  { label: "Fraud / Security", value: "/images/fraud-security.jpg" },
+  { label: "Payments Mobile",  value: "/images/payments-mobile.jpg" },
+  { label: "Open Banking",     value: "/images/open-banking.jpg" },
+  { label: "Regulation / Law", value: "/images/regulation-law.jpg" },
+  { label: "Neobank App",      value: "/images/neobank-app.jpg" },
+  { label: "ESG / Green",      value: "/images/esg-green.jpg" },
+  { label: "Crypto / Blockchain", value: "/images/crypto-blockchain.jpg" },
+  { label: "Debt",             value: "/images/debt-money.jpg" },
+  { label: "Nutrition",        value: "/images/nutrition.jpg" },
+  { label: "Fitness",          value: "/images/fitness.jpg" },
+  { label: "Sleep",            value: "/images/sleep-health.jpg" },
+  { label: "Wellness",         value: "/images/wellness-mental.jpg" },
+  { label: "Analytics",        value: "/images/business-analytics.jpg" },
+  { label: "Case Study",       value: "/images/business-case.jpg" },
+  { label: "Abstract",         value: "/images/hero-abstract.jpg" },
+  { label: "Data Viz",         value: "/images/data-visualization-bg.jpg" },
 ];
 
 const getInitialPostForm = () => {
