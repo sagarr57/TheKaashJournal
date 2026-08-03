@@ -93,7 +93,20 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-6 md:pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-sm text-gray-600">
-          <p className="text-center md:text-left">&copy; {currentYear} The Kaash Journal. All rights reserved.</p>
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p className="text-center md:text-left">&copy; {currentYear} The Kaash Journal. All rights reserved.</p>
+            <p className="text-xs text-gray-400">
+              Powered by{" "}
+              <a
+                href="https://dravyxai.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-gray-800 transition-colors font-medium"
+              >
+                Dravyx AI
+              </a>
+            </p>
+          </div>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <a href="/privacy-policy" className="hover:text-gray-900 transition-colors">
               Privacy Policy
