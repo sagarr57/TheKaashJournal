@@ -52,24 +52,11 @@ function PageLoader() {
   );
 }
 
-function useEzoicPageRefresh() {
-  const [location] = useLocation();
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.ezstandalone?.cmd) {
-      window.ezstandalone.cmd.push(function () {
-        window.ezstandalone.showAds();
-      });
-    }
-  }, [location]);
-}
-
 function Router() {
   // Track page views automatically
   usePageTracking();
   // Track link clicks automatically
   useLinkTracking();
-  // Refresh Ezoic ads on every route change (required for SPAs)
-  useEzoicPageRefresh();
   
   return (
     <Suspense fallback={<PageLoader />}>

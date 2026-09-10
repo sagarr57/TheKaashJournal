@@ -48,7 +48,7 @@ export function SEO({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="author" content={author} />
-      <meta name="robots" content={noIndex ? "noindex, follow" : "index, follow"} />
+      <meta name="robots" content={noIndex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
       <meta name="language" content="en-GB" />
       {tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
 
