@@ -13,6 +13,15 @@
   "redirects": [
     {
       "source": "/(.*)",
+      "has": [
+        { "type": "host", "value": "thekaashjournal.com" },
+        { "type": "header", "key": "x-forwarded-proto", "value": "http" }
+      ],
+      "destination": "https://www.thekaashjournal.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "thekaashjournal.com" }],
       "destination": "https://www.thekaashjournal.com/$1",
       "permanent": true
