@@ -2,6 +2,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 import bcrypt from 'bcryptjs';
+import { authenticator } from 'otplib';
 
 export default async function handler(
   req: VercelRequest,
@@ -29,7 +30,7 @@ export default async function handler(
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
-    const { username, password } = req.body;
+    const { username, password, totpToken } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({ error: 'Username and password are required' });
@@ -54,6 +55,17 @@ export default async function handler(
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
+    // 2FA check — if enabled and no token provided, signal client to ask for it
+    if (user.totp_enabled && user.totp_secret) {
+      if (!totpToken) {
+        return res.json({ success: true, requires2fa: true });
+      }
+      const isValidToken = authenticator.verify({ token: totpToken, secret: user.totp_secret });
+      if (!isValidToken) {
+        return res.status(401).json({ error: 'Invalid 2FA code. Try again.' });
+      }
+    }
+
     // Update last login
     await supabase
       .from('admin_users')
@@ -63,6 +75,7 @@ export default async function handler(
     // Return success (don't return password hash)
     return res.json({
       success: true,
+      requires2fa: false,
       user: {
         id: user.id,
         username: user.username,

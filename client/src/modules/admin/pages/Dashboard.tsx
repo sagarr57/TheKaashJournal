@@ -10,9 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
-import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw, Pencil, Trash2, Plus, X, Upload, ImageIcon } from "lucide-react";
+import { Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw, Pencil, Trash2, Plus, X, Upload, ImageIcon, EyeOff, Shield, KeyRound, User, CheckCircle2, XCircle } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { categories } from "@/lib/categories";
+import { getUsername } from "../auth";
 import {
   fetchAnalyticsOverview,
   fetchVisitorsData,
@@ -146,6 +147,338 @@ function PagerBar({ total, page, perPage, onPageChange }: { total: number; page:
           className="px-2 py-1 text-xs border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
         >Next →</button>
       </div>
+    </div>
+  );
+}
+
+const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || '/api';
+
+function SettingsPanel() {
+  const username = getUsername();
+
+  // Change Password state
+  const [cpCurrent, setCpCurrent] = useState("");
+  const [cpNew, setCpNew] = useState("");
+  const [cpConfirm, setCpConfirm] = useState("");
+  const [showCpCurrent, setShowCpCurrent] = useState(false);
+  const [showCpNew, setShowCpNew] = useState(false);
+  const [showCpConfirm, setShowCpConfirm] = useState(false);
+  const [cpLoading, setCpLoading] = useState(false);
+
+  // 2FA state
+  const [twoFaPassword, setTwoFaPassword] = useState("");
+  const [showTwoFaPassword, setShowTwoFaPassword] = useState(false);
+  const [twoFaStep, setTwoFaStep] = useState<"idle" | "setup" | "disable">("idle");
+  const [twoFaSecret, setTwoFaSecret] = useState("");
+  const [twoFaQrUrl, setTwoFaQrUrl] = useState("");
+  const [twoFaToken, setTwoFaToken] = useState("");
+  const [twoFaDisableToken, setTwoFaDisableToken] = useState("");
+  const [twoFaDisablePassword, setTwoFaDisablePassword] = useState("");
+  const [showTwoFaDisablePassword, setShowTwoFaDisablePassword] = useState(false);
+  const [twoFaLoading, setTwoFaLoading] = useState(false);
+  const [twoFaEnabled, setTwoFaEnabled] = useState<boolean | null>(null);
+
+  // Fetch current 2FA status
+  const fetchTwoFaStatus = async () => {
+    if (!username) return;
+    try {
+      const { data } = await supabase
+        .from('admin_users')
+        .select('totp_enabled')
+        .eq('username', username)
+        .single();
+      setTwoFaEnabled(data?.totp_enabled ?? false);
+    } catch { setTwoFaEnabled(false); }
+  };
+
+  useState(() => { fetchTwoFaStatus(); });
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (cpNew !== cpConfirm) { toast.error("New passwords don't match"); return; }
+    if (cpNew.length < 8) { toast.error("Password must be at least 8 characters"); return; }
+    setCpLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/change-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, currentPassword: cpCurrent, newPassword: cpNew }),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Failed to change password'); return; }
+      toast.success("Password changed successfully");
+      setCpCurrent(""); setCpNew(""); setCpConfirm("");
+    } catch { toast.error("Request failed"); }
+    finally { setCpLoading(false); }
+  };
+
+  const handleSetup2FA = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setTwoFaLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/setup-2fa`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password: twoFaPassword }),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Setup failed'); return; }
+      setTwoFaSecret(data.secret);
+      setTwoFaQrUrl(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.otpauthUrl)}`);
+      setTwoFaStep("setup");
+    } catch { toast.error("Request failed"); }
+    finally { setTwoFaLoading(false); }
+  };
+
+  const handleVerify2FA = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setTwoFaLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/verify-2fa`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, token: twoFaToken }),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Verification failed'); return; }
+      toast.success("2FA enabled successfully!");
+      setTwoFaStep("idle"); setTwoFaPassword(""); setTwoFaToken(""); setTwoFaSecret(""); setTwoFaQrUrl("");
+      setTwoFaEnabled(true);
+    } catch { toast.error("Request failed"); }
+    finally { setTwoFaLoading(false); }
+  };
+
+  const handleDisable2FA = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setTwoFaLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/disable-2fa`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password: twoFaDisablePassword, token: twoFaDisableToken }),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Failed to disable 2FA'); return; }
+      toast.success("2FA disabled");
+      setTwoFaStep("idle"); setTwoFaDisablePassword(""); setTwoFaDisableToken("");
+      setTwoFaEnabled(false);
+    } catch { toast.error("Request failed"); }
+    finally { setTwoFaLoading(false); }
+  };
+
+  const PasswordInput = ({
+    value, onChange, show, onToggle, placeholder, id,
+  }: { value: string; onChange: (v: string) => void; show: boolean; onToggle: () => void; placeholder?: string; id?: string }) => (
+    <div className="relative">
+      <input
+        id={id}
+        type={show ? "text" : "password"}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        required
+        className="w-full border border-gray-300 px-3 py-2 pr-10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="button"
+        onClick={onToggle}
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+        tabIndex={-1}
+      >
+        {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+      </button>
+    </div>
+  );
+
+  return (
+    <div className="space-y-6">
+      {/* Account Info */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <User className="w-5 h-5 text-blue-600" /> Account
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+            <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg uppercase flex-shrink-0">
+              {username.charAt(0) || "A"}
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">{username || "Admin"}</p>
+              <p className="text-sm text-gray-500">The Kaash Journal Admin</p>
+            </div>
+            <div className="ml-auto">
+              {twoFaEnabled === true && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> 2FA On
+                </span>
+              )}
+              {twoFaEnabled === false && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700">
+                  <XCircle className="w-3.5 h-3.5" /> 2FA Off
+                </span>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Change Password */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <KeyRound className="w-5 h-5 text-blue-600" /> Change Password
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleChangePassword} className="space-y-4 max-w-md">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Current Password</label>
+              <PasswordInput value={cpCurrent} onChange={setCpCurrent} show={showCpCurrent} onToggle={() => setShowCpCurrent(!showCpCurrent)} placeholder="Enter current password" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">New Password</label>
+              <PasswordInput value={cpNew} onChange={setCpNew} show={showCpNew} onToggle={() => setShowCpNew(!showCpNew)} placeholder="At least 8 characters" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Confirm New Password</label>
+              <PasswordInput value={cpConfirm} onChange={setCpConfirm} show={showCpConfirm} onToggle={() => setShowCpConfirm(!showCpConfirm)} placeholder="Repeat new password" />
+              {cpNew && cpConfirm && cpNew !== cpConfirm && (
+                <p className="text-xs text-red-500 flex items-center gap-1"><XCircle className="w-3 h-3" /> Passwords don't match</p>
+              )}
+              {cpNew && cpConfirm && cpNew === cpConfirm && cpConfirm.length >= 8 && (
+                <p className="text-xs text-green-600 flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Passwords match</p>
+              )}
+            </div>
+            <Button type="submit" disabled={cpLoading || cpNew !== cpConfirm || cpNew.length < 8} className="rounded-lg">
+              {cpLoading ? "Updating…" : "Update Password"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      {/* Two-Factor Authentication */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Shield className="w-5 h-5 text-blue-600" /> Two-Factor Authentication
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-100 rounded-xl">
+            <Shield className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-gray-800">Authenticator App (TOTP)</p>
+              <p className="text-xs text-gray-500 mt-0.5">Use Google Authenticator, Authy, or any TOTP app. Adds an extra layer of security on every login.</p>
+            </div>
+          </div>
+
+          {twoFaEnabled === null && <p className="text-sm text-gray-400">Loading 2FA status…</p>}
+
+          {/* 2FA not enabled — show setup form */}
+          {twoFaEnabled === false && twoFaStep === "idle" && (
+            <form onSubmit={handleSetup2FA} className="space-y-4 max-w-md">
+              <p className="text-sm text-gray-600">Enter your password to begin 2FA setup.</p>
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Your Password</label>
+                <PasswordInput value={twoFaPassword} onChange={setTwoFaPassword} show={showTwoFaPassword} onToggle={() => setShowTwoFaPassword(!showTwoFaPassword)} placeholder="Confirm your password" />
+              </div>
+              <Button type="submit" disabled={twoFaLoading || !twoFaPassword} className="rounded-lg">
+                {twoFaLoading ? "Setting up…" : "Set Up 2FA"}
+              </Button>
+            </form>
+          )}
+
+          {/* QR Code step */}
+          {twoFaEnabled === false && twoFaStep === "setup" && (
+            <div className="space-y-5 max-w-md">
+              <div className="p-4 bg-gray-50 border border-gray-200 rounded-xl space-y-3">
+                <p className="text-sm font-semibold text-gray-800">Step 1 — Scan this QR code</p>
+                <p className="text-xs text-gray-500">Open your authenticator app and scan the QR code below.</p>
+                <div className="flex justify-center py-2">
+                  <img src={twoFaQrUrl} alt="2FA QR Code" className="w-48 h-48 rounded-lg border border-gray-200" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-1">Or enter manually:</p>
+                  <code className="block w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 text-xs font-mono text-gray-700 break-all select-all">
+                    {twoFaSecret}
+                  </code>
+                </div>
+              </div>
+              <form onSubmit={handleVerify2FA} className="space-y-3">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Step 2 — Enter verification code</label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    maxLength={6}
+                    value={twoFaToken}
+                    onChange={(e) => setTwoFaToken(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    placeholder="000 000"
+                    required
+                    className="w-full border border-gray-300 px-4 py-3 rounded-lg text-xl font-mono tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="flex gap-3">
+                  <Button type="button" variant="outline" onClick={() => { setTwoFaStep("idle"); setTwoFaPassword(""); }} className="rounded-lg">Cancel</Button>
+                  <Button type="submit" disabled={twoFaLoading || twoFaToken.length !== 6} className="rounded-lg">
+                    {twoFaLoading ? "Verifying…" : "Enable 2FA"}
+                  </Button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* 2FA enabled — show disable option */}
+          {twoFaEnabled === true && twoFaStep === "idle" && (
+            <div className="space-y-4 max-w-md">
+              <div className="flex items-center gap-2 text-sm text-green-700 font-medium">
+                <CheckCircle2 className="w-4 h-4" /> Two-factor authentication is active on your account.
+              </div>
+              <Button
+                variant="outline"
+                onClick={() => setTwoFaStep("disable")}
+                className="rounded-lg border-red-300 text-red-600 hover:bg-red-50"
+              >
+                Disable 2FA
+              </Button>
+            </div>
+          )}
+
+          {twoFaEnabled === true && twoFaStep === "disable" && (
+            <form onSubmit={handleDisable2FA} className="space-y-4 max-w-md">
+              <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                This will remove 2FA protection from your account. You'll need your password and a valid authenticator code.
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Your Password</label>
+                <PasswordInput value={twoFaDisablePassword} onChange={setTwoFaDisablePassword} show={showTwoFaDisablePassword} onToggle={() => setShowTwoFaDisablePassword(!showTwoFaDisablePassword)} placeholder="Enter your password" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Authenticator Code</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={twoFaDisableToken}
+                  onChange={(e) => setTwoFaDisableToken(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                  placeholder="000 000"
+                  required
+                  className="w-full border border-gray-300 px-4 py-2.5 rounded-lg text-lg font-mono tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-red-400"
+                />
+              </div>
+              <div className="flex gap-3">
+                <Button type="button" variant="outline" onClick={() => { setTwoFaStep("idle"); setTwoFaDisablePassword(""); setTwoFaDisableToken(""); }} className="rounded-lg">Cancel</Button>
+                <Button type="submit" disabled={twoFaLoading || twoFaDisableToken.length !== 6 || !twoFaDisablePassword} className="rounded-lg bg-red-600 hover:bg-red-700 text-white">
+                  {twoFaLoading ? "Disabling…" : "Confirm Disable 2FA"}
+                </Button>
+              </div>
+            </form>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }
@@ -669,7 +1002,7 @@ function AdminDashboard() {
             <TabsTrigger value="subscribers">Subscribers</TabsTrigger>
             <TabsTrigger value="tracking">Tracking Data</TabsTrigger>
             <TabsTrigger value="posts">Posts</TabsTrigger>
-            <TabsTrigger value="settings" className="hidden lg:block">Settings</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
           </div>
 
@@ -1596,17 +1929,7 @@ function AdminDashboard() {
 
           {/* Settings Tab */}
           <TabsContent value="settings" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Settings</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12 text-gray-500">
-                  <p>Settings coming soon</p>
-                  <p className="text-sm mt-2">Configure analytics, integrations, and preferences</p>
-                </div>
-              </CardContent>
-            </Card>
+            <SettingsPanel />
           </TabsContent>
         </Tabs>
       </main>
