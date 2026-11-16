@@ -25,7 +25,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "2",
-    title: "How Real-Time Financial Data is Changing Investment Decisions in 2026",
+    title: "How Real-Time Financial Data Is Changing Investing",
     slug: "real-time-financial-data-investment",
     excerpt:
       "Retail investors now access the same millisecond market feeds that hedge funds once paid millions for. This guide explains how real-time price data, AI-driven alerts, and open banking APIs are reshaping individual investment decisions — and where the risks lie.",
@@ -63,7 +63,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "4",
-    title: "The Rise of AI-Powered Fintech Startups: What You Need to Know",
+    title: "The Rise of AI-Powered Fintech Startups: What to Know",
     slug: "ai-fintech-startups-2026",
     excerpt:
       "How AI shows up in lending, wealth apps, fraud detection, and support—and what to verify before you trust a startup with your money.",
@@ -139,7 +139,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "8",
-    title: "Paying down a large balance: a composite teaching example (not a verified news story)",
+    title: "Paying Down a Large Balance: A Composite Teaching Example",
     slug: "case-study-ai-debt-payoff-50000",
     excerpt:
       "A fictional-but-realistic path: full debt list, one weekly budgeting habit, avalanche vs snowball, automated minimums, and when to call free UK advisers—not a verified household story.",
@@ -158,7 +158,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "9",
-    title: "When Debt Takes Over Your Headspace (and How to Steady the Wheel)",
+    title: "Debt Stress: When Debt Takes Over Your Headspace",
     slug: "debt-stress-mindset-practical-steps",
     excerpt:
       "Money worries can crowd out everything else. Here is a calmer way to understand what is happening emotionally — and a practical path back toward clarity.",
@@ -177,7 +177,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "10",
-    title: "Loan Repayments Feel Relentless. Here Is How to Take the Pressure Down",
+    title: "Loan Repayments Feel Relentless? How to Ease the Pressure",
     slug: "loan-repayment-stress-seven-approaches",
     excerpt:
       "Fixed monthly payments can feel like a treadmill. These approaches focus on communication, structure, and small buffers — not willpower alone.",
@@ -196,7 +196,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "11",
-    title: "A Debt Collector Has Called. Pause, Verify, Then Decide Your Next Move",
+    title: "A Debt Collector Has Called: Pause, Verify, Then Decide",
     slug: "debt-collector-call-uk-verify-rights",
     excerpt:
       "Unexpected calls about money you may or may not owe are unsettling. This guide walks through verification, records, and where to get trustworthy help.",
@@ -215,7 +215,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "12",
-    title: "IVAs in Plain English: Who They Suit, What They Cost You, and What to Ask First",
+    title: "IVAs in Plain English: Who They Suit and What They Cost",
     slug: "iva-uk-explained-trade-offs",
     excerpt:
       "Individual Voluntary Arrangements are widely advertised. This piece explains the mechanics, typical trade-offs, and how to get advice that is not selling you a product.",
@@ -234,7 +234,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "13",
-    title: "Several Loans at Once? A Straightforward Way to Tidy the Mess",
+    title: "Several Loans at Once? A Simple Way to Tidy the Mess",
     slug: "multiple-loans-strategy-consolidation-pitfalls",
     excerpt:
       "More than one repayment each month is mentally expensive. Here is how to rank debts, when consolidation helps, and the habits that undo good plans.",
@@ -272,7 +272,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "15",
-    title: "How to Build a Debt Payoff Plan in 60 Minutes (Without Fancy Tools)",
+    title: "How to Build a Debt Payoff Plan in 60 Minutes",
     slug: "build-debt-payoff-plan-in-60-minutes",
     excerpt:
       "You do not need complex apps to start. This one-hour planning method helps you map balances, priorities, and realistic monthly actions.",
@@ -291,7 +291,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "16",
-    title: "Best Emergency Loan Alternatives in 2026: Ranked by Cost and Speed",
+    title: "Best Emergency Loan Alternatives 2026: By Cost and Speed",
     slug: "best-emergency-loan-alternatives-2026",
     excerpt:
       "A practical ranking of emergency cash options by speed, total cost, and repayment risk—plus red flags to avoid before signing any high-cost loan.",
@@ -310,7 +310,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "17",
-    title: "Wall Street in Your Pocket: Can an AI Co-Pilot Beat the Market?",
+    title: "Wall Street in Your Pocket: Can AI Beat the Market?",
     slug: "wall-street-in-your-pocket-ai-copilot-beat-market",
     excerpt:
       "AI can speed up research and portfolio checks, but it cannot erase market risk. A practical 2026 guide to using AI investing tools without overpromising returns.",
@@ -329,7 +329,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "18",
-    title: "The Sentinel on Your Wrist: How AI Wearables Are Predicting Illness Before You Feel It",
+    title: "AI Wearables: Predicting Illness Before You Feel It",
     slug: "ai-wearables-predicting-illness-2026",
     excerpt:
       "AI wearables are shifting from step tracking to early-warning health signals. A practical look at what is promising, what is overhyped, and what privacy risks matter.",
@@ -348,7 +348,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "19",
-    title: "Beyond the Food Pyramid: How AI and Your Microbiome Are Redefining the Way We Eat",
+    title: "AI and Your Microbiome: The New Precision Nutrition",
     slug: "ai-microbiome-precision-nutrition-2026",
     excerpt:
       "Precision nutrition is moving from generic diet rules to personalised responses. Here is what AI, CGM data, and microbiome analysis can do—and what they still cannot.",
@@ -367,7 +367,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "20",
-    title: "The Dawn of the Health Agent: Why 2026 Is the Year of Proactive Wellness Planning",
+    title: "AI Health Agents: 2026 and Proactive Wellness Planning",
     slug: "ai-health-agent-proactive-wellness-2026",
     excerpt:
       "AI health agents now merge wearable data, bloodwork, and your calendar to act as 24/7 wellness concierges — shifting from passive tracking to proactive intervention before burnout arrives.",
@@ -393,7 +393,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "21",
-    title: "The End of Anti-Aging: How AI and Biotech Are Ushering in the Era of Skin Longevity",
+    title: "Skin Longevity: How AI and Biotech Are Replacing Anti-Aging",
     slug: "ai-skin-longevity-biotech-2026",
     excerpt:
       "The beauty industry has retired 'anti-aging' in favour of skin longevity. AI diagnostics and biotech ingredients like senolytics and NAD+ boosters are redefining skincare as cellular health science.",
@@ -420,7 +420,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "22",
-    title: "The Rise of AI Nutritionists: How Artificial Intelligence Is Changing Diet and Meal Planning",
+    title: "AI Nutritionists: How AI Is Changing Diet and Meal Planning",
     slug: "ai-nutritionist-meal-planning-2026",
     excerpt:
       "Manual calorie counting is over. AI nutritionists in 2026 integrate wearables, CGM data, and grocery apps to create fully automated, bio-individual meal plans that evolve with your physiology.",
@@ -447,7 +447,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "23",
-    title: "The 3 AM Therapist: Is AI the Cure for Our Mental Health Crisis or a Digital Band-Aid?",
+    title: "The 3 AM Therapist: Is AI a Mental Health Cure or Band-Aid?",
     slug: "ai-mental-health-digital-therapist-2026",
     excerpt:
       "Millions are turning to AI chatbots for 24/7 emotional support. But can an algorithm truly empathise? A balanced look at AI therapy's real benefits, ethical risks, and the hybrid model reshaping mental healthcare in 2026.",
@@ -474,7 +474,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "24",
-    title: "Longevity Science and AI in 2026: What Biological Age Testing Really Means for How Long You Live",
+    title: "Longevity Science and AI: What Biological Age Tests Mean",
     slug: "longevity-science-biological-age-ai-2026",
     excerpt:
       "Biological age tests now claim to predict your health trajectory years in advance. We break down the science behind epigenetic clocks, what the results actually mean, and how AI is turning longevity data into personalised action plans.",
@@ -501,7 +501,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "25",
-    title: "Sleep Optimization Technology in 2026: Why Right Now Is the Best Time in History to Finally Fix Your Sleep",
+    title: "Sleep Optimization Technology in 2026: Fix Your Sleep",
     slug: "sleep-optimization-technology-ai-2026",
     excerpt:
       "Sleep trackers have evolved from step counters to clinical-grade monitors that detect apnoea, analyse sleep architecture, and generate personalised recovery plans. Here is what the technology can and cannot do for your nights.",
@@ -528,7 +528,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "26",
-    title: "The Gut-Brain Axis in 2026: What Your Microbiome Is Doing to Your Mind, Your Mood, and Your Health",
+    title: "The Gut-Brain Axis: How Your Microbiome Affects Your Mood",
     slug: "gut-brain-axis-microbiome-mental-health-2026",
     excerpt:
       "The gut-brain axis is no longer fringe science. Microbiome research now links your digestive bacteria to anxiety, depression, cognitive performance, and immune function — and AI-powered gut tests are making personalised intervention possible.",
@@ -555,7 +555,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "27",
-    title: "AI Diagnostics and Preventive Healthcare: How Artificial Intelligence Is Catching Disease Years Before Traditional Medicine Would",
+    title: "AI Diagnostics: Catching Disease Years Earlier",
     slug: "ai-diagnostics-preventive-healthcare-2026",
     excerpt:
       "AI diagnostic models are detecting cancer, heart disease, and neurological conditions from scans, blood panels, and wearable data before symptoms appear. A practical look at where the technology stands, what the NHS is trialling, and what you can do today.",
@@ -582,7 +582,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "30",
-    title: "Digital Detox and Intentional Tech Use in 2026: Why the Healthiest People Know Exactly When to Put It All Down",
+    title: "Digital Detox and Intentional Tech Use: A 2026 Guide",
     slug: "digital-detox-intentional-tech-use-2026",
     excerpt:
       "The same technology driving AI health breakthroughs is also engineered to hijack your attention. A research-backed guide to distinguishing tools that serve your biology from platforms that extract from it — and the practical strategies for taking back control.",
@@ -636,7 +636,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "32",
-    title: "Blockchain Meets AI: The Real-World Case Studies Proving This Combination Is Finally Delivering Genuine Financial Value",
+    title: "Blockchain Meets AI: Case Studies in Real Financial Value",
     slug: "blockchain-ai-case-studies-financial-value-2026",
     excerpt:
       "Four documented deployments where blockchain and AI are producing measurable financial outcomes — from JP Morgan's smart contract auditing to HSBC's trade finance fraud prevention and Chainalysis blockchain forensics.",
@@ -663,7 +663,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "29",
-    title: "AI Fitness Coaching in 2026: Why Your AI Personal Trainer Knows Your Body Better Than You Do",
+    title: "AI Fitness Coaching 2026: What an AI Trainer Can Do",
     slug: "ai-fitness-coaching-personal-trainer-2026",
     excerpt:
       "Static workout programs fail because they cannot adapt to your biology in real time. In 2026, AI coaching platforms connected to wearable data are changing that — building programs around your daily HRV, recovery score, and movement patterns rather than a fixed schedule.",
@@ -825,7 +825,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "36",
-    title: "Voice Banking and Conversational AI in 2026: How Financial Institutions Are Using LLMs to Replace Call Centers",
+    title: "Voice Banking 2026: LLMs Replacing Bank Call Centres",
     slug: "voice-banking-conversational-ai-2026",
     excerpt:
       "Conversational AI powered by large language models is dismantling the hated phone menu — Bank of America's Erica has handled 2 billion interactions; Wells Fargo, NatWest, and Monzo are all accelerating. A practical guide to what's real, what the economics are, and what the limits remain.",
@@ -852,7 +852,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "35",
-    title: "Agentic Finance in 2026: How AI Agents Are Now Autonomously Managing Your Money While You Sleep",
+    title: "Agentic Finance 2026: AI Agents That Manage Your Money",
     slug: "agentic-finance-ai-2026",
     excerpt:
       "Agentic AI in finance doesn't wait for questions — it negotiates bills, optimises cash flow, and automates business expense processing autonomously. A practical guide to Rocket Money, Monarch Money, Ramp, and the open banking infrastructure making it possible.",
@@ -879,7 +879,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "34",
-    title: "Fintech and the Gig Economy in 2026: How AI Is Finally Building the Financial Products That Freelancers and Creators Actually Need",
+    title: "Fintech for the Gig Economy: AI Products for Freelancers",
     slug: "fintech-gig-economy-ai-2026",
     excerpt:
       "The gig economy has five million self-employed UK workers and tens of millions globally — but the financial system still wasn't built for them. AI fintech is fixing that with income smoothing, cash flow credit underwriting, and automated tax provisioning.",
@@ -906,7 +906,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "33",
-    title: "Climate Fintech and ESG Investing AI in 2026: How Machine Learning Is Building Portfolios That Actually Mean What They Say",
+    title: "Climate Fintech and ESG Investing: How AI Builds Portfolios",
     slug: "climate-fintech-esg-investing-ai-2026",
     excerpt:
       "AI is solving ESG investing's credibility problem — satellite imagery, NLP analysis of corporate disclosures, and continuous scoring are replacing greenwashing with verifiable data. A practical guide to the platforms changing sustainable finance.",
@@ -951,7 +951,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "43",
-    title: "New Payments Architecture UK: What It Means for Your Business",
+    title: "New Payments Architecture UK: What It Means for Business",
     slug: "new-payments-architecture-uk",
     excerpt:
       "New Payments Architecture UK: What Every Founder and Business Owner Needs to Know",
@@ -1005,7 +1005,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "46",
-    title: "Real-Time Credit Decisioning UK: How Lenders Approve in Seconds",
+    title: "Real-Time Credit Decisioning UK: Approval in Seconds",
     slug: "real-time-credit-decisioning-uk",
     excerpt:
       "Real-Time Credit Decisioning UK: How FCA-Regulated Lenders Are Approving Loans in Seconds",
@@ -1060,7 +1060,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "49",
-    title: "Commercial VRPs UK 2026: What Every Business Needs to Know Now",
+    title: "Commercial VRPs UK 2026: What Every Business Should Know",
     slug: "commercial-vrp-uk-2026-businesses",
     excerpt:
       "Commercial Variable Recurring Payments (cVRPs) went live in the UK in Q1 2026 — the most significant change to UK payment infrastructure since Faster Payments. Instant settlement, real-time funds availability checks, and a consumer trust model that beats Direct Debit. Here is everything UK businesses need to know.",
@@ -1078,7 +1078,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "50",
-    title: "Agentic Commerce UK Payments 2026: When AI Agents Pay for You",
+    title: "Agentic Commerce UK 2026: When AI Agents Pay for You",
     slug: "agentic-commerce-uk-payments-2026",
     excerpt:
       "Agentic AI was the number one theme at PLS London 2026 — and it is already live in UK banking, treasury, and retail. AI agents are now searching, comparing, initiating, and reconciling payments without human input. The FCA has acknowledged existing regulation may not be sufficient. What UK businesses must do now.",
@@ -1096,7 +1096,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "51",
-    title: "Open Finance UK FCA Roadmap 2026: What It Means for Your Money",
+    title: "Open Finance UK: The FCA Roadmap and Your Money (2026)",
     slug: "open-finance-uk-fca-roadmap-2026",
     excerpt:
       "On 14 April 2026, the FCA published its Open Finance roadmap to 2030 — backed by the Data (Use and Access) Act 2025. Pensions, mortgages, SME credit, and insurance data sharing are all in scope. The first scheme framework arrives Q4 2026. Everything you need to know.",
@@ -1240,7 +1240,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "28",
-    title: "Stress, Burnout, and the Nervous System: How AI Is Finally Giving Us Tools That Actually Work",
+    title: "Stress, Burnout and the Nervous System: AI Tools That Work",
     slug: "stress-burnout-nervous-system-ai-2026",
     excerpt:
       "Chronic stress and burnout are measurable physiological states, not just feelings. In 2026, AI-powered biometric tools can detect nervous system dysregulation before you consciously register it — and guide you back to balance with personalised precision.",
@@ -1267,7 +1267,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "59",
-    title: "AI Mental Health UK: Can Technology Help Solve the NHS Crisis?",
+    title: "AI Mental Health UK: Can Tech Help Solve the NHS Crisis?",
     slug: "ai-mental-health-uk",
     excerpt:
       "An estimated 1.7 million people are currently on NHS mental health waiting lists in England — and latest projections from the British Medical Association suggest the true figure of unmet need is…",
@@ -1285,7 +1285,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "60",
-    title: "AI Cancer Detection UK: How NHS Doctors Are Finding It Earlier",
+    title: "AI Cancer Detection UK: How the NHS Is Finding It Earlier",
     slug: "ai-cancer-detection-uk",
     excerpt:
       "AI Cancer Detection UK: How NHS Doctors Are Finding Cancer Earlier — and Saving More Lives",
@@ -1303,7 +1303,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "61",
-    title: "Wearable Health Technology UK: What Your Device Is Telling You",
+    title: "Wearable Health Tech UK: What Your Device Is Telling You",
     slug: "wearable-health-technology-uk",
     excerpt:
       "Wearable Health Technology UK: What Your Device Is Really Telling You — and When to Take It Seriously",
@@ -1321,7 +1321,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "62",
-    title: "AI NHS UK Healthcare Transformation: The £10bn Plan Explained",
+    title: "AI in the NHS: The £10bn Healthcare Plan Explained",
     slug: "ai-nhs-uk-healthcare-transformation",
     excerpt:
       "The NHS operates at a scale that is difficult to comprehend. With a £192 billion annual budget, approximately 1.5 million staff, and around 600 million patient contacts every year across GP,…",
@@ -1339,7 +1339,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "63",
-    title: "AI Drug Discovery UK: How Biotech Is Getting Medicines Faster",
+    title: "AI Drug Discovery UK: How Biotech Gets Medicines Faster",
     slug: "ai-drug-discovery-uk",
     excerpt:
       "AI Drug Discovery UK: How Biotech Is Delivering New Medicines to Patients Faster Than Ever",
@@ -1357,7 +1357,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "64",
-    title: "AI Symptom Checker UK: Are They Safe, Accurate and Regulated?",
+    title: "AI Symptom Checkers UK: Safe, Accurate and Regulated?",
     slug: "ai-symptom-checker-uk-safe",
     excerpt:
       "In a single month in April 2024, 661,987 NHS 111 online sessions were completed — generating outcomes ranging from ambulance dispatch to self-care advice for hundreds of thousands of UK adults who…",
@@ -1375,7 +1375,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "65",
-    title: "Predictive AI NHS Patient Data UK: Stopping Admissions Before They Happen",
+    title: "Predictive AI in the NHS: Stopping Admissions Early",
     slug: "predictive-ai-nhs-patient-data-uk",
     excerpt:
       "Predictive AI and NHS Patient Data: How Live Data Is Preventing Hospital Admissions Across the UK",
@@ -1429,7 +1429,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "68",
-    title: "UK Fintech Investment 2026: Where Is the Money Going This Year?",
+    title: "UK Fintech Investment 2026: Where Is the Money Going?",
     slug: "uk-fintech-investment-2026",
     excerpt:
       "The UK retained its position as Europe’s number one and the world’s second-largest fintech investment destination in 2025, attracting $3.6 billion across 534 deals — more than the next five European…",
@@ -1447,7 +1447,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "69",
-    title: "RegTech UK 2026 FCA Compliance: How AI Is Transforming Regulation",
+    title: "RegTech UK 2026: How AI Is Transforming FCA Compliance",
     slug: "regtech-uk-2026-fca-compliance",
     excerpt:
       "RegTech UK 2026 FCA Compliance: How AI and Automation Are Transforming the Way Firms Regulate Themselves",
@@ -1465,7 +1465,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "70",
-    title: "Neobanks UK 2026 Comparison: Monzo, Starling and Revolut Ranked",
+    title: "Neobanks UK 2026: Monzo, Starling and Revolut Ranked",
     slug: "neobanks-uk-2026-comparison",
     excerpt:
       "A decade after Starling Bank launched and began what became one of the most disruptive periods in UK retail banking history, the neobanks UK 2026 comparison looks markedly different from any previous…",
@@ -1502,7 +1502,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "72",
-    title: "Generative AI UK Financial Services FCA: Benefits, Risks, Rules",
+    title: "Generative AI in UK Finance: Risks and What the FCA Expects",
     slug: "generative-ai-uk-financial-services-fca",
     excerpt:
       "Generative AI in UK Financial Services: Benefits, Risks, and What the FCA Expects in 2026",
@@ -1558,7 +1558,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "75",
     slug: "ai-money-management-uk-banks-2026",
-    title: "How AI Is Quietly Changing the Way Britons Manage Their Money",
+    title: "How AI Is Quietly Changing How Britons Manage Money",
     excerpt: "From fraud detection to auto-budgeting, AI is already inside your UK banking app. Here's how it works in 2026 — and where to stay cautious.",
     author: "Saga",
     date: "2026-07-04",
@@ -1593,7 +1593,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "77",
     slug: "debt-options-guide-uk-2026",
-    title: "Struggling With Debt? A Plain-English Guide to Your Options in the UK (2026)",
+    title: "Struggling With Debt? Your UK Options in Plain English",
     excerpt: "A clear, judgement-free walkthrough of every major UK debt option — DMP, IVA, DRO, bankruptcy — and where to get free help today.",
     author: "Saga",
     date: "2026-07-10",
@@ -1610,7 +1610,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "78",
     slug: "ai-chatbot-therapy-uk-mental-health-2026",
-    title: "AI and Mental Health: Can Chatbot Therapy Really Help UK Users?",
+    title: "Can Chatbot Therapy Really Help? AI and UK Mental Health",
     excerpt: "AI mental health apps are booming in the UK — but what do they actually do well, and where do they fall short of real support?",
     author: "Kash",
     date: "2026-07-13",
@@ -1627,7 +1627,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "79",
     slug: "buy-now-pay-later-bnpl-uk-guide-2026",
-    title: "Buy Now Pay Later in the UK: Convenience, Debt Risk and What's Changing",
+    title: "Buy Now Pay Later UK: Convenience, Debt Risk and Changes",
     excerpt: "BNPL is everywhere at UK checkouts. Here's how it actually works, why regulators are stepping in, and how to use it without it becoming a debt problem.",
     author: "Saga",
     date: "2026-07-16",
@@ -1679,7 +1679,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "82",
     slug: "ai-fraud-detection-uk-banks-explained-2026",
-    title: "How UK Banks Use AI to Detect Fraud — and What It Means for You",
+    title: "How UK Banks Use AI to Detect Fraud and What It Means",
     excerpt: "UK banks stop fraud in real time using AI. Here's how the systems work, why your card sometimes gets blocked unfairly, and what rights you have.",
     author: "Saga",
     date: "2026-07-25",
@@ -1696,7 +1696,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "83",
     slug: "credit-score-myths-uk-2026",
-    title: "Credit Score Myths in the UK: What Actually Moves the Needle in 2026",
+    title: "Credit Score Myths UK 2026: What Actually Moves the Needle",
     excerpt: "Checking your score damages it? Closing old cards helps? Most UK credit score advice online is outdated or wrong. Here's what genuinely moves the needle.",
     author: "Saga",
     date: "2026-07-28",
