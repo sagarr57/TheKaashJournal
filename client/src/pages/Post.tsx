@@ -266,7 +266,9 @@ export default function Post() {
     },
     inLanguage: "en-GB",
     ...(postMeta.category ? { articleSection: postMeta.category } : {}),
-    ...(postMeta.tags?.length ? { keywords: postMeta.tags.join(", ") } : {}),
+    ...((postMeta as any).keywords?.length || postMeta.tags?.length
+      ? { keywords: [...((postMeta as any).keywords || []), ...(postMeta.tags || [])].join(", ") }
+      : {}),
   };
 
   const breadcrumbSchema = {
@@ -317,7 +319,7 @@ export default function Post() {
     <div className="min-h-screen bg-white">
       <SEO
         title={postMeta.title}
-        description={postMeta.excerpt}
+        description={(postMeta as any).metaDescription || postMeta.excerpt}
         image={postMeta.image}
         url={`/blog/${postMeta.slug}`}
         type="article"
@@ -328,7 +330,7 @@ export default function Post() {
             ? new Date(postMeta.updated).toISOString()
             : undefined
         }
-        tags={postMeta.tags}
+        tags={[...((postMeta as any).keywords || []), ...(postMeta.tags || [])]}
         category={postMeta.category}
       />
 

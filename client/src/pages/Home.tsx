@@ -8,6 +8,42 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 import { useState, useEffect, useMemo } from "react";
 import { fetchPublishedPostIndex } from "@/lib/blog-data";
 import { postIndex } from "@/lib/postsIndex";
+import { SITE_URL } from "@/lib/config";
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "The Kaash Journal",
+  url: "https://www.thekaashjournal.com",
+  description: "In-depth guides on AI, fintech, debt management, and personal finance for UK readers. FCA-aware, source-linked, jargon-free.",
+  inLanguage: "en-GB",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://www.thekaashjournal.com/blog?q={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "The Kaash Journal",
+  url: "https://www.thekaashjournal.com",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://www.thekaashjournal.com/images/Kaash_logo.png",
+    width: 512,
+    height: 512,
+  },
+  description: "Independent UK publication covering AI, fintech, debt management, and personal finance.",
+  foundingDate: "2025",
+  areaServed: "GB",
+  knowsAbout: ["Artificial Intelligence", "Financial Technology", "Debt Management", "Personal Finance", "Open Banking", "NHS Digital Health"],
+  sameAs: [
+    "https://www.linkedin.com/in/sagar-mamindla/",
+    "https://www.linkedin.com/in/kaushika-binod/",
+  ],
+};
 
 export default function Home() {
   const [posts, setPosts] = useState(postIndex);
@@ -39,7 +75,10 @@ export default function Home() {
         title="AI, Health & Fintech — Practical Guides for Everyone"
         description="In-depth guides on AI, health tech, fintech, and personal finance. Source-linked, jargon-free articles for curious readers everywhere."
         url="/"
+        tags={["AI health UK", "fintech UK", "debt management UK", "open banking UK", "NHS AI technology", "personal finance UK", "FCA regulation"]}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       <Header />
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">

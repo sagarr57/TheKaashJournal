@@ -59,9 +59,10 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Blog — Money, AI & Fintech Articles"
-        description="Long-form articles on AI, fintech, debt, and personal finance—with sources linked in the text."
+        title="All Articles — AI, Fintech, Debt & Health Guides"
+        description="117+ in-depth guides on AI tools in the NHS, UK debt management (IVAs, DROs), open banking, FCA regulation, and fintech case studies. Source-linked and FCA-aware."
         url="/blog"
+        tags={["AI health UK", "debt management UK", "open banking", "FCA regulation", "fintech trends UK", "IVA guide UK", "NHS AI technology", "neobank comparison"]}
       />
       <Header />
 
