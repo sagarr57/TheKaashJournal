@@ -5,6 +5,7 @@ import { PostMeta } from "@/components/blog/PostMeta";
 import { PostEditorialFooter } from "@/components/blog/PostEditorialFooter";
 import { YmylDisclaimer } from "@/components/blog/YmylDisclaimer";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
+import { TopicHubBox } from "@/components/blog/TopicHubBox";
 import { getPostBySlug } from "@/lib/blog-utils";
 import { useParams } from "wouter";
 import ReactMarkdown from "react-markdown";
@@ -580,6 +581,8 @@ export default function Post() {
                   </ReactMarkdown>
                 </div>
               </div>
+
+              <TopicHubBox slug={postMeta.slug} />
 
               {/* Related Posts */}
               <RelatedPosts currentPost={postMeta as any} />

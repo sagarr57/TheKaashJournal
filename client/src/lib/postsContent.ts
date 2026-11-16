@@ -490,6 +490,17 @@ Pick one app, connect honestly through proper consent flows, review weekly, and 
 
 Choosing a robo-advisor is less like picking a phone colour and more like picking a gym: the best one is the programme you will actually show up to when markets look ugly. In plain English, a robo-advisor usually means you answer a risk questionnaire, the platform assigns a **model portfolio** (typically low-cost index funds), and software handles **rebalancing** and **dividend reinvestment** on a schedule. Some now add natural-language chat interfaces, tax-year reminders, and AI-generated commentary about your portfolio — features that range from genuinely useful to marketing wallpaper.
 
+## Robo-advisor comparison: what to compare at a glance
+
+| What to compare | Why it matters |
+|---|---|
+| Total annual cost | Platform fee plus fund charges (OCF) plus any dealing fees; small differences compound over decades |
+| Tax wrappers | Whether a Stocks and Shares ISA, Lifetime ISA or SIPP is available |
+| Portfolio design | Which funds are used, how often it rebalances, and whether ESG options exist |
+| Cash handling | A default cash buffer can leave you less invested than the label suggests |
+| Risk questionnaire | It should ask about time horizon and loss tolerance, and explain the portfolio you are given |
+| Protection | Confirm the firm on the FCA register and check FSCS cover before funding |
+
 ## The UK robo-advisor market: key players
 
 The major platforms UK investors typically compare:

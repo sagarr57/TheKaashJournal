@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import { categories } from "../client/src/lib/categories";
 import { getAuthorProfilePath } from "../client/src/lib/authors";
 import { AUTHORS } from "../client/src/lib/author-profiles";
+import { getTopicHub, topicHubs } from "../client/src/lib/topic-hubs";
 import { buildCanonicalUrl, buildPageTitle, DEFAULT_SITE_URL, normalizeSiteUrl, trimDescription } from "../shared/site-url";
 import { loadPublishedPosts, type PublishedPost } from "./lib/load-posts";
 
@@ -130,7 +131,26 @@ function listingPage(head: PageHead, heading: string, posts: PublishedPost[]) {
   );
 }
 
-function postPage(post: PublishedPost, related: PublishedPost[]) {
+function topicHubHtml(post: PublishedPost, all: PublishedPost[]) {
+  const topic = getTopicHub(post.slug);
+  if (!topic) return "";
+  const link = (slug: string) => {
+    const target = all.find((p) => p.slug === slug);
+    return target ? `<a href="/blog/${slug}">${esc(target.title)}</a>` : "";
+  };
+  const hub = topic.hub !== post.slug ? link(topic.hub) : "";
+  const others = topic.members.filter((slug) => slug !== post.slug).map(link).filter(Boolean).slice(0, 6);
+  const resources = topic.resources.map((r) => `<a href="${esc(r.url)}" rel="noopener noreferrer">${esc(r.name)}</a>`).join(" · ");
+  return (
+    `<section class="mt-8"><h2 class="font-oswald text-xl font-bold mb-3">More on ${esc(topic.label)}</h2>` +
+    (hub ? `<p>Start with the main guide: ${hub}</p>` : "") +
+    (others.length ? `<ul>${others.map((item) => `<li>${item}</li>`).join("")}</ul>` : "") +
+    (resources ? `<p class="text-sm">Check the facts with official sources: ${resources}</p>` : "") +
+    `</section>`
+  );
+}
+
+function postPage(post: PublishedPost, related: PublishedPost[], all: PublishedPost[]) {
   const route = `/blog/${post.slug}`;
   const url = buildCanonicalUrl(SITE_URL, route);
   const published = isoDate(post.date);
@@ -201,6 +221,7 @@ function postPage(post: PublishedPost, related: PublishedPost[]) {
         `<p class="text-lg text-gray-700 mb-6">${esc(post.excerpt)}</p>` +
         `<div class="prose prose-sm md:prose-base max-w-none">${contentHtml}</div>` +
         `</article>` +
+        topicHubHtml(post, all) +
         (related.length
           ? `<section class="mt-12"><h2 class="font-oswald text-2xl font-bold mb-4">More in ${esc(post.category)}</h2>${postList(related)}</section>`
           : "") +
@@ -309,8 +330,12 @@ for (const [slug, profile] of Object.entries(AUTHORS)) {
 }
 for (const post of posts) {
   if (!post.content) continue;
-  postPage(post, posts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 5));
+  postPage(post, posts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 5), posts);
 }
+
+const knownSlugs = new Set(posts.map((post) => post.slug));
+const unknownHubSlugs = topicHubs.flatMap((topic) => [topic.hub, ...topic.members]).filter((slug) => !knownSlugs.has(slug));
+if (unknownHubSlugs.length) console.warn(`[topic-hubs] slugs with no published post: ${unknownHubSlugs.join(", ")}`);
 
 writeFileSync(path.join(distDir, "rss.xml"), rssFeed(posts), "utf8");
 
