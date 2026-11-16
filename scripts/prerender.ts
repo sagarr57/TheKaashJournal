@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { categories } from "../client/src/lib/categories";
 import { getAuthorProfilePath } from "../client/src/lib/authors";
-import { buildCanonicalUrl, DEFAULT_SITE_URL, normalizeSiteUrl } from "../shared/site-url";
+import { buildCanonicalUrl, buildPageTitle, DEFAULT_SITE_URL, normalizeSiteUrl } from "../shared/site-url";
 import { loadPublishedPosts, type PublishedPost } from "./lib/load-posts";
 
 const SITE_URL = normalizeSiteUrl(process.env.SITE_URL || process.env.VITE_SITE_URL || DEFAULT_SITE_URL);
@@ -44,7 +44,7 @@ type PageHead = {
 // data-rh marks tags as owned by react-helmet, so the app replaces them instead of duplicating them.
 function headTags({ route, title, description, image = DEFAULT_IMAGE, type = "website", extra = "" }: PageHead) {
   const canonical = buildCanonicalUrl(SITE_URL, route === "/" ? "" : route);
-  const fullTitle = `${title} | ${SITE_NAME}`;
+  const fullTitle = buildPageTitle(title, SITE_NAME);
   const rh = 'data-rh="true"';
   return {
     fullTitle,

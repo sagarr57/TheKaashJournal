@@ -29,4 +29,10 @@ export function buildCanonicalUrl(siteUrl: string, path = ""): string {
   return `${base}${normalizedPath}`;
 }
 
+/** Adds the site name to a page title only when it fits in the ~60 characters Google shows. */
+export function buildPageTitle(title: string, siteName = "The Kaash Journal"): string {
+  const withSite = `${title} | ${siteName}`;
+  return title.includes(siteName) || withSite.length > 60 ? title : withSite;
+}
+
 export { DEFAULT_SITE_URL };

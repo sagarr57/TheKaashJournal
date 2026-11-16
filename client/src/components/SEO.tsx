@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { buildCanonicalUrl } from "@shared/site-url";
+import { buildCanonicalUrl, buildPageTitle } from "@shared/site-url";
 import { SITE_URL } from "@/lib/config";
 
 interface SEOProps {
@@ -38,7 +38,7 @@ export function SEO({
   category,
   noIndex = false,
 }: SEOProps) {
-  const fullTitle = title ? `${title} | The Kaash Journal` : defaultTitle;
+  const fullTitle = title ? buildPageTitle(title) : defaultTitle;
   const canonicalUrl = buildCanonicalUrl(SITE_URL, url ?? "");
   const fullImage = image.startsWith("http") ? image : `${SITE_URL}${image}`;
 
