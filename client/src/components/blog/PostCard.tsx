@@ -68,6 +68,7 @@ export function PostCard({ post, className }: PostCardProps) {
             <a
               key={tag}
               href={`/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
+              rel="nofollow"
               className="text-[11px] bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-gray-700 px-2 py-0.5 rounded-full border border-gray-100 transition-colors"
               aria-label={`View articles tagged ${tag}`}
             >
