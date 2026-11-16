@@ -6,8 +6,13 @@ import type { BlogPost } from "../../client/src/lib/types";
 
 export type PublishedPost = BlogPost & { content: string };
 
+// Slugs that vercel.json redirects elsewhere: keep them out of the sitemap, feed and prerendered pages.
+const REDIRECTED_SLUGS = new Set(["best-ai-health-apps-uk-2025"]);
+
 function repoPosts(): PublishedPost[] {
-  return postIndex.map((post) => ({ ...post, content: postContentBySlug[post.slug] || "" }));
+  return postIndex
+    .filter((post) => !REDIRECTED_SLUGS.has(post.slug))
+    .map((post) => ({ ...post, content: postContentBySlug[post.slug] || "" }));
 }
 
 /** Published posts as the live site lists them: Supabase when reachable, the in-repo copy otherwise. */
@@ -33,7 +38,7 @@ export async function loadPublishedPosts(): Promise<PublishedPost[]> {
     if (error || !data) throw new Error(error?.message || "no data returned");
 
     console.log(`[posts] Loaded ${data.length} published posts from Supabase`);
-    return data.map((row: any) => ({
+    return data.filter((row: any) => !REDIRECTED_SLUGS.has(row.slug)).map((row: any) => ({
       id: String(row.id),
       title: row.title,
       slug: row.slug,

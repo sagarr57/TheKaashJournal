@@ -27,6 +27,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/best-ai-health-apps-uk-2025",
+      "destination": "/blog/best-ai-health-apps-uk-2026",
+      "permanent": true
+    },
+    {
       "source": "/:path+/",
       "destination": "/:path+",
       "permanent": true

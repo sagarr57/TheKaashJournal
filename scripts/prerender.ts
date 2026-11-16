@@ -9,6 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { categories } from "../client/src/lib/categories";
 import { getAuthorProfilePath } from "../client/src/lib/authors";
+import { AUTHORS } from "../client/src/lib/author-profiles";
 import { buildCanonicalUrl, buildPageTitle, DEFAULT_SITE_URL, normalizeSiteUrl } from "../shared/site-url";
 import { loadPublishedPosts, type PublishedPost } from "./lib/load-posts";
 
@@ -279,6 +280,30 @@ for (const page of staticPages) {
     shell(`<h1 class="font-oswald text-3xl md:text-4xl font-bold mb-3">${esc(page.title)}</h1><p class="text-gray-600">${esc(page.description)}</p>`)
   );
 }
+for (const [slug, profile] of Object.entries(AUTHORS)) {
+  const route = `/author/${slug}`;
+  const description = `${profile.name} is a contributor at The Kaash Journal. ${profile.bio[0]}`;
+  const person = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: profile.name,
+    jobTitle: profile.role,
+    url: buildCanonicalUrl(SITE_URL, route),
+    sameAs: [profile.linkedin],
+    worksFor: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+  };
+  writePage(
+    { route, title: `${profile.name} — ${profile.role}`, description },
+    shell(
+      `<h1 class="font-oswald text-3xl md:text-4xl font-bold mb-1">${esc(profile.name)}</h1>` +
+        `<p class="text-blue-600 font-medium mb-6">${esc(profile.role)}</p>` +
+        profile.bio.map((paragraph) => `<p class="text-gray-700 mb-4">${esc(paragraph)}</p>`).join("") +
+        `<h2 class="font-oswald text-2xl font-bold mt-10 mb-4">Articles by ${esc(profile.name)}</h2>` +
+        postList(posts.filter((post) => post.author?.trim().toLowerCase() === slug)) +
+        jsonLd(person)
+    )
+  );
+}
 for (const post of posts) {
   if (!post.content) continue;
   postPage(post, posts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 5));
@@ -286,4 +311,4 @@ for (const post of posts) {
 
 writeFileSync(path.join(distDir, "rss.xml"), rssFeed(posts), "utf8");
 
-console.log(`Prerendered ${posts.length} posts, ${categories.length} categories, ${staticPages.length + 2} pages and rss.xml`);
+console.log(`Prerendered ${posts.length} posts, ${categories.length} categories, ${Object.keys(AUTHORS).length} authors, ${staticPages.length + 2} pages and rss.xml`);

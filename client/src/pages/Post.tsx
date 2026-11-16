@@ -206,6 +206,7 @@ export default function Post() {
   if (!postMeta) {
     return (
       <div className="min-h-screen bg-white">
+        <SEO title="Article Not Found" noIndex={true} />
         <Header />
         <main id="main-content" className="container pt-24 sm:pt-28 pb-20 text-center">
           <h1 className="font-oswald text-2xl sm:text-3xl font-bold mb-3">Article Not Found</h1>
@@ -357,18 +358,8 @@ export default function Post() {
       <Header />
 
       <main id="main-content" className="pt-6 sm:pt-8 md:pt-10">
-        {/* Hero Image */}
-        <div className="w-full h-56 sm:h-72 md:h-96 lg:h-[420px] overflow-hidden bg-gray-200">
-          <Image
-            src={postMeta.image}
-            alt={postMeta.title}
-            className="w-full h-full object-cover"
-            priority={true}
-          />
-        </div>
-
         {/* Article Container */}
-        <div className="container py-6 md:py-10">
+        <div className="container pb-6 md:pb-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
             <article className="lg:col-span-3 max-w-3xl">
 
@@ -393,13 +384,29 @@ export default function Post() {
               </nav>
 
               {/* Title */}
-              <h1 className="font-oswald text-2xl sm:text-3xl lg:text-[2rem] font-bold normal-case tracking-tight mb-4 md:mb-5 leading-tight text-gray-900">
+              <h1 className="font-oswald text-2xl sm:text-3xl lg:text-[2rem] font-bold normal-case tracking-tight mb-3 md:mb-4 leading-tight text-gray-900">
                 {postMeta.title}
               </h1>
+
+              {postMeta.excerpt && (
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4 md:mb-5">
+                  {postMeta.excerpt}
+                </p>
+              )}
 
               {/* Meta Information */}
               <div className="mb-5 md:mb-6 pb-5 md:pb-6 border-b border-gray-200">
                 <PostMeta post={postMeta as any} />
+              </div>
+
+              {/* Hero Image */}
+              <div className="w-full h-44 sm:h-60 md:h-72 overflow-hidden rounded-lg bg-gray-200 mb-5 md:mb-6">
+                <Image
+                  src={postMeta.image}
+                  alt={postMeta.title}
+                  className="w-full h-full object-cover"
+                  priority={true}
+                />
               </div>
 
               {/* YMYL Disclaimer */}
@@ -550,6 +557,9 @@ export default function Post() {
                 </div>
               </div>
 
+              {/* Related Posts */}
+              <RelatedPosts currentPost={postMeta as any} />
+
               {/* Ezoic post-content ad */}
               <EzoicAd className="my-6" />
 
@@ -611,9 +621,6 @@ export default function Post() {
 
               {/* Ezoic end-of-article ad */}
               <EzoicAd className="mb-6" />
-
-              {/* Related Posts */}
-              <RelatedPosts currentPost={postMeta as any} />
             </article>
 
             {/* Sidebar */}
