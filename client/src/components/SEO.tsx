@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { buildCanonicalUrl, buildPageTitle } from "@shared/site-url";
+import { buildCanonicalUrl, buildPageTitle, trimDescription } from "@shared/site-url";
 import { SITE_URL } from "@/lib/config";
 
 interface SEOProps {
@@ -25,7 +25,7 @@ const defaultImage = "/images/Kaash_logo.png";
 
 export function SEO({
   title,
-  description = defaultDescription,
+  description: rawDescription = defaultDescription,
   image = defaultImage,
   imageWidth = 1200,
   imageHeight = 630,
@@ -39,6 +39,7 @@ export function SEO({
   noIndex = false,
 }: SEOProps) {
   const fullTitle = title ? buildPageTitle(title) : defaultTitle;
+  const description = trimDescription(rawDescription);
   const canonicalUrl = buildCanonicalUrl(SITE_URL, url ?? "");
   const fullImage = image.startsWith("http") ? image : `${SITE_URL}${image}`;
 

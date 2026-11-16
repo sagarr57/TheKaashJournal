@@ -101,7 +101,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "6",
-    title: "Comparing AI Robo-Advisors: Which One is Best for You?",
+    title: "Robo-Advisor Comparison UK: Fees, Portfolios and Features",
     slug: "ai-robo-advisors-comparison",
     excerpt:
       "What robo-advisors actually do, how to compare fees and ISAs, when chat features help, and UK platforms to research—Moneybox, Vanguard, interactive investor—plus the FCA register.",
@@ -114,7 +114,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
-        "Robo-advisor comparison framework: costs, portfolios, cash drag, ISAs, risk questionnaires, UK platform links, and when you need a human adviser—not hype.",
+        "Robo-advisor comparison framework: costs, portfolios, cash drag, ISAs, risk questionnaires, UK platform links, and when you need a human adviser.",
       keywords: ["robo-advisor comparison", "best robo-advisors", "AI investment", "automated investing"],
     },
   },
@@ -609,7 +609,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "31",
-    title: "Robo-Advisors vs Human Financial Advisors: The Real Comparison Nobody Is Having Honestly in 2026",
+    title: "Robo-Advisors vs Human Financial Advisers: Honest Comparison",
     slug: "robo-advisors-vs-human-financial-advisors-2026",
     excerpt:
       "The robo vs human debate has been framed as a binary for too long. In 2026 the honest answer is a framework — matching your financial complexity to the right combination of automated efficiency and human expertise.",
@@ -622,7 +622,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
-        "Robo-advisor or human financial advisor? An honest, evidence-based comparison of costs, capabilities, and limitations — and a practical framework for making the right choice in 2026.",
+        "Robo-advisor or human adviser? An evidence-based comparison of costs, strengths and limits, plus a simple framework for choosing in 2026.",
       keywords: [
         "robo advisor vs human advisor 2026",
         "best robo advisor 2026",
@@ -771,7 +771,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "38",
-    title: "The Fraud Detection Arms Race: How Mastercard's AI Processes 143 Billion Transactions and Catches Fraud in 50 Milliseconds",
+    title: "How Mastercard's AI Catches Fraud in 50 Milliseconds",
     slug: "mastercard-ai-fraud-detection-decision-intelligence",
     excerpt:
       "Every card tap triggers a 50-millisecond AI decision across 143 billion annual transactions. A detailed case study of Mastercard's Decision Intelligence, Decision Intelligence Pro's generative AI layer, behavioural biometrics, and the organised criminal networks it is competing against.",
@@ -784,7 +784,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
-        "How Mastercard's Decision Intelligence AI catches fraud in 50 milliseconds across 143 billion annual transactions — a case study in generative AI, behavioural biometrics, and the payment fraud arms race.",
+        "A case study of Mastercard Decision Intelligence: how AI scores 143 billion transactions a year for fraud, and what it means for UK cardholders.",
       keywords: [
         "Mastercard AI fraud detection",
         "Decision Intelligence Mastercard",
@@ -798,7 +798,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "37",
-    title: "From Near Collapse to AI Pioneer: The Deutsche Bank and Google Cloud Transformation",
+    title: "Deutsche Bank and Google Cloud: AI Turnaround Case Study",
     slug: "deutsche-bank-google-cloud-ai-transformation",
     excerpt:
       "In 2019, Deutsche Bank was losing billions and cutting 18,000 jobs. That same year it signed a billion-dollar Google Cloud partnership. By 2024 it was reporting decade-high profits. A detailed case study in legacy bank AI transformation — what they built, what it cost, and what every financial institution can learn.",
@@ -811,7 +811,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-case.jpg",
     seo: {
       metaDescription:
-        "How Deutsche Bank went from four years of losses to decade-high profits using Google Cloud and NVIDIA AI infrastructure. A practical case study in legacy bank digital transformation.",
+        "How Deutsche Bank went from four years of losses to decade-high profits with Google Cloud and NVIDIA AI. What changed, what it cost, and the lessons.",
       keywords: [
         "Deutsche Bank AI transformation",
         "Deutsche Bank Google Cloud case study",
@@ -1041,7 +1041,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "48",
-    title: "AI Workplace Mental Health UK Employers 2026: What You Must Do",
+    title: "AI and Workplace Mental Health: UK Employer Duties 2026",
     slug: "ai-workplace-mental-health-uk-employers-2026",
     excerpt:
       "Work-related stress is the leading driver of UK workplace ill health, affecting 964,000 workers. The Employment Rights Act 2025 is in force, HSE enforcement is live, and AI-powered EAP tech is maturing fast. A definitive guide to what every UK employer must do in 2026.",
@@ -1053,7 +1053,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription: "AI workplace mental health UK 2026: HSE investigations are live. Expert guide to EAP technology, burnout AI tools and your legal obligations.",
+      metaDescription:
+        "What UK employers must do on workplace mental health in 2026: HSE duties, the Employment Rights Act, and where AI wellbeing tools help or add risk.",
       keywords: ["AI workplace mental health UK 2026", "UK employer mental health duty of care", "AI burnout detection UK", "EAP technology UK 2026", "HSE mental health enforcement UK"],
     },
   },
@@ -1482,7 +1483,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "71",
-    title: "AI UK Jobs Market 2026: Which Roles Are at Risk and Which Will Grow?",
+    title: "AI and UK Jobs 2026: Roles Most at Risk and Set to Grow",
     slug: "ai-uk-jobs-market-2026-risk-growth",
     excerpt:
       "Up to 8 million UK jobs could be lost to artificial intelligence in a worst-case scenario, according to the Institute for Public Policy Research (IPPR) — making the current moment one of the most…",
@@ -1494,7 +1495,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/business-case.jpg",
     seo: {
-      metaDescription: "AI UK jobs market 2026: up to 8 million roles at risk but 3.9 million new AI jobs by 2035. Which sectors are most exposed and what to do now.",
+      metaDescription:
+        "Government data puts 7.1 million UK workers at risk from AI automation. Which roles are most exposed, which are growing, and what it means for you.",
       keywords: ["AI UK jobs 2026", "AI job displacement UK", "AI employment impact UK 2026", "jobs at risk from AI UK", "AI new jobs UK economy 2035"],
     },
   },
@@ -1538,7 +1540,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "74",
     slug: "iva-vs-debt-management-plan-uk-2026",
-    title: "IVA vs Debt Management Plan: Which UK Debt Solution Actually Fits Your Situation in 2026?",
+    title: "IVA vs Debt Management Plan (DMP): Which Suits You?",
     excerpt: "Confused between an IVA and a Debt Management Plan? A plain-English breakdown of how each works, who they suit, and the questions to ask before you choose.",
     author: "Saga",
     date: "2026-07-01",
@@ -1548,7 +1550,8 @@ export const postIndex: PostIndexItem[] = [
     featured: true,
     image: "/images/debt-money.jpg",
     seo: {
-      metaDescription: "Confused between an IVA and a Debt Management Plan? A plain-English breakdown of how each works, who they suit, and what to ask before you choose.",
+      metaDescription:
+        "IVA or DMP? A plain-English comparison of how each works, what each really costs, who they suit, and what to ask before you choose.",
       keywords: ["IVA vs debt management plan UK", "IVA or DMP", "individual voluntary arrangement UK", "debt management plan explained", "best debt solution UK 2026"],
     },
   },
@@ -1572,7 +1575,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "76",
     slug: "best-budgeting-savings-apps-uk-2026",
-    title: "Fintech Apps UK 2026: Best Budgeting & Savings Tools Compared",
+    title: "Best Budgeting and Savings Apps UK 2026, Compared",
     excerpt: "A no-nonsense comparison of the UK's leading budgeting and savings apps — who they're best for, what they cost, and what to check before you link your bank account.",
     author: "Saga",
     date: "2026-07-07",
@@ -1582,7 +1585,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/neobank-app.jpg",
     seo: {
-      metaDescription: "A no-nonsense comparison of the UK's leading budgeting and savings apps in 2026 — who they're best for, what they cost, and what to check before linking your bank account.",
+      metaDescription:
+        "Monzo, Starling, Revolut, Plum, Chip, Moneybox, Emma and Snoop compared: who each suits, what it costs, and what to check before linking your bank.",
       keywords: ["best budgeting apps UK 2026", "best savings apps UK", "fintech apps UK compared", "money management apps UK", "Monzo Starling Revolut comparison"],
     },
   },
@@ -1640,7 +1644,7 @@ export const postIndex: PostIndexItem[] = [
   {
     id: "80",
     slug: "ai-burnout-wellness-tech-uk-workplace-2026",
-    title: "AI Burnout: Using Wellness Tech to Reclaim Focus in a Hyper-Connected UK Workplace",
+    title: "AI Burnout at Work: Can Wellness Tech Actually Help? (UK)",
     excerpt: "AI tools were meant to save time at work — so why does burnout feel worse? Here's what's actually driving it, and how wellness tech can help — or hurt.",
     author: "Kash",
     date: "2026-07-19",
@@ -1650,7 +1654,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/ai-health.jpg",
     seo: {
-      metaDescription: "AI tools were meant to save time — so why does burnout feel worse? Here's what's driving AI-adjacent burnout in UK workplaces and what wellness tech can actually help.",
+      metaDescription:
+        "AI tools were meant to save time, so why does burnout feel worse? What drives AI-related burnout in UK workplaces and which wellness tech helps.",
       keywords: ["AI burnout UK workplace", "wellness tech for burnout", "AI work stress UK", "digital burnout 2026", "workplace mental health AI UK"],
     },
   },

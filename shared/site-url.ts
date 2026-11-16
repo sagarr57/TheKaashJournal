@@ -35,4 +35,15 @@ export function buildPageTitle(title: string, siteName = "The Kaash Journal"): s
   return title.includes(siteName) || withSite.length > 60 ? title : withSite;
 }
 
+/** Shortens a meta description to what Google displays, ending on a sentence or word boundary. */
+export function trimDescription(text: string, max = 155): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+
+  const head = clean.slice(0, max);
+  const sentenceEnd = Math.max(head.lastIndexOf(". "), head.lastIndexOf("? "), head.lastIndexOf("! "));
+  if (sentenceEnd >= 90) return head.slice(0, sentenceEnd + 1);
+  return `${head.slice(0, head.lastIndexOf(" ", max - 1)).replace(/[\s,;:—–-]+$/, "")}…`;
+}
+
 export { DEFAULT_SITE_URL };
