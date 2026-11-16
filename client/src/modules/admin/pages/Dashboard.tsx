@@ -15,7 +15,7 @@ import {
   Mail, Eye, DollarSign, TrendingUp, MousePointerClick, LogOut, RefreshCw,
   Pencil, Trash2, Plus, X, Upload, ImageIcon, EyeOff, Shield, KeyRound,
   User, CheckCircle2, XCircle, Menu, FileText, Users, Activity, Settings,
-  BarChart2,
+  BarChart2, ExternalLink,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { categories } from "@/lib/categories";
@@ -671,15 +671,24 @@ function AdminDashboard() {
         fetchRevenueData(30), fetchTopPosts(10), fetchTrafficSources(), fetchSubscribers(),
       ]);
       const [overviewResult, visitorsResult, clicksResult, revenueResult, topPostsResult, trafficResult, subscribersResult] = results;
+      const failed = (title: string, result: PromiseRejectedResult, fallback: string) =>
+        toast.error(title, { description: result.reason?.message || fallback });
+
       if (overviewResult.status === "fulfilled") { setOverview(overviewResult.value); }
-      else { setOverview({ visitors: 0, subscribers: 0, clicks: 0, revenue: 0, visitorsChange: 0, subscribersChange: 0, clicksChange: 0, revenueChange: 0 }); }
-      setVisitors(visitorsResult.status === "fulfilled" ? visitorsResult.value : []);
-      setClicks(clicksResult.status === "fulfilled" ? clicksResult.value : []);
-      setRevenue(revenueResult.status === "fulfilled" ? revenueResult.value : []);
-      if (topPostsResult.status === "fulfilled") { setTopPosts(topPostsResult.value); setTopPostsPage(1); } else { setTopPosts([]); }
+      else { setOverview({ visitors: 0, subscribers: 0, clicks: 0, revenue: 0, visitorsChange: 0, subscribersChange: 0, clicksChange: 0, revenueChange: 0 }); failed("Failed to load analytics overview", overviewResult, "Unable to fetch analytics data"); }
+      if (visitorsResult.status === "fulfilled") { setVisitors(visitorsResult.value); }
+      else { setVisitors([]); failed("Failed to load visitors data", visitorsResult, "Unable to fetch visitors chart data"); }
+      if (clicksResult.status === "fulfilled") { setClicks(clicksResult.value); }
+      else { setClicks([]); failed("Failed to load clicks data", clicksResult, "Unable to fetch clicks chart data"); }
+      if (revenueResult.status === "fulfilled") { setRevenue(revenueResult.value); }
+      else { setRevenue([]); failed("Failed to load revenue data", revenueResult, "Unable to fetch revenue chart data"); }
+      if (topPostsResult.status === "fulfilled") { setTopPosts(topPostsResult.value); setTopPostsPage(1); }
+      else { setTopPosts([]); failed("Failed to load top posts", topPostsResult, "Unable to fetch top posts data"); }
       setTrafficSources(trafficResult.status === "fulfilled" ? trafficResult.value : []);
-      if (subscribersResult.status === "fulfilled") { setSubscribers(subscribersResult.value); setSubPage(1); } else { setSubscribers([]); }
-    } catch {
+      if (subscribersResult.status === "fulfilled") { setSubscribers(subscribersResult.value); setSubPage(1); }
+      else { setSubscribers([]); failed("Failed to load subscribers", subscribersResult, "Unable to fetch subscriber list"); }
+    } catch (error: any) {
+      toast.error("Unexpected error", { description: error?.message || "Failed to load dashboard data" });
       setOverview({ visitors: 0, subscribers: 0, clicks: 0, revenue: 0, visitorsChange: 0, subscribersChange: 0, clicksChange: 0, revenueChange: 0 });
       setVisitors([]); setClicks([]); setRevenue([]); setTopPosts([]); setTrafficSources([]); setSubscribers([]);
     } finally { setIsLoading(false); }
@@ -816,6 +825,13 @@ function AdminDashboard() {
               <p className="text-slate-400 text-[10px]">Administrator</p>
             </div>
           </div>
+          <a
+            href="/"
+            className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+          >
+            <ExternalLink className="w-4 h-4" />
+            View site
+          </a>
           <button
             onClick={logout}
             className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
@@ -849,7 +865,7 @@ function AdminDashboard() {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            {activeSection === "analytics" && (
+            {(activeSection === "analytics" || activeSection === "subscribers") && (
               <button
                 onClick={handleRefresh}
                 disabled={isRefreshing}
@@ -911,11 +927,12 @@ function AdminDashboard() {
                       <TabsTrigger value="visitors">Visitors</TabsTrigger>
                       <TabsTrigger value="clicks">Clicks</TabsTrigger>
                       <TabsTrigger value="revenue">Revenue</TabsTrigger>
-                      <TabsTrigger value="sources">Sources</TabsTrigger>
+                      <TabsTrigger value="sources">Traffic Sources</TabsTrigger>
                     </TabsList>
                   </div>
                   <div className="p-5">
                     <TabsContent value="visitors">
+                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Monthly Visitors</h3>
                       {visitors.length > 0 ? (
                         <ResponsiveContainer width="100%" height={260}>
                           <BarChart data={visitors}>
@@ -931,6 +948,7 @@ function AdminDashboard() {
                       )}
                     </TabsContent>
                     <TabsContent value="clicks">
+                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Monthly Clicks</h3>
                       {clicks.length > 0 ? (
                         <ResponsiveContainer width="100%" height={260}>
                           <LineChart data={clicks}>
@@ -946,6 +964,7 @@ function AdminDashboard() {
                       )}
                     </TabsContent>
                     <TabsContent value="revenue">
+                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Monthly Revenue</h3>
                       {revenue.length > 0 ? (
                         <ResponsiveContainer width="100%" height={260}>
                           <LineChart data={revenue}>
@@ -961,6 +980,7 @@ function AdminDashboard() {
                       )}
                     </TabsContent>
                     <TabsContent value="sources">
+                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Traffic Sources</h3>
                       {trafficSources.length > 0 ? (
                         <ResponsiveContainer width="100%" height={260}>
                           <PieChart>
@@ -1140,7 +1160,7 @@ function AdminDashboard() {
                         <label className="flex flex-col gap-1">
                           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">URL Slug <span className="text-red-500">*</span></span>
                           <input value={postForm.slug} onChange={(e) => handlePostFieldChange("slug", slugify(e.target.value))} placeholder="e.g. how-ai-is-changing-personal-finance" className="w-full border border-slate-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" required />
-                          <span className="text-[11px] text-slate-400">Auto-generated from title.</span>
+                          <span className="text-[11px] text-slate-400">Auto-generated from title. Used in the blog URL.</span>
                         </label>
                       </div>
 
@@ -1151,6 +1171,7 @@ function AdminDashboard() {
                           <select value={postForm.author} onChange={(e) => handlePostFieldChange("author", e.target.value)} className="w-full border border-slate-300 px-3 py-2 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
                             {PEN_NAME_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                           </select>
+                          <span className="text-[11px] text-slate-400">Auto-selected when you pick a category. Override here if needed.</span>
                         </label>
                         <label className="flex flex-col gap-1">
                           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Publish Date <span className="text-red-500">*</span></span>
@@ -1178,8 +1199,9 @@ function AdminDashboard() {
                           </select>
                         </label>
                         <label className="flex flex-col gap-1">
-                          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Reading Time (min)</span>
+                          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Reading Time (minutes)</span>
                           <input type="number" min={1} value={postForm.readingTime} onChange={(e) => handlePostFieldChange("readingTime", Number(e.target.value))} placeholder="5" className="w-full border border-slate-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" />
+                          <span className="text-[11px] text-slate-400">Shown as "5 min read" on the blog post.</span>
                         </label>
                       </div>
 
@@ -1224,14 +1246,14 @@ function AdminDashboard() {
                       {/* Excerpt */}
                       <label className="flex flex-col gap-1">
                         <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Excerpt / Summary <span className="text-red-500">*</span></span>
-                        <textarea value={postForm.excerpt} onChange={(e) => handlePostFieldChange("excerpt", e.target.value)} placeholder="A short 1–2 sentence summary shown on the blog listing page." className="w-full border border-slate-300 px-3 py-2 rounded-lg min-h-[80px] focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" required />
+                        <textarea value={postForm.excerpt} onChange={(e) => handlePostFieldChange("excerpt", e.target.value)} placeholder="A short 1–2 sentence summary shown on the blog listing page and in Google search results." className="w-full border border-slate-300 px-3 py-2 rounded-lg min-h-[80px] focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" required />
                         <span className="text-[11px] text-slate-400">Keep under 160 characters for best SEO results.</span>
                       </label>
 
                       {/* Content editor */}
                       <div className="flex flex-col gap-1">
                         <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Main Content <span className="text-red-500">*</span></span>
-                        <span className="text-[11px] text-slate-400 mb-1">Write in Markdown. Use ## for headings, **bold**, - for bullet lists.</span>
+                        <span className="text-[11px] text-slate-400 mb-1">Write in Markdown. Use ## for headings, **bold**, - for bullet lists. Switch to Preview to see how it looks.</span>
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                           <div className="lg:col-span-2">
                             <div className="flex border-b border-slate-200 mb-2">
@@ -1286,12 +1308,12 @@ function AdminDashboard() {
                         <label className="flex flex-col gap-1">
                           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Tags</span>
                           <input value={postForm.tags} onChange={(e) => handlePostFieldChange("tags", e.target.value)} placeholder="e.g. AI, Fintech, Personal Finance" className="w-full border border-slate-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" />
-                          <span className="text-[11px] text-slate-400">Comma-separated.</span>
+                          <span className="text-[11px] text-slate-400">Comma-separated. Used for filtering and related posts.</span>
                         </label>
                         <label className="flex flex-col gap-1">
                           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">SEO Keywords</span>
                           <input value={postForm.keywords} onChange={(e) => handlePostFieldChange("keywords", e.target.value)} placeholder="e.g. AI finance tools, debt management 2026" className="w-full border border-slate-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white" />
-                          <span className="text-[11px] text-slate-400">Comma-separated. Added to meta keywords tag.</span>
+                          <span className="text-[11px] text-slate-400">Comma-separated. Added to the page's meta keywords tag.</span>
                         </label>
                       </div>
 
