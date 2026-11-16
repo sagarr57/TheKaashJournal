@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { postIndex } from "../client/src/lib/postsIndex";
+import { loadPublishedPosts } from "./lib/load-posts";
 import { categories } from "../client/src/lib/categories";
 import { buildCanonicalUrl, DEFAULT_SITE_URL, normalizeSiteUrl } from "../shared/site-url";
 
@@ -58,7 +58,7 @@ const categoryRoutes: SitemapUrl[] = categories.map((category) => ({
   priority: "0.7",
 }));
 
-const postRoutes: SitemapUrl[] = postIndex.map((post) => ({
+const postRoutes: SitemapUrl[] = (await loadPublishedPosts()).map((post) => ({
   loc: buildCanonicalUrl(SITE_URL, `/blog/${post.slug}`),
   lastmod: normalizeDate(post.updated || post.date),
   changefreq: "weekly",
