@@ -47,7 +47,7 @@
       "destination": "/robots.txt"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ],
