@@ -44,7 +44,7 @@ export function NewsletterForm({
         setEmail("");
         setConsent(false);
 
-        pushToDataLayer("newsletter_subscribe", { email: email.trim() });
+        pushToDataLayer("newsletter_subscribe", { source });
         trackConversion("newsletter", "newsletter_signup", {
           metadata: { email: email.trim(), source: "newsletter_form" },
         });

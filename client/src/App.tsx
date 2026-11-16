@@ -98,6 +98,8 @@ function sendToGTM({ name, value, id }: { name: string; value: number; id: strin
 function App() {
   const gtmId = import.meta.env.VITE_GTM_ID || "";
   const [consentStatus, setConsentStatus] = useState<CookieConsentStatus | null>(null);
+  const [location] = useLocation();
+  const isAdminRoute = location.startsWith("/admin");
 
   useEffect(() => {
     setConsentStatus(getCookieConsentStatus());
@@ -128,7 +130,7 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          {gtmId && <GTM gtmId={gtmId} consentGranted={consentStatus === "accepted"} />}
+          {gtmId && !isAdminRoute && <GTM gtmId={gtmId} consentGranted={consentStatus === "accepted"} />}
           <Router />
           <CookieConsentBanner />
         </TooltipProvider>
