@@ -746,7 +746,7 @@ function AdminDashboard() {
   const username = getUsername();
 
   return (
-    <div className="min-h-screen bg-slate-100 flex">
+    <div className="h-dvh overflow-hidden bg-slate-100 flex">
       <SEO title="Admin Dashboard" description="Admin dashboard" noIndex={true} />
 
       {/* Mobile sidebar overlay */}
@@ -759,7 +759,7 @@ function AdminDashboard() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-30 w-60 bg-slate-900 flex flex-col lg:static transition-transform duration-200 ${
+        className={`fixed inset-y-0 left-0 z-30 w-60 flex-shrink-0 bg-slate-900 flex flex-col lg:static lg:h-full transition-transform duration-200 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -827,9 +827,9 @@ function AdminDashboard() {
       </aside>
 
       {/* Main area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 min-h-0">
         {/* Top header */}
-        <header className="bg-white border-b border-slate-200 px-4 md:px-6 py-3.5 flex items-center gap-4 sticky top-0 z-10">
+        <header className="bg-white border-b border-slate-200 px-4 md:px-6 py-3.5 flex items-center gap-3 flex-shrink-0">
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 transition-colors"
@@ -882,7 +882,8 @@ function AdminDashboard() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 md:p-6 overflow-x-hidden">
+        <main className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden p-4 md:p-6">
+          <div className="mx-auto w-full max-w-[1400px]">
 
           {/* ── ANALYTICS ── */}
           {activeSection === "analytics" && (
@@ -905,7 +906,7 @@ function AdminDashboard() {
               {/* Charts */}
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
                 <Tabs defaultValue="visitors">
-                  <div className="px-5 pt-4 border-b border-slate-100">
+                  <div className="px-3 sm:px-5 pt-4 border-b border-slate-100 overflow-x-auto">
                     <TabsList className="mb-0">
                       <TabsTrigger value="visitors">Visitors</TabsTrigger>
                       <TabsTrigger value="clicks">Clicks</TabsTrigger>
@@ -1401,12 +1402,12 @@ function AdminDashboard() {
           {activeSection === "tracking" && (
             <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
               {/* Sub-tabs */}
-              <div className="px-5 border-b border-slate-100 flex gap-0">
+              <div className="px-2 sm:px-5 border-b border-slate-100 flex gap-0 overflow-x-auto">
                 {(["pageviews", "clicks", "events"] as const).map((t) => (
                   <button
                     key={t}
                     onClick={() => handleTrackingTabChange(t)}
-                    className={`px-4 py-3.5 text-xs font-semibold border-b-2 transition-colors -mb-px ${
+                    className={`px-3 sm:px-4 py-3.5 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors -mb-px ${
                       trackingTab === t ? "border-blue-600 text-blue-600" : "border-transparent text-slate-500 hover:text-slate-700"
                     }`}
                   >
@@ -1542,6 +1543,7 @@ function AdminDashboard() {
           {/* ── SETTINGS ── */}
           {activeSection === "settings" && <SettingsPanel />}
 
+          </div>
         </main>
       </div>
 
