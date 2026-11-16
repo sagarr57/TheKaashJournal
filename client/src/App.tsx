@@ -10,6 +10,7 @@ import { usePageTracking } from "./hooks/usePageTracking";
 import { useLinkTracking } from "./hooks/useLinkTracking";
 import { CookieConsentBanner } from "./components/CookieConsentBanner";
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals";
+import { prerenderedHtml, prerenderedPath } from "./lib/prerendered";
 
 declare global {
   interface Window {
@@ -40,8 +41,22 @@ const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const Author = lazy(() => import("./pages/Author"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+let firstPageShown = false;
+
+function MarkFirstPageShown() {
+  useEffect(() => {
+    firstPageShown = true;
+  }, []);
+  return null;
+}
+
 // Loading fallback component
 function PageLoader() {
+  // On first load keep showing the prerendered page until its code arrives, instead of a blank placeholder.
+  if (!firstPageShown && prerenderedHtml && window.location.pathname === prerenderedPath) {
+    return <div dangerouslySetInnerHTML={{ __html: prerenderedHtml }} />;
+  }
+
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="text-center space-y-4">
@@ -80,6 +95,7 @@ function Router() {
         {/* Final fallback route */}
         <Route component={NotFound} />
       </Switch>
+      <MarkFirstPageShown />
     </Suspense>
   );
 }

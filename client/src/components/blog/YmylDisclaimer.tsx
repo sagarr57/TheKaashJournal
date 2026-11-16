@@ -10,9 +10,9 @@ export function YmylDisclaimer({ type }: YmylDisclaimerProps) {
   const isHealth = type === "health";
 
   return (
-    <div className="flex gap-3 border border-amber-200 bg-amber-50 rounded-lg p-4 mb-5 text-sm text-amber-900">
-      <AlertTriangle className="w-5 h-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
-      <div className="space-y-2">
+    <div className="flex gap-2.5 sm:gap-3 border border-amber-200 bg-amber-50 rounded-lg p-3 sm:p-4 mb-5 text-xs sm:text-sm leading-snug sm:leading-normal text-amber-900">
+      <AlertTriangle className="hidden sm:block w-5 h-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+      <div className="space-y-1.5 sm:space-y-2">
         <p>
           <strong>Important:</strong>{" "}
           {isHealth

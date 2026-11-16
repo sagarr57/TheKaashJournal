@@ -204,7 +204,9 @@ function postPage(post: PublishedPost, related: PublishedPost[]) {
         (related.length
           ? `<section class="mt-12"><h2 class="font-oswald text-2xl font-bold mb-4">More in ${esc(post.category)}</h2>${postList(related)}</section>`
           : "") +
-        jsonLd(article)
+        jsonLd(article) +
+        // Read by the app on load so the article renders at once, without a second download.
+        `<script id="prerendered-post" type="application/json">${JSON.stringify(post).replace(/</g, "\\u003c")}</script>`
     )
   );
 }

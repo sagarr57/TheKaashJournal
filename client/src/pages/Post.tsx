@@ -15,7 +15,7 @@ import { ReadingProgress } from "@/components/ReadingProgress";
 import { SocialShare } from "@/components/SocialShare";
 import { useEffect, useState } from "react";
 import { fetchPostBySlugWithContent } from "@/lib/blog-data";
-import { postContentBySlug } from "@/lib/postsContent";
+import { prerenderedPost } from "@/lib/prerendered";
 import { EzoicAd } from "@/components/EzoicAd";
 import { SITE_URL } from "@/lib/config";
 import { buildCanonicalUrl } from "@shared/site-url";
@@ -82,16 +82,21 @@ function extractToc(markdown: string): TocItem[] {
 }
 
 function TableOfContents({ items }: { items: TocItem[] }) {
+  // Open on larger screens; collapsed on phones so the article text starts sooner.
+  const [openByDefault] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches
+  );
   if (items.length < 3) return null;
   return (
     <nav
       aria-label="Table of contents"
       className="my-5 md:my-6 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3"
     >
-      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-700">
-        In this article
-      </p>
-      <ol className="space-y-1.5 text-sm">
+      <details open={openByDefault}>
+      <summary className="cursor-pointer text-xs font-semibold uppercase tracking-widest text-blue-700">
+        In this article ({items.length} sections)
+      </summary>
+      <ol className="mt-3 space-y-1.5 text-sm">
         {items.map((item) => (
           <li
             key={item.id}
@@ -106,6 +111,7 @@ function TableOfContents({ items }: { items: TocItem[] }) {
           </li>
         ))}
       </ol>
+      </details>
     </nav>
   );
 }
@@ -163,45 +169,62 @@ function extractFaqSchema(content: string) {
   };
 }
 
+function prerenderedFor(slug: string) {
+  return prerenderedPost?.slug === slug ? prerenderedPost : null;
+}
+
 export default function Post() {
   const params = useParams();
   const slug = params.slug as string;
-  const [postMeta, setPostMeta] = useState(getPostBySlug(slug));
-  // Initialize from static data so Googlebot sees full content on first paint;
-  // useEffect then updates with the latest version from Supabase.
-  const [content, setContent] = useState<string | null>(postContentBySlug[slug] ?? null);
+  const [postMeta, setPostMeta] = useState(() => prerenderedFor(slug) ?? getPostBySlug(slug));
+  const [content, setContent] = useState<string | null>(() => prerenderedFor(slug)?.content ?? null);
   const [contentError, setContentError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
-    setContent(postContentBySlug[slug] ?? null);
+    const initial = prerenderedFor(slug);
+    setPostMeta(initial ?? getPostBySlug(slug));
+    setContent(initial?.content ?? null);
     setContentError(null);
-    setPostMeta(getPostBySlug(slug));
+    setIsLoading(true);
 
-    async function load() {
-      try {
-        const supabasePost = await fetchPostBySlugWithContent(slug);
-        if (!cancelled && supabasePost) {
-          setPostMeta(supabasePost);
-          setContent(supabasePost.content || "");
-          return;
+    // Always ask Supabase: it has the latest text and the posts created in the admin.
+    fetchPostBySlugWithContent(slug)
+      .then((latest) => {
+        if (cancelled) return;
+        if (latest) {
+          setPostMeta(latest);
+          setContent(latest.content || "");
+        } else if (!initial) {
+          setContentError("Content not found");
         }
+      })
+      .catch((e: any) => {
+        if (!cancelled && !initial) setContentError(e?.message || "Failed to load content");
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
 
-        const mod = await import("@/lib/postsContent");
-        const loaded = mod.postContentBySlug?.[slug];
-        if (!loaded) throw new Error("Content not found");
-        if (!cancelled) setContent(loaded);
-      } catch (e: any) {
-        if (!cancelled) setContentError(e?.message || "Failed to load content");
-      }
-    }
-
-    // Always fetch from Supabase — posts created via admin won't be in static data
-    load();
     return () => {
       cancelled = true;
     };
   }, [slug]);
+
+  if (!postMeta && isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <main id="main-content" className="container max-w-3xl pt-24 sm:pt-28 pb-20 animate-pulse space-y-4" aria-label="Loading article">
+          <div className="h-8 bg-gray-200 rounded w-3/4" />
+          <div className="h-4 bg-gray-200 rounded w-full" />
+          <div className="h-4 bg-gray-200 rounded w-5/6" />
+          <div className="h-56 bg-gray-200 rounded w-full" />
+        </main>
+      </div>
+    );
+  }
 
   if (!postMeta) {
     return (
@@ -552,7 +575,8 @@ export default function Post() {
                       ),
                     }}
                   >
-                    {content || ""}
+                    {/* The page already shows the title as its <h1>; drop the copy that starts the markdown. */}
+                    {(content || "").replace(/^\s*#\s+.+\n/, "")}
                   </ReactMarkdown>
                 </div>
               </div>
