@@ -6,7 +6,7 @@ export type PostIndexItem = Omit<BlogPost, "content"> & { content?: never };
 export const postIndex: PostIndexItem[] = [
   {
     id: "1",
-    title: "Five apps that help you tackle debt and budgeting (2026)",
+    title: "5 Best Debt and Budgeting Apps for the UK (2026)",
     slug: "top-5-ai-tools-debt-management-2026",
     excerpt:
       "A straight comparison of YNAB, Rocket Money, Undebt.it, Copilot, and Goodbudget—what each is for, with links so you can check pricing and coverage yourself.",
@@ -19,7 +19,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/debt-money.jpg",
     seo: {
       metaDescription:
-        "Hands-on look at YNAB, Rocket Money, Undebt.it, Copilot, and Goodbudget for budgeting and debt—with links to each product and UK debt help resources.",
+        "YNAB, Undebt.it, Goodbudget, Copilot and Emma compared: what each costs, who it suits, and where to get free UK debt help.",
       keywords: ["YNAB", "Undebt.it", "Rocket Money", "debt payoff tools", "budgeting apps UK"],
     },
   },
@@ -690,7 +690,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "41",
-    title: "JPMorgan Chase: Artificial Intelligence in Banking — Case Study",
+    title: "JPMorgan AI Case Study: LOXM, COiN and a $17bn Tech Bet",
     slug: "jpmorgan-ai-banking-strategy-case-study",
     excerpt:
       "JPMorgan Chase employs more software engineers than Google, has 2,000 AI and machine learning experts, and has deployed artificial intelligence across fraud detection, trading, risk management, and customer service. A case study in what it looks like when a $3.9 trillion bank treats AI as existential infrastructure.",
@@ -703,7 +703,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-case.jpg",
     seo: {
       metaDescription:
-        "A detailed artificial intelligence in banking case study: JPMorgan Chase spends $17 billion a year on technology and has 2,000 AI experts deploying machine learning across trading, fraud detection, risk management, and customer service.",
+        "How JPMorgan uses AI: LOXM trade execution, COiN contract review, IndexGPT and fraud detection. What $17bn a year buys, and what other banks can learn.",
       keywords: [
         "artificial intelligence in banking case study",
         "JPMorgan Chase AI strategy",
@@ -717,7 +717,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "40",
-    title: "The Klarna AI Case Study: $40 Million Saved, 700 Jobs Cut, and the Lesson Nobody Expected",
+    title: "Klarna AI Case Study: $40M Saved, Then a U-Turn",
     slug: "klarna-ai-customer-service-case-study",
     excerpt:
       "In February 2024, Klarna announced its AI assistant handled 2.3 million customer service conversations in one month — equivalent to 700 agents — and projected $40 million in savings. A case study that goes beyond the headline to examine what actually happened, what it cost, and what every business can learn.",
@@ -730,7 +730,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-case.jpg",
     seo: {
       metaDescription:
-        "Klarna's AI assistant handled 2.3 million customer service chats in one month, saving $40 million. A detailed case study of what worked, what the real costs were, and what every business should learn before replacing humans with AI.",
+        "Klarna's AI handled 2.3 million chats in a month and saved $40 million, then the company brought humans back. What worked, what failed, and why.",
       keywords: [
         "Klarna AI customer service case study",
         "Klarna AI assistant OpenAI",
@@ -744,7 +744,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "39",
-    title: "How Nubank Went from Zero to 100 Million Customers Using AI",
+    title: "Nubank AI Strategy: Case Study of 100 Million Customers",
     slug: "nubank-ai-strategy-100-million-customers",
     excerpt:
       "Nubank found a founding insight in a Brazilian bank branch and built the world's largest digital bank using machine learning, alternative credit underwriting, and a data flywheel that the incumbent banks couldn't replicate. A case study in AI-powered financial inclusion at scale.",
@@ -757,7 +757,7 @@ export const postIndex: PostIndexItem[] = [
     image: "/images/business-analytics.jpg",
     seo: {
       metaDescription:
-        "How Nubank used machine learning and alternative data to extend credit to 100 million customers the traditional banking system refused to serve. A case study in AI-powered financial inclusion.",
+        "How Nubank used machine learning and alternative data to give credit to 100 million people banks turned away. The numbers, the model and the lessons.",
       keywords: [
         "Nubank case study",
         "Nubank AI strategy",
@@ -1518,7 +1518,7 @@ export const postIndex: PostIndexItem[] = [
   },
   {
     id: "73",
-    title: "AI Therapy Apps UK 2026: What Works, What's Risky, What to Know",
+    title: "AI Therapy Apps UK 2026: Are Wysa, Limbic & Kooth Safe?",
     slug: "ai-therapy-apps-uk-2026-safe",
     excerpt:
       "AI Therapy Apps UK 2026: What Works, What’s Risky, and What the Research Actually Says",
@@ -1530,7 +1530,8 @@ export const postIndex: PostIndexItem[] = [
     featured: false,
     image: "/images/wellness-mental.jpg",
     seo: {
-      metaDescription: "Are AI therapy apps UK 2026 safe? We review Wysa, Limbic and Kooth against MHRA standards and NICE evidence — exposing the real risks.",
+      metaDescription:
+        "We check Wysa, Limbic and Kooth against MHRA rules and NICE evidence: what works, what's risky, and when to see a person instead.",
       keywords: ["AI therapy apps UK 2026", "Wysa mental health UK", "Limbic AI therapy review", "MHRA mental health apps UK", "AI counselling safety UK 2026"],
     },
   },
