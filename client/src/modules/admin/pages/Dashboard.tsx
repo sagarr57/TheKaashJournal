@@ -17,7 +17,7 @@ import {
   User, CheckCircle2, XCircle, Menu, FileText, Users, Activity, Settings,
   BarChart2, ExternalLink,
 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { adminSupabase as supabase, uploadBlogImage } from "../lib/admin-supabase";
 import { categories } from "@/lib/categories";
 import {
   fetchAnalyticsOverview,
@@ -547,12 +547,7 @@ function AdminDashboard() {
     if (!file) return;
     setIsUploadingImage(true);
     try {
-      const ext = file.name.split(".").pop();
-      const fileName = `blog-${Date.now()}.${ext}`;
-      const { data, error } = await supabase.storage.from("blog-images").upload(fileName, file, { contentType: file.type, upsert: false });
-      if (error) throw error;
-      const { data: urlData } = supabase.storage.from("blog-images").getPublicUrl(data.path);
-      handlePostFieldChange("image", urlData.publicUrl);
+      handlePostFieldChange("image", await uploadBlogImage(file));
       toast.success("Image uploaded successfully");
     } catch (err: any) {
       toast.error("Upload failed", { description: err?.message || "Check that the 'blog-images' storage bucket exists in Supabase." });

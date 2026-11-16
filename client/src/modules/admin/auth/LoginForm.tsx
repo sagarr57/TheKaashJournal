@@ -51,8 +51,8 @@ export function LoginForm() {
         return;
       }
 
-      if (data.success) {
-        setAuth(username.trim());
+      if (data.success && data.token) {
+        setAuth(username.trim(), data.token);
         toast.success("Logged in successfully");
         setLocation("/admin");
       }

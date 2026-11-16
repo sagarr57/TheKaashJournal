@@ -1,6 +1,6 @@
 // Analytics — reads directly from Supabase page_views, events, conversions tables
 import type { AnalyticsData, ChartDataPoint, TopPost, TrafficSource } from "../types";
-import { supabase } from "@/lib/supabase";
+import { adminSupabase as supabase } from "./admin-supabase";
 
 function daysAgo(n: number) {
   const d = new Date();

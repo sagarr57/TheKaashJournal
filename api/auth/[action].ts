@@ -3,6 +3,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import bcrypt from 'bcryptjs';
 import { authenticator } from 'otplib';
+import { createSessionToken, verifySessionToken } from '../_lib/session.js';
 
 type Action = (req: VercelRequest, res: VercelResponse, supabase: SupabaseClient) => Promise<unknown>;
 
@@ -48,6 +49,7 @@ const login: Action = async (req, res, supabase) => {
   return res.json({
     success: true,
     requires2fa: false,
+    token: createSessionToken(user.username),
     user: {
       id: user.id,
       username: user.username,
@@ -58,6 +60,10 @@ const login: Action = async (req, res, supabase) => {
 };
 
 const createAdmin: Action = async (req, res, supabase) => {
+  if (!verifySessionToken(req.headers.authorization)) {
+    return res.status(401).json({ error: 'Only a signed-in admin can create another admin' });
+  }
+
   const { username, password, email, full_name } = req.body;
 
   if (!username || !password) {
@@ -234,7 +240,7 @@ const actions: Record<string, Action> = {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 

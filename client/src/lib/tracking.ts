@@ -57,28 +57,16 @@ export function startTimeTracking(pagePath: string) {
   _pageViewStartTime = Date.now();
   if (_timeInterval) clearInterval(_timeInterval);
 
-  _timeInterval = setInterval(async () => {
+  _timeInterval = setInterval(() => {
     const secs = Math.floor((Date.now() - _pageViewStartTime) / 1000);
     const sid = getSessionId();
-    try {
-      // Update the most-recent page_view row for this session + path
-      const { data } = await supabase
-        .from('page_views')
-        .select('id')
-        .eq('session_id', sid)
-        .eq('page_path', pagePath)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
-      if (data?.id) {
-        await supabase
-          .from('page_views')
-          .update({ view_time_seconds: secs, is_bounce: secs < 10 })
-          .eq('id', data.id);
-      }
-    } catch {
-      // silent fail
-    }
+    // Sent to the server, which updates the visit's row; the browser cannot read or edit page_views.
+    fetch("/api/tracking/page-time", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_id: sid, page_path: pagePath, view_time_seconds: secs }),
+      keepalive: true,
+    }).catch(() => {});
   }, 15000); // every 15 seconds
 }
 

@@ -29,22 +29,6 @@ function mapRowToPostIndex(row: any): BlogPostIndexItem {
   };
 }
 
-// Run at most once per JS session — it's best-effort, the cron is authoritative
-let autoPublishRan = false;
-async function autoPublishScheduled() {
-  if (autoPublishRan) return;
-  autoPublishRan = true;
-  try {
-    await supabase
-      .from("blog_posts")
-      .update({ status: "published", publish_at: null })
-      .eq("status", "scheduled")
-      .lte("publish_at", new Date().toISOString());
-  } catch {
-    // silent
-  }
-}
-
 // --- Per-post content cache (sessionStorage, 30-min TTL) ---
 const POST_TTL = 30 * 60 * 1000;
 function postCacheKey(slug: string) { return `kaash_post_${slug}`; }
@@ -67,8 +51,6 @@ function savePostToSession(slug: string, post: BlogPost) {
 
 export async function fetchPublishedPostIndex(): Promise<BlogPostIndexItem[]> {
   try {
-    await autoPublishScheduled();
-
     const { data, error } = await supabase
       .from("blog_posts")
       .select(
@@ -95,8 +77,6 @@ export async function fetchPostBySlugWithContent(
   if (cached) return cached;
 
   try {
-    await autoPublishScheduled();
-
     const { data, error } = await supabase
       .from("blog_posts")
       .select(
