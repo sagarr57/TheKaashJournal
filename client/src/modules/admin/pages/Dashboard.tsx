@@ -157,6 +157,31 @@ function PagerBar({
 
 const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || '/api';
 
+// Kept outside SettingsPanel: a component declared inside another remounts on every render and loses input focus.
+const PasswordInput = ({
+  value, onChange, show, onToggle, placeholder, id,
+}: { value: string; onChange: (v: string) => void; show: boolean; onToggle: () => void; placeholder?: string; id?: string }) => (
+  <div className="relative">
+    <input
+      id={id}
+      type={show ? "text" : "password"}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      required
+      className="w-full border border-slate-300 px-3 py-2 pr-10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+    />
+    <button
+      type="button"
+      onClick={onToggle}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+      tabIndex={-1}
+    >
+      {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+    </button>
+  </div>
+);
+
 function SettingsPanel() {
   const username = getUsername();
 
@@ -266,30 +291,6 @@ function SettingsPanel() {
     } catch { toast.error("Request failed"); }
     finally { setTwoFaLoading(false); }
   };
-
-  const PasswordInput = ({
-    value, onChange, show, onToggle, placeholder, id,
-  }: { value: string; onChange: (v: string) => void; show: boolean; onToggle: () => void; placeholder?: string; id?: string }) => (
-    <div className="relative">
-      <input
-        id={id}
-        type={show ? "text" : "password"}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        required
-        className="w-full border border-slate-300 px-3 py-2 pr-10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-      />
-      <button
-        type="button"
-        onClick={onToggle}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-        tabIndex={-1}
-      >
-        {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-      </button>
-    </div>
-  );
 
   return (
     <div className="space-y-6 max-w-2xl">
