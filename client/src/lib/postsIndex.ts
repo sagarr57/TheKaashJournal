@@ -54,7 +54,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["ChatGPT", "AI", "Personal Finance", "Budgeting"],
     readingTime: 9,
     featured: true,
-    image: "/images/investment-charts.jpg",
+    image: "/images/laptop-analytics.jpg",
     seo: {
       metaDescription:
         "Use ChatGPT safely for budgets, debt strategy sketches, and learning investing terms—with UK prompts, GOV.UK debt signposting, and FCA/MoneyHelper links.",
@@ -73,7 +73,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Fintech", "AI", "Startups", "Investment"],
     readingTime: 10,
     featured: false,
-    image: "/images/investment-charts.jpg",
+    image: "/images/laptop-plant.jpg",
     seo: {
       metaDescription:
         "AI in fintech: underwriting speed, robo journeys, invisible fraud controls, and chat support—with FCA register and MoneyHelper signposts for UK readers.",
@@ -92,7 +92,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Budgeting", "Automation", "AI", "Personal Finance"],
     readingTime: 8,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/laptop-dashboard.jpg",
     seo: {
       metaDescription:
         "Automated budgeting tutorial: Mint’s closure, YNAB/Goodbudget/Undebt.it, UK open banking consent, weekly review habit, and CSV snapshots.",
@@ -130,7 +130,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Tools", "Finance", "Updates", "Technology"],
     readingTime: 11,
     featured: true,
-    image: "/images/investment-charts.jpg",
+    image: "/images/laptop-report.jpg",
     seo: {
       metaDescription:
         "Early-2026 AI finance landscape: assistants, Microsoft/Google copilots, YNAB, Goodbudget, Undebt.it, UK neobanks, TrueLayer, FCA scam guidance—with official links.",
@@ -149,7 +149,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt", "AI", "Budgeting", "Teaching example"],
     readingTime: 12,
     featured: true,
-    image: "/images/debt-money.jpg",
+    image: "/images/budgeting-desk.jpg",
     seo: {
       metaDescription:
         "Composite teaching example: phases from honest inventory through budgeting apps, avalanche vs snowball, automation, and when to use free UK debt advice—not a news story.",
@@ -168,7 +168,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt stress", "Mental health", "Budgeting", "UK finance"],
     readingTime: 11,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/stressed-at-desk.jpg",
     seo: {
       metaDescription:
         "Understand how debt stress affects thinking and motivation, and learn practical, non-judgemental steps to regain control of your finances in the UK.",
@@ -187,7 +187,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Loans", "Repayments", "Refinancing", "UK"],
     readingTime: 12,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/stressed-at-desk.jpg",
     seo: {
       metaDescription:
         "Practical ways to manage loan repayment stress: clarity on numbers, lender conversations, automation, and when to seek free debt advice.",
@@ -206,7 +206,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt collection", "Consumer rights", "UK", "Scams"],
     readingTime: 10,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/telephone-red.jpg",
     seo: {
       metaDescription:
         "What to do if a debt collector calls: verify the debt, know UK protections, avoid pressure tactics, and use official channels before you pay.",
@@ -225,7 +225,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["IVA", "Insolvency", "UK debt", "Advice"],
     readingTime: 13,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/document-clipboard.jpg",
     seo: {
       metaDescription:
         "An impartial overview of UK IVAs: duration, voting rules, credit file impact, fees, and why free debt charities should be part of your research.",
@@ -244,7 +244,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Multiple debts", "Snowball", "Avalanche", "Consolidation"],
     readingTime: 12,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/wallet-cards.jpg",
     seo: {
       metaDescription:
         "Manage multiple loans with a clear inventory, a repayment strategy that matches your personality, and pitfalls that keep people cycling back into debt.",
@@ -263,7 +263,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt advice", "Scams", "UK", "Consumer protection"],
     readingTime: 11,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/phone-coffee.jpg",
     seo: {
       metaDescription:
         "How to spot debt advice scams in the UK: red flags, verification steps, and safe alternatives through free FCA-authorised support.",
@@ -282,7 +282,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Debt plan", "Budgeting", "Repayment strategy", "Financial wellbeing"],
     readingTime: 10,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/calculator-notes.jpg",
     seo: {
       metaDescription:
         "Create a practical debt payoff plan in one hour with a simple template, realistic budget rules, and a follow-through routine.",
@@ -301,7 +301,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Emergency cash", "Debt", "Borrowing", "Personal finance"],
     readingTime: 11,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/piggy-bank-pink.jpg",
     seo: {
       metaDescription:
         "Compare emergency loan alternatives in 2026 by cost and speed: savings, earned wage access, credit union loans, payment plans, BNPL, and personal loans.",
@@ -320,7 +320,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI investing", "Risk management", "Portfolio", "Markets"],
     readingTime: 9,
     featured: false,
-    image: "/images/investment-charts.jpg",
+    image: "/images/trading-floor.jpg",
     seo: {
       metaDescription:
         "Can AI co-pilots beat the market in 2026? Understand where AI helps, where it fails, and how to use a core-plus-satellite approach with risk controls.",
@@ -339,7 +339,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI wearables", "Digital health", "Preventive care", "Privacy"],
     readingTime: 9,
     featured: false,
-    image: "/images/fitness.jpg",
+    image: "/images/smartwatch-desk.jpg",
     seo: {
       metaDescription:
         "How AI wearables in 2026 are used for early health signals, AFib screening, and trend detection—plus practical limits and privacy considerations.",
@@ -403,7 +403,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Skin Longevity", "AI Diagnostics", "Biotech", "Skincare", "Regenerative Beauty"],
     readingTime: 9,
     featured: false,
-    image: "/images/fitness.jpg",
+    image: "/images/skincare.jpg",
     seo: {
       metaDescription:
         "How AI skin diagnostics and biotech ingredients like senolytics and NAD+ boosters are replacing anti-aging with skin longevity — a data-driven approach to cellular health.",
@@ -430,7 +430,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Nutrition", "Meal Planning", "Precision Nutrition", "Digital Health", "CGM"],
     readingTime: 10,
     featured: false,
-    image: "/images/nutrition.jpg",
+    image: "/images/vegetables.jpg",
     seo: {
       metaDescription:
         "How AI nutritionists in 2026 use wearable data, CGM readings, and microbiome insights to replace manual calorie counting with automated, personalised meal planning.",
@@ -457,7 +457,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Mental Health", "AI Therapy", "Digital Wellbeing", "CBT", "AI Health"],
     readingTime: 11,
     featured: true,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/sleep-bed.jpg",
     seo: {
       metaDescription:
         "AI therapy chatbots offer 24/7 mental health support — but can they replace human therapists? An honest look at the benefits, ethical risks, and the 2026 hybrid model.",
@@ -484,7 +484,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Longevity", "Biological Age", "Epigenetics", "AI Health", "Preventive Health"],
     readingTime: 11,
     featured: true,
-    image: "/images/fitness.jpg",
+    image: "/images/dna.jpg",
     seo: {
       metaDescription:
         "What do biological age tests actually measure and can they predict how long you live? A clear guide to epigenetic clocks, AI longevity tools, and what the science says in 2026.",
@@ -538,7 +538,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Gut Health", "Microbiome", "Mental Health", "AI Health", "Nutrition"],
     readingTime: 11,
     featured: false,
-    image: "/images/nutrition.jpg",
+    image: "/images/yogurt-bowl.jpg",
     seo: {
       metaDescription:
         "Your gut microbiome influences your mood, anxiety, and cognitive performance. A clear guide to the gut-brain axis science, microbiome testing, and AI-driven personalised interventions in 2026.",
@@ -565,7 +565,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI Diagnostics", "Preventive Health", "NHS", "Cancer Detection", "AI Health"],
     readingTime: 12,
     featured: true,
-    image: "/images/ai-health.jpg",
+    image: "/images/clinicians-scan.jpg",
     seo: {
       metaDescription:
         "AI is detecting cancer, heart disease, and neurological conditions years before symptoms appear. A clear look at AI diagnostics, NHS pilots, and what preventive healthcare looks like in 2026.",
@@ -592,7 +592,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Digital Wellness", "Mental Health", "Screen Time", "Social Media", "Intentional Living"],
     readingTime: 11,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/reading-outdoors.jpg",
     seo: {
       metaDescription:
         "Heavy social media use has documented negative effects on mental health, sleep, and attention. A practical, evidence-backed guide to intentional technology use and digital wellness in 2026.",
@@ -619,7 +619,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Robo-Advisors", "Financial Planning", "AI Finance", "Investing", "Fintech Trends"],
     readingTime: 10,
     featured: false,
-    image: "/images/business-analytics.jpg",
+    image: "/images/workshop-notes.jpg",
     seo: {
       metaDescription:
         "Robo-advisor or human adviser? An evidence-based comparison of costs, strengths and limits, plus a simple framework for choosing in 2026.",
@@ -646,7 +646,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Blockchain", "AI Finance", "Case Studies", "DeFi", "Fintech"],
     readingTime: 11,
     featured: false,
-    image: "/images/business-case.jpg",
+    image: "/images/crypto-coins.jpg",
     seo: {
       metaDescription:
         "Four real case studies where blockchain and AI are delivering genuine financial value in 2026 — JP Morgan, HSBC, Chainalysis, and Aave. What actually works and why.",
@@ -781,7 +781,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Mastercard", "Fraud Detection", "AI Payments", "Decision Intelligence", "Case Study"],
     readingTime: 11,
     featured: false,
-    image: "/images/business-analytics.jpg",
+    image: "/images/wallet-cards.jpg",
     seo: {
       metaDescription:
         "A case study of Mastercard Decision Intelligence: how AI scores 143 billion transactions a year for fraud, and what it means for UK cardholders.",
@@ -808,7 +808,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Deutsche Bank", "AI Transformation", "Cloud Banking", "Case Study", "Fintech"],
     readingTime: 12,
     featured: true,
-    image: "/images/business-case.jpg",
+    image: "/images/laptop-working.jpg",
     seo: {
       metaDescription:
         "How Deutsche Bank went from four years of losses to decade-high profits with Google Cloud and NVIDIA AI. What changed, what it cost, and the lessons.",
@@ -835,7 +835,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Voice Banking", "Conversational AI", "LLM Finance", "AI Banking", "Fintech"],
     readingTime: 10,
     featured: false,
-    image: "/images/crypto-blockchain.jpg",
+    image: "/images/microphone.jpg",
     seo: {
       metaDescription:
         "How large language models are replacing call centres in banking in 2026 — from Bank of America Erica to UK neobank AI. A practical look at what's deployed, the economics, and the privacy trade-offs.",
@@ -889,7 +889,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Gig Economy", "Freelancer Finance", "AI Fintech", "Creator Economy", "Self-Employed"],
     readingTime: 10,
     featured: false,
-    image: "/images/crypto-blockchain.jpg",
+    image: "/images/laptop-dashboard.jpg",
     seo: {
       metaDescription:
         "How AI fintech in 2026 is solving the financial problems freelancers, gig workers, and creators face — irregular income planning, alternative credit underwriting, and automated tax tools.",
@@ -961,7 +961,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["FinTech", "Payments", "UK Banking", "Open Banking"],
     readingTime: 8,
     featured: false,
-    image: "/images/payments-mobile.jpg",
+    image: "/images/server-room.jpg",
     seo: {
       metaDescription: "The New Payments Architecture UK is being overhauled. What the National Payments Vision means for UK businesses and how to prepare now.",
       keywords: ["New Payments Architecture UK", "NPA UK businesses", "Faster Payments upgrade UK", "ISO 20022 UK", "UK payment infrastructure 2026"],
@@ -1015,7 +1015,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["FinTech", "Payments", "UK Banking", "Open Banking"],
     readingTime: 8,
     featured: false,
-    image: "/images/payments-mobile.jpg",
+    image: "/images/laptop-analytics.jpg",
     seo: {
       metaDescription: "Real-time credit decisioning UK is transforming lending. How FCA-regulated lenders use open banking and AI to approve loans in seconds.",
       keywords: ["real-time credit decisioning UK", "open banking lending UK", "AI loan approval UK", "FCA regulated instant credit", "instant loan decisioning UK"],
@@ -1051,7 +1051,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Mental Health", "AI Workplace", "UK Employers", "Burnout", "HSE"],
     readingTime: 10,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/meeting-room.jpg",
     seo: {
       metaDescription:
         "What UK employers must do on workplace mental health in 2026: HSE duties, the Employment Rights Act, and where AI wellbeing tools help or add risk.",
@@ -1070,7 +1070,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Commercial VRP", "Open Banking", "UK Payments", "Direct Debit", "UKPI"],
     readingTime: 10,
     featured: false,
-    image: "/images/payments-mobile.jpg",
+    image: "/images/card-payment-terminal.jpg",
     seo: {
       metaDescription: "Commercial VRPs UK 2026 are live. How cVRPs replace Direct Debits, which sectors qualify first, Wave 2 timeline and your action plan.",
       keywords: ["commercial VRP UK 2026", "variable recurring payments UK", "cVRP vs Direct Debit UK", "open banking recurring payments UK", "UKPI Wave 1 eligible sectors"],
@@ -1088,7 +1088,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Agentic AI", "UK Payments", "FCA", "Open Banking", "Consumer Duty"],
     readingTime: 10,
     featured: false,
-    image: "/images/payments-mobile.jpg",
+    image: "/images/robot-assistant.jpg",
     seo: {
       metaDescription: "Agentic commerce UK payments 2026: AI agents now initiate and authorise payments autonomously. What it means, the FCA's response and your obligations.",
       keywords: ["agentic commerce UK payments 2026", "agentic AI payments FCA regulation", "autonomous AI payments UK", "AI agent payments Consumer Duty UK", "FCA agentic payments 2026"],
@@ -1106,7 +1106,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Open Finance", "FCA", "UK Banking", "Open Banking", "Smart Data"],
     readingTime: 10,
     featured: true,
-    image: "/images/open-banking.jpg",
+    image: "/images/london-shard.jpg",
     seo: {
       metaDescription: "The open finance UK FCA roadmap 2026 is published. How pensions, mortgages and SME credit will be transformed by 2030 and what to do now.",
       keywords: ["open finance UK FCA roadmap 2026", "FCA open finance strategy 2030", "Data Use Access Act open finance UK", "open finance mortgages pensions UK", "PRISM taskforce FCA open finance"],
@@ -1124,7 +1124,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Digital Identity", "Fraud Prevention", "GOV.UK Wallet", "APP Fraud", "UK Payments"],
     readingTime: 8,
     featured: false,
-    image: "/images/open-banking.jpg",
+    image: "/images/phone-hand.jpg",
     seo: {
       metaDescription: "Digital identity in payments UK 2026: how GOV.UK Wallet, DVS and reusable identity will cut the £1.17bn APP fraud bill. Expert guide.",
       keywords: ["digital identity payments UK 2026", "GOV.UK Wallet payments UK", "DVS digital verification UK", "APP fraud digital identity UK", "reusable digital identity UK"],
@@ -1142,7 +1142,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Treasury Management", "Faster Payments", "ISO 20022", "Corporate Finance", "Cash Flow"],
     readingTime: 8,
     featured: false,
-    image: "/images/investment-charts.jpg",
+    image: "/images/charts-calculator.jpg",
     seo: {
       metaDescription: "Real-time treasury management UK 2026: how AI, Faster Payments and ISO 20022 let CFOs manage liquidity, FX and fraud in seconds. Expert guide.",
       keywords: ["real-time treasury management UK", "corporate treasury AI UK 2026", "ISO 20022 treasury UK", "Faster Payments treasury UK", "AI cash management UK 2026"],
@@ -1178,7 +1178,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["NHS AI", "AI Scribing", "Clinical Documentation", "Digital Health", "Ambient Voice"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/stethoscope-laptop.jpg",
     seo: {
       metaDescription: "NHS AI scribing UK 2026: ambient voice technology is reducing admin by 23% and boosting patient time. The definitive guide for clinicians.",
       keywords: ["NHS AI scribing UK 2026", "ambient voice technology NHS", "AI clinical documentation UK", "NHS DTAC scribing tools", "AI GP notes UK 2026"],
@@ -1214,7 +1214,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Chronic Disease", "NHS Virtual Wards", "Remote Monitoring", "AI Health", "NHS 10 Year Plan"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/medication.jpg",
     seo: {
       metaDescription: "AI chronic disease management UK 2026: how NHS virtual wards, remote monitoring and predictive AI are transforming care for 15 million patients.",
       keywords: ["AI chronic disease management UK", "NHS virtual wards AI UK", "remote patient monitoring UK", "AI diabetes COPD UK", "predictive AI chronic disease NHS"],
@@ -1232,7 +1232,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Loneliness", "AI Mental Health", "Digital Health", "MHRA", "Social Prescribing"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/london-dusk.jpg",
     seo: {
       metaDescription: "AI and the UK loneliness crisis 2026: how AI companions, social prescribing tech and NHS digital tools are reaching 3.8 million isolated people.",
       keywords: ["AI loneliness UK 2026", "AI companion apps UK", "social prescribing technology UK", "NHS loneliness intervention UK", "AI mental health elderly UK 2026"],
@@ -1250,7 +1250,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["Stress", "Burnout", "Nervous System", "AI Health", "Mental Health"],
     readingTime: 11,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/running-bridge.jpg",
     seo: {
       metaDescription:
         "Burnout is a measurable nervous system state, not just exhaustion. AI tools in 2026 detect HRV dysregulation, cortisol patterns, and recovery deficits — and create personalised recovery plans.",
@@ -1295,7 +1295,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/radiology.jpg",
     seo: {
       metaDescription: "AI cancer detection UK is transforming NHS screening. How AI finds breast, bowel, lung and skin cancer earlier — with real survival data.",
       keywords: ["AI cancer detection UK", "NHS AI cancer screening", "AI breast cancer screening UK", "AI bowel cancer NHS", "AI diagnostics NHS cancer"],
@@ -1313,7 +1313,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     readingTime: 8,
     featured: false,
-    image: "/images/fitness.jpg",
+    image: "/images/smartwatch-stats.jpg",
     seo: {
       metaDescription: "Wearable health technology UK: how accurate are smartwatch ECGs and AI biometrics? The expert, evidence-based guide for UK users.",
       keywords: ["wearable health technology UK", "smartwatch ECG accuracy UK", "Apple Watch health UK", "AI health wearables NHS", "fitness tracker health UK 2026"],
@@ -1349,7 +1349,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/dna.jpg",
     seo: {
       metaDescription: "AI drug discovery UK is cutting clinical trial timelines from years to months. How BenevolentAI, Exscientia and AlphaFold transform UK medicines.",
       keywords: ["AI drug discovery UK", "BenevolentAI UK medicines", "Exscientia AI drug design", "AlphaFold drug discovery UK", "UK biotech AI clinical trials"],
@@ -1367,7 +1367,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/stethoscope-phone.jpg",
     seo: {
       metaDescription: "Is your AI symptom checker UK safe? We review NHS 111, Ada Health and Babylon against MHRA standards — with evidence-based accuracy data.",
       keywords: ["AI symptom checker UK safe", "NHS 111 online AI", "Ada Health UK review", "MHRA digital health standards", "AI health app safety UK 2026"],
@@ -1385,7 +1385,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/server-room.jpg",
     seo: {
       metaDescription: "Predictive AI NHS patient data UK is preventing hospital admissions before they happen. How trusts use early-warning AI to save lives and cut A&E pressure.",
       keywords: ["predictive AI NHS UK", "NHS patient data AI analytics", "AI hospital admissions prevention", "early warning system NHS AI", "NHS AI data analytics UK"],
@@ -1403,7 +1403,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "NHS", "Digital Health", "UK Healthcare"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/elderly-support.jpg",
     seo: {
       metaDescription: "AI elderly care UK technology transforms independent living — from fall detection saving £1m a day to dementia monitoring at home.",
       keywords: ["AI elderly care UK", "fall detection technology UK", "AI dementia monitoring UK", "assistive technology elderly UK", "NHS elderly care AI tools 2026"],
@@ -1421,7 +1421,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
     readingTime: 8,
     featured: true,
-    image: "/images/regulation-law.jpg",
+    image: "/images/signing-paperwork.jpg",
     seo: {
       metaDescription: "BNPL regulation UK 2026 arrives on 15 July. What FCA's new deferred payment credit rules mean for Klarna, Clearpay users and lenders.",
       keywords: ["BNPL regulation UK 2026", "Klarna FCA regulation UK", "buy now pay later UK rules 2026", "FCA deferred payment credit", "BNPL consumer protection UK"],
@@ -1439,7 +1439,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
     readingTime: 8,
     featured: false,
-    image: "/images/investment-charts.jpg",
+    image: "/images/london-shard.jpg",
     seo: {
       metaDescription: "UK fintech investment 2026: record data revealed. Where VC is flowing, how Mansion House capital unlocks billions and which sectors lead growth.",
       keywords: ["UK fintech investment 2026", "Mansion House fintech funding UK", "UK fintech VC 2026", "fintech growth sectors UK", "UK startup investment fintech"],
@@ -1493,7 +1493,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI", "Jobs", "UK Economy", "Technology"],
     readingTime: 10,
     featured: true,
-    image: "/images/business-case.jpg",
+    image: "/images/meeting-room.jpg",
     seo: {
       metaDescription:
         "Government data puts 7.1 million UK workers at risk from AI automation. Which roles are most exposed, which are growing, and what it means for you.",
@@ -1512,7 +1512,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["FinTech", "UK Finance", "FCA", "Regulation"],
     readingTime: 10,
     featured: false,
-    image: "/images/neobank-app.jpg",
+    image: "/images/robot-assistant.jpg",
     seo: {
       metaDescription: "Generative AI UK financial services: FCA rules are live. How banks deploy LLMs, what Consumer Duty and SM&CR require and your compliance checklist.",
       keywords: ["generative AI financial services UK", "FCA AI rules 2026 UK", "LLM banking compliance UK", "Consumer Duty AI UK", "SM&CR AI compliance UK"],
@@ -1548,7 +1548,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["IVA", "debt management plan", "UK debt solutions", "DMP", "debt advice UK"],
     readingTime: 8,
     featured: true,
-    image: "/images/debt-money.jpg",
+    image: "/images/signing-paperwork.jpg",
     seo: {
       metaDescription:
         "IVA or DMP? A plain-English comparison of how each works, what each really costs, who they suit, and what to ask before you choose.",
@@ -1566,7 +1566,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI banking UK", "money management AI", "personal finance UK", "fintech 2026", "AI budgeting"],
     readingTime: 8,
     featured: false,
-    image: "/images/investment-charts.jpg",
+    image: "/images/canary-wharf.jpg",
     seo: {
       metaDescription: "From fraud detection to auto-budgeting, AI is already inside your UK banking app. Here's how it works in 2026 — and where to stay cautious.",
       keywords: ["AI money management UK", "AI banking apps UK", "how AI is used in personal finance", "AI budgeting tools UK 2026", "AI in UK banking 2026"],
@@ -1583,7 +1583,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["budgeting apps UK", "savings apps UK", "fintech UK 2026", "Monzo Starling Revolut", "money management apps"],
     readingTime: 9,
     featured: false,
-    image: "/images/neobank-app.jpg",
+    image: "/images/piggy-bank-calculator.jpg",
     seo: {
       metaDescription:
         "Monzo, Starling, Revolut, Plum, Chip, Moneybox, Emma and Snoop compared: who each suits, what it costs, and what to check before linking your bank.",
@@ -1618,7 +1618,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI therapy UK", "mental health apps UK", "chatbot therapy", "AI wellness UK", "CBT AI app"],
     readingTime: 8,
     featured: false,
-    image: "/images/wellness-mental.jpg",
+    image: "/images/phone-desk.jpg",
     seo: {
       metaDescription: "AI mental health apps are booming in the UK, but what do they actually do well — and where do they fall short? An honest look at chatbot therapy in 2026.",
       keywords: ["AI chatbot therapy UK", "AI mental health apps UK", "can AI help with anxiety", "AI wellness apps UK 2026", "chatbot therapy UK"],
@@ -1635,7 +1635,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["buy now pay later UK", "BNPL debt risk", "Klarna UK", "BNPL regulation", "consumer credit UK"],
     readingTime: 8,
     featured: false,
-    image: "/images/payments-mobile.jpg",
+    image: "/images/online-shopping.jpg",
     seo: {
       metaDescription: "BNPL is everywhere at UK checkouts. Here's how it actually works, why regulators are stepping in, and how to use it without it becoming a debt problem.",
       keywords: ["buy now pay later UK", "BNPL debt risk UK", "is BNPL regulated UK", "Klarna Clearpay UK debt", "BNPL consumer guide UK 2026"],
@@ -1652,7 +1652,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["AI burnout UK", "workplace wellness tech", "digital burnout 2026", "AI work stress", "burnout UK workplace"],
     readingTime: 9,
     featured: false,
-    image: "/images/ai-health.jpg",
+    image: "/images/fitness-band-wrist.jpg",
     seo: {
       metaDescription:
         "AI tools were meant to save time, so why does burnout feel worse? What drives AI-related burnout in UK workplaces and which wellness tech helps.",
@@ -1670,7 +1670,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["DRO vs IVA UK", "debt relief order homeowner", "IVA homeowner equity", "debt options UK 2026", "DRO eligibility UK"],
     readingTime: 8,
     featured: false,
-    image: "/images/debt-money.jpg",
+    image: "/images/house-keys.jpg",
     seo: {
       metaDescription: "Own your home and worried about debt? Here's how a DRO and an IVA treat UK homeowners differently — and the key questions to ask before choosing either route.",
       keywords: ["DRO vs IVA UK", "debt relief order homeowner UK", "IVA homeowner equity", "can I get a DRO if I own a house", "debt options for homeowners UK"],
@@ -1704,7 +1704,7 @@ export const postIndex: PostIndexItem[] = [
     tags: ["credit score UK", "credit score myths UK", "improve credit score UK", "UK credit reference agencies", "Experian Equifax TransUnion"],
     readingTime: 9,
     featured: true,
-    image: "/images/open-banking.jpg",
+    image: "/images/laptop-report.jpg",
     seo: {
       metaDescription: "Checking your score lowers it? Closing cards helps? These UK credit score myths are costing people. Here's what actually moves the needle in 2026.",
       keywords: ["credit score myths UK", "how to improve credit score UK", "does checking my credit score lower it", "UK credit score explained 2026", "credit file UK 2026"],
