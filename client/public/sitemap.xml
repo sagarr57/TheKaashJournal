@@ -99,10 +99,10 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.thekaashjournal.com/blog/uk-fintech-unicorns-2026-revolut-monzo-starling-wise</loc>
-    <lastmod>2026-11-16</lastmod>
+    <loc>https://www.thekaashjournal.com/blog/september-2026-uk-insolvency-statistics</loc>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/fca-safeguarding-rules-emoney-firms-2026</loc>
@@ -117,16 +117,16 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.thekaashjournal.com/blog/september-2026-uk-insolvency-statistics</loc>
-    <lastmod>2026-11-16</lastmod>
+    <loc>https://www.thekaashjournal.com/blog/fca-crypto-authorisation-gateway-2026</loc>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.thekaashjournal.com/blog/fca-crypto-authorisation-gateway-2026</loc>
-    <lastmod>2026-11-16</lastmod>
+    <loc>https://www.thekaashjournal.com/blog/uk-fintech-unicorns-2026-revolut-monzo-starling-wise</loc>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/ai-notetaking-nhs-ambient-voice-technology-2026</loc>
@@ -184,7 +184,13 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/open-banking-17-million-uk-users-2026</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.thekaashjournal.com/blog/ai-cbt-gp-surgeries-pilot-2026</loc>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -201,12 +207,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.thekaashjournal.com/blog/ai-cbt-gp-surgeries-pilot-2026</loc>
-    <lastmod>2026-11-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.thekaashjournal.com/blog/bnpl-fca-regulation-july-2026</loc>
     <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -214,7 +214,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/uk-faster-payments-59-billion-transactions</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -238,7 +238,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/ai-fraud-detection-uk-banks-explained-2026</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -298,7 +298,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/ai-chronic-disease-management-uk-2026</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -340,7 +340,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/agentic-commerce-uk-payments-2026</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -400,7 +400,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/regtech-uk-2026-fca-compliance</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -412,7 +412,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/bnpl-regulation-uk-2026</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -448,7 +448,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/wearable-health-technology-uk</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -460,7 +460,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/ai-mental-health-uk</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -502,7 +502,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/uk-insolvency-2025-record-household-case-studies</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -514,7 +514,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/ai-app-financial-burnout-early-signs-uk-2026</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -598,7 +598,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/digital-detox-intentional-tech-use-2026</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -658,7 +658,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/ai-microbiome-precision-nutrition-2026</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -718,7 +718,7 @@
   </url>
   <url>
     <loc>https://www.thekaashjournal.com/blog/sleep-optimization-technology-ai-2026</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
