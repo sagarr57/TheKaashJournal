@@ -32,6 +32,21 @@
       "permanent": true
     },
     {
+      "source": "/blog/new-payments-architecture-uk-guide-2026",
+      "destination": "/blog/new-payments-architecture-uk",
+      "permanent": false
+    },
+    {
+      "source": "/blog/ai-mental-health-tools-nhs-2026-evidence",
+      "destination": "/blog/ai-therapy-apps-uk-2026-safe",
+      "permanent": false
+    },
+    {
+      "source": "/blog/wise-nasdaq-listing-may-2026",
+      "destination": "/blog/uk-fintech-unicorns-2026-revolut-monzo-starling-wise",
+      "permanent": false
+    },
+    {
       "source": "/:path+/",
       "destination": "/:path+",
       "permanent": true
