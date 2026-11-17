@@ -137,6 +137,12 @@ export const topicHubs: TopicHub[] = [
     label: "AI in banking: case studies",
     hub: "jpmorgan-ai-banking-strategy-case-study",
     members: [
+      "natwest-cora-ai-case-study",
+      "hsbc-ai-anti-money-laundering-case-study",
+      "stripe-radar-ai-fraud-case-study",
+      "dbs-bank-ai-transformation-case-study",
+      "bank-of-america-erica-ai-case-study",
+      "morgan-stanley-openai-ai-assistant-case-study",
       "nubank-ai-strategy-100-million-customers",
       "klarna-ai-customer-service-case-study",
       "deutsche-bank-google-cloud-ai-transformation",
