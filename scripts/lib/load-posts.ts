@@ -7,13 +7,7 @@ import type { BlogPost } from "../../client/src/lib/types";
 export type PublishedPost = BlogPost & { content: string };
 
 // Slugs that vercel.json redirects elsewhere: keep them out of the sitemap, feed and prerendered pages.
-const REDIRECTED_SLUGS = new Set([
-  "best-ai-health-apps-uk-2025",
-  // Unpublished pending a rewrite: their central claims did not survive fact-checking.
-  "new-payments-architecture-uk-guide-2026",
-  "ai-mental-health-tools-nhs-2026-evidence",
-  "wise-nasdaq-listing-may-2026",
-]);
+const REDIRECTED_SLUGS = new Set(["best-ai-health-apps-uk-2025"]);
 
 function repoPosts(): PublishedPost[] {
   return postIndex

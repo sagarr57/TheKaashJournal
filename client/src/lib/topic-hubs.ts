@@ -90,6 +90,7 @@ export const topicHubs: TopicHub[] = [
     label: "UK payments infrastructure",
     hub: "new-payments-architecture-uk",
     members: [
+      "new-payments-architecture-uk-guide-2026",
       "uk-faster-payments-59-billion-transactions",
       "real-time-payments-uk-small-business",
       "agentic-commerce-uk-payments-2026",
@@ -126,6 +127,7 @@ export const topicHubs: TopicHub[] = [
       "monzo-172m-profit-case-study-2026",
       "starling-bank-217m-profit-2026",
       "revolut-uk-banking-licence-march-2026",
+      "wise-nasdaq-listing-may-2026",
       "uk-fintech-investment-2026",
       "uk-fintech-investment-18bn-h1-2026",
     ],
@@ -164,6 +166,7 @@ export const topicHubs: TopicHub[] = [
     hub: "ai-therapy-apps-uk-2026-safe",
     members: [
       "ai-mental-health-uk",
+      "ai-mental-health-tools-nhs-2026-evidence",
       "ai-chatbot-therapy-uk-mental-health-2026",
       "ai-mental-health-digital-therapist-2026",
       "ai-workplace-mental-health-uk-employers-2026",
