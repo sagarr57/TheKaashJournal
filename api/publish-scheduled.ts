@@ -3,6 +3,7 @@
 // Vercel sends `Authorization: Bearer <CRON_SECRET>` so external callers can't trigger it.
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createClient } from "@supabase/supabase-js";
+import { triggerRebuild } from "./_lib/rebuild.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only GET is used by Vercel cron; block everything else
@@ -41,13 +42,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const published = data || [];
+  let rebuild = { configured: false, triggered: false };
   if (published.length > 0) {
     console.log(`[publish-scheduled] Published ${published.length} post(s):`, published.map((p: any) => p.slug));
+    rebuild = await triggerRebuild();
   }
 
   return res.status(200).json({
     ok: true,
     published: published.length,
+    rebuild,
     posts: published.map((p: any) => ({ id: p.id, slug: p.slug, title: p.title })),
     checkedAt: new Date().toISOString(),
   });

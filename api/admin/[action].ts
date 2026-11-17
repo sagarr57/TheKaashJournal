@@ -3,6 +3,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 import { verifySessionToken } from '../_lib/session.js';
+import { triggerRebuild } from '../_lib/rebuild.js';
 
 const FORWARDED_REQUEST_HEADERS = ['accept', 'content-type', 'prefer', 'range', 'range-unit', 'accept-profile', 'content-profile'];
 const FORWARDED_RESPONSE_HEADERS = ['content-type', 'content-range', 'preference-applied'];
@@ -72,6 +73,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return await proxyDatabaseRequest(req, res, supabaseUrl, serviceKey);
       case 'upload-url':
         return await createImageUploadUrl(req, res, supabaseUrl, serviceKey);
+      case 'rebuild':
+        if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+        return res.json(await triggerRebuild());
       default:
         return res.status(404).json({ error: 'Not found' });
     }

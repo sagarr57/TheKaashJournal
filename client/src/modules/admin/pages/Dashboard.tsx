@@ -17,7 +17,7 @@ import {
   User, CheckCircle2, XCircle, Menu, FileText, Users, Activity, Settings,
   BarChart2, ExternalLink,
 } from "lucide-react";
-import { adminSupabase as supabase, uploadBlogImage } from "../lib/admin-supabase";
+import { adminSupabase as supabase, uploadBlogImage, requestSiteRebuild } from "../lib/admin-supabase";
 import { categories } from "@/lib/categories";
 import {
   fetchAnalyticsOverview,
@@ -558,7 +558,8 @@ function AdminDashboard() {
   const fetchAllPosts = async () => {
     setIsFetchingPosts(true);
     try {
-      await supabase.from("blog_posts").update({ status: "published", publish_at: null }).eq("status", "scheduled").lte("publish_at", new Date().toISOString());
+      const { data: duePosts } = await supabase.from("blog_posts").update({ status: "published", publish_at: null }).eq("status", "scheduled").lte("publish_at", new Date().toISOString()).select("id");
+      if (duePosts?.length) void requestSiteRebuild();
       const { data, error } = await supabase.from("blog_posts").select("id,title,slug,excerpt,content,author,date,category,tags,reading_time,featured,image,meta_description,keywords,status,publish_at,updated_at").order("date", { ascending: false });
       if (error) throw new Error(error.message);
       setAllPosts((data as BlogPostRow[]) || []);
@@ -591,6 +592,7 @@ function AdminDashboard() {
       const { error } = await supabase.from("blog_posts").delete().eq("id", deleteModal.id);
       if (error) throw new Error(error.message);
       toast.success("Post deleted");
+      void requestSiteRebuild();
       await fetchAllPosts();
     } catch (err: any) {
       toast.error("Failed to delete post", { description: err?.message });
@@ -649,7 +651,13 @@ function AdminDashboard() {
       }, { onConflict: "id" });
       if (error) throw new Error(error.message || "Failed to save post");
       const label = status === "draft" ? "Draft saved" : status === "scheduled" ? `Scheduled for ${new Date(postForm.publishAt).toLocaleString()}` : editingPostId ? "Post updated" : "Post published";
-      toast.success(label, { description: "The blog post has been saved to Supabase." });
+      // Published posts, and edits that may unpublish one, change the public site.
+      const rebuilding = status === "published" || editingPostId ? await requestSiteRebuild() : false;
+      toast.success(label, {
+        description: rebuilding
+          ? "Saved. The site is rebuilding; the public page updates in a few minutes."
+          : "The blog post has been saved to Supabase.",
+      });
       setEditingPostId(null); setPostForm(getInitialPostForm()); setPostsView("list");
       await fetchAllPosts();
     } catch (error: any) {

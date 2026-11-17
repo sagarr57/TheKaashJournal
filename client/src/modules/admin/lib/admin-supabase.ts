@@ -26,6 +26,23 @@ export const adminSupabase = createClient(supabaseUrl, "admin-proxy", {
   global: { fetch: adminFetch },
 });
 
+/**
+ * Asks the server to redeploy the site so its prerendered pages and sitemap include content changes.
+ * Returns false when no deploy hook is configured.
+ */
+export async function requestSiteRebuild(): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/admin/rebuild`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${getAdminToken()}` },
+    });
+    const result = await response.json().catch(() => ({}));
+    return Boolean(result.triggered);
+  } catch {
+    return false;
+  }
+}
+
 /** Asks the server for a one-time upload link, uploads the image to it, and returns its public URL. */
 export async function uploadBlogImage(file: File): Promise<string> {
   const response = await fetch(`${API_BASE_URL}/admin/upload-url`, {

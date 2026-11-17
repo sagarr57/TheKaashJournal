@@ -6,6 +6,7 @@ import { PostEditorialFooter } from "@/components/blog/PostEditorialFooter";
 import { YmylDisclaimer } from "@/components/blog/YmylDisclaimer";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { TopicHubBox } from "@/components/blog/TopicHubBox";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { getPostBySlug } from "@/lib/blog-utils";
 import { useParams } from "wouter";
 import ReactMarkdown from "react-markdown";
@@ -581,6 +582,16 @@ export default function Post() {
                   </ReactMarkdown>
                 </div>
               </div>
+
+              <section aria-label="Newsletter signup" className="mt-8 rounded-lg bg-blue-50 border border-blue-100 p-4 md:p-5">
+                <h2 className="font-oswald text-lg md:text-xl font-bold normal-case mb-1 text-gray-900">
+                  Get new articles by email
+                </h2>
+                <p className="text-sm text-gray-600 mb-3">
+                  Source-checked guides on AI, fintech and personal finance. No spam; unsubscribe any time.
+                </p>
+                <NewsletterForm placeholder="Your email" buttonText="Subscribe" className="space-y-2.5 max-w-md" source="article-end" />
+              </section>
 
               <TopicHubBox slug={postMeta.slug} />
 
