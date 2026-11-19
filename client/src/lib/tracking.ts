@@ -12,6 +12,22 @@ function getSessionId(): string {
   return id;
 }
 
+// Links between articles reload the page, so document.referrer is usually this site. Keep the
+// referrer that brought the visitor in for the whole session instead.
+function landingReferrer(): string | null {
+  const key = 'tracking_landing_referrer';
+  try {
+    const ref = document.referrer;
+    if (ref && new URL(ref).hostname !== window.location.hostname) {
+      sessionStorage.setItem(key, ref);
+      return ref;
+    }
+    return sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
 function getDeviceType(): string {
   if (typeof window === 'undefined') return 'unknown';
   const w = window.innerWidth;
@@ -37,7 +53,7 @@ export async function trackPageView(pagePath: string, pageTitle?: string) {
       session_id: getSessionId(),
       page_path: pagePath,
       page_title: pageTitle || document.title,
-      referrer: document.referrer || null,
+      referrer: landingReferrer(),
       user_agent: navigator.userAgent,
       device_type: getDeviceType(),
       browser: getBrowser(),
@@ -122,7 +138,7 @@ export async function trackConversion(
       value: data?.value ?? null,
       currency: data?.currency ?? 'USD',
       page_path: window.location.pathname,
-      referrer: document.referrer || null,
+      referrer: landingReferrer(),
       user_agent: navigator.userAgent,
       metadata: data?.metadata ?? null,
     });

@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { SEO } from "@/components/SEO";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+import { GooglePanel } from "../components/GooglePanel";
 import { logout, getUsername } from "../auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -908,10 +909,18 @@ function AdminDashboard() {
           {/* ── ANALYTICS ── */}
           {activeSection === "analytics" && (
             <div className="space-y-6">
+              <GooglePanel />
+
+              <div className="pt-2 border-t border-slate-200">
+                <h2 className="font-semibold text-slate-900">On-site tracking</h2>
+                <p className="text-xs text-slate-500">
+                  The site's own records, last 30 days. Only visitors who accept cookies are counted, so these numbers are lower than Google Analytics.
+                </p>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                <StatCard title="Total Visitors"  value={displayOverview.visitors}   change={displayOverview.visitorsChange}   icon={Eye}             colorIcon="bg-blue-100 text-blue-600"    colorBorder="border-l-blue-500" />
+                <StatCard title="Page views"  value={displayOverview.visitors}   change={displayOverview.visitorsChange}   icon={Eye}             colorIcon="bg-blue-100 text-blue-600"    colorBorder="border-l-blue-500" />
                 <StatCard title="Subscribers"     value={displayOverview.subscribers} change={displayOverview.subscribersChange} icon={Mail}            colorIcon="bg-emerald-100 text-emerald-600" colorBorder="border-l-emerald-500" />
-                <StatCard title="Total Clicks"    value={displayOverview.clicks}     change={displayOverview.clicksChange}     icon={MousePointerClick} colorIcon="bg-violet-100 text-violet-600"  colorBorder="border-l-violet-500" />
+                <StatCard title="Outbound clicks"    value={displayOverview.clicks}     change={displayOverview.clicksChange}     icon={MousePointerClick} colorIcon="bg-violet-100 text-violet-600"  colorBorder="border-l-violet-500" />
                 <StatCard
                   title="Revenue"
                   value={displayOverview.revenue}
@@ -936,7 +945,7 @@ function AdminDashboard() {
                   </div>
                   <div className="p-5">
                     <TabsContent value="visitors">
-                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Monthly Visitors</h3>
+                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Page views per day</h3>
                       {visitors.length > 0 ? (
                         <ResponsiveContainer width="100%" height={260}>
                           <BarChart data={visitors}>
@@ -952,7 +961,7 @@ function AdminDashboard() {
                       )}
                     </TabsContent>
                     <TabsContent value="clicks">
-                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Monthly Clicks</h3>
+                      <h3 className="font-semibold text-slate-900 text-sm mb-4">Clicks per day</h3>
                       {clicks.length > 0 ? (
                         <ResponsiveContainer width="100%" height={260}>
                           <LineChart data={clicks}>
@@ -1007,7 +1016,7 @@ function AdminDashboard() {
               {/* Top posts */}
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
                 <div className="px-5 py-4 border-b border-slate-100">
-                  <h2 className="font-semibold text-slate-900 text-sm">Top Performing Posts</h2>
+                  <h2 className="font-semibold text-slate-900 text-sm">Most-viewed posts (on-site tracking)</h2>
                 </div>
                 <div className="p-5 overflow-x-auto">
                   <table className="w-full min-w-[640px] text-sm">

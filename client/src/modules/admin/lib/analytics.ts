@@ -177,15 +177,24 @@ export async function fetchTopPosts(limit: number = 10): Promise<TopPost[]> {
 
 export async function fetchTrafficSources(): Promise<TrafficSource[]> {
   try {
-    // Fetch all page views including null referrers (= Direct traffic)
+    // Count visits (sessions), using the referrer of each session's first page view.
     const { data } = await supabase
       .from("page_views")
-      .select("referrer")
-      .gte("created_at", daysAgo(30));
+      .select("referrer,session_id,created_at")
+      .gte("created_at", daysAgo(30))
+      .order("created_at", { ascending: true });
 
-    const map: Record<string, number> = {};
+    const firstViews = new Map<string, string | null>();
     (data || []).forEach((row) => {
-      const ref = row.referrer as string | null;
+      const key = row.session_id || `${row.created_at}`;
+      if (!firstViews.has(key)) firstViews.set(key, row.referrer as string | null);
+    });
+
+    const ownHost = typeof window !== "undefined" ? window.location.hostname : "thekaashjournal.com";
+    const map: Record<string, number> = {};
+    firstViews.forEach((referrer) => {
+      let ref = referrer;
+      try { if (ref && new URL(ref).hostname === ownHost) ref = null; } catch { /* keep as is */ }
       let source = "Direct";
       if (ref) {
         if (ref.includes("google")) source = "Google";
