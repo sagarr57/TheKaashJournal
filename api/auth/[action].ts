@@ -69,6 +69,12 @@ const createAdmin: Action = async (req, res, supabase) => {
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required' });
   }
+  if (!/^[A-Za-z0-9._-]{3,40}$/.test(username)) {
+    return res.status(400).json({ error: 'Username must be 3 to 40 letters, numbers, dots, dashes or underscores' });
+  }
+  if (String(password).length < 8) {
+    return res.status(400).json({ error: 'Password must be at least 8 characters' });
+  }
 
   const { data: existingUser } = await supabase
     .from('admin_users')

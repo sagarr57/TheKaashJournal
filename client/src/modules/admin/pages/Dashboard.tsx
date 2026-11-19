@@ -4,6 +4,9 @@ import remarkGfm from "remark-gfm";
 import { SEO } from "@/components/SEO";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { GooglePanel } from "../components/GooglePanel";
+import { TeamPanel } from "../components/TeamPanel";
+import QRCode from "qrcode";
+import { getAdminToken } from "../auth";
 import { logout, getUsername } from "../auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -209,16 +212,16 @@ function SettingsPanel() {
   const fetchTwoFaStatus = async () => {
     if (!username) return;
     try {
-      const { data } = await supabase
-        .from("admin_users")
-        .select("totp_enabled")
-        .eq("username", username)
-        .single();
-      setTwoFaEnabled(data?.totp_enabled ?? false);
-    } catch { setTwoFaEnabled(false); }
+      const res = await fetch(`${API_BASE_URL}/admin/me`, { headers: { Authorization: `Bearer ${getAdminToken()}` } });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      setTwoFaEnabled(Boolean(data.totp_enabled));
+    } catch {
+      toast.error("Could not load your 2FA status", { description: "Refresh the page to try again." });
+    }
   };
 
-  useState(() => { fetchTwoFaStatus(); });
+  useEffect(() => { fetchTwoFaStatus(); }, []);
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,7 +254,8 @@ function SettingsPanel() {
       const data = await res.json();
       if (!res.ok) { toast.error(data.error || "Setup failed"); return; }
       setTwoFaSecret(data.secret);
-      setTwoFaQrUrl(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.otpauthUrl)}`);
+      // Generated in the browser: the secret inside this code must never be sent to another site.
+      setTwoFaQrUrl(await QRCode.toDataURL(data.otpauthUrl, { width: 200, margin: 1 }));
       setTwoFaStep("setup");
     } catch { toast.error("Request failed"); }
     finally { setTwoFaLoading(false); }
@@ -369,7 +373,7 @@ function SettingsPanel() {
           </div>
         </div>
 
-        {twoFaEnabled === null && <p className="text-sm text-slate-400">Loading 2FA status…</p>}
+        {twoFaEnabled === null && <p className="text-sm text-slate-400">Loading 2FA status… <button type="button" onClick={fetchTwoFaStatus} className="underline">Retry</button></p>}
 
         {twoFaEnabled === false && twoFaStep === "idle" && (
           <form onSubmit={handleSetup2FA} className="space-y-4">
@@ -466,6 +470,8 @@ function SettingsPanel() {
           </form>
         )}
       </div>
+
+      <TeamPanel />
     </div>
   );
 }

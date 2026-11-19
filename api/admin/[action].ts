@@ -40,6 +40,47 @@ async function proxyDatabaseRequest(req: VercelRequest, res: VercelResponse, sup
   return method === 'HEAD' ? res.end() : res.send(await upstream.text());
 }
 
+const TEAM_COLUMNS = 'id, username, full_name, email, is_active, totp_enabled, last_login, created_at';
+
+// Admin accounts are managed here rather than through the generic database proxy, which never
+// exposes this table, so password hashes and 2FA secrets can't be read from the browser.
+async function handleTeam(req: VercelRequest, res: VercelResponse, supabaseUrl: string, serviceKey: string, sessionUser: string) {
+  const supabase = createClient(supabaseUrl, serviceKey);
+  const action = String(req.query.action);
+
+  if (action === 'me') {
+    const { data, error } = await supabase.from('admin_users').select('username, full_name, totp_enabled').eq('username', sessionUser).single();
+    if (error || !data) return res.status(404).json({ error: 'Account not found' });
+    return res.json(data);
+  }
+
+  if (req.method === 'GET') {
+    const { data, error } = await supabase.from('admin_users').select(TEAM_COLUMNS).order('created_at', { ascending: true });
+    if (error) return res.status(500).json({ error: error.message });
+    return res.json({ me: sessionUser, users: data });
+  }
+
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  const { id, change } = req.body || {};
+  const { data: target } = await supabase.from('admin_users').select('id, username, is_active').eq('id', id).single();
+  if (!target) return res.status(404).json({ error: 'User not found' });
+  if (target.username === sessionUser) return res.status(400).json({ error: 'Use your own settings above to change your account' });
+
+  if (change === 'deactivate' || change === 'activate') {
+    if (change === 'deactivate') {
+      const { count } = await supabase.from('admin_users').select('id', { count: 'exact', head: true }).eq('is_active', true);
+      if ((count ?? 0) <= 1) return res.status(400).json({ error: 'At least one active admin is required' });
+    }
+    await supabase.from('admin_users').update({ is_active: change === 'activate', updated_at: new Date().toISOString() }).eq('id', id);
+  } else if (change === 'reset-2fa') {
+    await supabase.from('admin_users').update({ totp_enabled: false, totp_secret: null, updated_at: new Date().toISOString() }).eq('id', id);
+  } else {
+    return res.status(400).json({ error: 'Unknown change' });
+  }
+  const { data } = await supabase.from('admin_users').select(TEAM_COLUMNS).eq('id', id).single();
+  return res.json({ user: data });
+}
+
 async function createImageUploadUrl(req: VercelRequest, res: VercelResponse, supabaseUrl: string, serviceKey: string) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -64,7 +105,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceKey) return res.status(500).json({ error: 'Supabase not configured' });
 
-  if (!verifySessionToken(req.headers.authorization)) {
+  const sessionUser = verifySessionToken(req.headers.authorization);
+  if (!sessionUser) {
     return res.status(401).json({ error: 'Not signed in' });
   }
 
@@ -74,6 +116,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return await proxyDatabaseRequest(req, res, supabaseUrl, serviceKey);
       case 'upload-url':
         return await createImageUploadUrl(req, res, supabaseUrl, serviceKey);
+      case 'me':
+      case 'team':
+        return await handleTeam(req, res, supabaseUrl, serviceKey, sessionUser);
       case 'google':
         return res.json(await googleReports(req.query.fresh === '1'));
       case 'rebuild':
